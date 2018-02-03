@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/src/main/assets"/><source path="/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/src/debug/assets"/></dataSet></merger>

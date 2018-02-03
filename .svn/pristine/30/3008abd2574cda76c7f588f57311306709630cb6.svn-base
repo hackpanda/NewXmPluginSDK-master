@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rippelColor">#0099CC</color>
+    <color name="no1_orange">#fe7d44</color>
+    <color name="colorDivider">#cccccc</color>
+</resources>

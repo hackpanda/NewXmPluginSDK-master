@@ -1,0 +1,11 @@
+package com.xiaomi.zkplug.util;
+
+/**
+ * 作者：liwenqi on 17/6/13 13:32
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：
+ */
+
+public class ZkUtil {
+
+}

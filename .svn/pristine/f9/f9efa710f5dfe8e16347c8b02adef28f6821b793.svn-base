@@ -1,0 +1,42 @@
+package com.xiaomi.zkplug.pwdset;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.R;
+
+public class PwdSetActivity extends BaseActivity implements View.OnClickListener {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pwd_set);
+        // 设置titlebar在顶部透明显示时的顶部padding
+        mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
+        mHostActivity.enableWhiteTranslucentStatus();
+        TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
+        mTitleView.setText("成员详情");
+        initView();
+    }
+
+    private void initView(){
+
+        findViewById(R.id.title_bar_return).setOnClickListener(this);
+        findViewById(R.id.pwdSetBtn).setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.title_bar_return:
+                finish();
+                break;
+            case R.id.pwdSetBtn:
+                break;
+
+        }
+    }
+}

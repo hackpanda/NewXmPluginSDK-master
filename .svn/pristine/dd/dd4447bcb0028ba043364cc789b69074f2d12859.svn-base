@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">com.xiaomi.zkplug</string>
+    <string name="input_tips">将手指放在门锁的指纹模块，门锁\"嘀\"一声后移开</string>
+
+    <string name="fp_danger">报警功能说明：\n使用报警指纹开锁时，家人会收到您使用报警指纹开锁，可能有危险的消息提醒。</string>
+
+</resources>

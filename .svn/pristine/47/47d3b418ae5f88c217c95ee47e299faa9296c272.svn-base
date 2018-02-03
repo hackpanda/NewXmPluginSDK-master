@@ -1,0 +1,30 @@
+package com.xiaomi.zkplug;
+
+import android.os.Bundle;
+import android.util.Log;
+
+import com.xiaomi.smarthome.device.api.XmPluginBaseActivity;
+import com.xiaomi.zkplug.util.ActivityCollector;
+
+/**
+ * 作者：liwenqi on 17/6/13 13:34
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：
+ */
+
+public class BaseActivity extends XmPluginBaseActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.d("BaseActivity", getClass().getSimpleName()+"---");
+        ActivityCollector.addActivity(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ActivityCollector.removeActivity(this);
+    }
+}

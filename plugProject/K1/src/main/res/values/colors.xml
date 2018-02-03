@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rippelColor">#0099CC</color>
+    <color name="colorDivider">#cccccc</color>
+    <color name="dfu_updateing_color">#ff7700</color>
+    <color name="main_blue">#2889fd</color>
+    <color name="warn_color">#ff345a</color>
+    <color name="text_succ">#3fb579</color>
+</resources>

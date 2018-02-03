@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	根标签为animation-list，其中oneshot代表着是否只展示一遍，设置为false会不停的循环播放动画
+	根标签下，通过item标签对动画中的每一个图片进行声明
+	android:duration 表示展示所用的该图片的时间长度
+ -->
+<animation-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item android:drawable="@drawable/fp_input_2_1" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_2" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_3" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_4" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_5" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_6" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_7" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_8" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_9" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_10" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_11" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_12" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_13" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_14" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_15" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_16" android:duration="10"></item>
+    <item android:drawable="@drawable/fp_input_2_17" android:duration="10"></item>
+</animation-list>

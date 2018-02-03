@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_transparent_white" />
+    <LinearLayout
+        android:id="@+id/emptyView"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/checkImg"
+            android:layout_width="@dimen/x34"
+            android:layout_marginTop="@dimen/y133"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/icon_zhuangtai"
+            android:layout_height="@dimen/x34" />
+        <TextView
+            android:text="正在检查固件更新"
+            android:textSize="@dimen/x12"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y16"
+            android:alpha="0.8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/dfuInitView"
+
+        android:background="#eeeeee"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y243">
+            <ImageView
+                android:id="@+id/gujianImg"
+                android:layout_width="@dimen/x73"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/x72"
+                android:background="@drawable/icon_gujian"
+                android:layout_height="@dimen/x73" />
+            <TextView
+                android:id="@+id/curRomVer"
+                android:layout_gravity="center_horizontal"
+                android:text="当前版本: V1.3.1"
+                android:textColor="#000000"
+                android:textSize="@dimen/x13"
+                android:layout_marginTop="@dimen/y16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/newestRomVer"
+                android:layout_gravity="center_horizontal"
+                android:text="最新版本: V1.3.1"
+                android:textColor="#000000"
+                android:textSize="@dimen/x13"
+                android:layout_marginTop="@dimen/y7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y243">
+            <ScrollView
+                android:layout_marginTop="@dimen/y12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/featureListTv"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="@dimen/x12"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </ScrollView>
+            <TextView
+                android:id="@+id/updateTipTv1"
+                android:layout_marginTop="@dimen/y99"
+                android:text="打开蓝牙并靠近门锁，升级过程不能中断"
+                android:textColor="#ff7700"
+                android:textSize="@dimen/x12"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/updateTipTv2"
+                android:layout_below="@+id/updateTipTv1"
+                android:layout_marginTop="@dimen/y9"
+                android:text="如升级失败必须重新升级，直到升级成功"
+                android:textColor="#ff7700"
+                android:textSize="@dimen/x12"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/updateBtn"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/updateTipTv2"
+                android:src="@drawable/rom_update_selector"
+                android:layout_marginTop="@dimen/y9"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y33" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dfuProgressView"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_marginTop="@dimen/x119"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73">
+            <ImageView
+                android:id="@+id/dfuProgressImg"
+                android:layout_width="@dimen/x73"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/icon_yuan"
+                android:layout_height="@dimen/x73" />
+            <TextView
+                android:id="@+id/dfuProgressTv"
+                android:layout_centerInParent="true"
+                android:text="0%"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/x18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <!-- 更新过程和成功都使用 begin-->
+        <TextView
+            android:id="@+id/curVerDfuSuccTv"
+            android:layout_gravity="center_horizontal"
+            android:text="更新中..."
+            android:textColor="#000000"
+            android:alpha="0.8"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/checkVerDfuSuccTv"
+            android:layout_gravity="center_horizontal"
+            android:text="更新过程中请勿使用门锁"
+            android:textColor="#ff7700"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/checkVerDfuSuccTipTv"
+            android:layout_gravity="center_horizontal"
+            android:text="手机与门锁距离不能超过1米"
+            android:textColor="#ff7700"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/confirmBtn"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/updateTipTv"
+            android:src="@drawable/dfu_confirm_selector"
+            android:layout_marginTop="@dimen/y158"
+            android:layout_width="@dimen/x279"
+            android:layout_height="@dimen/y33" />
+        <!-- 更新过程和成功都使用 end-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dfuFailView"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/dfuFailImg"
+            android:layout_marginTop="@dimen/x119"
+            android:layout_width="@dimen/x73"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/icon_guanbi"
+            android:layout_height="@dimen/x73" />
+        <TextView
+            android:id="@+id/dfuFailTv"
+            android:layout_gravity="center_horizontal"
+            android:text="升级失败，请重新升级"
+            android:textColor="#e83434"
+            android:textSize="@dimen/x16"
+            android:layout_marginTop="@dimen/y14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/y17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:alpha="0.8"
+                android:layout_marginLeft="@dimen/x7"
+                android:text="升级成功前，严禁删除门锁"
+                android:textColor="#e83434"
+                android:textSize="@dimen/x12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:alpha="0.8"
+                android:layout_marginLeft="@dimen/x7"
+                android:text="升级成功后，门锁才可使用"
+                android:textColor="#e83434"
+                android:textSize="@dimen/x12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!-- 重新升级 -->
+        <ImageView
+            android:id="@+id/reupdateBtn"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/updateTipTv"
+            android:src="@drawable/dfu_reupdate_selector"
+            android:layout_marginTop="@dimen/y148"
+            android:layout_width="@dimen/x279"
+            android:layout_height="@dimen/y33" />
+    </LinearLayout>
+</LinearLayout>

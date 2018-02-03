@@ -1,0 +1,274 @@
+[
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_alert_dialog_button_bar_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_button_bar_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_mode_bar.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_select_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_select_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/numberpicker_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/numberpicker_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_bar_title_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_title_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_popup_menu_item_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/menu_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/menu_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/pull_header.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/pull_header.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/xq_progress_dialog_simple.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/xq_progress_dialog_simple.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/activity_member_manage.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/res/layout/activity_member_manage.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/xq_progress_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/xq_progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_list_menu_item_icon.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/menu_dialog_slidebtn_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/menu_dialog_slidebtn_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_screen_content_include.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_select_dialog_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_select_dialog_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_media_cancel_action.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_select_dialog_multichoice.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_select_dialog_multichoice.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_list_menu_item_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/title_bar_transparent_white.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/title_bar_transparent_white.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_big_media_narrow.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/listview_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/res/layout/listview_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_media_action.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_screen_toolbar.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/sub_title_bar_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/sub_title_bar_black.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/time_picker.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/time_picker.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/xq_progress_horizital_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/xq_progress_horizital_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/select_dialog_multichoice_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_expanded_menu_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/settings_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/settings_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_alert_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_alert_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/menu_dialog_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/menu_dialog_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/std_titlebar_device_color.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/std_titlebar_device_color.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_menu_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_search_view.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/std_titlebar_device_color_two.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/std_titlebar_device_color_two.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_alert_dialog_input_view.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_alert_dialog_input_view.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_part_time.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_select_dialog_singlechoice.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_select_dialog_singlechoice.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/std_titlebar_device_white.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/std_titlebar_device_white.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_menu_item_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_mode_close_item_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_big_media.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_alert_dialog_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/std_titlebar_device_white_two.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/std_titlebar_device_white_two.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/title_bar_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/title_bar_black.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_media.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/family_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/res/layout/family_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_lines.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_center_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_center_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/select_dialog_singlechoice_material.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/title_bar_selectall.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/title_bar_selectall.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/ml_select_dialog_center.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/ml_select_dialog_center.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/activity_main.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/layout/title_bar_transparent_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/layout/title_bar_transparent_black.xml"
+    }
+]

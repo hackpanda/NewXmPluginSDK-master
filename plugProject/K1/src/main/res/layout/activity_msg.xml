@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/msgRel"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/title_bar_transparent_black" />
+    <LinearLayout
+        android:id="@+id/checkView"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/checkImg"
+            android:layout_width="@dimen/x34"
+            android:layout_marginTop="@dimen/y133"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/icon_zhuangtai"
+            android:layout_height="@dimen/x34" />
+        <TextView
+            android:text="正在读取消息"
+            android:textSize="@dimen/x12"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y16"
+            android:alpha="0.8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.xiaomi.zkplug.view.LoadMoreListView
+            android:id="@+id/msgListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.xiaomi.zkplug.view.LoadMoreListView>
+        <ImageView
+            android:id="@+id/xialaImg"
+            android:visibility="gone"
+            android:layout_width="@dimen/x51"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_xiahua"
+            android:layout_height="@dimen/y29" />
+        <LinearLayout
+            android:id="@+id/emptyView"
+            android:visibility="gone"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y81"
+                android:src="@drawable/icon_xinxi"
+                android:scaleType="fitCenter"
+                android:layout_width="@dimen/x65"
+                android:layout_height="@dimen/y49" />
+            <TextView
+                android:layout_marginTop="@dimen/y12"
+                android:textColor="#8d8d8d"
+                android:textSize="@dimen/x13"
+                android:text="当前您没有任何消息"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

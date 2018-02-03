@@ -1,0 +1,433 @@
+package com.xiaomi.zkplug.main;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Point;
+import android.os.Bundle;
+import android.os.Message;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.WindowManager;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.xiaomi.smarthome.bluetooth.Response;
+import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
+import com.xiaomi.smarthome.device.api.BaseDevice;
+import com.xiaomi.smarthome.device.api.BaseDevice.StateChangedListener;
+import com.xiaomi.smarthome.device.api.Callback;
+import com.xiaomi.smarthome.device.api.DeviceUpdateInfo;
+import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.Device;
+import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.entity.LockMsg;
+import com.xiaomi.zkplug.main.msg.MsgAdapter;
+import com.xiaomi.zkplug.member.MemberManageActivity;
+import com.xiaomi.zkplug.util.BitConverter;
+import com.xiaomi.zkplug.view.BottomScrollView;
+import com.xiaomi.zkplug.view.RippleBackground;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class MainActivity extends BaseActivity implements StateChangedListener, OnClickListener{
+    static final int MSG_UPDATE_FIRM = 1;
+    public static UUID RX_SERVICE_UUID = UUID.fromString("6e400001-b5a3-f393-e0a9-e50e24dcca9e");
+    public static UUID RX_CHAR_UUID = UUID.fromString("6e400002-b5a3-f393-e0a9-e50e24dcca9e");
+    public static UUID TX_CHAR_UUID = UUID.fromString("6e400003-b5a3-f393-e0a9-e50e24dcca9e");
+    public static UUID CCCD = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
+    Device mDevice;
+
+    View mNewFirmView;
+
+    TextView mTitleView;
+
+    RippleBackground rippleBackground;//动画布局
+
+    private View openView;
+    RelativeLayout lockRel;
+    private BottomScrollView sv;
+    private int offsetsum = 0;// 总的手指滑动距离
+    private Point point = new Point();
+    private RelativeLayout swipeRefreshLayout;
+    private MsgAdapter adapter;
+    private List<LockMsg> lists = new ArrayList<LockMsg>();
+    private ListView listView;
+
+    private boolean isMsgOnShow = false; // true:显示详情 false 反之
+    private int contentHeight = 0;//内容高度
+
+
+    /**
+     * listview竖向滑动的阈值
+     */
+    private static final int THRESHOLD_Y_LIST_VIEW = 20;
+    private boolean isSvToBottom = false;
+
+    private float mLastX;
+    private float mLastY;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        mNewFirmView = findViewById(R.id.title_bar_redpoint);
+        mTitleView = ((TextView) findViewById(R.id.title_bar_title));
+
+        // 初始化device
+        mDevice = Device.getDevice(mDeviceStat);
+
+        // 设置titlebar在顶部透明显示时的顶部padding
+        mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
+        mHostActivity.enableBlackTranslucentStatus();
+        findViewById(R.id.title_bar_return).setOnClickListener(this);
+        findViewById(R.id.title_bar_more).setOnClickListener(this);
+        findViewById(R.id.centerImage).setOnClickListener(this);
+        findViewById(R.id.memberImg).setOnClickListener(this);
+
+        // 打开分享
+        View shareView = findViewById(R.id.title_bar_share);
+        if (mDevice.isOwner()) {
+            shareView.setVisibility(View.VISIBLE);
+            shareView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mHostActivity.openShareActivity();
+                }
+            });
+        } else {
+            shareView.setVisibility(View.GONE);
+        }
+
+        initView();
+    }
+
+    private void initView(){
+
+        sv = (BottomScrollView) findViewById(R.id.myScrollView);
+
+        initOpenView();//初始化开锁界面
+        initMsgView();//初始化listView
+        initViewHeight();
+
+        sv.smoothScrollTo(0, 0);//初始化默认位置
+        sv.setScrollToBottomListener(new BottomScrollView.OnScrollToBottomListener() {
+            @Override
+            public void onScrollToBottom() {
+                isSvToBottom = true;
+            }
+
+            @Override
+            public void onNotScrollToBottom() {
+                isSvToBottom = false;
+            }
+        });
+    }
+
+
+    /**
+     * 初始化listView
+     */
+    private void initMsgView(){
+        listView = (ListView) findViewById(R.id.listview);
+        LockMsg lockMsg = new LockMsg();
+        lockMsg.setMsgDate("2017-07-06");
+        lists.add(lockMsg);
+
+        lockMsg = new LockMsg();
+        lockMsg.setMsgContent("当前您的门锁点亮低于8%, 请及时更换电池xx");
+        lockMsg.setMsgTitle("门锁电量过低");
+        lockMsg.setMsgDate("2017-07-06");
+        lockMsg.setMsgTime("12:10:13");
+        lockMsg.setMsgType(1);
+        lists.add(lockMsg);
+        lockMsg = new LockMsg();
+        lockMsg.setMsgContent("您的门锁，密码输错次数过多，导致键盘被锁");
+        lockMsg.setMsgTitle("键盘被锁");
+        lockMsg.setMsgDate("2017-07-06");
+        lockMsg.setMsgTime("12:10:13");
+        lockMsg.setMsgType(1);
+        lists.add(lockMsg);
+
+
+        lockMsg = new LockMsg();
+        lockMsg.setMsgDate("2017-07-07 12:10:13");
+        lists.add(lockMsg);
+        lockMsg = new LockMsg();
+        lockMsg.setMsgContent("当前您的门锁点亮低于8%, 请及时更换电池xx");
+        lockMsg.setMsgTitle("门锁电量过低");
+        lockMsg.setMsgDate("2017-07-07");
+        lockMsg.setMsgTime("12:10:13");
+        lockMsg.setMsgType(1);
+        lists.add(lockMsg);
+        lockMsg = new LockMsg();
+        lockMsg.setMsgContent("您的门锁，密码输错次数过多，导致键盘被锁");
+        lockMsg.setMsgTitle("键盘被锁");
+        lockMsg.setMsgDate("2017-07-07");
+        lockMsg.setMsgTime("12:10:13");
+        lockMsg.setMsgType(2);
+        lists.add(lockMsg);
+        adapter = new MsgAdapter(this, lists);
+        listView.setAdapter(adapter);
+        // 下拉刷新
+        swipeRefreshLayout = (RelativeLayout) findViewById(R.id.swipe_refresh_layout);
+        // ListView滑动冲突解决
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+
+                if(action == MotionEvent.ACTION_DOWN) {
+                    mLastY = event.getY();
+                }
+                if(action == MotionEvent.ACTION_MOVE) {
+                    int top = listView.getChildAt(0).getTop();
+                    float nowY = event.getY();
+                    if(!isSvToBottom) {
+                        isMsgOnShow = true;
+                        // 允许scrollview拦截点击事件, scrollView滑动
+                        sv.requestDisallowInterceptTouchEvent(false);
+                    } else if(top == 0 && nowY - mLastY > THRESHOLD_Y_LIST_VIEW) {
+                        // 允许scrollview拦截点击事件, scrollView滑动
+                        sv.requestDisallowInterceptTouchEvent(false);
+                        isMsgOnShow = false;
+                    } else {
+                        // 不允许scrollview拦截点击事件， listView滑动
+                        sv.requestDisallowInterceptTouchEvent(true);
+                        isMsgOnShow = false;
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    /**
+     * 设置页面高度
+     */
+    private void initViewHeight(){
+        // 设置滑动层为屏幕高度
+        lockRel = (RelativeLayout) findViewById(R.id.lockRel);
+        // 设置滑动层为屏幕高度
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) lockRel.getLayoutParams();
+        contentHeight = (int) (measureHeight() - getStatusBarHeight()-getResources().getDimension(R.dimen.y34));
+        lp.height = (int) (contentHeight);
+        lockRel.setLayoutParams(lp);
+        lockRel.setOnTouchListener(myTouchListener);
+        //设置详细层的高度：等于屏幕高度-状态栏高度
+        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) swipeRefreshLayout.getLayoutParams();
+        lp2.height = contentHeight;
+        swipeRefreshLayout.setLayoutParams(lp2);
+
+    }
+
+    private void initOpenView(){
+        //开门动画
+        rippleBackground = (RippleBackground)findViewById(R.id.openRel);
+        openView = findViewById(R.id.openView);
+
+    }
+    public void refreshUI() {
+        mTitleView.setText(mDevice.getName());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 检测是否有固件更新
+        mDevice.checkDeviceUpdateInfo(new Callback<DeviceUpdateInfo>() {
+
+            @Override
+            public void onSuccess(DeviceUpdateInfo updateInfo) {
+                Message.obtain(mHandler, MSG_UPDATE_FIRM, updateInfo).sendToTarget();
+            }
+
+            @Override
+            public void onFailure(int arg0, String arg1) {
+
+            }
+        });
+        mDevice.updateDeviceStatus();
+        ((TextView) findViewById(R.id.title_bar_title)).setText(mDevice.getName());
+
+        // 监听设备数据变化
+        mDevice.addStateChangedListener(this);
+        refreshUI();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // 取消监听
+        mDevice.removeStateChangedListener(this);
+
+    }
+
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+            case MSG_UPDATE_FIRM:
+                // 刷新固件升级状态
+                DeviceUpdateInfo updateInfo = (DeviceUpdateInfo) msg.obj;
+                if (updateInfo.mHasNewFirmware) {
+                    mNewFirmView.setVisibility(View.VISIBLE);
+                } else {
+                    mNewFirmView.setVisibility(View.GONE);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onStateChanged(BaseDevice device) {
+        refreshUI();
+    }
+
+    OnTouchListener myTouchListener = new OnTouchListener() {
+
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            sv.requestDisallowInterceptTouchEvent(true);//不然无法监听touch距离
+            Log.d("小米", "offsetsum"+offsetsum);
+            // TODO Auto-generated method stub
+            int action = event.getAction();
+            Log.d("小米", action+"--action");
+            int offsety = 0;
+            int y = 0;
+            switch (action) {
+                case MotionEvent.ACTION_DOWN:
+                    point.y = (int) event.getRawY();
+                    offsetsum = 0;
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    y = (int) event.getRawY();
+                    offsety = y - point.y;
+                    offsetsum += offsety;
+                    point.y = (int) event.getRawY();
+                    sv.scrollBy(0, -offsety);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (offsetsum > 0) {// offsetsum大于0时是往下拉，只有当显示详情页是下拉才有效果，所以这里先判断isOpen的值。
+                        if (isMsgOnShow) {
+                            Log.d("小米", "下拉且msg显示");
+                            if (offsetsum > 300) {
+                                sv.smoothScrollTo(0, 0);
+                                isMsgOnShow = false;
+                            } else {
+                                sv.smoothScrollTo(0, contentHeight+getStatusBarHeight());
+                                isMsgOnShow = true;
+                            }
+                        }
+                        else
+                        {
+                            Log.d("小米", "下拉且msg隐藏");
+                            sv.smoothScrollTo(0, 0);
+                            isMsgOnShow = false;
+                        }
+                    } else {// offsetsum小于0时是往上拉，只有当隐藏详情页是下拉才有效果，所以这里先判断isOpen的值。
+                        if(!isMsgOnShow)
+                        {
+                            Log.d("小米", "msg隐藏");
+                            if (offsetsum < -300) {
+                                sv.smoothScrollTo(
+                                        0,
+                                        contentHeight+getStatusBarHeight());
+                                Log.d("小米", "下拉显示详情");
+                                isMsgOnShow = true;
+                            } else {
+                                Log.d("小米", "下拉显示详情还原");
+                                sv.smoothScrollTo(0, 0);
+                                isMsgOnShow = false;
+                            }
+                        }
+                        else
+                        {
+                            Log.d("小米", "msg显示");
+                            sv.smoothScrollTo(
+                                    0,
+                                    contentHeight+getStatusBarHeight());
+                            isMsgOnShow = true;
+                        }
+
+                    }
+
+                    break;
+            }
+            return true;
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.title_bar_return:
+                if(isMsgOnShow){
+                    sv.smoothScrollTo(0,0);
+                    isMsgOnShow = false;
+                }else{
+                    finish();
+                }
+
+                break;
+            case R.id.title_bar_more:
+                mHostActivity.openMoreMenu(null, true, -1);
+                break;
+            case R.id.centerImage:
+                rippleBackground.startRippleAnimation();
+
+                final String mac = "EE:9D:48:B4:3A:6C";
+                Toast.makeText(this, "click open", Toast.LENGTH_SHORT).show();
+
+                XmBluetoothManager.getInstance().securityChipWrite(mac, RX_SERVICE_UUID, RX_CHAR_UUID, BitConverter.fromHexString("12345678"), new Response.BleWriteResponse() {
+
+                    @Override
+                    public void onResponse(int code, Void data) {
+                        Log.d("小米", "code:"+code);
+                        Toast.makeText(MainActivity.this, "code:"+code, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.memberImg:
+                startActivity(new Intent(), MemberManageActivity.class.getName());
+                break;
+        }
+    }
+
+    /**
+     * 获取屏幕高度
+     *
+     * @return
+     */
+    public int measureHeight() {
+        WindowManager wManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wManager.getDefaultDisplay().getMetrics(dm);
+        return dm.heightPixels;
+    }
+
+    /**
+     * 获取状态栏高度
+     *
+     * @return
+     */
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height",
+                "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+}
+

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="pluglib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs_ex/pluglib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs_ex/pluglib-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

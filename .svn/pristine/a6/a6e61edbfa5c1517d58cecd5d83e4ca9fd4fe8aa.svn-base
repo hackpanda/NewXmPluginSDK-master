@@ -1,0 +1,169 @@
+package com.xiaomi.zkplug.member;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.authorization.AuthSearchActivity;
+import com.xiaomi.zkplug.fpdel.FpDelActivity;
+import com.xiaomi.zkplug.fpinput.FpInputActivity;
+import com.xiaomi.zkplug.member.slideview.ListViewCompat;
+import com.xiaomi.zkplug.member.slideview.PwdUnlockItem;
+import com.xiaomi.zkplug.member.slideview.SlideView;
+import com.xiaomi.zkplug.pwdset.PwdSetActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 作者：liwenqi on 17/6/13 13:34
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：成员详情
+ */
+public class MemberDetailActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, SlideView.OnSlideListener{
+
+    private SlideView mLastSlideViewWithStatusOn;//解锁密码的滑动删除布局
+    List<PwdUnlockItem> pwdUnlockItems;
+    private ListViewCompat mListView;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_member_detail);
+        // 设置titlebar在顶部透明显示时的顶部padding
+        mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
+        mHostActivity.enableWhiteTranslucentStatus();
+        TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
+        mTitleView.setText("成员详情");
+        initView();
+    }
+
+    private void initView(){
+        findViewById(R.id.title_bar_return).setOnClickListener(this);
+        findViewById(R.id.pwdSetRel).setOnClickListener(this);
+        findViewById(R.id.nameRel).setOnClickListener(this);
+        findViewById(R.id.authRel).setOnClickListener(this);
+        findViewById(R.id.fpRel).setOnClickListener(this);//右手拇指
+        findViewById(R.id.fpAddRel).setOnClickListener(this);
+        findViewById(R.id.memberDelRel).setOnClickListener(this);
+        pwdUnlockItems = new ArrayList<PwdUnlockItem>();
+        PwdUnlockItem item = new PwdUnlockItem();
+        item.title = "解锁密码";
+        pwdUnlockItems.add(item);
+        mListView = (ListViewCompat) findViewById(R.id.pwdUnlockView);
+        mListView.setAdapter(new PwdUnlockAdapter());
+        mListView.setOnItemClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.title_bar_return:
+                finish();
+                break;
+            case R.id.nameRel:
+                break;
+            case R.id.authRel:
+                startActivity(new Intent(), AuthSearchActivity.class.getName());
+                break;
+            case R.id.fpRel:
+                startActivity(new Intent(), FpDelActivity.class.getName());
+                break;
+            case R.id.fpAddRel:
+                startActivity(new Intent(), FpInputActivity.class.getName());
+                break;
+            case R.id.memberDelRel:
+                break;
+            case R.id.pwdSetRel:
+                startActivity(new Intent(), PwdSetActivity.class.getName());
+                break;
+            case R.id.delHolder:
+                Toast.makeText(this, "解锁密码", Toast.LENGTH_LONG).show();
+                break;
+        }
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position,
+                            long id) {
+        Log.e("Detail", "onItemClick position=" + position);
+    }
+
+    @Override
+    public void onSlide(View view, int status) {
+        if (mLastSlideViewWithStatusOn != null && mLastSlideViewWithStatusOn != view) {
+            mLastSlideViewWithStatusOn.shrink();
+        }
+
+        if (status == SLIDE_STATUS_ON) {
+            mLastSlideViewWithStatusOn = (SlideView) view;
+        }
+    }
+
+    class PwdUnlockHolder {
+        public TextView title;
+        public ViewGroup deleteHolder;
+        PwdUnlockHolder(View view) {
+            title = (TextView) view.findViewById(R.id.title);
+            deleteHolder = (ViewGroup)view.findViewById(R.id.delHolder);
+        }
+    }
+    private class PwdUnlockAdapter extends BaseAdapter {
+
+        private LayoutInflater mInflater;
+        PwdUnlockAdapter() {
+            mInflater = getLayoutInflater();
+        }
+
+        @Override
+        public int getCount() {
+            return pwdUnlockItems.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return pwdUnlockItems.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            PwdUnlockHolder holder;
+            SlideView slideView = (SlideView) convertView;
+            if (slideView == null) {
+                View itemView = mInflater.inflate(R.layout.pwd_unlock_item, null);
+
+                slideView = new SlideView(MemberDetailActivity.this);
+                slideView.setContentView(itemView);
+
+                holder = new PwdUnlockHolder(slideView);
+                slideView.setOnSlideListener(MemberDetailActivity.this);
+                slideView.setTag(holder);
+            } else {
+                holder = (PwdUnlockHolder) slideView.getTag();
+            }
+            PwdUnlockItem item = pwdUnlockItems.get(position);
+            item.slideView = slideView;
+            item.slideView.shrink();
+
+            holder.title.setText(item.title);
+            holder.deleteHolder.setOnClickListener(MemberDetailActivity.this);
+
+            return slideView;
+        }
+
+    }
+}

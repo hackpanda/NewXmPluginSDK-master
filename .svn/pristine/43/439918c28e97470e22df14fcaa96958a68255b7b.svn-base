@@ -1,0 +1,100 @@
+package com.xiaomi.zkplug.entity;
+
+import java.io.Serializable;
+
+/**
+ * 作者：liwenqi on 16/12/17 16:39
+ * 邮箱：liwenqi@zelkova.cn
+ */
+
+public class BleKey implements Serializable{
+
+    private static final long serialVersionUID = 2266887024069774089L;
+    long id;
+    int traceId;//锁命令跟踪吗
+    /*
+    * 钥匙需要的几个参数
+    * */
+    String name;//蓝牙钥匙名字
+    String bleKey;//就是一条锁命令
+    String bleKeyValidTo;
+    String bleKeyValidFrom;
+    int pin;//锁使用的pin
+    boolean bindClient;
+    int openTimes;
+
+    public int getTraceId() {
+        return traceId;
+    }
+
+    public void setTraceId(int traceId) {
+        this.traceId = traceId;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOpenTimes() {
+        return openTimes;
+    }
+
+    public void setOpenTimes(int openTimes) {
+        this.openTimes = openTimes;
+    }
+
+    public boolean isBindClient() {
+        return bindClient;
+    }
+
+    public void setBindClient(boolean bindClient) {
+        this.bindClient = bindClient;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBleKey() {
+        return bleKey;
+    }
+
+    public void setBleKey(String bleKey) {
+        this.bleKey = bleKey;
+    }
+
+    public String getBleKeyValidTo() {
+        return bleKeyValidTo;
+    }
+
+    public void setBleKeyValidTo(String bleKeyValidTo) {
+        this.bleKeyValidTo = bleKeyValidTo;
+    }
+
+    public String getBleKeyValidFrom() {
+        return bleKeyValidFrom;
+    }
+
+    public void setBleKeyValidFrom(String bleKeyValidFrom) {
+        this.bleKeyValidFrom = bleKeyValidFrom;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+
+
+
+
+}

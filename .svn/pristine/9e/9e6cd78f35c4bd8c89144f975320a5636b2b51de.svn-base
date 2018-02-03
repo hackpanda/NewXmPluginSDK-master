@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.xiaomi.zkplug.member.MemberManageActivity">
+    <include layout="@layout/title_bar_transparent_black" />
+
+
+    <RelativeLayout
+        android:background="#eeeeee"
+        android:layout_width="@dimen/x279"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="姓名"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/entryImg"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x1"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:layout_height="@dimen/y10" />
+        </RelativeLayout>
+        <ListView
+            android:id="@+id/memListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+    </RelativeLayout>
+</RelativeLayout>

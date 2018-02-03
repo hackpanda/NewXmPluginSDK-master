@@ -1,0 +1,85 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:3:5-32
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+application
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:5:5-33:19
+MERGED from [com.android.support:appcompat-v7:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:7:5-20
+MERGED from [com.android.support:support-v4:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.2/AndroidManifest.xml:9:5-20
+MERGED from [NewXmPluginSDK-mijia-watch:common_ui:unspecified] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/AndroidManifest.xml:11:5-15:19
+	android:label
+		ADDED from [NewXmPluginSDK-mijia-watch:common_ui:unspecified] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/AndroidManifest.xml:13:9-41
+	android:supportsRtl
+		ADDED from [NewXmPluginSDK-mijia-watch:common_ui:unspecified] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/AndroidManifest.xml:14:9-35
+	android:allowBackup
+		ADDED from [NewXmPluginSDK-mijia-watch:common_ui:unspecified] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/AndroidManifest.xml:12:9-35
+meta-data#minPluginSdkApiVersion
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:8:9-10:33
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:10:13-30
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:9:13-50
+meta-data#model
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:12:9-14:46
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:14:13-43
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:13:13-33
+meta-data#message_handler
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:16:9-18:65
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:18:13-62
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:17:13-43
+meta-data#MiHomeDeveloperId
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:20:9-22:45
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:22:13-42
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:21:13-45
+meta-data#MiHomePlatform
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:24:9-26:37
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:26:13-34
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:25:13-42
+meta-data#MiHomeSupportWidget
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:28:9-30:37
+	android:value
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:30:13-34
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:29:13-47
+activity#com.xiaomi.zkplug.member.MemberManageActivity
+ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:32:9-74
+	android:name
+		ADDED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml:32:19-62
+uses-sdk
+INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/AndroidManifest.xml:5:5-44
+MERGED from [com.android.support:support-vector-drawable:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/AndroidManifest.xml:5:5-43
+MERGED from [com.android.support:support-v4:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.2/AndroidManifest.xml:5:5-7:41
+MERGED from [NewXmPluginSDK-mijia-watch:common_ui:unspecified] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/AndroidManifest.xml:7:5-9:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:23.4.0] /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml
+		INJECTED from /Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/src/main/AndroidManifest.xml

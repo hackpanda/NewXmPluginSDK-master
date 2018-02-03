@@ -1,0 +1,68 @@
+package com.xiaomi.zkplug.member;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.entity.Member;
+
+import java.util.List;
+
+;
+
+/**
+ * 作者：liwenqi on 16/9/13 10:33
+ * 邮箱：liwenqi@zelkova.cn
+ */
+public class FamilyAdapter extends BaseAdapter {
+
+    private LayoutInflater mInflater;
+    public List<Member> memList;
+
+    public FamilyAdapter(Context pContext, List<Member> memList) {
+        mInflater = LayoutInflater.from(pContext);
+        this.memList = memList;
+    }
+
+    @Override
+    public int getCount() {
+        if (memList == null) {
+            return 0;
+        } else {
+            return memList.size();
+        }
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return memList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        FamilyHolder holder = null;
+        // 如果缓存convertView为空，则需要创建View
+        if (convertView == null) {
+            holder = new FamilyHolder();
+            // 根据自定义的Item布局加载布局
+            convertView = mInflater.inflate(R.layout.family_item, null);
+            holder.memName = (TextView) convertView.findViewById(R.id.memberName);
+            // 将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
+            convertView.setTag(holder);
+        } else {
+            holder = (FamilyHolder) convertView.getTag();
+        }
+        holder.memName.setText(memList.get(position).getRealName());
+        return convertView;
+    }
+}
+

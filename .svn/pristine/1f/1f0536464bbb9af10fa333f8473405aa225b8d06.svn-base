@@ -1,0 +1,68 @@
+package com.xiaomi.zkplug.gateway;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.entity.Member;
+
+import java.util.List;
+
+;
+
+/**
+ * 作者：liwenqi on 16/9/13 10:33
+ * 邮箱：liwenqi@zelkova.cn
+ */
+public class GwAdapter extends BaseAdapter {
+
+    private LayoutInflater mInflater;
+    public List<String> gwList;
+
+    public GwAdapter(Context pContext, List<String> gwList) {
+        mInflater = LayoutInflater.from(pContext);
+        this.gwList = gwList;
+    }
+
+    @Override
+    public int getCount() {
+        if (gwList == null) {
+            return 0;
+        } else {
+            return gwList.size();
+        }
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return gwList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        GwHolder holder = null;
+        // 如果缓存convertView为空，则需要创建View
+        if (convertView == null) {
+            holder = new GwHolder();
+            // 根据自定义的Item布局加载布局
+            convertView = mInflater.inflate(R.layout.gateway_item, null);
+            holder.gwName = (TextView) convertView.findViewById(R.id.gwName);
+            // 将设置好的布局保存到缓存中，并将其设置在Tag里，以便后面方便取出Tag
+            convertView.setTag(holder);
+        } else {
+            holder = (GwHolder) convertView.getTag();
+        }
+        holder.gwName.setText(gwList.get(position));
+        return convertView;
+    }
+}
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical"
+    tools:context=".main.MainActivity">
+    <include layout="@layout/title_bar_transparent_white" />
+    <LinearLayout
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_height="@dimen/y278">
+            <ImageView
+                android:layout_width="@dimen/x118"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y50"
+                android:background="@drawable/zk_lock_tupian"
+                android:layout_height="@dimen/y125" />
+            <TextView
+                android:gravity="center_horizontal"
+                android:text="为成员添加一把手机钥匙"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:textSize="@dimen/x12"
+                android:layout_marginTop="@dimen/y30"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center_horizontal"
+                android:text="成员就可以和您一起使用手机开锁啦"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:textSize="@dimen/x12"
+                android:layout_marginTop="@dimen/y3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/accountEdit"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/corners_edit"
+            android:paddingStart="@dimen/x11"
+            android:textColorHint="#595959"
+            android:textSize="@dimen/x10"
+            android:paddingLeft="@dimen/x11"
+            android:textColor="@color/black"
+            android:hint="邮箱／手机号码／小米账号"
+            android:layout_width="@dimen/x278"
+            android:layout_height="@dimen/y33" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/y7"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/accountWarnTv"
+                android:layout_centerHorizontal="true"
+                android:text="未找到该用户"
+                android:visibility="gone"
+                android:alpha="0.8"
+                android:textColor="#ff0000"
+                android:textSize="@dimen/x13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/searchBtn"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/auth_search_selector"
+                android:layout_marginTop="@dimen/y25"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y33" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

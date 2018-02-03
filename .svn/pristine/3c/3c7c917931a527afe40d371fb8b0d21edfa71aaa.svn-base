@@ -1,0 +1,41 @@
+package com.xiaomi.zkplug.fpdel;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.R;
+
+/**
+ * 作者：liwenqi on 17/6/13 13:34
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：删除指纹
+ */
+public class FpDelActivity extends BaseActivity implements View.OnClickListener{
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_fp_del);
+        // 设置titlebar在顶部透明显示时的顶部padding
+        mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
+        mHostActivity.enableWhiteTranslucentStatus();
+        TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
+        mTitleView.setText("右手拇指");
+        findViewById(R.id.title_bar_return).setOnClickListener(this);
+        findViewById(R.id.btnFpDel).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.title_bar_return:
+                finish();
+                break;
+            case R.id.btnFpDel:
+                break;
+        }
+    }
+}

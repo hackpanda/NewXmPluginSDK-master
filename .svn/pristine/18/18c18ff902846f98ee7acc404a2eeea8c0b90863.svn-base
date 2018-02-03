@@ -1,0 +1,110 @@
+[
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/std_titlebar_device_color.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/std_titlebar_device_color.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/xq_progress_dialog_simple.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/xq_progress_dialog_simple.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/settings_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/settings_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_select_dialog_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_select_dialog_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/menu_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/menu_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_select_dialog_center.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_select_dialog_center.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/xq_progress_horizital_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/xq_progress_horizital_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/pull_header.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/pull_header.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/time_picker.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/time_picker.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/title_bar_selectall.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/title_bar_selectall.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/std_titlebar_device_color_two.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/std_titlebar_device_color_two.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/title_bar_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/title_bar_black.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/title_bar_transparent_white.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/title_bar_transparent_white.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/menu_dialog_slidebtn_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/menu_dialog_slidebtn_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/sub_title_bar_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/sub_title_bar_black.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_select_dialog_singlechoice.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_select_dialog_singlechoice.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_select_dialog_multichoice.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_select_dialog_multichoice.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/xq_progress_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/xq_progress_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_alert_dialog_input_view.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_alert_dialog_input_view.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/std_titlebar_device_white.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/std_titlebar_device_white.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_center_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_center_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_alert_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_alert_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/menu_dialog_item.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/menu_dialog_item.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/numberpicker_layout.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/numberpicker_layout.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/title_bar_transparent_black.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/title_bar_transparent_black.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/ml_select_dialog.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/ml_select_dialog.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/layout/std_titlebar_device_white_two.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/layout/std_titlebar_device_white_two.xml"
+    }
+]

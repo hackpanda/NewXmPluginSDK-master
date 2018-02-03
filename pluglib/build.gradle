@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
+    buildTypes {
+        release {
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    provided fileTree(dir: 'lib_ex', include: ['*.jar'])
+}
+
+def jarName = 'pluglib.jar'
+def jarSurcesName = 'pluglib-sources.jar'
+task clearJar(type: Delete) {
+    delete "${project.buildDir}/libs/" + jarName
+}
+
+task makeJar(type: Copy) {
+    from("${project.buildDir}/intermediates/bundles/default/")
+    into("${project.buildDir}/libs/")
+    include('classes.jar')
+    rename('classes.jar', jarName)
+    from("${project.buildDir}/intermediates/bundles/release/")
+    into("${project.buildDir}/libs/")
+    include('classes.jar')
+    rename('classes.jar', jarName)
+}
+
+
+task sourcesJar(type: Jar) {
+    from(android.sourceSets.main.java.srcDirs)
+    into("${project.buildDir}/libs/")
+    rename('pluglib-sources.jar', jarSurcesName)
+    classifier = 'sources'
+}
+
+project.afterEvaluate {
+    makeJar.dependsOn(clearJar, assembleRelease, sourcesJar)
+    
+}

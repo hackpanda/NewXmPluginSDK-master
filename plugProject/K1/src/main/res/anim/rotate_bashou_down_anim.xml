@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android" >
+    <rotate
+        android:fromDegrees="0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:pivotX="18%"
+        android:pivotY="26%"
+        android:toDegrees="40"
+        android:duration = "500"
+        android:repeatCount = "0"
+        android:fillAfter="true"
+        android:visible = "true">
+    </rotate>
+
+</rotate>

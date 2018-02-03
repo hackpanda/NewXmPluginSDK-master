@@ -1,0 +1,136 @@
+package com.xiaomi.zkplug.entity;
+
+import java.io.Serializable;
+import java.util.List;
+
+/**
+ * 作者：liwenqi on 16/12/13 10:25
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：成员, 属于lock
+ */
+
+public class Member implements Serializable {
+    private static final long serialVersionUID = -6093787055885901882L;
+
+    private long id;
+
+    private long memberId;//服务器生成的ID
+
+    /*
+    * 管理员id
+    * */
+    private long adminid;
+    /*
+    * 是否接收通知
+    * */
+    private boolean receiveNotice;
+
+    public long getAdminid() {
+        return adminid;
+    }
+
+    public void setAdminid(long adminid) {
+        this.adminid = adminid;
+    }
+
+    /*
+    * 姓名
+    * */
+    private String realName;
+
+    /*
+    * 昵称
+    * */
+    private String nickName = "";
+    /*
+    * 电话号码
+    * */
+    private String phoneNum = "";
+
+    /*
+    * 指纹列表
+    * */
+    private List<FpKey> fpKeys;
+
+    /*
+    * 成员的蓝牙钥匙
+    * */
+    private BleKey bleKey;
+
+
+    private String lstatuscmd;
+
+    public String getLstatuscmd() {
+        return lstatuscmd;
+    }
+
+    public void setLstatuscmd(String lstatuscmd) {
+        this.lstatuscmd = lstatuscmd;
+    }
+
+    public boolean isReceiveNotice() {
+        return receiveNotice;
+    }
+
+    public void setReceiveNotice(boolean receiveNotice) {
+        this.receiveNotice = receiveNotice;
+    }
+
+    public List<FpKey> getFpKeys() {
+        return fpKeys;
+    }
+
+    public void setFpKeys(List<FpKey> fpKeys) {
+        this.fpKeys = fpKeys;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public BleKey getBleKey() {
+        return bleKey;
+    }
+
+    public void setBleKey(BleKey bleKey) {
+        this.bleKey = bleKey;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+
+    public long getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(long memberId) {
+        this.memberId = memberId;
+    }
+
+}

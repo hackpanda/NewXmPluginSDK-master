@@ -1,0 +1,76 @@
+package com.xiaomi.zkplug.entity;
+
+import java.io.Serializable;
+
+/**
+ * 作者：liwenqi on 16/12/13 10:25
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：指纹，属于成员
+ */
+
+public class FpKey implements Serializable {
+    private static final long serialVersionUID = 5688712831541757391L;
+    private long id;
+
+    private int batchId;
+    /*
+    * 指纹名字
+    * */
+    private String fpName;
+
+    private String featurecode;
+
+    public boolean isAlarm() {
+        return isAlarm;
+    }
+
+    public void setAlarm(boolean alarm) {
+        isAlarm = alarm;
+    }
+
+    private boolean isAlarm;//1报警指纹，0非报警指纹
+
+    public String getFeaturecode() {
+        return featurecode;
+    }
+
+    public void setFeaturecode(String featurecode) {
+        this.featurecode = featurecode;
+    }
+    /*
+    * 位置: 0上方，1下方
+    * */
+    private int positon;
+
+    public int getPositon() {
+        return positon;
+    }
+
+    public void setPositon(int positon) {
+        this.positon = positon;
+    }
+
+    public int getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(int batchId) {
+        this.batchId = batchId;
+    }
+
+    public String getFpName() {
+        return fpName;
+    }
+
+    public void setFpName(String fpName) {
+        this.fpName = fpName;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+}

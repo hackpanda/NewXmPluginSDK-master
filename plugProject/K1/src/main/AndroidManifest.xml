@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xiaomi.zkplug">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <application>
+
+        <!-- 支持插件的最低版本，必须 -->
+        <meta-data
+            android:name="minPluginSdkApiVersion"
+            android:value="51" />
+        <!-- 设备model，必须 -->
+        <meta-data
+            android:name="model"
+            android:value="shjszn.lock.c1" />
+        <!-- 设备处理消息入口，必须 -->
+        <meta-data
+            android:name="message_handler"
+            android:value="com.xiaomi.zkplug.MessageReceiver" />
+        <!-- 开发者Id, 必须 -->
+        <meta-data
+            android:name="MiHomeDeveloperId"
+            android:value="id_1139628820" />
+        <!-- 支持的运行平台,必须 -->
+        <meta-data
+            android:name="MiHomePlatform"
+            android:value="phone" />
+        <!-- 是否支持widget显示,非必须 -->
+        <meta-data
+            android:name="MiHomeSupportWidget"
+            android:value="false" />
+    </application>
+
+</manifest>

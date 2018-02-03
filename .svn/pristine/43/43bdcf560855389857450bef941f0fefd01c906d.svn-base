@@ -1,0 +1,11 @@
+package com.xiaomi.zkplug.open;
+
+/**
+ * 作者：liwenqi on 17/6/15 10:31
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：
+ */
+
+public class ZkLockOpen {
+
+}

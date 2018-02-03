@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical"
+    tools:context=".main.MainActivity">
+    <include layout="@layout/title_bar_transparent_white" />
+    <LinearLayout
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y252">
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@drawable/bg_chatu"
+                android:background="@color/white"
+                android:layout_height="@dimen/y252" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:text="请将门锁和手机尽量靠近"
+                android:textColor="@color/black"
+                android:alpha="0.8"
+                android:textSize="@dimen/x12"
+                android:layout_marginTop="@dimen/y23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:text="为您安全考虑，手机不会保存密码，请您牢记，为防止"
+            android:textColor="@color/black"
+            android:alpha="0.5"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="center_horizontal"
+            android:text="有人试密码，密码连续输错5次时，键盘会被锁定5分钟"
+            android:textColor="@color/black"
+            android:alpha="0.5"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/pwdRel"
+            android:layout_marginTop="@dimen/y11"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/x278"
+            android:layout_height="@dimen/y33">
+            <EditText
+                android:id="@+id/pwdEdit"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/corners_edit"
+                android:textColorHint="#000000"
+                android:textSize="@dimen/x10"
+                android:textColor="@color/black"
+                android:paddingLeft="@dimen/x11"
+                android:inputType="numberPassword"
+                android:maxLength="8"
+                android:hint="6-8位数字"
+                android:alpha="0.3"
+                android:drawablePadding="@dimen/x7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/pwdToggleImg"
+                android:background="@drawable/icon_yincang"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x9"
+                android:layout_width="@dimen/x19"
+                android:layout_height="@dimen/x19" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/y8"
+            android:layout_height="@dimen/y15">
+            <TextView
+                android:id="@+id/pwdWarnTv"
+                android:gravity="center_horizontal"
+                android:visibility="gone"
+                android:text="请输入密码"
+                android:alpha="0.8"
+                android:textColor="#ff0000"
+                android:textSize="@dimen/x13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/pwdSetBtn"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/pwd_set_selector"
+            android:layout_marginTop="@dimen/y17"
+            android:layout_width="@dimen/x279"
+            android:layout_height="@dimen/y33" />
+    </LinearLayout>
+
+
+</LinearLayout>

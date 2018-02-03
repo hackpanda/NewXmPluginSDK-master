@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_out_right.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_out_right.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_popup_exit.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_rotate_back_180.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_rotate_back_180.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_slide_in_top.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_fade_out.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_dialog_layout_anim.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_dialog_layout_anim.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_out_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_dialog_exit.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_dialog_exit.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_slide_out_top.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_in_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_rotate_180.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_rotate_180.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_in_right.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_in_right.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_rotate_45.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_rotate_45.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_dialog_item_in.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_dialog_item_in.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_out_top.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/slide_in_top.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/slide_in_top.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_fade_in.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/abc_popup_enter.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/res/merged/release/anim/v5_dialog_enter.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/plugProject/xiaomi_demo/build/intermediates/exploded-aar/NewXmPluginSDK-mijia-watch/common_ui/unspecified/res/anim/v5_dialog_enter.xml"
+    }
+]

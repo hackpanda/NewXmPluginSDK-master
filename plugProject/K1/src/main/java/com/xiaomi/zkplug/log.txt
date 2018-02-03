@@ -1,0 +1,82 @@
+
+    /**
+     *
+     * 获取锁状态命令
+     * @return
+     */
+    private LockCmdGetStatus getLockStatusCmd(){
+        Calendar cld = Calendar.getInstance();
+        cld.add(Calendar.SECOND, -180);
+        BriefDate vFrom = BriefDate.fromNature(cld.getTime());
+        cld = Calendar.getInstance();
+        cld.add(Calendar.SECOND, 180);
+        BriefDate vTo = BriefDate.fromNature(cld.getTime());
+        LockCmdGetStatus lockCmdGetStatus = new LockCmdGetStatus(BitConverter.convertMacAdd(mDevice.getMac()), vFrom, vTo);
+        return lockCmdGetStatus;
+    }
+    private void sendLockStatusCmd(){
+        iStatusOperator.sendLockMsg(getLockStatusCmd().getBytes(), new LockOperateCallback() {
+            @Override
+            public void lockOperateSucc(String value) {//value为时间差
+                //判断锁内时间偏差
+                try {
+                    iStatusOperator.unregisterBluetoothReceiver();
+                    JSONObject statusObj = new JSONObject(value);
+                    Log.d(TAG, "statusObj: "+statusObj.toString());
+                    dataManageUtil.saveDataToServer(statusObj, new DataUpdateCallback() {
+                        @Override
+                        public void dataUpateFail(int i, String s) {
+                            Log.d(TAG, "状态数据存储失败！");
+                        }
+
+                        @Override
+                        public void dataUpdateSucc(String s) {
+                            Log.d(TAG, "状态数据存储成功！");
+                        }
+                    });
+                    showSyncTimeDialog(statusObj.getString("keyid_timeDiffSnd_data"));
+                    Log.d(TAG, "lockOperateSucc-status");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void lockOperateFail(String value) {
+                Log.d(TAG, "getLockStatus:"+value);
+                iStatusOperator.unregisterBluetoothReceiver();
+                if(value.equals("3")){
+                    //命令过期，则需要授时
+                    showSyncTimeDialog("ff");//特殊时间，表示命令过期
+                }
+            }
+        });
+    }
+
+    /**
+     * 进入首届面获取门锁状态
+     * 进行更新门锁状态和授时
+     */
+    private void getLockStatus(){
+        Log.d(TAG, "getLockStatus开始");
+        if(iStatusOperator == null){
+            iStatusOperator = OperatorBuilder.create(SecureStatus.FLAG, activity, mDevice);
+        }
+        iStatusOperator.registerBluetoothReceiver();
+        Log.d(TAG, "回调状态:"+XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()));
+        if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
+            Log.d(TAG, "获取锁状态: "+BriefDate.fromNature(new Date()).toString());
+            viewHanlder.sendEmptyMessage(MSG_SEND_STATUS_GET_CMD);
+        } else {
+            //未连接就先建立连接
+            XmBluetoothManager.getInstance().securityChipConnect(mDevice.getMac(), new Response.BleConnectResponse() {
+                @Override
+                public void onResponse(int i, Bundle bundle) {
+                    Log.d(TAG, "回调状态:" + i);
+                    if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
+                        Log.d(TAG, "获取锁状态: "+BriefDate.fromNature(new Date()).toString());
+                        viewHanlder.sendEmptyMessage(MSG_SEND_STATUS_GET_CMD);
+                    }
+                }
+            });
+        }
+    }

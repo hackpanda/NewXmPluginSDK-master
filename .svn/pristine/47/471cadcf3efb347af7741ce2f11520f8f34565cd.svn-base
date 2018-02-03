@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical"
+    tools:context="com.xiaomi.zkplug.member.MemberDetailActivity">
+    <include layout="@layout/title_bar_transparent_white" />
+    <LinearLayout
+        android:background="#eeeeee"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/nameRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="姓名"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/nameEntryImg"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+            <TextView
+                android:text="王美兰"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x12"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.4"
+                android:layout_toLeftOf="@id/nameEntryImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_centerHorizontal="true"
+                android:background="#c6c6c6"
+                android:alpha="0.6"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y1" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/authRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="授权小米账号"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/authEntryImg"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+            <TextView
+                android:text="未授权"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x12"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.4"
+                android:layout_toLeftOf="@id/authEntryImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <TextView
+            android:text="密码解锁"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:textSize="@dimen/x11"
+            android:textColor="#000000"
+            android:alpha="0.6"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y29" />
+        <com.xiaomi.zkplug.member.slideview.ListViewCompat
+            android:id="@+id/pwdUnlockView"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+
+        </com.xiaomi.zkplug.member.slideview.ListViewCompat>
+        <RelativeLayout
+            android:id="@+id/pwdSetRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="设置密码"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#2889fd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+
+        </RelativeLayout>
+        <TextView
+            android:text="解锁指纹"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/x20"
+            android:textSize="@dimen/x11"
+            android:textColor="#000000"
+            android:alpha="0.6"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y29" />
+        <RelativeLayout
+            android:id="@+id/fpRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="右手拇指"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_centerHorizontal="true"
+                android:background="#c6c6c6"
+                android:alpha="0.6"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y1" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="左手拇指"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+            <View
+                android:alpha="0.6"
+                android:layout_centerHorizontal="true"
+                android:background="#c6c6c6"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fpAddRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="添加指纹"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#2889fd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/memberDelRel"
+            android:background="@drawable/item_selector"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/y29"
+            android:layout_height="@dimen/y38">
+            <TextView
+                android:text="删除家人"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x20"
+                android:textSize="@dimen/x13"
+                android:textColor="#2889fd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/x6"
+                android:background="@drawable/icon_xiayiceng"
+                android:layout_height="@dimen/y10" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

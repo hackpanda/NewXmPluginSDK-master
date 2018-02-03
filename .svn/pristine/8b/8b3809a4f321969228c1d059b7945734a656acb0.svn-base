@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/NewXmPluginSDK-mijia-watch.iml" filepath="$PROJECT_DIR$/NewXmPluginSDK-mijia-watch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common_ui/common_ui.iml" filepath="$PROJECT_DIR$/common_ui/common_ui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugProject/plugProject.iml" filepath="$PROJECT_DIR$/plugProject/plugProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pluglib/pluglib.iml" filepath="$PROJECT_DIR$/pluglib/pluglib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugProject/xiaomi_demo/xiaomi_demo.iml" filepath="$PROJECT_DIR$/plugProject/xiaomi_demo/xiaomi_demo.iml" />
+    </modules>
+  </component>
+</project>

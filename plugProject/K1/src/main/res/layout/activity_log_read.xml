@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.xiaomi.zkplug.member.MemberManageActivity">
+    <include layout="@layout/title_bar_transparent_black" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_alignParentBottom="true"
+            android:id="@+id/readBtn"
+            android:text="读取"
+            android:layout_centerHorizontal="true"
+            android:layout_width="@dimen/x89"
+            android:layout_height="@dimen/y75" />
+        <RelativeLayout
+            android:id="@+id/resultRel"
+            android:layout_above="@id/readBtn"
+            android:background="#f5f4f0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ScrollView
+                android:id="@+id/scv"
+                android:layout_centerHorizontal="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="horizontal|vertical" >
+                <TextView
+                    android:id="@+id/resultTv"
+                    android:layout_centerVertical="true"
+                    android:textColor="#005985"
+                    android:textSize="@dimen/y11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </ScrollView>
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

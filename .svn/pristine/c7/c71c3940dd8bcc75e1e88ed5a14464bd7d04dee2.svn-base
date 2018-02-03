@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="internal_impl-23.1.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs_ex/internal_impl-23.1.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,62 @@
+package com.xiaomi.zkplug.gateway;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.entity.Member;
+import com.xiaomi.zkplug.member.FamilyAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.xiaomi.zkplug.R.id.memListView;
+
+/**
+ * 作者：liwenqi on 17/6/13 13:34
+ * 邮箱：liwenqi@zelkova.cn
+ * 描述：我家网关
+ */
+public class GateWayActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
+
+    ListView gwListView;
+    List<String> gwList;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_gateway);
+
+        TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
+        mTitleView.setText("我家网关");
+        // 设置titlebar在顶部透明显示时的顶部padding
+        mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
+        mHostActivity.enableWhiteTranslucentStatus();
+        findViewById(R.id.title_bar_return).setOnClickListener(this);
+        findViewById(R.id.title_bar_more).setOnClickListener(this);
+
+        gwListView = (ListView)findViewById(R.id.gwListView);
+        gwListView.setOnItemClickListener(this);
+
+        gwList = new ArrayList<String>();
+        gwList.add("门锁名称1");
+        gwList.add("门锁名称2");
+        GwAdapter gwAdapter = new GwAdapter(this, gwList);
+        gwListView.setAdapter(gwAdapter);
+        gwAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+        }
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    }
+}

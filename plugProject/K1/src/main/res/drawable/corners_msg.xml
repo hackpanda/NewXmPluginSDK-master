@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 消息个数圆角布局 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#0deadb" />
+    <corners android:topLeftRadius="@dimen/x7"
+        android:topRightRadius="@dimen/x7"
+        android:bottomRightRadius="@dimen/x7"
+        android:bottomLeftRadius="@dimen/x7"/>
+</shape>

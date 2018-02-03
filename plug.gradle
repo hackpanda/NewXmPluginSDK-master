@@ -1,0 +1,210 @@
+import org.apache.tools.ant.taskdefs.condition.Os
+
+
+// add dependencies project
+if (project.ext.has("complieProject")) {
+    def complieProjects = project.ext.get("complieProject")
+    if (complieProjects != null) {
+        for (String compileProjectName : complieProjects) {
+            def projectPath = project.projectDir.absolutePath
+            projectPath = projectPath.substring(projectPath.indexOf("plugProject"))
+            def splitStr = File.separator;
+            if(Os.isFamily(Os.FAMILY_WINDOWS)){
+                splitStr =  "\\\\";
+            }
+            def projectPathArray = projectPath.split(splitStr)
+            if (projectPathArray.length >= 2) {
+                projectPath=""
+                for(int i=0;i<projectPathArray.length-1;i++){
+                    projectPath += ":" + projectPathArray[i]
+                }
+                projectPath +=  compileProjectName
+                println("compileProject "+projectPath)
+                project.dependencies {
+                    compile project(projectPath)
+                }
+            }
+        }
+    }
+}
+
+project.android {
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        disable 'InvalidPackage'
+        abortOnError false
+    }
+
+    aaptOptions {
+        useNewCruncher false
+        cruncherEnabled false
+    }
+}
+
+
+def pluglibPath = "${project.rootProject.projectDir}${File.separator}libs_ex"
+project.dependencies {
+    provided 'com.squareup.picasso:picasso:2.5.2'
+
+    compile project(':common_ui')
+    provided fileTree(dir: 'libs_ex', include: ['*.jar'])
+    provided fileTree(dir: pluglibPath, include: ['*.jar'])
+}
+
+
+configurations {
+    all*.exclude group: 'com.android.support', module: 'support-v4'
+    all*.exclude group: 'com.android.support', module: 'support-v7'
+    all*.exclude group: 'com.android.support', module: 'support-v13'
+}
+
+project.evaluationDependsOn(":pluglib")
+
+project.android.applicationVariants.all { variant ->
+    variant.outputs.each { output ->
+        def defaultOutputFile = output.outputFile
+        if (defaultOutputFile != null && defaultOutputFile.name.endsWith('.apk')) {
+            def newFileName = project.name + "-" + android.defaultConfig.versionCode + "-" + android.defaultConfig.versionName + "-" + variant.buildType.name + ".apk";
+            //output.outputFile = new File(defaultOutputFile.parent, newFileName)
+        }
+    }
+}
+
+
+project.afterEvaluate {
+    def beforePrapareTaskName = "preBuild"
+    def beforePrapareTask = project.tasks.findByName(beforePrapareTaskName)
+    def compliePluglibTaskName = "makeJar"
+    def compliePluglibTask = project.rootProject.project(":pluglib").tasks.findByName(compliePluglibTaskName)
+    if (compliePluglibTask != null) {
+        compliePluglibTask.doLast({
+            copy {
+                from "${project.rootProject.projectDir}${File.separator}pluglib${File.separator}build${File.separator}libs${File.separator}"
+                into pluglibPath
+                include('*.jar')
+            }
+        })
+        beforePrapareTask.dependsOn compliePluglibTask
+    } else {
+        println "not found task:" + compliePluglibTaskName
+    }
+
+    //////
+    project.android.applicationVariants.each { variant ->
+        def assembleTaskName = "assemble${variant.name.capitalize()}"
+        def assembleTask = project.tasks.findByName(assembleTaskName)
+        if (assembleTask != null) {
+            assembleTask.doLast({
+                installPlugin(project, variant);
+            });
+
+
+            def insatallTaskName = "install${variant.name.capitalize()}"
+            project.task(insatallTaskName, overwrite: true) << {
+//                installPlugin(project, variant);
+            }
+            def installTask = project.tasks.findByName(insatallTaskName)
+            installTask.dependsOn assembleTaskName
+
+
+            if (variant.name.capitalize().equals("Release")) {
+                insatallTaskName = "install"
+                project.task(insatallTaskName, overwrite: true) << {
+//                    installPlugin(project, variant);
+                }
+                installTask = project.tasks.findByName(insatallTaskName)
+                installTask.dependsOn assembleTaskName
+            }
+
+            ///
+            insatallTaskName = "install${project.name.capitalize()}${variant.name.capitalize()}"
+            project.task(insatallTaskName, overwrite: true) << {
+//                installPlugin(project, variant);
+            }
+            installTask = project.tasks.findByName(insatallTaskName)
+            installTask.dependsOn assembleTaskName
+
+            if (variant.name.capitalize().equals("Release")) {
+                insatallTaskName = "install" + project.name.capitalize()
+                project.task(insatallTaskName, overwrite: true) << {
+//                    installPlugin(project, variant);
+                }
+                installTask = project.tasks.findByName(insatallTaskName)
+                installTask.dependsOn assembleTaskName
+            }
+
+        }
+    }
+}
+
+
+void installPlugin(def project, def variant) {
+    variant.outputs.each { output ->
+        def defaultOutputFile = output.outputFile
+        if (defaultOutputFile != null && defaultOutputFile.name.endsWith('.apk')) {
+            println("install plug:" + defaultOutputFile)
+
+            Properties properties = new Properties()
+            File localProps = project.rootProject.file("local.properties")
+            def sdkDir
+            if (localProps.exists()) {
+                properties.load(localProps.newDataInputStream())
+                sdkDir = properties.getProperty("sdk.dir")
+            } else {
+                sdkDir = System.getenv("ANDROID_HOME")
+            }
+            if (sdkDir) {
+                int plugid = (int) (java.lang.Math.random() * 10)
+                def adbcmd =  "${sdkDir}/platform-tools/adb"
+                if(Os.isFamily(Os.FAMILY_WINDOWS)){
+                    adbcmd =  "${sdkDir}\\platform-tools\\adb"
+                }
+                def stdout = new ByteArrayOutputStream()
+
+                project.exec {
+                    commandLine adbcmd,
+                            "shell",
+                            "am force-stop com.xiaomi.smarthome"
+                }
+
+                project.exec {
+                    commandLine adbcmd,
+                            "shell",
+                            "am start com.xiaomi.smarthome/.SmartHomeMainActivity"
+                }
+
+                sleep(3000);
+
+                project.exec {
+                    commandLine adbcmd,
+                            "push",
+                            defaultOutputFile,
+                            "/sdcard/SmartHome/plugin/debug/${plugid}.mpk"
+                    standardOutput = stdout
+                }
+                def error = stdout.toString().trim()
+                if (error) {
+                    println "install push error:" + error
+                }
+
+                sleep(5000);
+
+                project.exec {
+                    commandLine adbcmd,
+                            "shell",
+                            "am broadcast -a com.xiaomi.smarthome.action.OPEN_API --es type plugin_debug --es sub_type debug_package"
+                }
+
+            } else {
+                println "not found android sdk dir"
+            }
+
+        }
+    }
+}
+

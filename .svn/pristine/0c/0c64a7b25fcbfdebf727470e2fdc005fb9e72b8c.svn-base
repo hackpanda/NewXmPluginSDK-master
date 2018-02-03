@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="pull_down_refresh_threshold">60dip</dimen>
+    <dimen name="pull_down_header_height">60dip</dimen>
+
+    <!-- Font sizes -->
+    <dimen name="font_size_0">30sp</dimen>
+    <dimen name="font_size_1">20sp</dimen>
+    <dimen name="font_size_2">18sp</dimen>
+    <dimen name="font_size_3">16sp</dimen>
+    <dimen name="font_size_4">14sp</dimen>
+    <dimen name="font_size_5">12sp</dimen>
+    <dimen name="font_size_6">10sp</dimen>
+    <dimen name="font_size_36sp">36sp</dimen>
+    <dimen name="font_size_48sp">48sp</dimen>
+
+    <dimen name="font_size_32sp">32sp</dimen>
+    <dimen name="font_size_30sp">30sp</dimen>
+    <dimen name="font_size_27sp">27sp</dimen>
+    <dimen name="font_size_22sp">22sp</dimen>
+    <dimen name="font_size_17sp">17sp</dimen>
+    <dimen name="font_size_15sp">15sp</dimen>
+    <dimen name="font_size_14sp">14sp</dimen>
+    <dimen name="font_size_13sp">13sp</dimen>
+    <dimen name="font_size_12sp">12sp</dimen>
+    <dimen name="font_size_11sp">11sp</dimen>
+    <dimen name="font_size_9sp">9sp</dimen>
+    <dimen name="font_size_23sp">23sp</dimen>
+    <dimen name="font_size_24sp">24sp</dimen>
+
+    <!-- margin spec -->
+    <dimen name="margin_small">3dp</dimen>
+    <dimen name="margin_medium">5dp</dimen>
+
+    <!-- Layout sizes -->
+    <dimen name="edit_text_padding_horizontal">15dp</dimen>
+    <dimen name="toggle_password_margin_horizontal">15dp</dimen>
+    <dimen name="page_horizontal_side_blank">20dp</dimen>
+    <dimen name="page_vertical_side_blank">20dp</dimen>
+    <dimen name="page_margin_left">23.3dp</dimen>
+    <dimen name="page_margin_right">23.3dp</dimen>
+
+    <!-- TitleBar -->
+    <dimen name="titlebar_height">50dp</dimen>
+    <dimen name="titlebar_return_area_size">90dp</dimen>
+    <dimen name="titlebar_button_margin_left">10dp</dimen>
+    <dimen name="titlebar_button_padding_horizontal">13dp</dimen>
+    <dimen name="titlebar_button_margin_right">10dp</dimen>
+
+    <!-- ToolBar -->
+    <dimen name="toolbar_height">77dp</dimen>
+    <dimen name="toolbar_text_margin_top">1dp</dimen>
+    <dimen name="toolbar_item_2_left_margin">30dp</dimen>
+    <dimen name="toolbar_item_4_left_margin">30dp</dimen>
+
+    <!-- ListItem -->
+    <dimen name="listitem_2_height">64dp</dimen>
+    <dimen name="listitem_2_padding_left">23dp</dimen>
+    <dimen name="listitem_2_padding_right">24dp</dimen>
+    <dimen name="listitem_2_icon_size">40dp</dimen>
+    <dimen name="listitem_2_text_margin_left">10dp</dimen>
+    <dimen name="listitem_3_height_1">79dp</dimen>
+    <dimen name="listitem_3_height_2">65dp</dimen>
+    <dimen name="listitem_3_padding_left">23dp</dimen>
+    <dimen name="listitem_3_anchor_margin">20dp</dimen>
+    <dimen name="listitem_4_height">50dp</dimen>
+    <dimen name="listitem_5_height">60.5dip</dimen>
+    <dimen name="listitem_menu_height">65dp</dimen>
+    <dimen name="listitem_menu_text_margin_top">5dp</dimen>
+
+    <!-- File ListItem -->
+    <dimen name="listitem_file_height">65dp</dimen>
+    <dimen name="listitem_file_padding_left">10dp</dimen>
+    <dimen name="listitem_file_padding_right">25dp</dimen>
+    <dimen name="listitem_file_icon_size">40dp</dimen>
+    <dimen name="listitem_file_text_margin_left">10dp</dimen>
+
+    <!-- AlertDialog -->
+    <dimen name="alertdialog_top_indent">23dip</dimen>
+    <dimen name="alertdialog_top_panel_margin_bottom">22dp</dimen>
+    <dimen name="alertdialog_top_panel_padding">25dp</dimen>
+    <dimen name="alertdialog_content_panel_margin_bottom">22dp</dimen>
+    <dimen name="alertdialog_content_panel_message_padding">23dp</dimen>
+    <dimen name="alertdialog_custom_panel_padding_bottom">20dp</dimen>
+    <dimen name="alertdialog_button_panel_padding_vertical">23dp</dimen>
+    <dimen name="alertdialog_button_panel_padding_horizontal">23dp</dimen>
+    <dimen name="alertdialog_button_text_size">16sp</dimen>
+    <dimen name="alertdialog_content_margin">33dp</dimen>
+    <dimen name="alertdialog_item_height">45dp</dimen>
+    <dimen name="alertdialog_item_padding_horizontal">23dp</dimen>
+    <dimen name="alertdialog_message_text_size">13sp</dimen>
+
+    <!-- Menu -->
+    <dimen name="menu_item_min_height">50dp</dimen>
+    <dimen name="widget_date_time_picker_text_size">20sp</dimen>
+    <dimen name="slidingmenu_offset">150dp</dimen>
+    <dimen name="slidingmenu_offset_right">50dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="shadow_width">15dp</dimen>
+    <dimen name="bar_padding">8dp</dimen>
+    <dimen name="mii_status_container_width">300dp</dimen>
+    <dimen name="mii_status_container_height">130dp</dimen>
+    <dimen name="mii_status_container_margin_top">40dp</dimen>
+    <dimen name="progress_circle_interval">40dp</dimen>
+    <dimen name="progress_circle_radius">10dp</dimen>
+    <dimen name="remote_control_paddin_horizontal">30dp</dimen>
+    <dimen name="remote_control_margin_home">5dp</dimen>
+    <dimen name="camera_photo_margin_bottom">40dp</dimen>
+    <dimen name="camera_tools_margin_bottom">200dp</dimen>
+    <dimen name="camera_photo_margin_horizontal">30dp</dimen>
+    <dimen name="scene_operation_title_height">134dp</dimen>
+
+    <!-- Media file picker grid view -->
+    <dimen name="media_groups_inner_interval">2dp</dimen>
+    <dimen name="media_groups_interval_small">2dp</dimen>
+    <dimen name="media_groups_margin">15dp</dimen>
+    <dimen name="media_groups_vertical_interval">30dp</dimen>
+    <dimen name="interval_between_title_and_grid">9dp</dimen>
+    <dimen name="scene_small_margin">5dp</dimen>
+    <dimen name="scene_line">14.6dip</dimen>
+    <dimen name="drag_slide_left">100dp</dimen>
+    <dimen name="scene_add_text_main">16sp</dimen>
+    <dimen name="scene_add_text_sub">12sp</dimen>
+    <dimen name="title_bar_top_padding">20dp</dimen>
+    <dimen name="title_bar_text_size">14sp</dimen>
+    <dimen name="sub_title_bar_text_size">12sp</dimen>
+    <dimen name="router_info_height">176dp</dimen>
+    <dimen name="router_text_size">14sp</dimen>
+    <dimen name="router_text_size_1">12sp</dimen>
+    <dimen name="router_guide_title_size">20sp</dimen>
+    <dimen name="router_guide_desc_size">12sp</dimen>
+    <dimen name="tv_info_height">176dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="menu_item_height">54dp</dimen>
+    <dimen name="menu_item_margin">23dp</dimen>
+
+    <dimen name="menu_item_title_text_size">13sp</dimen>
+    <dimen name="menu_item_text_size">14sp</dimen>
+
+    <!-- setting item start -->
+    <dimen name="setting_title_height">45dp</dimen>
+    <dimen name="setting_title_text_margin_left">42dp</dimen>
+    <dimen name="setting_title_text_size">15sp</dimen>
+
+    <dimen name="setting_item_title_margin_left">23dp</dimen>
+    <dimen name="setting_item_title_text_size">13sp</dimen>
+    <dimen name="setting_item_title_height">43dp</dimen>
+    <dimen name="setting_item_title_text_margin_top">22dp</dimen>
+    <dimen name="setting_item_title_text_margin_bottom">8dp</dimen>
+
+    <dimen name="setting_item_detail_margin_left">23dp</dimen>
+    <dimen name="setting_item_detail_margin_right">23dp</dimen>
+    <dimen name="setting_item_detail_icon_margin_right">3dp</dimen>
+    <dimen name="setting_item_detail_text_size">14sp</dimen>
+    <dimen name="setting_item_single_line_without_icon_height">54dp</dimen>
+    <dimen name="setting_item_single_line_with_icon_height">54dp</dimen>
+    <dimen name="setting_item_two_line_with_icon_height">62dp</dimen>
+    <!-- setting item end -->
+
+    <dimen name="wall_one_image_size_short_of_writereview">78dip</dimen>
+    <dimen name="dialog_window_width">290dip</dimen>
+
+    <dimen name="mikey_scene_item_margin">22dp</dimen>
+    
+    <dimen name="std_titlebar_margin_left_right">14dp</dimen>
+    <dimen name="std_titlebar_icon_size">28dp</dimen>
+    <dimen name="std_titlebar_title_size">14sp</dimen>
+    <dimen name="std_titlebar_new_msg_margin_top">8dp</dimen>
+    <dimen name="device_list_icon_size">45dp</dimen>
+    <dimen name="std_titlebar_sub_title_margin_bottom">1dp</dimen>
+    <dimen name="std_titlebar_redpoint_margin_right">12dp</dimen>
+    <dimen name="std_titlebar_redpoint_margin_top">10dp</dimen>
+
+    <!-- TitleBar -->
+    <dimen name="std_titlebar_height">45dp</dimen>
+    <dimen name="std_titlebar_return_area_size">90dp</dimen>
+    <dimen name="std_titlebar_button_margin_left">10dp</dimen>
+    <dimen name="std_titlebar_button_padding_horizontal">13dp</dimen>
+    <dimen name="std_titlebar_button_margin_right">10dp</dimen>
+    <dimen name="std_titlebar_button_interval">7dp</dimen>
+    <dimen name="std_title_bar_text_size">14sp</dimen>
+    <dimen name="std_title_bar_subtitle_text_size">12sp</dimen>
+    <dimen name="std_titlebar_edit_mode_btn_font_size">11sp</dimen>
+
+    <!--list列表-->
+    <dimen name="std_list_font_size_title">14sp</dimen>
+    <dimen name="std_list_font_size_subtitle">12sp</dimen>
+    <dimen name="std_list_font_size_group">11sp</dimen>
+    <dimen name="std_list_padding_left">23dp</dimen>
+    <dimen name="std_list_padding_right">24dp</dimen>
+    <dimen name="std_list_right_icon_padding_left_1">13dp</dimen>
+    <dimen name="std_list_right_icon_padding_left_2">29dp</dimen>
+    <dimen name="std_list_right_icon_padding_left_3">27dp</dimen>
+    <!--list分割线高度，暂时没用到，因为项目中是切图-->
+    <dimen name="std_list_divider_line">1px</dimen>
+    <dimen name="std_list_group_height">39dp</dimen>
+    <dimen name="std_list_group_title_padding_bottom">11dp</dimen>
+    <!--用于单行文本，左图有的话为非实物icon-->
+    <dimen name="std_list_item_height_single_line">50dp</dimen>
+    <!--list左图icon大小，非实物图-->
+    <dimen name="std_list_icon_size_single_line">22dp</dimen>
+    <dimen name="std_list_icon_padding_right_single_line">11dp</dimen>
+    <dimen name="std_list_icon_size_two_line">40dp</dimen>
+    <dimen name="std_list_icon_padding_right_two_line">13dp</dimen>
+    <!--用于双行文本，左图有的话为非实物icon-->
+    <dimen name="std_list_item_height_two_line">64dp</dimen>
+    <dimen name="std_list_padding_between_two_line">4dp</dimen>
+    <!--用于三行文本-->
+    <dimen name="std_list_item_height_three_line">79dp</dimen>
+
+    <!--Dialog规范-->
+    <!--除了list外，大多数元素和dialog边框都有common_padding-->
+    <dimen name="std_dialog_common_padding">23dp</dimen>
+    <dimen name="std_dialog_title_font_size">14sp</dimen>
+    <dimen name="std_dialog_msg_font_size">12sp</dimen>
+    <dimen name="std_dialog_button_font_size">13sp</dimen>
+    <dimen name="std_dialog_top_panel_margin_bottom">22dp</dimen>
+    <dimen name="std_dialog_button_padding_top">22dp</dimen>
+    <dimen name="std_dialog_input_margin_bottom">3dp</dimen>
+    <dimen name="std_dialog_input_padding_left">10dp</dimen>
+    <dimen name="std_dialog_input_padding_right">10dp</dimen>
+    <dimen name="std_dialog_input_title_font_size">12sp</dimen>
+    <dimen name="std_dialog_input_title_padding_bottom">10dp</dimen>
+    <dimen name="std_dialog_list_item_height">45dp</dimen>
+    <dimen name="std_dialog_list_padding_bottom">3dp</dimen>
+    <dimen name="std_dialog_list_item_title_font_size">14sp</dimen>
+    <dimen name="std_dialog_list_item_content_padding_left">23dp</dimen>
+    <dimen name="std_dialog_list_item_content_padding_right">23dp</dimen>
+    <!--用于左侧标志符如选中，非列表的icon-->
+    <dimen name="std_dialog_list_item_indicator_padding_left">11dp</dimen>
+    <dimen name="std_dialog_progress_content_padding">23dp</dimen>
+    <dimen name="std_dialog_progress_title_font_size">14sp</dimen>
+    <dimen name="std_dialog_progress_subtitle_font_size">12sp</dimen>
+    <dimen name="std_dialog_progress_line_padding">13dp</dimen>
+    <dimen name="std_dialog_share_padding_left">23dp</dimen>
+    <dimen name="std_dialog_share_padding_right">23dp</dimen>
+    <dimen name="std_dialog_share_padding_top">14dp</dimen>
+    <dimen name="std_dialog_share_padding_bottom">10dp</dimen>
+    <dimen name="std_dialog_share_icon_space">19dp</dimen>
+
+    <dimen name="std_bottom_bar_btn_text_font_size">10sp</dimen>
+    <dimen name="std_bottom_bar_btn_text_padding_top">5dp</dimen>
+    <dimen name="std_bottom_bar_btn_text_padding_bottom">8dp</dimen>
+    <dimen name="std_bottom_bar_btn_icon_padding_top">11dp</dimen>
+    <dimen name="std_bottom_bar_btn_icon_space">20dp</dimen>
+</resources>

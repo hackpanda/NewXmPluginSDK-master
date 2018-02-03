@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/color/primary_text.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/color/primary_text.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/color/common_button.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/color/common_button.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/color/class_b_to_white_color.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/color/class_b_to_white_color.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/color/indicator_text.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/color/indicator_text.xml"
+    },
+    {
+        "merged": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/res/merged/androidTest/debug/color/primary_text_inverse.xml",
+        "source": "/Users/liwenqi/Documents/项目/NewXmPluginSDK-mijia-watch/common_ui/build/intermediates/bundles/debug/res/color/primary_text_inverse.xml"
+    }
+]

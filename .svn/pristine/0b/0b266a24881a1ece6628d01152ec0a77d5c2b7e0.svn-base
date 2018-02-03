@@ -1,0 +1,51 @@
+include ':pluglib', ':common_ui'
+
+void scanProject(def settings, File dir) {
+    if (dir == null || !dir.isDirectory())
+        return;
+    File[] files = dir.listFiles();
+    for (File file : files) {
+        if (file.isFile() && "build.gradle".equals(file.name)) {
+            if (isPlugBuildFile(file)) {
+                String projectPath = file.absolutePath.substring(file.absolutePath.indexOf("plugProject") - 1);
+                projectPath = projectPath.substring(0, projectPath.indexOf("build.gradle") - 1)
+                projectPath = projectPath.replace(File.separator, ':')
+                println("include project : " + projectPath)
+                settings.include(projectPath)
+            }
+            return;
+        }
+    }
+
+    for (File file : files) {
+        if (file.isDirectory()) {
+            scanProject(settings, file);
+        }
+    }
+}
+
+boolean isPlugBuildFile(File file) {
+    BufferedReader reader = null;
+    try {
+        reader = new BufferedReader(new FileReader(file));
+        String lineStr = null;
+        while ((lineStr = reader.readLine()) != null) {
+            if (lineStr.contains("plug.gradle") || lineStr.contains("com.android.library")) {
+                return true;
+            }
+        }
+    } catch (IOException e) {
+    } finally {
+        if (reader != null) {
+            try {
+                reader.close();
+            } catch (IOException e1) {
+            }
+        }
+    }
+    return false;
+}
+
+def plugProject = new File("plugProject")
+scanProject(settings, plugProject);
+

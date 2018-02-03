@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_transparent_white" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="#eeeeee"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y187">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:src="@drawable/bg_chatu"
+                    android:background="@color/white"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:text="请将门锁和手机尽量靠近"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x12"
+                    android:layout_marginTop="@dimen/y13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/y12"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y185">
+                <TextView
+                    android:id="@+id/devicePowerTv"
+                    android:gravity="center_vertical"
+                    android:text="门锁电量："
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y37" />
+                <TextView
+                    android:layout_width="@dimen/x296"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_height="1dp" />
+                <TextView
+                    android:id="@+id/deviceSecLevelTv"
+                    android:layout_marginTop="@dimen/y12"
+                    android:text="安全等级："
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:gravity="center_vertical"
+                    android:text="@string/device_info_level_content"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_marginTop="@dimen/y4"
+                    android:textSize="@dimen/x11"
+                    android:textColor="@color/black"
+                    android:alpha="0.5"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="@dimen/x296"
+                    android:layout_marginTop="@dimen/y12"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_height="1dp" />
+                <RelativeLayout
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/muteModeTv"
+                        android:layout_marginTop="@dimen/y12"
+                        android:text="静音模式"
+                        android:layout_marginLeft="@dimen/x21"
+                        android:textSize="@dimen/x12"
+                        android:textColor="@color/black"
+                        android:alpha="0.8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:gravity="center_vertical"
+                        android:layout_below="@id/muteModeTv"
+                        android:text="开启后操作键盘和锁时，门锁不会发出提示音"
+                        android:layout_marginLeft="@dimen/x21"
+                        android:layout_marginTop="@dimen/y4"
+                        android:textSize="@dimen/x11"
+                        android:textColor="@color/black"
+                        android:alpha="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <com.xiaomi.smarthome.common.ui.widget.SwitchButton
+                        android:id="@+id/muteSwitch"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/y12"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y76">
+                <TextView
+                    android:id="@+id/fpCountTv"
+                    android:gravity="center_vertical"
+                    android:text="指纹数量"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y37" />
+                <TextView
+                    android:layout_width="@dimen/x296"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_height="1dp" />
+                <TextView
+                    android:id="@+id/pwdCountTv"
+                    android:gravity="center_vertical"
+                    android:text="密码数量"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y37" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/y12"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y76">
+                <TextView
+                    android:id="@+id/romVerTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_info_rom_ver"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y37" />
+                <TextView
+                    android:layout_width="@dimen/x296"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_height="1dp" />
+                <TextView
+                    android:id="@+id/pluginVerTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_info_plugin_ver"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/y37" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/y12"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y76">
+                <TextView
+                    android:id="@+id/lockTimeTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_info_lock_time"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_marginTop="@dimen/y12"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/phoneTimeTv"
+                    android:gravity="center_vertical"
+                    android:text="@string/device_info_phone_time"
+                    android:layout_marginLeft="@dimen/x21"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/y4"
+                    android:alpha="0.5"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="@dimen/x296"
+                    android:layout_marginTop="@dimen/y25"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_height="1dp" />
+            </LinearLayout>
+            <RelativeLayout
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y74">
+                <ImageView
+                    android:id="@+id/btnSyncTime"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/sync_time_selector"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y33" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
