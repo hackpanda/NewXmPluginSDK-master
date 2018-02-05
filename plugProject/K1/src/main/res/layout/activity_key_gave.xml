@@ -97,7 +97,7 @@
                         <ImageView
                             android:id="@+id/foreverImg"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/btn_weixuan"
+                            android:src="@drawable/btn_xuanzhong"
                             android:layout_width="@dimen/x14"
                             android:layout_height="@dimen/x14" />
                         <TextView
@@ -120,7 +120,7 @@
                         <ImageView
                             android:id="@+id/tempImg"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/btn_xuanzhong"
+                            android:src="@drawable/btn_weixuan"
                             android:layout_width="@dimen/x14"
                             android:layout_height="@dimen/x14" />
                         <TextView
@@ -166,23 +166,34 @@
                 android:background="#eeeeee"
                 android:layout_width="@dimen/x279"
                 android:layout_height="@dimen/y1" />
-            <RelativeLayout
-                android:id="@+id/keyInfoTv"
+            <LinearLayout
+                android:id="@+id/keyInfoLayout"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="@dimen/x279"
                 android:layout_height="@dimen/y39">
                 <TextView
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="每周一12:00-12:30"
+                    android:id="@+id/keyInfoStartTv"
+                    android:layout_gravity="center_vertical"
+                    android:text="永久"
+                    android:textColor="#000000"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/keyInfoEndTv"
+                    android:layout_gravity="center_vertical"
+                    android:text=""
                     android:textColor="#000000"
                     android:alpha="0.8"
                     android:textSize="@dimen/x13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
 
         <ImageView

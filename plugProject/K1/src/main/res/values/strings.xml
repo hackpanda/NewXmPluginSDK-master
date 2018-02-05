@@ -163,4 +163,6 @@
     <string name="device_info_plugin_ver">插件版本号：%1$s</string>
     <string name="device_info_lock_time">锁内时间：%1$s</string>
     <string name="device_info_phone_time">手机时间：%1$s</string>
+
+
 </resources>

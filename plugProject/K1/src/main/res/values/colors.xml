@@ -6,4 +6,5 @@
     <color name="main_blue">#2889fd</color>
     <color name="warn_color">#ff345a</color>
     <color name="text_succ">#3fb579</color>
+    <color name="colorPrimary">#5ead2f</color>
 </resources>
