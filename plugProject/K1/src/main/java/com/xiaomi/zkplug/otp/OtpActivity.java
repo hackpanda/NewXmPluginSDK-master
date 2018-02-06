@@ -81,7 +81,7 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.secLevelLayout:
                 Intent intentLev = new Intent();
-                startActivity(intentLev, CloseZotpActivity.class.getName());
+                startActivity(intentLev, SecureLevelActivity.class.getName());
                 break;
             default:
                 break;

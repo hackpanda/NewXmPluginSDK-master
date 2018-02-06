@@ -102,8 +102,8 @@
                 android:layout_marginTop="@dimen/y29"
                 android:layout_alignParentLeft="true"
                 android:orientation="vertical"
-                android:layout_width="@dimen/x24"
-                android:layout_marginLeft="@dimen/x115"
+                android:layout_width="@dimen/x70"
+                android:layout_marginLeft="@dimen/x90"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/lockStatusImg"
@@ -129,8 +129,8 @@
                 android:layout_marginTop="@dimen/y29"
                 android:layout_alignParentRight="true"
                 android:orientation="vertical"
-                android:layout_width="@dimen/x24"
-                android:layout_marginRight="@dimen/x115"
+                android:layout_width="@dimen/x70"
+                android:layout_marginRight="@dimen/x90"
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/powerImg"

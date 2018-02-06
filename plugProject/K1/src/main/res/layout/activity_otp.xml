@@ -61,20 +61,17 @@
             android:id="@+id/tips1"
             android:layout_below="@+id/ktTipRel"
             android:layout_centerHorizontal="true"
-            android:text="当前您还未开通临时密码，靠近门锁"
-            android:textColor="@color/black"
+            android:text="当前您还未开通临时密码"
+            android:textColor="@color/main_blue"
             android:textSize="@dimen/x13"
-            android:alpha="0.6"
             android:layout_marginTop="@dimen/y10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:layout_below="@+id/tips1"
             android:layout_centerHorizontal="true"
-            android:text="开通后方可使用"
-
-            android:textColor="@color/black"
-            android:alpha="0.6"
+            android:text="靠近门锁开通后方可使用"
+            android:textColor="@color/main_blue"
             android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/y3"
             android:layout_width="wrap_content"
@@ -97,157 +94,150 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/usedOutContent"
-            android:visibility="gone"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="@dimen/y243">
+        <!--<LinearLayout-->
+            <!--android:id="@+id/usedOutContent"-->
+            <!--android:visibility="gone"-->
+            <!--android:background="@color/white"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_height="@dimen/y243">-->
 
-            <TextView
-                android:text="当前时段密码已用完"
-                android:textColor="#cccccc"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y100"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="请于12:00后生成"
-                android:textColor="#cccccc"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y7"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+            <!---->
+        <!--</LinearLayout>-->
 
         <LinearLayout
-            android:id="@+id/content"
             android:background="@color/white"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="match_parent">
             <TextView
+                android:id="@+id/usedOutTipTv"
+                android:visibility="gone"
+                android:text="当前密码已用完，请于12:00后生成"
                 android:textColor="@color/black"
-                android:layout_marginTop="@dimen/y33"
-                android:alpha="0.8"
+                android:textSize="@dimen/x12"
+                android:layout_marginTop="@dimen/y182"
                 android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/x11"
-                android:text="使用临时密码的过程中，请确保门锁安全等级在A档"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <LinearLayout
-                android:id="@+id/secLevelLayout"
-                android:layout_marginTop="@dimen/y6"
-                android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:id="@+id/content"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     android:textColor="@color/black"
+                    android:layout_marginTop="@dimen/y33"
                     android:alpha="0.8"
+                    android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/x11"
-                    android:text="了解如何设置安全等级"
-                    android:textStyle="bold"
+                    android:text="门锁安全等级在A时，临时密码有效"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="@dimen/x9"
-                    android:src="@drawable/triangle"
-                    android:layout_height="@dimen/x9" />
+                <LinearLayout
+                    android:id="@+id/secLevelLayout"
+                    android:layout_marginTop="@dimen/y6"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/black"
+                        android:alpha="0.8"
+                        android:textSize="@dimen/x11"
+                        android:text="了解如何设置安全等级"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/x9"
+                        android:src="@drawable/triangle"
+                        android:layout_height="@dimen/x9" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="@dimen/y34"
+                    android:layout_height="wrap_content">
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_0"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_1"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_2"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_3"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_4"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                    <com.xiaomi.zkplug.view.AutoScrollTextView
+                        android:id="@+id/scrollText_5"
+                        android:layout_marginLeft="@dimen/x7"
+                        android:layout_width="@dimen/x35"
+                        android:layout_height="@dimen/x35"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/number_bg"
+                        android:textColor="@color/main_blue"
+                        android:textSize="@dimen/x20" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/invalidTime"
+                    android:layout_marginTop="@dimen/y20"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x12"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/zotpWarnTv"
+                    android:text=""
+                    android:textColor="#2889fd"
+                    android:textSize="@dimen/x12"
+                    android:layout_marginTop="@dimen/y10"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/x222"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="@dimen/y34"
-                android:layout_height="wrap_content">
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_0"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_1"
-                    android:layout_marginLeft="@dimen/x7"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_2"
-                    android:layout_marginLeft="@dimen/x7"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_3"
-                    android:layout_marginLeft="@dimen/x7"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_4"
-                    android:layout_marginLeft="@dimen/x7"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-                <com.xiaomi.zkplug.view.AutoScrollTextView
-                    android:id="@+id/scrollText_5"
-                    android:layout_marginLeft="@dimen/x7"
-                    android:layout_width="@dimen/x35"
-                    android:layout_height="@dimen/x35"
-                    android:layout_centerInParent="true"
-                    android:background="@drawable/number_bg"
-                    android:textColor="@color/main_blue"
-                    android:textSize="@dimen/x20" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/invalidTime"
-                android:text=""
-                android:textColor="#000000"
-                android:alpha="0.6"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y15"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:text="失效前仅可使用一次"
-                android:textColor="#000000"
-                android:alpha="0.6"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y6"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/zotpWarnTv"
-                android:text=""
-                android:textColor="#2889fd"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y10"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="@dimen/x222"
-                android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/btnRefresh"
                 android:layout_marginTop="@dimen/y128"

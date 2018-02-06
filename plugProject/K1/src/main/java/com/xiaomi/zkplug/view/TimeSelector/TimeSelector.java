@@ -4,7 +4,6 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -46,8 +45,8 @@ public class TimeSelector {
     public enum MODE {
 
         YMD(1),
-        YMDHM(2),
-        WHM(3);
+        YMDHM(2);
+
         private MODE(int value) {
             this.value = value;
         }
@@ -89,11 +88,8 @@ public class TimeSelector {
     private TextView tv_select, tv_title;
     private TextView hour_text;
     private TextView minute_text;
-    private TextView year_text;
-    private TextView month_text;
-    private TextView day_text;
 
-    String weekValue = "星期一";//记录是星期几
+
     public TimeSelector(Context context, ResultHandler resultHandler, String startDate, String endDate) {
         this.context = context;
         this.handler = resultHandler;
@@ -123,6 +119,8 @@ public class TimeSelector {
         initTimer();
         addListener();
         seletorDialog.show();
+
+
     }
 
     private void initDialog() {
@@ -149,9 +147,6 @@ public class TimeSelector {
         tv_cancle = (TextView) seletorDialog.findViewById(R.id.tv_cancle);
         tv_select = (TextView) seletorDialog.findViewById(R.id.tv_select);
         tv_title = (TextView) seletorDialog.findViewById(R.id.tv_title);
-        year_text = (TextView) seletorDialog.findViewById(R.id.year_text);
-        month_text = (TextView) seletorDialog.findViewById(R.id.month_text);
-        day_text = (TextView) seletorDialog.findViewById(R.id.day_text);
         hour_text = (TextView) seletorDialog.findViewById(R.id.hour_text);
         minute_text = (TextView) seletorDialog.findViewById(R.id.minute_text);
 
@@ -164,13 +159,7 @@ public class TimeSelector {
         tv_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String time = DateUtil.format(selectedCalender.getTime(), FORMAT_STR);
-                if(isWeek){
-                    handler.handle("每周"+weekValue.substring(2)+time.substring(10));
-                }else{
-                    handler.handle(time);
-                }
-
+                handler.handle(DateUtil.format(selectedCalender.getTime(), FORMAT_STR));
                 seletorDialog.dismiss();
             }
         });
@@ -309,11 +298,6 @@ public class TimeSelector {
             }
         }
 
-        if(isWeek){
-            changeYearToWeek();
-        }else{
-            changeWeekToYear();
-        }
         loadComponent();
 
     }
@@ -364,6 +348,8 @@ public class TimeSelector {
 
         }
         return res;
+
+
     }
 
     private String fomatTimeUnit(int unit) {
@@ -385,20 +371,15 @@ public class TimeSelector {
 
 
     private void addListener() {
-
         year_pv.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
-                Log.d("ooooo", "onSelect: isWeek--"+isWeek+"， text:"+text);
-                if(isWeek){
-                    weekValue = text;
-                }else{
-                    selectedCalender.set(Calendar.YEAR, Integer.parseInt(text));
-                    monthChange();
-                }
+                selectedCalender.set(Calendar.YEAR, Integer.parseInt(text));
+                monthChange();
+
+
             }
         });
-
         month_pv.setOnSelectListener(new PickerView.onSelectListener() {
             @Override
             public void onSelect(String text) {
@@ -421,10 +402,7 @@ public class TimeSelector {
             @Override
             public void onSelect(String text) {
                 selectedCalender.set(Calendar.HOUR_OF_DAY, Integer.parseInt(text));
-                if(!isWeek){
-
-                    minuteChange();
-                }
+                minuteChange();
 
 
             }
@@ -615,36 +593,6 @@ public class TimeSelector {
         tv_select.setText(str);
     }
 
-    boolean isWeek = false;//标识是否为周期选择
-    public void setSelectType(String type){
-        if(type.equals("week")){
-            isWeek = true;
-        }else{
-            isWeek = false;
-        }
-    }
-    //设置年为周
-    ArrayList<String> tempYears = new ArrayList<String>();
-    public void changeYearToWeek() {
-
-        tempYears = year;//缓存
-        year_text.setText("");
-        ArrayList<String> weeks = new ArrayList<String>();
-        String[] w = new String[]{"星期一","星期二","星期三","星期四","星期五","星期六","星期日"};
-        year.clear();
-        for(int i=0; i<w.length; i++){
-            year.add(w[i]);
-        }
-    }
-
-    //设置年为周
-    public void changeWeekToYear() {
-        year_text.setText("年");
-        if(year.size() == 0){
-            year = tempYears;
-        }
-    }
-
     public void setTitle(String str) {
         tv_title.setText(str);
     }
@@ -662,38 +610,19 @@ public class TimeSelector {
 
     public void setMode(MODE mode) {
         switch (mode.value) {
-            case 1://ymd
+            case 1:
                 disScrollUnit(SCROLLTYPE.HOUR, SCROLLTYPE.MINUTE);
-                month_pv.setVisibility(View.VISIBLE);
-                day_pv.setVisibility(View.VISIBLE);
-                month_text.setVisibility(View.VISIBLE);
-                day_text.setVisibility(View.VISIBLE);
-
                 hour_pv.setVisibility(View.GONE);
                 minute_pv.setVisibility(View.GONE);
                 hour_text.setVisibility(View.GONE);
                 minute_text.setVisibility(View.GONE);
                 break;
-            case 2://ymdhm
+            case 2:
                 disScrollUnit();
-
-                month_pv.setVisibility(View.VISIBLE);
-                day_pv.setVisibility(View.VISIBLE);
-                month_text.setVisibility(View.VISIBLE);
-                day_text.setVisibility(View.VISIBLE);
-
                 hour_pv.setVisibility(View.VISIBLE);
                 minute_pv.setVisibility(View.VISIBLE);
                 hour_text.setVisibility(View.VISIBLE);
                 minute_text.setVisibility(View.VISIBLE);
-                break;
-            case 3://whm
-                disScrollUnit();
-
-                month_pv.setVisibility(View.GONE);
-                day_pv.setVisibility(View.GONE);
-                month_text.setVisibility(View.GONE);
-                day_text.setVisibility(View.GONE);
                 break;
 
         }

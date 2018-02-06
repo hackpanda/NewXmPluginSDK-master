@@ -125,7 +125,7 @@
             android:layout_marginTop="@dimen/y83"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="删除钥匙"
+                android:text="删除手机钥匙"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"

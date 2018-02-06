@@ -14,11 +14,8 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.ZkUtil;
 import com.xiaomi.zkplug.view.TimeSelector.TimeSelector;
 
-import java.util.Calendar;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import cn.zelkova.lockprotocol.BriefDate;
 
 
 /**
@@ -37,8 +34,8 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
     ImageView userImg;
     Bitmap userBitmap;
     String memberId;
-    LinearLayout keyInfoLayout;
-    TextView keyInfoStartTv, keyInfoEndTv;//钥匙周期
+    TextView keyInfoTv, keyStartTv, keyEndTv, keyPeriodTv;//钥匙周期
+    LinearLayout keyInfoLayout, keyStartLayout, keyEndLayout, keyPeriodLayout;
     private TimeSelector timeSelector;
     KeyManager keyManager;//发送钥匙辅助类
     @Override
@@ -71,26 +68,31 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         this.foreverImg = (ImageView) findViewById(R.id.foreverImg);
         this.tempImg = (ImageView) findViewById(R.id.tempImg);
         this.periodImg = (ImageView) findViewById(R.id.periodImg);
+        this.foreverImg.setTag(TAG_XUAN_ZHONG);
+        this.tempImg.setTag(TAG_WEI_XUAN_ZHONG);
+        this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
+        this.keyInfoTv = (TextView) findViewById(R.id.keyInfoTv);
+        this.keyPeriodTv = (TextView) findViewById(R.id.keyPeriodTv);
+        this.keyStartTv = (TextView) findViewById(R.id.keyStartTv);
+        this.keyEndTv = (TextView) findViewById(R.id.keyEndTv);
 
-        this.keyInfoLayout = (LinearLayout) findViewById(R.id.keyInfoLayout);
-        this.keyInfoStartTv = (TextView) findViewById(R.id.keyInfoStartTv);
-        this.keyInfoEndTv = (TextView) findViewById(R.id.keyInfoEndTv);
-        this.keyInfoLayout.setOnClickListener(this);
-        this.keyInfoStartTv.setOnClickListener(this);
-        this.keyInfoEndTv.setOnClickListener(this);
+        keyInfoLayout = (LinearLayout) findViewById(R.id.keyInfoLayout);
+        keyPeriodLayout = (LinearLayout) findViewById(R.id.keyPeriodLayout);
+        keyStartLayout = (LinearLayout) findViewById(R.id.keyStartLayout);
+        keyEndLayout = (LinearLayout) findViewById(R.id.keyEndLayout);
+        keyPeriodLayout.setOnClickListener(this);
+        keyStartLayout.setOnClickListener(this);
+        keyEndLayout.setOnClickListener(this);
+
+        this.keyEndTv.setOnClickListener(this);
         this.timeSelector = new TimeSelector(this, new TimeSelector.ResultHandler() {
             @Override
             public void handle(String time) {
-                if(timeSelector.getTitle().equals("请选择结束时间")){
-                    if(time.indexOf("每周") != -1){
-                        keyInfoEndTv.setText(" ~ "+time.substring(4));
-                    }else{
-                        keyInfoEndTv.setText(" ~ "+time);
-                    }
 
-
+                if(timeSelector.getTitle().equals("请选择生效时间")){
+                    keyStartTv.setText(time);
                 }else{
-                    keyInfoStartTv.setText(time);
+                    keyEndTv.setText(time);
                 }
             }
         }, "2018-01-30 00:00", "2030-12-31 00:00");
@@ -132,25 +134,25 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
             case R.id.keyGaveBtn:
                 //1：暂时有效，2：周期有效，3：永久有效
                 if((int)this.tempImg.getTag() == TAG_XUAN_ZHONG){
+                    Log.d("KeyManager", "临时");
                     keyManager.keyGaveWork(1);//添加钥匙
                 }
                 if((int)this.periodImg.getTag() == TAG_XUAN_ZHONG){
+                    Log.d("KeyManager", "周期");
                     keyManager.keyGaveWork(2);//添加钥匙
                 }
                 if((int)this.foreverImg.getTag() == TAG_XUAN_ZHONG){
+                    Log.d("KeyManager", "永久");
                     keyManager.keyGaveWork(3);//添加钥匙
                 }
                 break;
-            case R.id.keyInfoLayout:
-                showTimePickDialog("请选择结束时间");
+            case R.id.keyPeriodLayout:
                 break;
-            case R.id.keyInfoStartTv:
-                Log.d(TAG,"keyInfoStartTv click");
-                showTimePickDialog("请选择开始时间");
+            case R.id.keyStartLayout:
+                showTimePickDialog("请选择生效时间");
                 break;
-            case R.id.keyInfoEndTv:
-                showTimePickDialog("请选择结束时间");
-                Log.d(TAG,"keyInfoEndTv click");
+            case R.id.keyEndLayout:
+                showTimePickDialog("请选择失效时间");
                 break;
 
 
@@ -161,8 +163,10 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.tempImg.setTag(TAG_WEI_XUAN_ZHONG);
                 this.periodImg.setImageResource(R.drawable.btn_weixuan);
                 this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
-                keyInfoStartTv.setText("永久");
-                keyInfoEndTv.setText("");
+                keyInfoTv.setText("手机钥匙永久有效");
+                keyPeriodLayout.setVisibility(View.GONE);
+                keyStartLayout.setVisibility(View.GONE);
+                keyEndLayout.setVisibility(View.GONE);
                 break;
             case R.id.tempLayout:
                 Log.d(TAG, "tempLayout");
@@ -173,12 +177,11 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.periodImg.setImageResource(R.drawable.btn_weixuan);
                 this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
 
-                Calendar calendar = Calendar.getInstance();
-                String startTime = BriefDate.fromNature(calendar.getTime()).toString().substring(0, 16);
-                calendar.add(Calendar.DAY_OF_YEAR, 1);
-                String endTime = BriefDate.fromNature(calendar.getTime()).toString().substring(0, 16);
-                this.keyInfoStartTv.setText(startTime);
-                this.keyInfoEndTv.setText(" ~ "+endTime);
+                keyInfoTv.setText("手机钥匙在自定义的时间段内有效");
+                keyPeriodLayout.setVisibility(View.GONE);
+                keyStartLayout.setVisibility(View.VISIBLE);
+                keyEndLayout.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.periodLayout:
                 this.foreverImg.setImageResource(R.drawable.btn_weixuan);
@@ -187,9 +190,10 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.tempImg.setTag(TAG_WEI_XUAN_ZHONG);
                 this.periodImg.setImageResource(R.drawable.btn_xuanzhong);
                 this.periodImg.setTag(TAG_XUAN_ZHONG);
-
-                keyInfoStartTv.setText("每周三 12:00");
-                keyInfoEndTv.setText(" ~ 13:00       ");
+                keyInfoTv.setText("钥匙在所选周期的时间段内重复有效（例如：每周一和周三的12：10~13：10有效）");
+                keyPeriodLayout.setVisibility(View.VISIBLE);
+                keyStartLayout.setVisibility(View.VISIBLE);
+                keyEndLayout.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -204,13 +208,10 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         if((int)this.tempImg.getTag() == TAG_XUAN_ZHONG){
             timeSelector.setTitle(title);
             this.timeSelector.setMode(TimeSelector.MODE.YMDHM);
-            this.timeSelector.setSelectType("year");
             timeSelector.show();
         }
         if((int)this.periodImg.getTag() == TAG_XUAN_ZHONG){
             timeSelector.setTitle(title);
-            this.timeSelector.setMode(TimeSelector.MODE.WHM);
-            this.timeSelector.setSelectType("week");
             this.timeSelector.show();
 
         }

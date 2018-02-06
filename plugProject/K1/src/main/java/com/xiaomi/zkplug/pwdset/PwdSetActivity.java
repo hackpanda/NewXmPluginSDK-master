@@ -142,7 +142,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                             @Override
                             public void run() {
                                 if(s.equals("true")){//有效人员
-                                    if(getIntent().getStringExtra("title").equals("设置密码")){//设置密码
+                                    if(getIntent().getStringExtra("title").equals("添加密码")){//添加密码
                                         if(iLockAddOperator == null){
                                             iLockAddOperator = OperatorBuilder.create(SecurePwdAdd.FLAG, activity(), mDevice);
                                         }

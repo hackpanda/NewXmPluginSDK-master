@@ -87,7 +87,6 @@ public class MainViewControl {
     DataManageUtil dataManageUtil;//数据管理类
     XmPluginPackage xmPluginPackage;
     XQProgressDialog xqProgressDialog;
-    int openRetryTimes = 0;//开锁重试次数
     public MainViewControl(Activity activity, DeviceStat mDeviceStat, XmPluginPackage xmPluginPackage) {
         this.mDeviceStat = mDeviceStat;
         this.mDevice = Device.getDevice(mDeviceStat);
@@ -122,8 +121,6 @@ public class MainViewControl {
             return;
         }
         viewHanlder.sendEmptyMessageDelayed(MSG_CONNECT_TIMEOUT, CONNECT_FAIL_TIME);
-        openRetryTimes = 0;//每次点击开锁，openRetryTimes置为0
-//        bashouImg.setVisibility(View.VISIBLE);
         //每次点击置位
         isOperating = true;
         //开锁逻辑
@@ -260,6 +257,9 @@ public class MainViewControl {
 
     private void sendOpenMsg(){
         Log.d(TAG, "发送开锁命令");
+        ZkUtil.startAnima(activity, openCircleImg);
+        openWarnTv.setText("开锁中");
+        openWarnTv.setTextColor(activity.getResources().getColor(R.color.main_blue));
         secureOpen.sendLockMsg(null,new LockOperateCallback() {
             @Override
             public void lockOperateSucc(final String value) {
@@ -385,6 +385,7 @@ public class MainViewControl {
      * 开锁失败界面
      */
     public void displayFailView(String errMsg){
+        ZkUtil.stopAnima(openCircleImg);
         viewHanlder.removeMessages(MSG_CONNECT_TIMEOUT);
         openWarnTv.setText(errMsg);
         openWarnTv.setTextColor(activity.getResources().getColor(R.color.warn_color));
@@ -400,6 +401,7 @@ public class MainViewControl {
      * 开锁成功界面
      */
     public void displaySuccView(){
+        ZkUtil.stopAnima(openCircleImg);
         viewHanlder.removeMessages(MSG_CONNECT_TIMEOUT);
         openLockImg.setImageResource(R.drawable.icon_mensuoyikai);
         bashouImg.setImageResource(R.drawable.bashou_succ_7);
@@ -564,13 +566,10 @@ public class MainViewControl {
      * 被取消授权界面
      */
     protected void showNoShareKeyView(){
-        ImageView bashouImg = (ImageView) activity.findViewById(R.id.bashouImg);
-        bashouImg.setVisibility(View.GONE);
-        bashouImg.setImageResource(R.drawable.bashou_open_fail);
-        openLockImg.setImageResource(R.drawable.icon_mensuoweikai);
+        openLockImg.setImageResource(R.drawable.btn_open_bukedianji);
         openLockImg.setOnClickListener(null);
         openWarnTv.setVisibility(View.VISIBLE);
-        openWarnTv.setText("您的手机钥匙已被管理员删除");
+        openWarnTv.setText("当前时段钥匙无效");
         openWarnTv.setTextColor(activity.getResources().getColor(R.color.warn_color));
         keyPeriodTv.setVisibility(View.GONE);
     }

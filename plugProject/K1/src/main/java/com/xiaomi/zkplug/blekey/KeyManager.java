@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cn.zelkova.lockprotocol.BriefDate;
+
 /**
  * 作者：liwenqi on 18/2/2 11:12
  * 邮箱：liwenqi@zelkova.cn
@@ -41,7 +43,7 @@ public class KeyManager {
     Device mDevice;
     DataManageUtil dataManageUtil;
     String memberId, userId;
-    TextView keyInfoStartTv, keyInfoEndTv;
+    TextView keyStartTv, keyEndTv;
     public KeyManager(DeviceStat mDeviceStat, Activity activity) {
         // 初始化device
         this.activity = activity;
@@ -49,8 +51,8 @@ public class KeyManager {
         this.dataManageUtil = new DataManageUtil(mDeviceStat, activity);
         this.memberId = activity.getIntent().getStringExtra("memberId");//成员Id
         this.userId = activity.getIntent().getStringExtra("userId");//小米账号
-        this.keyInfoStartTv = (TextView) activity.findViewById(R.id.keyInfoStartTv);
-        this.keyInfoEndTv = (TextView) activity.findViewById(R.id.keyInfoEndTv);
+        this.keyStartTv = (TextView) activity.findViewById(R.id.keyStartTv);
+        this.keyEndTv = (TextView) activity.findViewById(R.id.keyEndTv);
     }
 
     /**
@@ -62,11 +64,13 @@ public class KeyManager {
         long expireTime = 0;
         List<Integer> weekdays = null; // 生效日期（星期几，例如周一和周三对应1和3，[1, 3]），仅在status=2时不可为空
         if(status == 3){
+            Log.d(TAG, "发送永久有效钥匙");
             activeTime = ZkUtil.getUTCTime(); // 生效时间 UTC时间戳，单位为s
             expireTime = activeTime + 20 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
+            Log.d(TAG, "activeTime: "+activeTime+", expireTime: "+expireTime);
         }else if(status == 2){
             weekdays = new ArrayList<Integer>();
-            String weekStr = keyInfoStartTv.getText().toString().substring(2,3);
+            String weekStr = keyStartTv.getText().toString().substring(2,3);
             if(weekStr.equals("一")){
                 weekdays.add(1);
             }else if(weekStr.equals("二")){
@@ -85,10 +89,11 @@ public class KeyManager {
         }else{//临时钥匙
             SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
-                Date startTime = sdFormat.parse(keyInfoStartTv.getText().toString());//上次授时的日期,也相当于上次授时时间
+                Date startTime = sdFormat.parse(keyStartTv.getText().toString());//上次授时的日期,也相当于上次授时时间
                 activeTime = startTime.getTime(); // 生效时间 UTC时间戳，
-                Date endTime = sdFormat.parse(keyInfoEndTv.getText().toString().substring(3));//上次授时的日期,也相当于上次授时时间
+                Date endTime = sdFormat.parse(keyEndTv.getText().toString());//上次授时的日期,也相当于上次授时时间
                 expireTime = endTime.getTime(); // 生效时间 UTC时间戳，单位为s
+                Log.d(TAG, BriefDate.fromNature(startTime).toString()+"~~~"+BriefDate.fromNature(endTime).toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -119,7 +124,7 @@ public class KeyManager {
      * @param readonly true：被分享人不可接收锁push，false：被分享人可接收锁push，（family关系用户不受这个字段影响）
      * @param
      */
-    protected void shareSecurityKey(String model, String did, String shareUid, int status, long activeTime, long expireTime, List<Integer> weekdays, final boolean readonly) {
+    protected void  shareSecurityKey(String model, String did, String shareUid, int status, long activeTime, long expireTime, List<Integer> weekdays, final boolean readonly) {
         XmPluginHostApi.instance().shareSecurityKey(model, did, shareUid,
                 status, activeTime, expireTime, weekdays, readonly, new Callback<Void>() {
                     @Override

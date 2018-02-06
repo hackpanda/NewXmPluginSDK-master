@@ -26,9 +26,12 @@ import com.xiaomi.zkplug.util.ZkUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import cn.zelkova.lockprotocol.BriefDate;
 
 /**
  * 作者：liwenqi on 17/6/13 13:34
@@ -47,10 +50,15 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
     String memberId;
     DataManageUtil dataManageUtil;
     KeyManager keyManager;
+    TextView keyValidPeriodTv, recMsgTv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_key_detail);
+        initView();
+    }
+
+    private void initView(){
         // 设置titlebar在顶部透明显示时的顶部padding
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
@@ -64,13 +72,12 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
         mDevice = Device.getDevice(mDeviceStat);
         nickNameTv.setText(getIntent().getStringExtra("nickName"));
         userImg = (ImageView) findViewById(R.id.userImg);
+        keyValidPeriodTv = ((TextView) findViewById(R.id.keyValidPeriodTv));
+        recMsgTv = ((TextView) findViewById(R.id.recMsgTv));
         this.miAccount = getIntent().getStringExtra("miAccount");
         this.memberId = getIntent().getStringExtra("memberId");
         getUserInfo(miAccount);
-    }
-
-    private void initView(){
-
+        getSecurityKey(mDeviceStat.model, mDeviceStat.did, false);
     }
     /**
      * 查询账号信息并初始化头像
@@ -120,7 +127,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
     }
 
     //获取指定人员的钥匙记录
-    public void getSecurityKey(final String model, final String did) {
+    public void getSecurityKey(final String model, final String did, final boolean isDelete) {
         XmPluginHostApi.instance().getSecurityKey(model, did, new Callback<List<SecurityKeyInfo>>() {
             @Override
             public void onSuccess(List<SecurityKeyInfo> securityKeyInfos) {
@@ -140,7 +147,20 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                     sb.append("weekdays = " + securityKeyInfos.get(i).weekdays + "\n");
                     sb.append("isoutofdate = " + securityKeyInfos.get(i).isoutofdate + "\n");
                     if(securityKeyInfos.get(i).shareUid.equals(miAccount)){//已被授过权
-                        deleteSecurityKey(model, did, securityKeyInfos.get(i).keyId);
+                        if(isDelete){
+                            deleteSecurityKey(model, did, securityKeyInfos.get(i).keyId);
+                        }else{
+                            //recMsgTv.setText();
+                            Date startTime = new Date(securityKeyInfos.get(i).activeTime * 1000);
+                            Date endTime = new Date(securityKeyInfos.get(i).expireTime * 1000);
+                            if(securityKeyInfos.get(i).status == 3){//永久
+                                keyValidPeriodTv.setText("手机钥匙永久有效");
+                            }else if(securityKeyInfos.get(i).status == 1){//临时
+                                keyValidPeriodTv.setText(BriefDate.fromNature(startTime).toString().substring(0, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(0, 16));
+                            }else{
+                                keyValidPeriodTv.setText("周期钥匙开发中...");
+                            }
+                        }
                         return;
                     }
                 }
@@ -170,7 +190,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                 builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        getSecurityKey(mDeviceStat.model, mDeviceStat.did);
+                        getSecurityKey(mDeviceStat.model, mDeviceStat.did, true);
                     }
                 });
                 builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {

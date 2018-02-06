@@ -15,7 +15,7 @@ public class MyEntity {
 
     public static final String MODEL_ID = "shjszn.lock.c1";//model_id
 
-    public static final String VERSION = "0.3.7.802011";//version
+    public static final String VERSION = "0.4.0.802061";//version
 
     // 开锁超时时间，可以根据实际情况自己定义
     public static final long OPERATE_TIMEOUT = 15 * 1000;

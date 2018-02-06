@@ -140,7 +140,7 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
                         Intent userIntent = new Intent();
                         userIntent.putExtra("nickName", userInfo.nickName);
                         userIntent.putExtra("url", userInfo.url);
-                        userIntent.putExtra("msg", "该用户已经有了手机钥匙");
+                        userIntent.putExtra("msg", "该用户已被添加手机钥匙，不能重复添加");
                         startActivity(userIntent, KeyExistActivity.class.getName());
                         return;
                     }

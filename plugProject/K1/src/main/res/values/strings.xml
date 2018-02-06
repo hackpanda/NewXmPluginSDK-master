@@ -156,7 +156,7 @@
 
     <string name="device_info_power">门锁电量：%1$d</string>
     <string name="device_info_level_title">安全等级：%1$s级</string>
-    <string name="device_info_level_content">A级：手机，指纹，密码任意一种方式皆可开锁；B级：必须两种方式验证通过才可开锁（手机，指纹，密码三种方式中任选其二）；C级：B级基础上关闭所有门锁远程状态查看功能</string>
+    <string name="device_info_level_content">了解门锁安全等级</string>
     <string name="device_info_fp_count">指纹数量：%1$d个</string>
     <string name="device_info_pwd_count">密码数量：%1$d个</string>
     <string name="device_info_rom_ver">固件版本号：%1$s</string>

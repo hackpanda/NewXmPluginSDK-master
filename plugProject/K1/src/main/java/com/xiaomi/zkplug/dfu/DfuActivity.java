@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothProfile;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
@@ -65,8 +66,9 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
     private static final String WRITE_UUID = "6E401003-B5A3-F393-E0A9-E50E24DCCA0E";
     private static final String DEVICE_NAME = "ZkDFU";
 
+    private final int MSG_TIME_OUT = 0x10;//超时
+    private final int MSG_CHECK_UPDATE_INFO = 0x11;
     private boolean isDisvocerService = false;
-    String romVer = "0.0.0";
     TextView curRomVer, newestRomVer;
     ImageView checkImg;
     private BluetoothLe mBluetoothLe;
@@ -79,10 +81,12 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
     XQProgressDialog xqProgressDialog;//下载rom包和扫描dfu进度条
     DfuManager dfuManager;
     String mFilePath;//Rom下载后路径
+    private DeviceUpdateInfo updateInfo;//服务器Rom版本信息
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dfu);
+
         // 设置titlebar在顶部透明显示时的顶部padding
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
@@ -107,11 +111,34 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         updateBtn.setOnClickListener(this);
         findViewById(R.id.reupdateBtn).setOnClickListener(this);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
-        findViewById(R.id.confirmBtn).setOnClickListener(this);
+        findViewById(R.id.checkVersionBtn).setOnClickListener(this);
         checkImg = (ImageView) findViewById(R.id.checkImg);
+
+
         ZkUtil.startAnima(this, checkImg);//旋转
-        initDfuView();//检查固件版本
+        XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
+
+        viewHanlder.sendEmptyMessageDelayed(MSG_CHECK_UPDATE_INFO, 2000);
+
     }
+    /**
+     * 时序: 用于界面控制
+     */
+    Handler viewHanlder = new Handler() {
+        @Override
+        public void handleMessage(final Message msg) {
+            switch (msg.what) {
+                case MSG_TIME_OUT:
+                    showGetVerFailView("");
+                    break;
+                case MSG_CHECK_UPDATE_INFO:
+                    initDfuView();//检查固件版本
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onClick(View v) {
@@ -145,12 +172,49 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                 xqProgressDialog.show();
                 downLoadRom();//先下载文件
                 break;
-            case R.id.confirmBtn:
-                finish();
+            case R.id.checkVersionBtn:
+                showCheckVerDialog();
                 break;
         }
     }
 
+    /**
+     * 检查锁内固件版本号
+     */
+    private void showCheckVerDialog(){
+        MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
+        builder.setTitle("已经是最新版本");
+        builder.setMessage("是否再次检查固件版本");
+        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getLockStatus(true);
+            }
+        });
+        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+    /**
+     * 检查后锁内固件仍是最新
+     */
+    private void showConfirmDialog(){
+        viewHanlder.removeMessages(MSG_TIME_OUT);
+        MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
+        builder.setTitle("检查结果");
+        builder.setMessage("已是最新版本，不需更新");
+        builder.setNegativeButton("确定", new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -379,7 +443,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                         Toast.makeText(activity(), "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
                         xqProgressDialog.dismiss();
                     }else{
-                        Toast.makeText(activity(), "未发现门锁，请靠近门锁重试", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(activity(), "未发现门锁，请靠近门锁重试", Toast.LENGTH_LONG).show();
                         xqProgressDialog.dismiss();
                     }
                 }
@@ -443,16 +507,38 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
      * 获取版本失败时提示
      */
     private void showGetVerFailView(String value){
+        viewHanlder.removeMessages(MSG_TIME_OUT);
         if(value.equals("命令不在有效期内(3)")){
             ZkUtil.showCmdTimeOutView(activity());
+        }else if(value.equals("设备已被重置，请解除绑定后重新添加")){
+            Toast.makeText(activity(), value, Toast.LENGTH_LONG).show();
+            finish();
         }else{
             final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-            builder.setTitle("获取失败");
-            builder.setMessage(value);
-            builder.setPositiveButton("重试", new MLAlertDialog.OnClickListener(){
+
+//            if(value.equals("未发现门锁，请靠近门锁重试")){
+//                builder.setTitle("未发现门锁");
+//                builder.setMessage("请靠近门锁后在尝试");
+//            }else{
+//                builder.setTitle("版本号读取失败");
+//                builder.setMessage("是否需要尝试更新门锁固件");
+//            }
+            builder.setTitle("版本号读取失败");
+            builder.setMessage("是否需要尝试更新门锁固件");
+            builder.setPositiveButton("尝试更新", new MLAlertDialog.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    initDfuView();
+                    if(!ZkUtil.isNetworkAvailable(activity())){
+                        Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    if(!ZkUtil.isBleOpen()){
+                        Toast.makeText(activity(), R.string.open_bluetooth, Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    xqProgressDialog.setMessage("正在发送请求");
+                    xqProgressDialog.show();
+                    downLoadRom();//先下载文件
                 }
             });
             builder.setNegativeButton("退出", new MLAlertDialog.OnClickListener() {
@@ -474,7 +560,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                 if (!mDevice.isOwner()) {//被分享者
                     return;
                 }
-                final DeviceUpdateInfo updateInfo = (DeviceUpdateInfo) msg.obj;
+                updateInfo = (DeviceUpdateInfo) msg.obj;
                 JSONArray mJsArray = new JSONArray();
                 mJsArray.put("keyid_romver_data");
                 dataManageUtil.queryDataFromServer(mJsArray, new DataUpdateCallback() {
@@ -492,9 +578,9 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                                     JSONObject resultObj = new JSONObject(s);
                                     Log.d(TAG, "resultObj:"+resultObj.toString());
                                     if(resultObj.has("keyid_romver_data") && !TextUtils.isEmpty(resultObj.getString("keyid_romver_data"))){
-                                        showDfuUpdateView(resultObj, updateInfo);//展示更新界面
+                                        showDfuUpdateView(resultObj.getString("keyid_romver_data"), updateInfo);//展示更新界面
                                     }else{
-                                        getLockStatus(updateInfo);
+                                        getLockStatus(false);
                                         return;
                                     }
                                 }catch (JSONException e){
@@ -513,36 +599,23 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
     /**
      * 根据当前版本号，展示不同的布局
      *
-     * @param statusObj
+     * @param romver
      * @param updateInfo
      */
-    private void showDfuUpdateView(JSONObject statusObj, DeviceUpdateInfo updateInfo){
-        XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-        Log.d(TAG, "读取服务器Rom版本成功:"+statusObj.toString());
+    private void showDfuUpdateView(String romver, DeviceUpdateInfo updateInfo){
+        viewHanlder.removeMessages(MSG_TIME_OUT);
+        Log.d(TAG, "读取Rom版本成功:"+romver);
         ZkUtil.stopAnima(checkImg);
-        try {
-            romVer = statusObj.getString("keyid_romver_data");
-            Log.d(TAG, "当前版本: "+statusObj.getString("keyid_romver_data")+", : "+updateInfo.mNewVersion);
-            curRomVer.setText("当前版本: "+romVer);
-            newestRomVer.setText("最新版本: "+updateInfo.mNewVersion);
-//            if(romVer.equals(updateInfo.mNewVersion)){
-//                //已是最新版本
-//                dfuManager.showDfuSuccView("当前版本: "+romVer);
-//                newestRomVer.setText("已是最新版本");
-//                Log.d(TAG, "已是最新版本");
-//
-//                /* add for dfu test begin */
-////                curRomVer.setText("当前版本: "+romVer);
-////                newestRomVer.setText("最新版本: "+updateInfo.mNewVersion);
-////                TextView featureListTv = (TextView) findViewById(R.id.featureListTv);
-////                featureListTv.setText(updateInfo.mUpdateDes);
-////                LinearLayout dfuInitView = (LinearLayout) findViewById(R.id.dfuInitView);
-////                dfuInitView.setVisibility(View.VISIBLE);
-////                LinearLayout emptyView = (LinearLayout) findViewById(R.id.emptyView);
-////                emptyView.setVisibility(View.GONE);
-//                /* add for dfu test end */
-//            }else{
-//                curRomVer.setText("当前版本: "+romVer);
+        curRomVer.setText("当前版本: "+romver);
+        newestRomVer.setText("最新版本: "+updateInfo.mNewVersion);
+        if(romver.equals(updateInfo.mNewVersion)){
+            //已是最新版本
+            dfuManager.showDfuSuccView("当前版本: "+romver);
+            newestRomVer.setText("已是最新版本");
+            Log.d(TAG, "已是最新版本");
+
+                /* add for dfu test begin */
+//                curRomVer.setText("当前版本: "+romver);
 //                newestRomVer.setText("最新版本: "+updateInfo.mNewVersion);
 //                TextView featureListTv = (TextView) findViewById(R.id.featureListTv);
 //                featureListTv.setText(updateInfo.mUpdateDes);
@@ -550,24 +623,16 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
 //                dfuInitView.setVisibility(View.VISIBLE);
 //                LinearLayout emptyView = (LinearLayout) findViewById(R.id.emptyView);
 //                emptyView.setVisibility(View.GONE);
-//            }
-            /* add for dfu can update forever begin */
-            if(romVer.equals(updateInfo.mNewVersion)) {
-                //已是最新版本
-                newestRomVer.setText("已是最新版本");
-                newestRomVer.setTextColor(getResources().getColor(R.color.dfu_updateing_color));
-                Log.d(TAG, "已是最新版本");
-            }
-
+                /* add for dfu test end */
+        }else{
+            curRomVer.setText("当前版本: "+romver);
+            newestRomVer.setText("最新版本: "+updateInfo.mNewVersion);
             TextView featureListTv = (TextView) findViewById(R.id.featureListTv);
             featureListTv.setText(updateInfo.mUpdateDes);
             LinearLayout dfuInitView = (LinearLayout) findViewById(R.id.dfuInitView);
             dfuInitView.setVisibility(View.VISIBLE);
             LinearLayout emptyView = (LinearLayout) findViewById(R.id.emptyView);
             emptyView.setVisibility(View.GONE);
-            /* add for dfu can update forever begin */
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
     /**
@@ -590,20 +655,28 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
      * 进入首届面获取门锁状态
      * 进行更新门锁状态和授时
      */
-    private void getLockStatus(final DeviceUpdateInfo updateInfo){
+    private void getLockStatus(final boolean isFromCheckVerClick){
         Log.d(TAG, "getLockStatus开始");
+        viewHanlder.sendEmptyMessageDelayed(MSG_TIME_OUT, 15* 1000);
         iStatusOperator = OperatorBuilder.create(SecureStatus.FLAG, activity(), mDevice);
         iStatusOperator.registerBluetoothReceiver();
+        if(isFromCheckVerClick){
+            xqProgressDialog.setMessage("正在检查锁内版本号");
+            xqProgressDialog.show();
+        }
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
             iStatusOperator.sendLockMsg(getLockStatusCmd().getBytes(), new LockOperateCallback() {
                 @Override
                 public void lockOperateSucc(String value) {//value为时间差
                     //判断锁内时间偏差
                     iStatusOperator.unregisterBluetoothReceiver();
+                    xqProgressDialog.dismiss();
                     try {
 
                         JSONObject statusObj = new JSONObject(value);
-                        dataManageUtil.saveDataToServer(statusObj, new DataUpdateCallback() {
+                        JSONObject settingsObj = new JSONObject();
+                        settingsObj.put("keyid_romver_data", statusObj.getString("romver"));
+                        dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
                             @Override
                             public void dataUpateFail(int i, String s) {
                                 Log.d(TAG, "数据存储失败！");
@@ -614,7 +687,12 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                                 Log.d(TAG, "数据存储成功！");
                             }
                         });
-                        showDfuUpdateView(statusObj, updateInfo);//展示更新界面
+                        if(statusObj.getString("romver").equals(updateInfo.mNewVersion) && isFromCheckVerClick){
+                            showConfirmDialog();//检查后仍是最新的
+                        }else{
+                            showDfuUpdateView(statusObj.getString("romver"), updateInfo);//展示更新界面
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -624,6 +702,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                     Log.d(TAG, "getLockStatus:"+value);
                     showGetVerFailView(value);
                     iStatusOperator.unregisterBluetoothReceiver();
+                    xqProgressDialog.dismiss();
                     Log.d(TAG, "lockOperateFail-status");
                 }
             });
@@ -641,6 +720,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                             public void lockOperateSucc(String value) {
                                 //判断锁内时间偏差
                                 iStatusOperator.unregisterBluetoothReceiver();
+                                xqProgressDialog.dismiss();
                                 try {
                                     JSONObject statusObj = new JSONObject(value);
                                     dataManageUtil.saveDataToServer(statusObj, new DataUpdateCallback() {
@@ -654,7 +734,11 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                                             Log.d(TAG, "状态数据存储成功！");
                                         }
                                     });
-                                    showDfuUpdateView(statusObj, updateInfo);//展示更新界面
+                                    if(statusObj.getString("romver").equals(updateInfo.mNewVersion) && isFromCheckVerClick){
+                                        showConfirmDialog();//检查后仍是最新的
+                                    }else{
+                                        showDfuUpdateView(statusObj.getString("romver"), updateInfo);//展示更新界面
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -662,16 +746,19 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                             @Override
                             public void lockOperateFail(String value) {
                                 iStatusOperator.unregisterBluetoothReceiver();
+                                xqProgressDialog.dismiss();
                                 Log.d(TAG, "getLockStatus:"+value);
                                 showGetVerFailView(value);
                             }
                         });
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
                         iStatusOperator.unregisterBluetoothReceiver();
+                        xqProgressDialog.dismiss();
                         showGetVerFailView("设备已被重置，请解除绑定后重新添加");
                     }else{
                         iStatusOperator.unregisterBluetoothReceiver();
-                        showGetVerFailView("版本获取失败("+i+")");
+                        xqProgressDialog.dismiss();
+                        showGetVerFailView("");
                     }
                 }
             });

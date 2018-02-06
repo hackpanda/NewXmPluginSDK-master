@@ -50,7 +50,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
     List<PwdUnlockItem> pwdUnlockItems;
     TextView nickNameTv;
     ListViewCompat pwdUnlockView;//解锁密码项:有密码时显示
-    RelativeLayout pwdSetRel, memberDelRel, keyRel;//设置密码,无密码时显示; 删除成员；授权
+    RelativeLayout pwdSetRel, memberDelRel, keyRel;//添加密码,无密码时显示; 删除成员；授权
     RelativeLayout fpRel_0, fpRel_1, fpRel_2;//指纹
     TextView fpName_0, fpName_1, fpName_2;//指纹名字
     TextView fpBatchNo_0, fpBatchNo_1, fpBatchNo_2;//指纹名字
@@ -134,7 +134,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
             case R.id.keyRel:
                 Intent intent = new Intent();
                 intent.putExtra("memberId", memberId);//member的id
-                if(TextUtils.isEmpty(miAccount)){
+                if(keyTv.getText().toString().equals("添加钥匙")){
                     startActivity(intent, KeySearchActivity.class.getName());
                 }else{
                     intent.putExtra("miAccount", miAccount);//小米帐号传进去
@@ -176,7 +176,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                 Intent pwdSetIntent = new Intent();
                 pwdSetIntent.putExtra("memberId", memberId);
                 pwdSetIntent.putExtra("nickName", nickNameTv.getText().toString());
-                pwdSetIntent.putExtra("title", "设置密码");
+                pwdSetIntent.putExtra("title", "添加密码");
                 startActivity(pwdSetIntent, PwdSetActivity.class.getName());
                 break;
             case R.id.delHolder:

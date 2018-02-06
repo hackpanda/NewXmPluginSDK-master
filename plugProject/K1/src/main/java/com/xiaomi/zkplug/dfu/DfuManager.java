@@ -112,8 +112,8 @@ public class DfuManager {
         ImageView dfuProgressImg = (ImageView) context.findViewById(R.id.dfuProgressImg);
         dfuProgressImg.setImageResource(R.drawable.icon_yuan);
 
-        ImageView confirmBtn = (ImageView)context.findViewById(R.id.confirmBtn);
-        confirmBtn.setVisibility(View.GONE);
+        ImageView checkVersionBtn = (ImageView)context.findViewById(R.id.checkVersionBtn);
+        checkVersionBtn.setVisibility(View.GONE);
         //隐藏失败布局
         LinearLayout dfuFailView = (LinearLayout) context.findViewById(R.id.dfuFailView);
         dfuFailView.setVisibility(View.GONE);
@@ -152,8 +152,8 @@ public class DfuManager {
         checkVerDfuSuccTv.setText("固件已是最新版本");
         context.findViewById(checkVerDfuSuccTipTv).setVisibility(View.GONE);
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.colorDivider));
-        ImageView confirmBtn = (ImageView)context.findViewById(R.id.confirmBtn);
-        confirmBtn.setVisibility(View.VISIBLE);
+        ImageView checkVersionBtn = (ImageView)context.findViewById(R.id.checkVersionBtn);
+        checkVersionBtn.setVisibility(View.VISIBLE);
     }
 
     /**

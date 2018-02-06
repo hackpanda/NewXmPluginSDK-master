@@ -67,7 +67,7 @@
             android:layout_height="@dimen/y38">
             <TextView
                 android:id="@+id/keyTv"
-                android:text="添加钥匙"
+                android:text="添加手机钥匙"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="设置密码"
+                android:text="添加密码"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"

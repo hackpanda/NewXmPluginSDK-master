@@ -47,7 +47,7 @@
                 android:layout_marginTop="@dimen/y50"
                 android:alpha="0.6"
                 android:gravity="center_horizontal"
-                android:text="该用户已经有了手机钥匙"
+                android:text="该用户已被添加手机钥匙，不能重复添加"
                 android:textColor="#000000"
                 android:textSize="@dimen/x12" />
         </LinearLayout>

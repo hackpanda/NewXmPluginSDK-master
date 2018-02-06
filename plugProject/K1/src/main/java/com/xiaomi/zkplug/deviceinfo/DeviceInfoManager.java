@@ -28,6 +28,8 @@ import com.xiaomi.zkplug.lockoperater.SecureSetVolumn;
 import com.xiaomi.zkplug.lockoperater.SecureStatus;
 import com.xiaomi.zkplug.lockoperater.SecureSyncTime;
 import com.xiaomi.zkplug.util.BitConverter;
+import com.xiaomi.zkplug.util.DataManageUtil;
+import com.xiaomi.zkplug.util.DataUpdateCallback;
 import com.xiaomi.zkplug.util.ZkUtil;
 
 import org.json.JSONException;
@@ -62,12 +64,14 @@ public class DeviceInfoManager {
     TextView devicePowerTv, deviceSecLevelTv, muteModeTv, fpCountTv, pwdCountTv, romVerTv, pluginVerTv, lockTimeTv, phoneTimeTv;
     SwitchButton muteSwitch;
     ILockDataOperator iStatusOperator, iSyncTimeOperator, iSetVolumnOperator;
+    DataManageUtil dataManageUtil;
     public DeviceInfoManager(Device device, Activity activity) {
         this.mDevice = device;
         this.activity = activity;
         if(iStatusOperator == null){
             iStatusOperator = OperatorBuilder.create(SecureStatus.FLAG, activity, mDevice);
         }
+        this.dataManageUtil = new DataManageUtil(mDevice.deviceStat(), activity);
         xqProgressDialog = new XQProgressDialog(activity);
         xqProgressDialog.setCancelable(false);
         this.muteSwitch = (SwitchButton) activity.findViewById(R.id.muteSwitch);
@@ -160,10 +164,10 @@ public class DeviceInfoManager {
     /**
      * 文字变色
      */
-    private void showDiffTimeMsg(String msg){
+    private void showErrMsg(TextView tv, String msg){
         SpannableString spanttt = new SpannableString(msg);//renshu为要变色的字符串
         spanttt.setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.warn_color)), 0, msg.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);//将字符串变色
-        phoneTimeTv.append(spanttt);
+        tv.append(spanttt);
     }
 
     /**
@@ -173,6 +177,9 @@ public class DeviceInfoManager {
 
         try {
             devicePowerTv.setText(activity.getResources().getString(R.string.device_info_power, statusObj.getInt("power"))+"%");
+            if(statusObj.getInt("power") < 10){
+                showErrMsg(devicePowerTv, "（电量过低，请及时更换电池）");
+            }
             int securityLevel = (statusObj.getInt("seclevel") & 3);
 
             String securityLevelStr = "A";
@@ -201,7 +208,7 @@ public class DeviceInfoManager {
 
             Log.d(TAG, "timdiffsnd"+timdiffsnd);
             if(timdiffsnd > 30){
-                showDiffTimeMsg("（偏差"+timdiffsnd+"秒建议同步时间）");
+                showErrMsg(phoneTimeTv,"（偏差"+timdiffsnd+"秒建议同步时间）");
                 showSyncTimeDialog();
             }
 
@@ -310,6 +317,27 @@ public class DeviceInfoManager {
                 Toast.makeText(activity, "同步成功", Toast.LENGTH_SHORT).show();
                 xqProgressDialog.dismiss();
                 sendStatusCmd();//同步成功后，再次获取锁信息
+
+                //把同步时间的日期，存进服务器
+                JSONObject settingsObj = new JSONObject();
+                try {
+                    settingsObj.put("keyid_syncTime_data", BriefDate.fromNature(new Date()).toString());
+                    dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
+                        @Override
+                        public void dataUpateFail(int i, String s) {
+                            Log.d(TAG, "数据存储失败！");
+                        }
+
+                        @Override
+                        public void dataUpdateSucc(String s) {
+                            Log.d(TAG, "数据存储成功！");
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
@@ -321,6 +349,7 @@ public class DeviceInfoManager {
             }
         });
     }
+
 
     /**
      * 发送前状态判断

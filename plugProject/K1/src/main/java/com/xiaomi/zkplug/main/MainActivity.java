@@ -76,7 +76,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mHostActivity.enableBlackTranslucentStatus();
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         findViewById(R.id.title_bar_more).setOnClickListener(this);
-
+        memberImg = (ImageView) findViewById(R.id.title_bar_share);
         openLockGif = (GifView) findViewById(R.id.openLockGif);
         openLockImg = (ImageView) findViewById(R.id.openLockImg);
         refreshLsImg = (ImageView) findViewById(R.id.refreshLsImg);
@@ -103,7 +103,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             //Toast.makeText(activity, "没有被分享的钥匙", Toast.LENGTH_SHORT).show();
             mainViewControl.showNoShareKeyView();
         }else{
-            findViewById(R.id.keyPeriodTv).setVisibility(View.VISIBLE);
+            TextView keyPeriodTv = (TextView) findViewById(R.id.keyPeriodTv);
+            keyPeriodTv.setText("被分享者钥匙有效期不支持查询");
+            keyPeriodTv.setVisibility(View.VISIBLE);
             mainViewControl.connectSharedLock();//自动连接门锁
         }
         /* 检查家人的钥匙是否可用 end */
@@ -116,7 +118,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mTitleView.setOnClickListener(this);
         mNewFirmView = findViewById(R.id.title_bar_redpoint);
         /* use share icon instead of member begin */
-        memberImg = (ImageView) findViewById(R.id.title_bar_share);
+
         memberImg.setVisibility(View.VISIBLE);
         memberImg.setOnClickListener(this);
         memberImg.setImageResource(R.drawable.member_guanli_selector);

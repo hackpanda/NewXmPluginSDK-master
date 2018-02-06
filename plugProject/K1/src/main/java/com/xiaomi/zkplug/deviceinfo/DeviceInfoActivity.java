@@ -1,5 +1,6 @@
 package com.xiaomi.zkplug.deviceinfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 import com.xiaomi.zkplug.BaseActivity;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.otp.SecureLevelActivity;
 
 /**
  * 作者：liwenqi on 18/1/31 18:34
@@ -34,8 +36,10 @@ public class DeviceInfoActivity extends BaseActivity implements View.OnClickList
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         findViewById(R.id.btnSyncTime).setOnClickListener(this);
 
+        findViewById(R.id.secLevelLayout).setOnClickListener(this);
         this.deviceInfoManager = new DeviceInfoManager(Device.getDevice(mDeviceStat), activity());
         this.deviceInfoManager.getDeviceInfo();//获取设备信息
+
     }
     @Override
     public void onClick(View v) {
@@ -45,6 +49,10 @@ public class DeviceInfoActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.btnSyncTime:
                 deviceInfoManager.operateLockSyncTime();
+                break;
+            case R.id.secLevelLayout:
+                Intent intentLev = new Intent();
+                startActivity(intentLev, SecureLevelActivity.class.getName());
                 break;
             default:
                 break;

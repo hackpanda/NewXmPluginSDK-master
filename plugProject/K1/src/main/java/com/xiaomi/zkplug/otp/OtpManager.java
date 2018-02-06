@@ -127,7 +127,7 @@ public class OtpManager {
             otpKaitongView.setVisibility(View.GONE);
             LinearLayout optRefreshView = (LinearLayout) activity.findViewById(R.id.optRefreshView);
             optRefreshView.setVisibility(View.VISIBLE);
-            activity.findViewById(R.id.usedOutContent).setVisibility(View.GONE);
+            activity.findViewById(R.id.usedOutTipTv).setVisibility(View.GONE);
             activity.findViewById(R.id.content).setVisibility(View.VISIBLE);
         }
     }
@@ -541,12 +541,13 @@ public class OtpManager {
                             initInvalidTime();
                             Log.d(TAG, "otpIdxsObj: "+otpIdxsObj.toString());
                             if(otpIdxsObj.getJSONArray("idxs").length() == 0){//次数用完了
-                                activity.findViewById(R.id.usedOutContent).setVisibility(View.VISIBLE);
+                                activity.findViewById(R.id.usedOutTipTv).setVisibility(View.VISIBLE);
+                                setNextGeneTime();
                                 activity.findViewById(R.id.content).setVisibility(View.GONE);
                                 isUsedOut = true;
                             }else{
                                 isUsedOut = false;
-                                activity.findViewById(R.id.usedOutContent).setVisibility(View.GONE);
+                                activity.findViewById(R.id.usedOutTipTv).setVisibility(View.GONE);
                                 activity.findViewById(R.id.content).setVisibility(View.VISIBLE);
                                 viewHandler.sendEmptyMessage(MSG_CACULATE_ZOTP);
                             }
@@ -558,12 +559,13 @@ public class OtpManager {
             }else{
                 JSONArray tempArray = combinJsonArray(new JSONArray(), idxsArrayLocal);
                 if(tempArray.length() == 0){
-                    activity.findViewById(R.id.usedOutContent).setVisibility(View.VISIBLE);
+                    activity.findViewById(R.id.usedOutTipTv).setVisibility(View.VISIBLE);
+                    setNextGeneTime();
                     activity.findViewById(R.id.content).setVisibility(View.GONE);
                     isUsedOut = true;
                 }else{
                     isUsedOut = false;
-                    activity.findViewById(R.id.usedOutContent).setVisibility(View.GONE);
+                    activity.findViewById(R.id.usedOutTipTv).setVisibility(View.GONE);
                     activity.findViewById(R.id.content).setVisibility(View.VISIBLE);
                     otpIdxsObj.put("idxs", combinJsonArray(new JSONArray(), idxsArrayLocal));//合并去重，并生成新序号
                     viewHandler.sendEmptyMessage(MSG_CACULATE_ZOTP);
@@ -575,7 +577,30 @@ public class OtpManager {
         }
     }
 
-
+    /**
+     * 设置下次生产密码的时间
+     */
+    private void setNextGeneTime(){
+        String starttime = "";
+        try {
+            starttime = otpIdxsObj.getString("starttime");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        DateFormat df = new SimpleDateFormat(BriefDate.DATE_FORMAT);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(ZkUtil.getDateByStr(starttime));
+        if(calendar.get(Calendar.MINUTE) == 30){
+            int hour = calendar.get(Calendar.HOUR);
+            calendar.set(Calendar.HOUR, hour+1);
+            calendar.set(Calendar.MINUTE, 0);
+        }else{
+            int min = calendar.get(Calendar.MINUTE);
+            calendar.set(Calendar.MINUTE, min+30);
+        }
+        TextView usedOutTipTv = (TextView) activity.findViewById(R.id.usedOutTipTv);
+        usedOutTipTv.setText("当前密码已用完，请于"+(df.format(calendar.getTime())).substring(11,16)+"后生成");
+    }
     private int parseCharToInt(char c){
         return Integer.parseInt(String.valueOf(c));
     }
@@ -600,7 +625,7 @@ public class OtpManager {
             calendar.set(Calendar.MINUTE, min+30);
         }
 
-        invalidTime.setText("密码生成于"+starttime+"，将于"+(df.format(calendar.getTime())).substring(11,16)+"失效");
+        invalidTime.setText("密码于"+(df.format(calendar.getTime())).substring(11,16)+"失效，失效前仅可使用一次");
     }
     /**
      * @param otpMap

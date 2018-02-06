@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2889fd"
+    android:orientation="vertical">
+    <include layout="@layout/title_bar_transparent_white" />
+    <LinearLayout
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y77">
+            <TextView
+                android:text="门锁的安全等级介绍"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:textColor="@color/black"
+                android:alpha="0.8"
+                android:textSize="@dimen/x13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:layout_width="@dimen/x279"
+                android:background="#eeeeee"
+                android:layout_height="1dp" />
+            <TextView
+                android:text="门锁的安全等级分为A级、B级和C级"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:textSize="@dimen/x11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/y119">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="A级："
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_marginTop="@dimen/y11"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="只需要单一方式（密码/指纹/手机）验证通过就可以开锁"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_marginTop="@dimen/y11"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="B级："
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_marginTop="@dimen/y7"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="需要用两种不同方式（指纹+密码/指纹+手机/手机+密码）组合验证通过才可开锁"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_marginTop="@dimen/y7"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="C级："
+                    android:layout_marginLeft="@dimen/x21"
+                    android:layout_marginTop="@dimen/y7"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="在B级的基础上，门锁会停止消息广播，此时您无法接收门锁事件通知和查看门锁状态"
+                    android:layout_marginLeft="@dimen/x2"
+                    android:layout_marginTop="@dimen/y7"
+                    android:textColor="@color/black"
+                    android:alpha="0.6"
+                    android:textSize="@dimen/x11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/y12"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="怎样去设置门锁的安全等级？"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:textColor="@color/black"
+                android:alpha="0.8"
+                android:textSize="@dimen/x13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:layout_width="@dimen/x279"
+                android:background="#eeeeee"
+                android:layout_height="1dp" />
+            <TextView
+                android:text="从门锁后面板下方打开后面板盖，拨动安全等级按钮即可进行切换"
+                android:layout_marginLeft="@dimen/x21"
+                android:layout_marginTop="@dimen/y14"
+                android:layout_marginBottom="@dimen/y14"
+                android:textColor="@color/black"
+                android:alpha="0.6"
+                android:textSize="@dimen/x11"
+                android:layout_width="@dimen/x279"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
