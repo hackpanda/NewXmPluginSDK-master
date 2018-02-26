@@ -49,18 +49,20 @@
                     android:background="@drawable/item_selector"
                     android:layout_height="@dimen/y38">
                     <TextView
+                        android:id="@+id/validTitle"
                         android:text="钥匙有效期"
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/x13"
                         android:textColor="#000000"
                         android:alpha="0.6"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/x100"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/keyValidPeriodTv"
                         android:text="每周一12:00-12:40"
                         android:layout_marginRight="@dimen/x20"
+                        android:layout_marginLeft="@dimen/x100"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/x13"

@@ -90,9 +90,17 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
             public void handle(String time) {
 
                 if(timeSelector.getTitle().equals("请选择生效时间")){
-                    keyStartTv.setText(time);
+                    if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
+                        keyStartTv.setText(time.substring(11));
+                    }else{
+                        keyStartTv.setText(time);
+                    }
                 }else{
-                    keyEndTv.setText(time);
+                    if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
+                        keyEndTv.setText(time.substring(11));
+                    }else{
+                        keyEndTv.setText(time);
+                    }
                 }
             }
         }, "2018-01-30 00:00", "2030-12-31 00:00");
@@ -147,6 +155,8 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 }
                 break;
             case R.id.keyPeriodLayout:
+
+                keyManager.showPeriodPickDialog();
                 break;
             case R.id.keyStartLayout:
                 showTimePickDialog("请选择生效时间");
@@ -212,9 +222,11 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         }
         if((int)this.periodImg.getTag() == TAG_XUAN_ZHONG){
             timeSelector.setTitle(title);
+            this.timeSelector.setMode(TimeSelector.MODE.HM);
             this.timeSelector.show();
 
         }
     }
+
 
 }

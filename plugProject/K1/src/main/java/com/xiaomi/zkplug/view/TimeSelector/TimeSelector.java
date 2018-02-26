@@ -45,8 +45,8 @@ public class TimeSelector {
     public enum MODE {
 
         YMD(1),
-        YMDHM(2);
-
+        YMDHM(2),
+        HM(3);
         private MODE(int value) {
             this.value = value;
         }
@@ -85,7 +85,7 @@ public class TimeSelector {
     private Calendar startCalendar;
     private Calendar endCalendar;
     private TextView tv_cancle;
-    private TextView tv_select, tv_title;
+    private TextView tv_select, tv_title, year_text, month_text, day_text;
     private TextView hour_text;
     private TextView minute_text;
 
@@ -147,6 +147,9 @@ public class TimeSelector {
         tv_cancle = (TextView) seletorDialog.findViewById(R.id.tv_cancle);
         tv_select = (TextView) seletorDialog.findViewById(R.id.tv_select);
         tv_title = (TextView) seletorDialog.findViewById(R.id.tv_title);
+        year_text = (TextView) seletorDialog.findViewById(R.id.year_text);
+        month_text = (TextView) seletorDialog.findViewById(R.id.month_text);
+        day_text = (TextView) seletorDialog.findViewById(R.id.day_text);
         hour_text = (TextView) seletorDialog.findViewById(R.id.hour_text);
         minute_text = (TextView) seletorDialog.findViewById(R.id.minute_text);
 
@@ -612,6 +615,14 @@ public class TimeSelector {
         switch (mode.value) {
             case 1:
                 disScrollUnit(SCROLLTYPE.HOUR, SCROLLTYPE.MINUTE);
+
+                year_pv.setVisibility(View.VISIBLE);
+                year_text.setVisibility(View.VISIBLE);
+                month_pv.setVisibility(View.VISIBLE);
+                month_text.setVisibility(View.VISIBLE);
+                day_pv.setVisibility(View.VISIBLE);
+                day_text.setVisibility(View.VISIBLE);
+
                 hour_pv.setVisibility(View.GONE);
                 minute_pv.setVisibility(View.GONE);
                 hour_text.setVisibility(View.GONE);
@@ -619,6 +630,27 @@ public class TimeSelector {
                 break;
             case 2:
                 disScrollUnit();
+
+                year_pv.setVisibility(View.GONE);
+                year_text.setVisibility(View.GONE);
+                month_pv.setVisibility(View.GONE);
+                month_text.setVisibility(View.GONE);
+                day_pv.setVisibility(View.GONE);
+                day_text.setVisibility(View.GONE);
+                hour_pv.setVisibility(View.VISIBLE);
+                minute_pv.setVisibility(View.VISIBLE);
+                hour_text.setVisibility(View.VISIBLE);
+                minute_text.setVisibility(View.VISIBLE);
+                break;
+
+            case 3:
+                disScrollUnit();
+                year_pv.setVisibility(View.GONE);
+                year_text.setVisibility(View.GONE);
+                month_pv.setVisibility(View.GONE);
+                month_text.setVisibility(View.GONE);
+                day_pv.setVisibility(View.GONE);
+                day_text.setVisibility(View.GONE);
                 hour_pv.setVisibility(View.VISIBLE);
                 minute_pv.setVisibility(View.VISIBLE);
                 hour_text.setVisibility(View.VISIBLE);

@@ -158,7 +158,27 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                             }else if(securityKeyInfos.get(i).status == 1){//临时
                                 keyValidPeriodTv.setText(BriefDate.fromNature(startTime).toString().substring(0, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(0, 16));
                             }else{
-                                keyValidPeriodTv.setText("周期钥匙开发中...");
+                                List<Integer> weekdays = securityKeyInfos.get(i).weekdays;
+                                String result = "每";
+                                for(int m=0; m<weekdays.size(); m++){
+                                    if(weekdays.get(m) == 1){
+                                        result += "周一，";
+                                    }else if(weekdays.get(m) == 2){
+                                        result += "周二，";
+                                    }else if(weekdays.get(m) == 3){
+                                        result += "周三，";
+                                    }else if(weekdays.get(m) == 4){
+                                        result += "周四，";
+                                    }else if(weekdays.get(m) == 5){
+                                        result += "周五，";
+                                    }else if(weekdays.get(m) == 6){
+                                        result += "周六，";
+                                    }else if(weekdays.get(m) == 0){
+                                        result += "周日，";
+                                    }
+                                }
+                                result = result.substring(0, result.length() - 1);
+                                keyValidPeriodTv.setText(result+"的"+BriefDate.fromNature(startTime).toString().substring(11, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(11, 16)+"有效");
                             }
                         }
                         return;

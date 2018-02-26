@@ -17,6 +17,7 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.DataManageUtil;
 import com.xiaomi.zkplug.util.DataUpdateCallback;
 import com.xiaomi.zkplug.util.ZkUtil;
+import com.xiaomi.zkplug.view.mutiselect.MultiSelectPopWindow;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,7 +44,9 @@ public class KeyManager {
     Device mDevice;
     DataManageUtil dataManageUtil;
     String memberId, userId;
-    TextView keyStartTv, keyEndTv;
+    TextView keyStartTv, keyEndTv, keyPeriodTv;
+
+    List<Integer> weekdays = null; // 生效日期（星期几，例如周一和周三对应1和3，[1, 3]），仅在status=2时不可为空
     public KeyManager(DeviceStat mDeviceStat, Activity activity) {
         // 初始化device
         this.activity = activity;
@@ -51,8 +54,66 @@ public class KeyManager {
         this.dataManageUtil = new DataManageUtil(mDeviceStat, activity);
         this.memberId = activity.getIntent().getStringExtra("memberId");//成员Id
         this.userId = activity.getIntent().getStringExtra("userId");//小米账号
+        this.keyPeriodTv = (TextView) activity.findViewById(R.id.keyPeriodTv);//重复周期
         this.keyStartTv = (TextView) activity.findViewById(R.id.keyStartTv);
         this.keyEndTv = (TextView) activity.findViewById(R.id.keyEndTv);
+    }
+
+    /**
+     * 显示周期选择框
+     */
+    protected void showPeriodPickDialog(){
+        weekdays = null;//初始化
+        ArrayList<String> names = new ArrayList<>();
+        names.add("星期一");
+        names.add("星期二");
+        names.add("星期三");
+        names.add("星期四");
+        names.add("星期五");
+        names.add("星期六");
+        names.add("星期日");
+
+        new MultiSelectPopWindow.Builder(activity)
+                .setNameArray(names)
+                .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
+                    @Override
+                    public void onClick(ArrayList<Integer> indexList, ArrayList<String> selectedList) {
+
+                        if(selectedList.size() > 0){
+                            String result = "";
+                            weekdays = new ArrayList<Integer>();
+                            for(int i=0; i<selectedList.size(); i++){
+                                if(selectedList.get(i).equals("星期一")){
+                                    weekdays.add(1);
+                                }else if(selectedList.get(i).equals("星期二")){
+                                    weekdays.add(2);
+                                }else if(selectedList.get(i).equals("星期三")){
+                                    weekdays.add(3);
+                                }else if(selectedList.get(i).equals("星期四")){
+                                    weekdays.add(4);
+                                }else if(selectedList.get(i).equals("星期五")){
+                                    weekdays.add(5);
+                                }else if(selectedList.get(i).equals("星期六")){
+                                    weekdays.add(6);
+                                }else if(selectedList.get(i).equals("星期日")){
+                                    weekdays.add(0);
+                                }
+                                result += selectedList.get(i) +",";
+                            }
+                            result = result.substring(0, result.length() - 1);
+                            keyPeriodTv.setText(result);
+                            for(int m = 0; m<weekdays.size(); m++){
+                                Log.d(TAG, weekdays.get(m).toString());
+                            }
+
+                        }
+                    }
+                })
+                .setCancel("取消")
+                .setConfirm("完成")
+                .setTitle("周期列表")
+                .build()
+                .show(activity.findViewById(R.id.mBottom));
     }
 
     /**
@@ -62,30 +123,12 @@ public class KeyManager {
     protected void keyGaveWork(int status){
         long activeTime = 0;
         long expireTime = 0;
-        List<Integer> weekdays = null; // 生效日期（星期几，例如周一和周三对应1和3，[1, 3]），仅在status=2时不可为空
+
         if(status == 3){
             Log.d(TAG, "发送永久有效钥匙");
             activeTime = ZkUtil.getUTCTime(); // 生效时间 UTC时间戳，单位为s
-            expireTime = activeTime + 20 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
+            expireTime = activeTime + 100 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
             Log.d(TAG, "activeTime: "+activeTime+", expireTime: "+expireTime);
-        }else if(status == 2){
-            weekdays = new ArrayList<Integer>();
-            String weekStr = keyStartTv.getText().toString().substring(2,3);
-            if(weekStr.equals("一")){
-                weekdays.add(1);
-            }else if(weekStr.equals("二")){
-                weekdays.add(2);
-            }else if(weekStr.equals("三")){
-                weekdays.add(3);
-            }else if(weekStr.equals("四")){
-                weekdays.add(4);
-            }else if(weekStr.equals("五")){
-                weekdays.add(5);
-            }else if(weekStr.equals("六")){
-                weekdays.add(6);
-            }else if(weekStr.equals("日")){
-                weekdays.add(0);
-            }
         }else{//临时钥匙
             SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
@@ -97,8 +140,8 @@ public class KeyManager {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            //周期钥匙的weekdays，已经通过showPeriodPickDialog()得到
         }
-
 
         boolean readonly = true; // true：被分享人不可接收锁push，false：被分享人可接收锁push
         SwitchButton readSwitchBtn = (SwitchButton) activity.findViewById(R.id.btnSwitch);
@@ -106,6 +149,7 @@ public class KeyManager {
             readonly = false;
         }
         Log.d(TAG, "readonly: "+readonly);
+
         // 分享钥匙的有效时间可以配置
         shareSecurityKey(mDevice.getModel(), mDevice.getDid(), userId, status, activeTime / 1000, expireTime / 1000, weekdays, readonly);
     }
@@ -124,7 +168,7 @@ public class KeyManager {
      * @param readonly true：被分享人不可接收锁push，false：被分享人可接收锁push，（family关系用户不受这个字段影响）
      * @param
      */
-    protected void  shareSecurityKey(String model, String did, String shareUid, int status, long activeTime, long expireTime, List<Integer> weekdays, final boolean readonly) {
+    protected void  shareSecurityKey(String model, String did, String shareUid, int status, final long activeTime, long expireTime, List<Integer> weekdays, final boolean readonly) {
         XmPluginHostApi.instance().shareSecurityKey(model, did, shareUid,
                 status, activeTime, expireTime, weekdays, readonly, new Callback<Void>() {
                     @Override
@@ -134,7 +178,11 @@ public class KeyManager {
 
                     @Override
                     public void onFailure(int i, String s) {
-                        Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
+                        if(i == -8){
+                            Toast.makeText(activity, " 无效的钥匙周期", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
+                        }
                         if (i == Callback.INVALID) {
                             Toast.makeText(activity, "用户id不存在", Toast.LENGTH_SHORT).show();
                         }

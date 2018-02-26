@@ -49,6 +49,7 @@ dependencies {
     compile project(path: ':plugProject:LockCommLib')
     compile project(path: ':plugProject:dfu')
     compile files('libs/BluetoothLe.jar')
+    compile 'com.davidecirillo.multichoicerecyclerview:multichoicerecyclerview:2.3.0'
 }
 
 //如果有其他项目依赖，添加下面属性，项目名字相对于插件根目录
