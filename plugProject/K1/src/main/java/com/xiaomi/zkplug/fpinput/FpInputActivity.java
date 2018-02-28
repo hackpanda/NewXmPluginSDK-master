@@ -2,7 +2,7 @@ package com.xiaomi.zkplug.fpinput;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,7 +24,7 @@ public class FpInputActivity extends BaseActivity implements View.OnClickListene
     Device mDevice;
     FpInputHelper fpInputHelper;
     String memberId;
-    ImageView btnFpInput;
+    Button btnFpInput;
     LinearLayout fpInputBuzhouLayout;
     DataManageUtil dataManageUtil;
     @Override
@@ -37,7 +37,7 @@ public class FpInputActivity extends BaseActivity implements View.OnClickListene
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
         mTitleView.setText("录入指纹");
         findViewById(R.id.title_bar_return).setOnClickListener(this);
-        this.btnFpInput = (ImageView) findViewById(R.id.btnFpIput);
+        this.btnFpInput = (Button) findViewById(R.id.btnFpIput);
         this.fpInputBuzhouLayout = (LinearLayout) findViewById(R.id.fpInputBuzhouLayout);
         btnFpInput.setOnClickListener(this);
         mDevice = Device.getDevice(mDeviceStat);

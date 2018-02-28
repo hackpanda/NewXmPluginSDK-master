@@ -149,6 +149,9 @@ public class MainViewControl {
             openWarnTv.setText("未连接门锁，点击重试");
         }
         isOperating = false;
+        if(!ZkUtil.isBleOpen()){
+            openWarnTv.setText("手机蓝牙未打开");
+        }
     }
     /**
      * 开锁逻辑
@@ -161,6 +164,7 @@ public class MainViewControl {
         if(!ZkUtil.isBleOpen()){
             openWarnTv.setText("手机蓝牙未打开");
             openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
+            Toast.makeText(activity, "请打开手机蓝牙", Toast.LENGTH_LONG).show();
             return;
         }
 

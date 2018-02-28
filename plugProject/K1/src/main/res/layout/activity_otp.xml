@@ -77,14 +77,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageView
+        <Button
             android:id="@+id/otpKtBtn"
             android:layout_below="@+id/ktTipRel"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/otp_kaitong_selector"
             android:layout_marginTop="@dimen/y118"
             android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33" />
+            android:layout_height="@dimen/y33"
+            android:text="开通"
+            android:background="@drawable/corners_btn" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -238,20 +240,24 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <ImageView
+            <Button
                 android:id="@+id/btnRefresh"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y33"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y128"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/otp_shengcheng_selector"
-                android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y33" />
-            <ImageView
+                android:text="生成"
+                android:background="@drawable/corners_btn" />
+
+            <Button
                 android:id="@+id/btnClose"
-                android:layout_marginTop="@dimen/y10"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/otp_guanbi_selector"
                 android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y33" />
+                android:layout_height="@dimen/y33"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y10"
+                android:text="关闭"
+                android:textColor="@color/black"
+                android:background="@drawable/corners_grey" />
         </LinearLayout>
 
     </LinearLayout>

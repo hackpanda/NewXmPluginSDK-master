@@ -30,13 +30,15 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_alignParentBottom="true"
+        <Button
             android:id="@+id/btnCloseOtp"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/y25"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/otp_close_blue_selector"
             android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33" />
+            android:layout_height="@dimen/y33"
+            android:text="关闭"
+            android:background="@drawable/corners_btn" />
+
     </RelativeLayout>
 </LinearLayout>

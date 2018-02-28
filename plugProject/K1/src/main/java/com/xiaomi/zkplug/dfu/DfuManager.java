@@ -114,6 +114,7 @@ public class DfuManager {
 
         Button checkVersionBtn = (Button)context.findViewById(R.id.checkVersionBtn);
         checkVersionBtn.setVisibility(View.GONE);
+        context.findViewById(R.id.dfuBottomTipTv).setVisibility(View.GONE);
         //隐藏失败布局
         LinearLayout dfuFailView = (LinearLayout) context.findViewById(R.id.dfuFailView);
         dfuFailView.setVisibility(View.GONE);
@@ -126,15 +127,15 @@ public class DfuManager {
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.dfu_updateing_color));
         TextView checkVerDfuSuccTipTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTipTv);
         checkVerDfuSuccTipTv.setText("手机与门锁距离不能超过1米");
-
         checkVerDfuSuccTipTv.setVisibility(View.VISIBLE);
+
 
     }
 
     /**
      * DFU更新成功界面效果
      */
-    protected void showDfuSuccView(){
+    protected void showDfuSuccView(String version){
         LinearLayout emptyView = (LinearLayout) context.findViewById(R.id.emptyView);
         emptyView.setVisibility(View.GONE);
         LinearLayout dfuInitView = (LinearLayout) context.findViewById(R.id.dfuInitView);
@@ -147,13 +148,14 @@ public class DfuManager {
         TextView dfuProgressTv = (TextView) context.findViewById(R.id.dfuProgressTv);
         dfuProgressTv.setText("");
         TextView curVerDfuSuccTv = (TextView) context.findViewById(R.id.curVerDfuSuccTv);
-        curVerDfuSuccTv.setText("已是最新版本");
+        curVerDfuSuccTv.setText(version);
         TextView checkVerDfuSuccTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTv);
         checkVerDfuSuccTv.setText("固件已是最新版本");
         context.findViewById(R.id.checkVerDfuSuccTipTv).setVisibility(View.GONE);
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.colorDivider));
         Button checkVersionBtn = (Button)context.findViewById(R.id.checkVersionBtn);
         checkVersionBtn.setVisibility(View.VISIBLE);
+        context.findViewById(R.id.dfuBottomTipTv).setVisibility(View.VISIBLE);
     }
 
     /**

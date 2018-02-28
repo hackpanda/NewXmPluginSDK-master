@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:gravity="center_horizontal"
-                android:text="成员就可以和您一起使用手机开锁啦"
+                android:text="成员就可以使用手机开锁了"
                 android:textColor="@color/black"
                 android:alpha="0.6"
                 android:textSize="@dimen/x12"
@@ -50,11 +50,11 @@
             android:layout_marginTop="@dimen/y30"
             android:background="@drawable/corners_edit"
             android:paddingStart="@dimen/x11"
-            android:textColorHint="#595959"
+            android:textColorHint="@color/gray"
             android:textSize="@dimen/x10"
             android:paddingLeft="@dimen/x11"
             android:textColor="@color/black"
-            android:hint="邮箱／手机号码／小米账号"
+            android:hint="请输入对方的邮箱／手机号码／小米账号"
             android:layout_width="@dimen/x278"
             android:layout_height="@dimen/y33" />
 
@@ -72,13 +72,15 @@
                 android:textSize="@dimen/x13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ImageView
+
+            <Button
                 android:id="@+id/searchBtn"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/auth_search_selector"
                 android:layout_marginTop="@dimen/y25"
                 android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y33" />
+                android:layout_height="@dimen/y33"
+                android:text="查找"
+                android:background="@drawable/corners_btn" />
         </RelativeLayout>
 
     </LinearLayout>

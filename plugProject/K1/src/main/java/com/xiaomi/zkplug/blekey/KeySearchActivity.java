@@ -72,7 +72,8 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
                 if(TextUtils.isEmpty(accountEdit.getText().toString())){
-                    accountWarnTv.setText("请输入小米账号");
+                    accountWarnTv.setText("请输入查找账号");
+                    accountWarnTv.setVisibility(View.VISIBLE);
                     return;
                 }
                 xqProgressDialog = new XQProgressDialog(activity());

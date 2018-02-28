@@ -21,7 +21,7 @@
             android:background="@drawable/icon_zhuangtai"
             android:layout_height="@dimen/x34" />
         <TextView
-            android:text="正在检查固件更新"
+            android:text="正在检查最新版本"
             android:textSize="@dimen/x12"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal"
@@ -186,6 +186,7 @@
             android:text="检查锁内固件版本号"
             android:background="@drawable/corners_btn"/>
         <TextView
+            android:id="@+id/dfuBottomTipTv"
             android:layout_gravity="center_horizontal"
             android:text="固件版本号以锁内为准，请靠近门锁读取"
             android:textColor="@color/colorDivider"
@@ -244,13 +245,15 @@
         </LinearLayout>
 
         <!-- 重新升级 -->
-        <ImageView
+        <Button
             android:id="@+id/reupdateBtn"
+
+            android:layout_width="@dimen/x279"
+            android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/updateTipTv"
-            android:src="@drawable/dfu_reupdate_selector"
             android:layout_marginTop="@dimen/y140"
-            android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33" />
+            android:text="重新升级"
+            android:background="@drawable/corners_btn" />
     </LinearLayout>
 </LinearLayout>

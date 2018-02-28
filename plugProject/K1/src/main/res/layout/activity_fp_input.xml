@@ -45,13 +45,14 @@
             android:layout_marginTop="@dimen/y88"
             android:layout_width="@dimen/x213"
             android:layout_height="@dimen/y108"/>
-        <ImageView
+        <Button
             android:id="@+id/btnFpIput"
-            android:layout_marginTop="@dimen/y86"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/fp_input_selector"
             android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33"/>
+            android:layout_height="@dimen/y33"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y86"
+            android:text="开始添加"
+            android:background="@drawable/corners_btn"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/fpInputBuzhouLayout"

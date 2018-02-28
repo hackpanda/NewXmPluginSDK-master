@@ -34,7 +34,7 @@
 
         <TextView
             android:gravity="center_horizontal"
-            android:text="为您安全考虑，手机不会保存密码，请您牢记，为防止"
+            android:text="连续输错五次密码，键盘会被锁定5分钟"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y11"
@@ -42,9 +42,8 @@
             android:layout_height="wrap_content" />
         <TextView
             android:gravity="center_horizontal"
-            android:text="有人试密码，连续输错5次密码，键盘会被锁定5分钟"
-            android:textColor="@color/black"
-            android:alpha="0.5"
+            android:text="连续被锁，惩罚时间翻倍"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y3"
             android:layout_width="match_parent"

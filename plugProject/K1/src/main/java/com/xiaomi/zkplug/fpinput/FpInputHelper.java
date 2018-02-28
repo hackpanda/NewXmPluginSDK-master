@@ -212,7 +212,7 @@ public class FpInputHelper {
 
     //发送锁命令,并更新数据
     protected void operateLockMsg(LockCmdFpAdd lockCmdAddFp){
-        viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
+        //viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
         iLockDataOperator.sendLockMsg(lockCmdAddFp.getBytes(), new LockOperateCallback() {
             @Override
             public void lockOperateSucc(String fpBatchNo) {
@@ -279,12 +279,13 @@ public class FpInputHelper {
                                             iLockDataOperator.unregisterBluetoothReceiver();
                                             viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
                                             xqProgressDialog.dismiss();
-                                        } else {
-                                            CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
-                                            iLockDataOperator.unregisterBluetoothReceiver();
-                                            viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
-                                            xqProgressDialog.dismiss();
                                         }
+//                                        else {
+//                                            CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+//                                            iLockDataOperator.unregisterBluetoothReceiver();
+//                                            viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
+//                                            xqProgressDialog.dismiss();
+//                                        }
                                     }
                                 });
                             }
@@ -303,11 +304,13 @@ public class FpInputHelper {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_FP_INPUT_TIMEOUT:
-                    Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
-                    xqProgressDialog.dismiss();
-                    XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                    CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
-                    Log.d(TAG, "超时未发现门锁");
+                    if(fpInputBuzhouLayout.getVisibility() == View.GONE){
+                        Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
+                        XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
+                        CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                        iLockDataOperator.unregisterBluetoothReceiver();
+                        xqProgressDialog.dismiss();
+                    }
                     break;
 
                 default:

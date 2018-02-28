@@ -52,7 +52,7 @@ import cn.zelkova.lockprotocol.LockCmdSetVolumn;
 public class DeviceInfoManager {
 
     private final String TAG = "DeviceInfoManager";
-    private final int GET_STATUS_FAIL_TIME = 15 * 1000;//15秒时间
+    private final int GET_STATUS_FAIL_TIME = 20 * 1000;//15秒时间
     private final int MSG_TIME_OUT = 0x0;//超时
     private final int MSG_GET_STATUS = 0x10;
     private final int MSG_MUTE_SET_TIME_OUT = 0x11;//静音设置超时
@@ -66,7 +66,8 @@ public class DeviceInfoManager {
     SwitchButton muteSwitch;
     ILockDataOperator iStatusOperator, iSyncTimeOperator, iSetVolumnOperator;
     DataManageUtil dataManageUtil;
-    public DeviceInfoManager(Device device, Activity activity) {
+    boolean muteSetComplete = false;//静音模式设置完成标识位
+    public DeviceInfoManager(Device device, final Activity activity) {
         this.mDevice = device;
         this.activity = activity;
         if(iStatusOperator == null){
@@ -91,6 +92,11 @@ public class DeviceInfoManager {
                 if(fromGetInfoFlag){
                     fromGetInfoFlag = false;
                 }else{//不是从getInfo而来，才需要监听变化
+                    if(!ZkUtil.isBleOpen()){
+                        Toast.makeText(activity, "请打开手机蓝牙", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    muteSetComplete = false;
                     setMuteMode(isChecked);
                 }
             }
@@ -98,12 +104,18 @@ public class DeviceInfoManager {
     }
 
     protected void getDeviceInfo(){
-        if(!ZkUtil.isNetworkAvailable(activity)){
-            Toast.makeText(activity, R.string.network_not_avilable, Toast.LENGTH_LONG).show();
-            return;
-        }
         if(!ZkUtil.isBleOpen()){
-            Toast.makeText(activity, R.string.open_bluetooth, Toast.LENGTH_LONG).show();
+            MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
+            builder.setTitle("提示");
+            builder.setMessage("手机蓝牙未打开");
+            builder.setNegativeButton("确定", new MLAlertDialog.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                    activity.finish();
+                }
+            });
+            builder.show();
             return;
         }
         xqProgressDialog.setMessage("正在获取设备信息");
@@ -133,6 +145,7 @@ public class DeviceInfoManager {
      * 发送获取状态命令
      */
     private void sendStatusCmd(){
+
         iStatusOperator.registerBluetoothReceiver();
         iStatusOperator.sendLockMsg(getLockStatusCmd().getBytes(), new LockOperateCallback() {
             @Override
@@ -272,8 +285,10 @@ public class DeviceInfoManager {
         public void handleMessage(final Message msg) {
             switch (msg.what) {
                 case MSG_MUTE_SET_TIME_OUT:
+                    Log.d(TAG, "连接设备失败");
                     unregisterBleReceiver();
                     Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_LONG).show();
+                    XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
                     xqProgressDialog.dismiss();
                     break;
                 case MSG_TIME_OUT:
@@ -289,8 +304,6 @@ public class DeviceInfoManager {
                         public void onResponse(int i, Bundle bundle) {
                             if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                                 sendStatusCmd();
-                            }else{
-                                XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
                             }
                         }
                     });
@@ -384,7 +397,7 @@ public class DeviceInfoManager {
     private void prepareSendSyncCmd(){
         iSyncTimeOperator = OperatorBuilder.create(SecureSyncTime.FLAG, activity, mDevice);
         iSyncTimeOperator.registerBluetoothReceiver();
-        viewHanlder.sendEmptyMessageDelayed(MSG_SEND_SYNC_TIME_CMD, 1000);//注册广播后，延迟一秒发送
+        viewHanlder.sendEmptyMessageDelayed(MSG_SEND_SYNC_TIME_CMD, 2000);//注册广播后，延迟一秒发送
     }
     /**
      * 授时间
@@ -461,10 +474,12 @@ public class DeviceInfoManager {
     }
 
     private void sendVolumnSetCmd(){
+        Log.d(TAG, "sendVolumnSetCmd");
         iSetVolumnOperator.sendLockMsg(getVolumnSetCmd().getBytes(),new LockOperateCallback() {
             @Override
             public void lockOperateSucc(String result) {
                 Log.d(TAG, "设置成功");
+                muteSetComplete = true;
                 viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                 iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
@@ -474,6 +489,7 @@ public class DeviceInfoManager {
             @Override
             public void lockOperateFail(String value) {
                 Log.d(TAG, "设置失败");
+                muteSetComplete = true;
                 viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                 iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, value, Toast.LENGTH_SHORT).show();
@@ -492,35 +508,41 @@ public class DeviceInfoManager {
     private void prepareSendVolumnSetCmd(){
         iSetVolumnOperator = OperatorBuilder.create(SecureSetVolumn.FLAG, activity, mDevice);
         iSetVolumnOperator.registerBluetoothReceiver();
-        viewHanlder.sendEmptyMessageDelayed(MSG_SEND_VOLUMN_SET_CMD, 1000);//注册广播后，延迟一秒发送
+        viewHanlder.sendEmptyMessageDelayed(MSG_SEND_VOLUMN_SET_CMD, 2000);//注册广播后，延迟2秒发送
     }
     /**
      * 设置音量
      */
     protected void operateLockVolumnSet(){
+        iSetVolumnOperator = OperatorBuilder.create(SecureSetVolumn.FLAG, activity, mDevice);
+        iSetVolumnOperator.registerBluetoothReceiver();
+
         Log.d(TAG, "开始设置音量: "+BriefDate.fromNature(new Date()).toString());
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
             Log.d(TAG, "已连接，直接发送音量设置命令");
-            prepareSendVolumnSetCmd();
+            //prepareSendVolumnSetCmd();
+            viewHanlder.sendEmptyMessageDelayed(MSG_SEND_VOLUMN_SET_CMD, 2000);//注册广播后，延迟2秒发送
         } else {
             //未连接就先建立连接
-            Log.d(TAG, "授时时未连接，就先建立连接");
+            Log.d(TAG, "设置时未连接，就先建立连接");
             XmBluetoothManager.getInstance().securityChipConnect(mDevice.getMac(), new Response.BleConnectResponse() {
                 @Override
                 public void onResponse(int i, Bundle bundle) {
                     Log.d(TAG, "回调状态:" + i);
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
-                        prepareSendVolumnSetCmd();
-                    }else{
-                        viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
-                        XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
-                        if(iSetVolumnOperator != null){
-                            iSyncTimeOperator.unregisterBluetoothReceiver();
-                        }
-                        Log.d(TAG, "连接设备失败");
-                        Toast.makeText(activity, "连接设备失败", Toast.LENGTH_SHORT).show();
-                        xqProgressDialog.dismiss();
-                    }
+                        //prepareSendVolumnSetCmd();
+                        viewHanlder.sendEmptyMessageDelayed(MSG_SEND_VOLUMN_SET_CMD, 2000);//注册广播后，延迟2秒发送
+                    }//else使用超时来控制
+//                    else{
+//                        viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
+//                        XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
+//                        if(iSetVolumnOperator != null){
+//                            iSyncTimeOperator.unregisterBluetoothReceiver();
+//                        }
+//                        Log.d(TAG, "连接设备失败");
+//                        Toast.makeText(activity, "连接设备失败", Toast.LENGTH_SHORT).show();
+//                        xqProgressDialog.dismiss();
+//                    }
                 }
             });
         }
