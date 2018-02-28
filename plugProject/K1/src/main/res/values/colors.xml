@@ -3,11 +3,12 @@
     <color name="rippelColor">#0099CC</color>
     <color name="colorDivider">#cccccc</color>
     <color name="dfu_updateing_color">#ff7700</color>
-    <color name="main_blue">#2889fd</color>
     <color name="warn_color">#ff345a</color>
     <color name="text_succ">#3fb579</color>
-    <color name="colorPrimary">#5ead2f</color>
 
+    <!--<color name="colorPrimary">#5ead2f</color>-->
+    <color name="colorPrimary">#2889fd</color>
+    <color name="colorPrimaryPress">#0066cc</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="gray">#c3c3c3</color>

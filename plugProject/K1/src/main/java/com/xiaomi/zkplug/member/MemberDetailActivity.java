@@ -134,7 +134,8 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
             case R.id.keyRel:
                 Intent intent = new Intent();
                 intent.putExtra("memberId", memberId);//member的id
-                if(keyTv.getText().toString().equals("添加钥匙")){
+                //根据标题进入不同的页面
+                if(keyTv.getText().toString().equals(this.getResources().getString(R.string.member_add_key))){
                     startActivity(intent, KeySearchActivity.class.getName());
                 }else{
                     intent.putExtra("miAccount", miAccount);//小米帐号传进去
@@ -579,8 +580,8 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                 keyTv.setTextColor(getResources().getColor(R.color.black));
                 keyTv.setText("手机钥匙");
             }else{
-                keyTv.setTextColor(getResources().getColor(R.color.main_blue));
-                keyTv.setText("添加钥匙");
+                keyTv.setTextColor(getResources().getColor(R.color.colorPrimary));
+                keyTv.setText(R.string.member_add_key);
             }
             /* 手机钥匙布局加载 end */
 

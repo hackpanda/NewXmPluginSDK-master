@@ -62,7 +62,7 @@
             android:layout_below="@+id/ktTipRel"
             android:layout_centerHorizontal="true"
             android:text="当前您还未开通临时密码"
-            android:textColor="@color/main_blue"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/y10"
             android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
             android:layout_below="@+id/tips1"
             android:layout_centerHorizontal="true"
             android:text="靠近门锁开通后方可使用"
-            android:textColor="@color/main_blue"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/y3"
             android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                     <com.xiaomi.zkplug.view.AutoScrollTextView
                         android:id="@+id/scrollText_1"
@@ -176,7 +176,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                     <com.xiaomi.zkplug.view.AutoScrollTextView
                         android:id="@+id/scrollText_2"
@@ -185,7 +185,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                     <com.xiaomi.zkplug.view.AutoScrollTextView
                         android:id="@+id/scrollText_3"
@@ -194,7 +194,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                     <com.xiaomi.zkplug.view.AutoScrollTextView
                         android:id="@+id/scrollText_4"
@@ -203,7 +203,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                     <com.xiaomi.zkplug.view.AutoScrollTextView
                         android:id="@+id/scrollText_5"
@@ -212,7 +212,7 @@
                         android:layout_height="@dimen/x35"
                         android:layout_centerInParent="true"
                         android:background="@drawable/number_bg"
-                        android:textColor="@color/main_blue"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/x20" />
                 </LinearLayout>
 

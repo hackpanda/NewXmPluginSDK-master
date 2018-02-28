@@ -631,12 +631,12 @@ public class TimeSelector {
             case 2:
                 disScrollUnit();
 
-                year_pv.setVisibility(View.GONE);
-                year_text.setVisibility(View.GONE);
-                month_pv.setVisibility(View.GONE);
-                month_text.setVisibility(View.GONE);
-                day_pv.setVisibility(View.GONE);
-                day_text.setVisibility(View.GONE);
+                year_pv.setVisibility(View.VISIBLE);
+                year_text.setVisibility(View.VISIBLE);
+                month_pv.setVisibility(View.VISIBLE);
+                month_text.setVisibility(View.VISIBLE);
+                day_pv.setVisibility(View.VISIBLE);
+                day_text.setVisibility(View.VISIBLE);
                 hour_pv.setVisibility(View.VISIBLE);
                 minute_pv.setVisibility(View.VISIBLE);
                 hour_text.setVisibility(View.VISIBLE);

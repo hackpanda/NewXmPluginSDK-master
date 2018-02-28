@@ -14,6 +14,8 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.ZkUtil;
 import com.xiaomi.zkplug.view.TimeSelector.TimeSelector;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -51,7 +53,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("添加手机钥匙");
+        mTitleView.setText(R.string.member_add_key);
         nickNameTv = (TextView) findViewById(R.id.nickNameTv);
         nickNameTv.setText(getIntent().getStringExtra("nickName"));
         this.userImg = (ImageView) findViewById(R.id.userImg);
@@ -85,25 +87,8 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         keyEndLayout.setOnClickListener(this);
 
         this.keyEndTv.setOnClickListener(this);
-        this.timeSelector = new TimeSelector(this, new TimeSelector.ResultHandler() {
-            @Override
-            public void handle(String time) {
 
-                if(timeSelector.getTitle().equals("请选择生效时间")){
-                    if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
-                        keyStartTv.setText(time.substring(11));
-                    }else{
-                        keyStartTv.setText(time);
-                    }
-                }else{
-                    if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
-                        keyEndTv.setText(time.substring(11));
-                    }else{
-                        keyEndTv.setText(time);
-                    }
-                }
-            }
-        }, "2018-01-30 00:00", "2030-12-31 00:00");
+
 
     }
     /**
@@ -162,7 +147,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 showTimePickDialog("请选择生效时间");
                 break;
             case R.id.keyEndLayout:
-                showTimePickDialog("请选择失效时间");
+                showTimePickDialog("请选择到期时间");
                 break;
 
 
@@ -187,9 +172,9 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.periodImg.setImageResource(R.drawable.btn_weixuan);
                 this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
 
-                keyInfoTv.setText("手机钥匙在自定义的时间段内有效");
+                keyInfoTv.setText("手机钥匙在到期时间之前有效");
                 keyPeriodLayout.setVisibility(View.GONE);
-                keyStartLayout.setVisibility(View.VISIBLE);
+                keyStartLayout.setVisibility(View.GONE);
                 keyEndLayout.setVisibility(View.VISIBLE);
 
                 break;
@@ -212,20 +197,46 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
      * 显示不同的日期选择框
      */
     private void showTimePickDialog(String title){
-        if((int)this.foreverImg.getTag() == TAG_XUAN_ZHONG){
 
-        }
         if((int)this.tempImg.getTag() == TAG_XUAN_ZHONG){
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            String startTime = sdFormat.format(new Date());
+            this.timeSelector = new TimeSelector(this, new TimeSelector.ResultHandler() {
+                @Override
+                public void handle(String time) {
+                    keyEndTv.setText(time);
+                }
+            }, startTime, "2030-12-31 23:59");
             timeSelector.setTitle(title);
             this.timeSelector.setMode(TimeSelector.MODE.YMDHM);
             timeSelector.show();
         }
-        if((int)this.periodImg.getTag() == TAG_XUAN_ZHONG){
-            timeSelector.setTitle(title);
-            this.timeSelector.setMode(TimeSelector.MODE.HM);
-            this.timeSelector.show();
+//        if((int)this.periodImg.getTag() == TAG_XUAN_ZHONG){
+//            this.timeSelector = new TimeSelector(this, new TimeSelector.ResultHandler() {
+//                @Override
+//                public void handle(String time) {
+//
+//                    if(timeSelector.getTitle().equals("请选择到期时间")){
+//                        if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
+//                            keyStartTv.setText(time.substring(11));
+//                        }else{
+//                            keyStartTv.setText(time);
+//                        }
+//                    }else{
+//                        if((int)periodImg.getTag() == TAG_XUAN_ZHONG){
+//                            keyEndTv.setText(time.substring(11));
+//                        }else{
+//                            keyEndTv.setText(time);
+//                        }
+//                    }
+//                }
+//            }, "2018-01-30 00:00", "2018-01-30 23:59");
+//            timeSelector.setTitle(title);
+//            this.timeSelector.setMode(TimeSelector.MODE.HM);
+//            this.timeSelector.show();
+//        }
 
-        }
+
     }
 
 

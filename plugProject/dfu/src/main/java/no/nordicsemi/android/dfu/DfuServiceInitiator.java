@@ -488,7 +488,7 @@ public class DfuServiceInitiator {
 		DfuBaseService dfuBaseService = new DfuBaseService(context) {
 			@Override
 			protected Class<? extends Activity> getNotificationTarget() {
-				Log.d("debug", "contextName： "+context.getClass().getName());
+				Log.d("Dfu", "contextName： "+context.getClass().getName());
 				return (Class<? extends Activity>) context.getClass();
 			}
 		};

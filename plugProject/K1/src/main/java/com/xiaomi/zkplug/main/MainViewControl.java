@@ -7,6 +7,7 @@ import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
+import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.xiaomi.plugin.core.XmPluginPackage;
 import com.xiaomi.smarthome.bluetooth.Response;
 import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
+import com.xiaomi.smarthome.common.ui.dialog.MLAlertDialog;
 import com.xiaomi.smarthome.common.ui.dialog.XQProgressDialog;
 import com.xiaomi.smarthome.device.api.Callback;
 import com.xiaomi.smarthome.device.api.DeviceStat;
@@ -126,7 +128,7 @@ public class MainViewControl {
         //开锁逻辑
         ZkUtil.startAnima(activity, openCircleImg);
         openWarnTv.setText("连接门锁中");
-        openWarnTv.setTextColor(activity.getResources().getColor(R.color.main_blue));
+        openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
     }
     /**
      * 展示门锁成功界面
@@ -143,8 +145,10 @@ public class MainViewControl {
      */
     protected void showConnecFailView(){
         Log.d(TAG , "----showConnecFailView--"+isOperating);
+        if(isOperating == false){
+            openWarnTv.setText("未连接门锁，点击重试");
+        }
         isOperating = false;
-        openWarnTv.setText("未连接门锁，点击重试");
     }
     /**
      * 开锁逻辑
@@ -156,7 +160,7 @@ public class MainViewControl {
         }
         if(!ZkUtil.isBleOpen()){
             openWarnTv.setText("手机蓝牙未打开");
-            openWarnTv.setTextColor(activity.getResources().getColor(R.color.main_blue));
+            openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
             return;
         }
 
@@ -259,7 +263,7 @@ public class MainViewControl {
         Log.d(TAG, "发送开锁命令");
         ZkUtil.startAnima(activity, openCircleImg);
         openWarnTv.setText("开锁中");
-        openWarnTv.setTextColor(activity.getResources().getColor(R.color.main_blue));
+        openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
         secureOpen.sendLockMsg(null,new LockOperateCallback() {
             @Override
             public void lockOperateSucc(final String value) {
@@ -369,12 +373,16 @@ public class MainViewControl {
                 int dayInterval = (int) ((nowTime.getTime()-syncTime.getTime())/(60*60*1000*24));
 
                 Log.d(TAG, "dayInterval: " + dayInterval);
-                if(dayInterval > 30){
-                    longTimeNoSyncTimeTv.setText(activity.getResources().getString(R.string.long_no_sync_time, dayInterval));
+                if(dayInterval > 30 && dayInterval <= 60){
+                    longTimeNoSyncTimeTv.setText("超过30天未同步时间，请到\"设备信息\"页将手机时间同步到锁内");
                     longTimeNoSyncTimeRel.setVisibility(View.VISIBLE);
-                }else{
+                }else if(dayInterval > 60){
+                    longTimeNoSyncTimeTv.setText("超过60天未同步时间，请到\"设备信息\"页将手机时间同步到锁内");
+                    longTimeNoSyncTimeRel.setVisibility(View.VISIBLE);
+                } else{
                     longTimeNoSyncTimeRel.setVisibility(View.GONE);
                 }
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -423,6 +431,7 @@ public class MainViewControl {
             switch (msg.what) {
                 case MSG_CONNECT_TIMEOUT:
                     isOperating = false;
+                    Log.d(TAG, "-----1------");
                     openWarnTv.setText("未连接门锁，点击重试");
                     ZkUtil.stopAnima(openCircleImg);
                     break;
@@ -443,7 +452,7 @@ public class MainViewControl {
                     openLockImg.setImageResource(R.drawable.open_lock_selector);
                     bashouImg.setVisibility(View.GONE);
                     openWarnTv.setText("点击开锁");
-                    openWarnTv.setTextColor(activity.getResources().getColor(R.color.main_blue));
+                    openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
                     isOperating = false;
                     break;
                 default:
@@ -474,7 +483,11 @@ public class MainViewControl {
                     powerImg.setImageResource(R.drawable.icon_dianlianggao);
                     powerTv.setTextColor(activity.getResources().getColor(R.color.black));
                 }
-                powerTv.setText(powerLevel+"%");
+                if(powerLevel > 80){
+                    powerTv.setText(">"+powerLevel+"%");
+                }else{
+                    powerTv.setText(powerLevel+"%");
+                }
             }
 
             @Override
@@ -569,9 +582,22 @@ public class MainViewControl {
         openLockImg.setImageResource(R.drawable.btn_open_bukedianji);
         openLockImg.setOnClickListener(null);
         openWarnTv.setVisibility(View.VISIBLE);
-        openWarnTv.setText("当前时段钥匙无效");
-        openWarnTv.setTextColor(activity.getResources().getColor(R.color.warn_color));
+        openWarnTv.setText("");
         keyPeriodTv.setVisibility(View.GONE);
+        final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
+
+        builder.setTitle("提示");
+        builder.setMessage("钥匙已失效，无法开锁，请联系管理员");
+
+        builder.setCancelable(false);
+        builder.setNegativeButton("确定", new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                activity.finish();
+            }
+        });
+        builder.show();
     }
 
     private ScanCallback mScanCallback = new ScanCallback() {

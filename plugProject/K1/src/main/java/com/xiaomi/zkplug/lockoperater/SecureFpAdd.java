@@ -219,10 +219,11 @@ public class SecureFpAdd implements ILockDataOperator {
                     FpInputHelper.getXqProgressDialog().dismiss();
                     Log.d(TAG, "错误码："+lockCommFpAddResponse.getResultCode());
                     if(lockCommFpAddResponse.getResultCode() == 3){
-                        if(lockCommFpAddResponse.getLuruNum() == 0){//命令不在有效期
-                            lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode())));
+                        LinearLayout fpTipLayout = (LinearLayout) activity.findViewById(R.id.fpTipLayout);
+                        if(fpTipLayout.getVisibility() == View.GONE){
+                            lockOperateCallback.lockOperateFail("超时未放置手指，请重新添加");
                         }else{
-                            lockOperateCallback.lockOperateFail("等待录入超时");
+                            lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode())));
                         }
 
                     }else if(lockCommFpAddResponse.getResultCode() == 0x17){//0x17

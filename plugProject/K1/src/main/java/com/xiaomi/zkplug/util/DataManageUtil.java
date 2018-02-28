@@ -149,7 +149,7 @@ public class DataManageUtil {
         Callback<String> callback = new Callback<String>() {
             @Override
             public void onSuccess(String result) {
-                Log.d(TAG, "查询server成功回调回来了");
+                Log.d(TAG, "查询server成功回调回来了: "+result);//注意，这里服务器直接返回了：已是最新版本
                 dataUpdateCallback.dataUpdateSucc(result);
             }
 

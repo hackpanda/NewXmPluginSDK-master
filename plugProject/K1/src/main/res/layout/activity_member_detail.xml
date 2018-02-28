@@ -67,7 +67,7 @@
             android:layout_height="@dimen/y38">
             <TextView
                 android:id="@+id/keyTv"
-                android:text="添加手机钥匙"
+                android:text="@string/member_add_key"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"

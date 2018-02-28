@@ -127,12 +127,23 @@ public class KeyManager {
         if(status == 3){
             Log.d(TAG, "发送永久有效钥匙");
             activeTime = ZkUtil.getUTCTime(); // 生效时间 UTC时间戳，单位为s
-            expireTime = activeTime + 100 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
+            expireTime = activeTime + 50 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
             Log.d(TAG, "activeTime: "+activeTime+", expireTime: "+expireTime);
+        }else if(status == 2){//周期钥匙，暂时屏蔽掉了
+            SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            try {
+                Date startTime = sdFormat.parse("2018-01-30 " + keyStartTv.getText().toString());//上次授时的日期,也相当于上次授时时间, 时间是随便写的，只要保证开始和结束24小时即可
+                activeTime = startTime.getTime(); // 生效时间 UTC时间戳，
+                Date endTime = sdFormat.parse("2018-01-30 " + keyEndTv.getText().toString());//上次授时的日期,也相当于上次授时时间
+                expireTime = endTime.getTime(); // 生效时间 UTC时间戳，单位为s
+                Log.d(TAG, BriefDate.fromNature(startTime).toString()+"~~~"+BriefDate.fromNature(endTime).toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }else{//临时钥匙
             SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
-                Date startTime = sdFormat.parse(keyStartTv.getText().toString());//上次授时的日期,也相当于上次授时时间
+                Date startTime = new Date();
                 activeTime = startTime.getTime(); // 生效时间 UTC时间戳，
                 Date endTime = sdFormat.parse(keyEndTv.getText().toString());//上次授时的日期,也相当于上次授时时间
                 expireTime = endTime.getTime(); // 生效时间 UTC时间戳，单位为s
@@ -169,6 +180,13 @@ public class KeyManager {
      * @param
      */
     protected void  shareSecurityKey(String model, String did, String shareUid, int status, final long activeTime, long expireTime, List<Integer> weekdays, final boolean readonly) {
+        Date startTime = new Date();
+
+        Date endTime = new Date(expireTime * 1000);
+        if(BriefDate.fromNature(startTime).toString().substring(0, 16).equals(BriefDate.fromNature(endTime).toString().substring(0, 16))){//至少一分钟
+            Toast.makeText(activity, "到期时间必须大于当前时间", Toast.LENGTH_LONG).show();
+            return;
+        }
         XmPluginHostApi.instance().shareSecurityKey(model, did, shareUid,
                 status, activeTime, expireTime, weekdays, readonly, new Callback<Void>() {
                     @Override
@@ -178,11 +196,13 @@ public class KeyManager {
 
                     @Override
                     public void onFailure(int i, String s) {
-                        if(i == -8){
-                            Toast.makeText(activity, " 无效的钥匙周期", Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
-                        }
+//                        if(i == -8){
+//                            Toast.makeText(activity, "无效的钥匙周期", Toast.LENGTH_LONG).show();
+//                        }else{
+//                            Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
+//                        }
+
+                        Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
                         if (i == Callback.INVALID) {
                             Toast.makeText(activity, "用户id不存在", Toast.LENGTH_SHORT).show();
                         }

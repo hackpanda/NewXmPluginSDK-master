@@ -135,7 +135,7 @@
                 <TextView
                     android:id="@+id/fpCountTv"
                     android:gravity="center_vertical"
-                    android:text="指纹数量"
+                    android:text="指纹数量："
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -150,7 +150,7 @@
                 <TextView
                     android:id="@+id/pwdCountTv"
                     android:gravity="center_vertical"
-                    android:text="密码数量"
+                    android:text="密码数量："
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -168,7 +168,7 @@
                 <TextView
                     android:id="@+id/romVerTv"
                     android:gravity="center_vertical"
-                    android:text="@string/device_info_rom_ver"
+                    android:text="固件版本号："
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -183,7 +183,7 @@
                 <TextView
                     android:id="@+id/pluginVerTv"
                     android:gravity="center_vertical"
-                    android:text="@string/device_info_plugin_ver"
+                    android:text="插件版本号："
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -200,7 +200,7 @@
                 <TextView
                     android:id="@+id/lockTimeTv"
                     android:gravity="center_vertical"
-                    android:text="@string/device_info_lock_time"
+                    android:text="锁内时间："
                     android:layout_marginLeft="@dimen/x21"
                     android:layout_marginTop="@dimen/y12"
                     android:textSize="@dimen/x12"
@@ -212,9 +212,9 @@
                 <TextView
                     android:id="@+id/phoneTimeTv"
                     android:gravity="center_vertical"
-                    android:text="@string/device_info_phone_time"
+                    android:text="手机时间："
                     android:layout_marginLeft="@dimen/x21"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x11"
                     android:textColor="@color/black"
                     android:layout_marginTop="@dimen/y4"
                     android:alpha="0.5"

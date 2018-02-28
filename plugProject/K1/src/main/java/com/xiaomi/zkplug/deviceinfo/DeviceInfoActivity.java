@@ -39,8 +39,8 @@ public class DeviceInfoActivity extends BaseActivity implements View.OnClickList
         findViewById(R.id.secLevelLayout).setOnClickListener(this);
         this.deviceInfoManager = new DeviceInfoManager(Device.getDevice(mDeviceStat), activity());
         this.deviceInfoManager.getDeviceInfo();//获取设备信息
-
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){

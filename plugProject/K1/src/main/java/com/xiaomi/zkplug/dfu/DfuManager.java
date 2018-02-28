@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,8 +19,6 @@ import java.util.concurrent.Executors;
 
 import no.nordicsemi.android.dfu.DfuBaseService;
 import no.nordicsemi.android.dfu.DfuServiceInitiator;
-
-import static com.xiaomi.zkplug.R.id.checkVerDfuSuccTipTv;
 
 
 /**
@@ -50,6 +49,7 @@ public class DfuManager {
     protected void startDFU(BluetoothDevice bluetoothDevice, boolean keepBond, boolean force,
                           boolean PacketsReceipt, int numberOfPackets, String filePath) {
         Log.d("debug", bluetoothDevice.getAddress()+":"+bluetoothDevice.getName());
+        Log.d("debug", "isDfuServiceRunning(): "+isDfuServiceRunning());
         final DfuServiceInitiator stater = new DfuServiceInitiator(bluetoothDevice.getAddress())
                 .setDeviceName(bluetoothDevice.getName())
                 .setKeepBond(keepBond)
@@ -59,7 +59,7 @@ public class DfuManager {
         stater.setZip(filePath);
         //stater.setZip(R.raw.zkcupdate012);//这个方法可以传入raw文件夹中的文件、也可以是文件的string或者url路径。
         stater.start(context, DfuBaseService.class);
-        Log.d("debug", "isDfuServiceRunning(): "+isDfuServiceRunning());
+
     }
 
 
@@ -112,7 +112,7 @@ public class DfuManager {
         ImageView dfuProgressImg = (ImageView) context.findViewById(R.id.dfuProgressImg);
         dfuProgressImg.setImageResource(R.drawable.icon_yuan);
 
-        ImageView checkVersionBtn = (ImageView)context.findViewById(R.id.checkVersionBtn);
+        Button checkVersionBtn = (Button)context.findViewById(R.id.checkVersionBtn);
         checkVersionBtn.setVisibility(View.GONE);
         //隐藏失败布局
         LinearLayout dfuFailView = (LinearLayout) context.findViewById(R.id.dfuFailView);
@@ -134,7 +134,7 @@ public class DfuManager {
     /**
      * DFU更新成功界面效果
      */
-    protected void showDfuSuccView(String version){
+    protected void showDfuSuccView(){
         LinearLayout emptyView = (LinearLayout) context.findViewById(R.id.emptyView);
         emptyView.setVisibility(View.GONE);
         LinearLayout dfuInitView = (LinearLayout) context.findViewById(R.id.dfuInitView);
@@ -147,12 +147,12 @@ public class DfuManager {
         TextView dfuProgressTv = (TextView) context.findViewById(R.id.dfuProgressTv);
         dfuProgressTv.setText("");
         TextView curVerDfuSuccTv = (TextView) context.findViewById(R.id.curVerDfuSuccTv);
-        curVerDfuSuccTv.setText(version);
+        curVerDfuSuccTv.setText("已是最新版本");
         TextView checkVerDfuSuccTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTv);
         checkVerDfuSuccTv.setText("固件已是最新版本");
-        context.findViewById(checkVerDfuSuccTipTv).setVisibility(View.GONE);
+        context.findViewById(R.id.checkVerDfuSuccTipTv).setVisibility(View.GONE);
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.colorDivider));
-        ImageView checkVersionBtn = (ImageView)context.findViewById(R.id.checkVersionBtn);
+        Button checkVersionBtn = (Button)context.findViewById(R.id.checkVersionBtn);
         checkVersionBtn.setVisibility(View.VISIBLE);
     }
 

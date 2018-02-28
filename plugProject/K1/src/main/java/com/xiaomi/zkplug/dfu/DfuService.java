@@ -41,5 +41,4 @@ public class DfuService extends DfuBaseService {
 		Log.d("debug", "DfuService-getNotificationTarget");
 		return MainActivity.class;
 	}
-
 }

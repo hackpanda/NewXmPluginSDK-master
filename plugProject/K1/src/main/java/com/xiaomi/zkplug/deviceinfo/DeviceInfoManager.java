@@ -55,6 +55,7 @@ public class DeviceInfoManager {
     private final int GET_STATUS_FAIL_TIME = 15 * 1000;//15秒时间
     private final int MSG_TIME_OUT = 0x0;//超时
     private final int MSG_GET_STATUS = 0x10;
+    private final int MSG_MUTE_SET_TIME_OUT = 0x11;//静音设置超时
     private final int MSG_SEND_SYNC_TIME_CMD = 0x20;//发送同步时间命令
     private final int MSG_SEND_VOLUMN_SET_CMD = 0x30;//发送设置静音模式命令
     boolean fromGetInfoFlag = false;//从获取设备信息而来, 则不需要监听muteSwitch的变化
@@ -226,6 +227,7 @@ public class DeviceInfoManager {
         }else{
             xqProgressDialog.setMessage("正在关闭");
         }
+        viewHanlder.sendEmptyMessageDelayed(MSG_MUTE_SET_TIME_OUT, GET_STATUS_FAIL_TIME);
         xqProgressDialog.show();
         operateLockVolumnSet();
     }
@@ -240,8 +242,28 @@ public class DeviceInfoManager {
         viewHanlder.sendEmptyMessageDelayed(MSG_GET_STATUS, 2000);
     }
 
-
-
+    /**
+     * 失败时重新获取
+     */
+    private void showGetStatusRetryDialog(){
+        MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
+        builder.setTitle("获取锁内信息失败");
+        builder.setMessage("请将手机尽量靠近门锁重新获取");
+        builder.setPositiveButton("重新获取", new MLAlertDialog.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getDeviceInfo();
+            }
+        });
+        builder.setNegativeButton("退出", new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                activity.finish();
+            }
+        });
+        builder.show();
+    }
     /**
      * 时序: 用于界面控制
      */
@@ -249,9 +271,14 @@ public class DeviceInfoManager {
         @Override
         public void handleMessage(final Message msg) {
             switch (msg.what) {
-                case MSG_TIME_OUT:
+                case MSG_MUTE_SET_TIME_OUT:
                     unregisterBleReceiver();
                     Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_LONG).show();
+                    xqProgressDialog.dismiss();
+                    break;
+                case MSG_TIME_OUT:
+                    unregisterBleReceiver();
+                    showGetStatusRetryDialog();
                     xqProgressDialog.dismiss();
                     break;
                 case MSG_GET_STATUS:
@@ -437,8 +464,9 @@ public class DeviceInfoManager {
         iSetVolumnOperator.sendLockMsg(getVolumnSetCmd().getBytes(),new LockOperateCallback() {
             @Override
             public void lockOperateSucc(String result) {
-                iSetVolumnOperator.unregisterBluetoothReceiver();
                 Log.d(TAG, "设置成功");
+                viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
+                iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
                 xqProgressDialog.dismiss();
             }
@@ -446,6 +474,7 @@ public class DeviceInfoManager {
             @Override
             public void lockOperateFail(String value) {
                 Log.d(TAG, "设置失败");
+                viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                 iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, value, Toast.LENGTH_SHORT).show();
                 xqProgressDialog.dismiss();
@@ -483,8 +512,11 @@ public class DeviceInfoManager {
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                         prepareSendVolumnSetCmd();
                     }else{
+                        viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
-                        iSyncTimeOperator.unregisterBluetoothReceiver();
+                        if(iSetVolumnOperator != null){
+                            iSyncTimeOperator.unregisterBluetoothReceiver();
+                        }
                         Log.d(TAG, "连接设备失败");
                         Toast.makeText(activity, "连接设备失败", Toast.LENGTH_SHORT).show();
                         xqProgressDialog.dismiss();

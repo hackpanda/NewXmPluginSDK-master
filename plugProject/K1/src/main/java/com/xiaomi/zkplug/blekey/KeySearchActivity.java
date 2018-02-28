@@ -51,7 +51,7 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("添加手机钥匙");
+        mTitleView.setText(R.string.member_add_key);
         mDevice = Device.getDevice(mDeviceStat);
         accountWarnTv = (TextView) findViewById(R.id.accountWarnTv);
         accountEdit = (EditText) findViewById(R.id.accountEdit);
@@ -141,6 +141,7 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
                         userIntent.putExtra("nickName", userInfo.nickName);
                         userIntent.putExtra("url", userInfo.url);
                         userIntent.putExtra("msg", "该用户已被添加手机钥匙，不能重复添加");
+                        accountEdit.setText("");
                         startActivity(userIntent, KeyExistActivity.class.getName());
                         return;
                     }

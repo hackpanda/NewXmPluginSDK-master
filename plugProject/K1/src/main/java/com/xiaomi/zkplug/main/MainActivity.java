@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         refreshLsImg = (ImageView) findViewById(R.id.refreshLsImg);
         refreshLsImg.setOnClickListener(this);
         openLockImg.setOnClickListener(this);
+        findViewById(R.id.longTimeNoSyncTimeTv).setOnClickListener(this);
         if(mDevice.isOwner()){
             initOwnerView();
         }else{
@@ -155,7 +156,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         MyProvider myProvider = new MyProvider(activity(), pluginPackage(), mDevice);
         ProfileProvider.getIns().setProvider(myProvider);//2.一次性密码准备秘钥
         mainViewControl = new MainViewControl(activity(), mDeviceStat, pluginPackage());
-        mainViewControl.checkMasterNickName();//3.初始化数据，添加管理员
+        //3.初始化数据，添加管理员，放在onresume中，因为要动态提示同步时间
         mainViewControl.refreshLockStatus(true);//4.刷新状态
         mainViewControl.conneMasterctLock();//5.自动连接门锁
     }
@@ -197,6 +198,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 startActivity(new Intent(), MsgActivity.class.getName());
                 overridePendingTransition(R.anim.activity_open, R.anim.activity_open);//结束的动画
                 break;
+            case R.id.longTimeNoSyncTimeTv:
+                startActivity(new Intent(), DeviceInfoActivity.class.getName());
+                overridePendingTransition(R.anim.activity_open, R.anim.activity_open);//结束的动画
+                break;
         }
     }
 
@@ -206,7 +211,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
             mainViewControl.showConnecSuccView();
         }else{
-            mainViewControl.showConnecFailView();
+            if(mDevice.isOwner()){
+                mainViewControl.showConnecFailView();
+            }
+        }
+        if(mDevice.isOwner()){
+            mainViewControl.checkMasterNickName();
         }
     }
 

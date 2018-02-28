@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/keyValidPeriodTv"
-                        android:text="每周一12:00-12:40"
+                        android:text=""
                         android:layout_marginRight="@dimen/x20"
                         android:layout_marginLeft="@dimen/x100"
                         android:layout_alignParentRight="true"

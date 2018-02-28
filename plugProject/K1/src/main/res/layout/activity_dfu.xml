@@ -107,15 +107,15 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <ImageView
+            <Button
                 android:id="@+id/updateBtn"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/updateTipTv2"
-                android:src="@drawable/rom_update_selector"
-                android:layout_marginTop="@dimen/y9"
                 android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y33" />
+                android:layout_height="@dimen/y33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/y9"
+                android:text="更新"
+                android:background="@drawable/corners_btn"/>
         </RelativeLayout>
     </LinearLayout>
 
@@ -176,15 +176,23 @@
             android:layout_marginTop="@dimen/y7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
+
+        <Button
             android:id="@+id/checkVersionBtn"
-            android:visibility="gone"
-            android:layout_gravity="center_horizontal"
-            android:layout_below="@+id/updateTipTv"
-            android:src="@drawable/dfu_confirm_selector"
-            android:layout_marginTop="@dimen/y158"
             android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33" />
+            android:layout_height="@dimen/y33"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/y113"
+            android:text="检查锁内固件版本号"
+            android:background="@drawable/corners_btn"/>
+        <TextView
+            android:layout_gravity="center_horizontal"
+            android:text="固件版本号以锁内为准，请靠近门锁读取"
+            android:textColor="@color/colorDivider"
+            android:textSize="@dimen/x12"
+            android:layout_marginTop="@dimen/y7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <!-- 更新过程和成功都使用 end-->
     </LinearLayout>
 

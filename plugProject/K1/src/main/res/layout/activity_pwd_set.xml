@@ -35,7 +35,7 @@
         <TextView
             android:gravity="center_horizontal"
             android:text="为您安全考虑，手机不会保存密码，请您牢记，为防止"
-            android:textColor="@color/main_blue"
+            android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y11"
             android:layout_width="match_parent"

@@ -52,25 +52,14 @@
                 android:textSize="@dimen/x12" />
         </LinearLayout>
 
-
-        <RelativeLayout
+        <Button
             android:id="@+id/confirmBtn"
-            android:background="@drawable/button_selector"
             android:layout_width="@dimen/x279"
             android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y83">
-            <TextView
-                android:text="确定"
-                android:layout_centerInParent="true"
-                android:textSize="@dimen/x13"
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-
-
+            android:layout_marginTop="@dimen/y83"
+            android:text="确定"
+            android:background="@drawable/corners_btn"/>
     </LinearLayout>
 
 

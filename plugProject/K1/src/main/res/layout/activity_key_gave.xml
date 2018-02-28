@@ -8,321 +8,312 @@
     android:orientation="vertical"
     tools:context=".main.MainActivity">
     <include layout="@layout/title_bar_transparent_white" />
-    <ScrollView
+    <LinearLayout
+        android:orientation="vertical"
         android:background="#eeeeee"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:orientation="vertical"
-                android:background="@color/white"
+            android:layout_height="wrap_content">
+            <com.xiaomi.zkplug.view.XCRoundImageView
+                android:id="@+id/userImg"
+                android:layout_width="@dimen/x64"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y43"
+                android:background="@drawable/icon_wo"
+                android:layout_height="@dimen/x64" />
+            <TextView
+                android:id="@+id/nickNameTv"
+                android:gravity="center_horizontal"
+                android:text="二月花"
+                android:textColor="#000000"
+                android:alpha="0.8"
+                android:textSize="@dimen/x16"
+                android:layout_marginTop="@dimen/y14"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.xiaomi.zkplug.view.XCRoundImageView
-                    android:id="@+id/userImg"
-                    android:layout_width="@dimen/x64"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/y43"
-                    android:background="@drawable/icon_wo"
-                    android:layout_height="@dimen/x64" />
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_gravity="center_horizontal"
+                android:background="#eeeeee"
+                android:layout_marginTop="@dimen/y43"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y1" />
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
                 <TextView
-                    android:id="@+id/nickNameTv"
-                    android:gravity="center_horizontal"
-                    android:text="二月花"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="接收推送信息"
                     android:textColor="#000000"
                     android:alpha="0.8"
-                    android:textSize="@dimen/x16"
-                    android:layout_marginTop="@dimen/y14"
-                    android:layout_width="match_parent"
+                    android:textSize="@dimen/x13"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                <com.xiaomi.smarthome.common.ui.widget.SwitchButton
+                    android:id="@+id/btnSwitch"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <View
+                android:layout_gravity="center_horizontal"
+                android:background="#eeeeee"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y1" />
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
+
+                <TextView
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:text="钥匙有效期"
+                    android:textColor="#000000"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:id="@+id/foreverLayout"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/foreverImg"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/btn_xuanzhong"
+                            android:layout_width="@dimen/x14"
+                            android:layout_height="@dimen/x14" />
+                        <TextView
+                            android:id="@+id/foreverTv"
+                            android:layout_marginLeft="@dimen/x2"
+                            android:layout_gravity="center_vertical"
+                            android:text="永久"
+                            android:textColor="#000000"
+                            android:alpha="0.6"
+                            android:textSize="@dimen/x13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/tempLayout"
+                        android:layout_marginLeft="@dimen/x14"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/tempImg"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/btn_weixuan"
+                            android:layout_width="@dimen/x14"
+                            android:layout_height="@dimen/x14" />
+                        <TextView
+                            android:id="@+id/tempTv"
+                            android:layout_marginLeft="@dimen/x2"
+                            android:layout_gravity="center_vertical"
+                            android:text="自定义"
+                            android:textColor="#000000"
+                            android:alpha="0.8"
+                            android:textSize="@dimen/x13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/periodLayout"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/x14"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/periodImg"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/btn_weixuan"
+                            android:layout_width="@dimen/x14"
+                            android:layout_height="@dimen/x14" />
+                        <TextView
+                            android:id="@+id/periodTv"
+                            android:text="周期"
+                            android:layout_marginLeft="@dimen/x2"
+                            android:layout_gravity="center_vertical"
+                            android:textColor="#000000"
+                            android:alpha="0.8"
+                            android:textSize="@dimen/x13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/keyInfoLayout"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
                 <View
                     android:layout_gravity="center_horizontal"
                     android:background="#eeeeee"
-                    android:layout_marginTop="@dimen/y43"
                     android:layout_width="@dimen/x279"
                     android:layout_height="@dimen/y1" />
-                <RelativeLayout
+                <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                     <TextView
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="接收推送信息"
+                        android:id="@+id/keyInfoTv"
+                        android:layout_gravity="center_vertical"
+                        android:text="手机钥匙永久有效"
+                        android:textColor="#000000"
+                        android:alpha="0.4"
+                        android:textSize="@dimen/x13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/keyPeriodLayout"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
+                <View
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:text="重复周期: "
                         android:textColor="#000000"
                         android:alpha="0.8"
                         android:textSize="@dimen/x13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <com.xiaomi.smarthome.common.ui.widget.SwitchButton
-                        android:id="@+id/btnSwitch"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-                <View
-                    android:layout_gravity="center_horizontal"
-                    android:background="#eeeeee"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y1" />
-
-                <RelativeLayout
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
-
                     <TextView
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="钥匙有效期"
+                        android:id="@+id/keyPeriodTv"
+                        android:layout_gravity="center_vertical"
+                        android:text="请选择重复周期"
                         android:textColor="#000000"
-                        android:alpha="0.8"
+                        android:alpha="0.6"
                         android:textSize="@dimen/x13"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-                    <LinearLayout
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-                        <LinearLayout
-                            android:id="@+id/foreverLayout"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/foreverImg"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/btn_xuanzhong"
-                                android:layout_width="@dimen/x14"
-                                android:layout_height="@dimen/x14" />
-                            <TextView
-                                android:id="@+id/foreverTv"
-                                android:layout_marginLeft="@dimen/x2"
-                                android:layout_gravity="center_vertical"
-                                android:text="永久"
-                                android:textColor="#000000"
-                                android:alpha="0.6"
-                                android:textSize="@dimen/x13"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/tempLayout"
-                            android:layout_marginLeft="@dimen/x14"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/tempImg"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/btn_weixuan"
-                                android:layout_width="@dimen/x14"
-                                android:layout_height="@dimen/x14" />
-                            <TextView
-                                android:id="@+id/tempTv"
-                                android:layout_marginLeft="@dimen/x2"
-                                android:layout_gravity="center_vertical"
-                                android:text="临时"
-                                android:textColor="#000000"
-                                android:alpha="0.8"
-                                android:textSize="@dimen/x13"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/periodLayout"
-                            android:layout_marginLeft="@dimen/x14"
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/periodImg"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/btn_weixuan"
-                                android:layout_width="@dimen/x14"
-                                android:layout_height="@dimen/x14" />
-                            <TextView
-                                android:id="@+id/periodTv"
-                                android:text="周期"
-                                android:layout_marginLeft="@dimen/x2"
-                                android:layout_gravity="center_vertical"
-                                android:textColor="#000000"
-                                android:alpha="0.8"
-                                android:textSize="@dimen/x13"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-                <LinearLayout
-                    android:id="@+id/keyInfoLayout"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
-                    <View
-                        android:layout_gravity="center_horizontal"
-                        android:background="#eeeeee"
-                        android:layout_width="@dimen/x279"
-                        android:layout_height="@dimen/y1" />
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:id="@+id/keyInfoTv"
-                            android:layout_gravity="center_vertical"
-                            android:text="手机钥匙永久有效"
-                            android:textColor="#000000"
-                            android:alpha="0.6"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/keyPeriodLayout"
-                    android:visibility="gone"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
-                    <View
-                        android:layout_gravity="center_horizontal"
-                        android:background="#eeeeee"
-                        android:layout_width="@dimen/x279"
-                        android:layout_height="@dimen/y1" />
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:layout_gravity="center_vertical"
-                            android:text="重复周期: "
-                            android:textColor="#000000"
-                            android:alpha="0.8"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/keyPeriodTv"
-                            android:layout_gravity="center_vertical"
-                            android:text="请选择重复周期"
-                            android:textColor="#000000"
-                            android:alpha="0.6"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/keyStartLayout"
-                    android:visibility="gone"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
-                    <View
-                        android:layout_gravity="center_horizontal"
-                        android:background="#eeeeee"
-                        android:layout_width="@dimen/x279"
-                        android:layout_height="@dimen/y1" />
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:layout_gravity="center_vertical"
-                            android:text="生效时间: "
-                            android:textColor="#000000"
-                            android:alpha="0.8"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/keyStartTv"
-                            android:layout_gravity="center_vertical"
-                            android:text="请选择生效时间"
-                            android:textColor="#000000"
-                            android:alpha="0.6"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/keyEndLayout"
-                    android:visibility="gone"
-                    android:orientation="vertical"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y39">
-                    <View
-                        android:layout_gravity="center_horizontal"
-                        android:background="#eeeeee"
-                        android:layout_width="@dimen/x279"
-                        android:layout_height="@dimen/y1" />
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                        <TextView
-                            android:layout_gravity="center_vertical"
-                            android:text="失效时间: "
-                            android:textColor="#000000"
-                            android:alpha="0.8"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                        <TextView
-                            android:id="@+id/keyEndTv"
-                            android:layout_gravity="center_vertical"
-                            android:text="请选择失效时间"
-                            android:textColor="#000000"
-                            android:alpha="0.6"
-                            android:textSize="@dimen/x13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/keyStartLayout"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
+                <View
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:text="生效时间: "
+                        android:textColor="#000000"
+                        android:alpha="0.8"
+                        android:textSize="@dimen/x13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/keyStartTv"
+                        android:layout_gravity="center_vertical"
+                        android:text="请选择生效时间"
+                        android:textColor="#000000"
+                        android:alpha="0.6"
+                        android:textSize="@dimen/x13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/keyEndLayout"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y39">
+                <View
+                    android:layout_gravity="center_horizontal"
+                    android:background="#eeeeee"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_gravity="center_vertical"
+                        android:text="到期时间: "
+                        android:textColor="#000000"
+                        android:alpha="0.8"
+                        android:textSize="@dimen/x13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/keyEndTv"
+                        android:layout_gravity="center_vertical"
+                        android:text="请选择到期时间"
+                        android:textColor="#000000"
+                        android:alpha="0.4"
+                        android:textSize="@dimen/x13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/keyGaveBtn"
-                android:layout_gravity="center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/key_gave_selector"
-                android:layout_marginTop="@dimen/y90"
-
                 android:layout_marginBottom="@dimen/y10"
                 android:layout_width="@dimen/x279"
                 android:layout_height="@dimen/y33" />
+            <View
+                android:id="@+id/mBottom"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"/>
+        </RelativeLayout>
+    </LinearLayout>
 
-        </LinearLayout>
-
-    </ScrollView>
-    <View
-        android:id="@+id/mBottom"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"/>
 </LinearLayout>

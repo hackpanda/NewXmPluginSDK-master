@@ -163,6 +163,8 @@
     <string name="device_info_plugin_ver">插件版本号：%1$s</string>
     <string name="device_info_lock_time">锁内时间：%1$s</string>
     <string name="device_info_phone_time">手机时间：%1$s</string>
+    <string name="member_add_key">添加手机钥匙</string>
 
+    <string name="cmd_invalid_time">命令不在有效期，请到"设备信息"页将手机时间同步到锁内后再尝</string>
 
 </resources>

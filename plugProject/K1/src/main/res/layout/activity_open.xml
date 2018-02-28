@@ -57,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:text="您已被取消开锁权限"
                 android:textSize="@dimen/x12"
-                android:textColor="@color/main_blue"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/x233"
                 android:layout_height="wrap_content" />
             <TextView
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
-                android:layout_below="@id/powerLayout"
+                android:layout_below="@id/lockStatusLayout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -187,7 +187,5 @@
                 android:background="@drawable/shanghua_selector"
                 android:layout_height="@dimen/y20" />
         </RelativeLayout>
-
-
 
 </LinearLayout>

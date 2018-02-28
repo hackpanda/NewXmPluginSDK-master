@@ -73,6 +73,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
         memListView = (ListView) findViewById(R.id.memListView);
         memListView.setOnItemClickListener(this);
         TextView versionTv = (TextView) findViewById(R.id.versionTv);
+
         versionTv.setText(MyEntity.VERSION);
         if(!ZkUtil.isNetworkAvailable(this)){
             CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");

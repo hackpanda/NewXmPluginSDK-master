@@ -36,7 +36,7 @@ public class KeyExistActivity extends BaseActivity implements View.OnClickListen
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("添加手机钥匙");
+        mTitleView.setText(R.string.member_add_key);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         TextView nickNameTv = (TextView) findViewById(R.id.nickNameTv);
         nickNameTv.setText(getIntent().getStringExtra("nickName"));
