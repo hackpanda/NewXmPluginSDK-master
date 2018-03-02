@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".main.MainActivity">
+    <include layout="@layout/title_bar_transparent_black" />
+    <LinearLayout
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/y12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/anyModeOpenLayout"
+                android:background="@drawable/item_selector"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y38">
+                <TextView
+                    android:text="@string/any_mode_open"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="#c6c6c6"
+                    android:alpha="0.4"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/anyFpOpenLayout"
+                android:background="@drawable/item_selector"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y38">
+                <TextView
+                    android:text="@string/any_fp_open"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="#c6c6c6"
+                    android:alpha="0.4"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/anyPwdOpenLayout"
+                android:background="@drawable/item_selector"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y38">
+                <TextView
+                    android:text="@string/any_pwd_open"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="#c6c6c6"
+                    android:alpha="0.4"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/anyBlekeyOpenLayout"
+                android:background="@drawable/item_selector"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y38">
+                <TextView
+                    android:text="@string/any_blekey_open"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:alpha="0.8"
+                    android:textSize="@dimen/x12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:background="#c6c6c6"
+                    android:alpha="0.4"
+                    android:layout_width="@dimen/x279"
+                    android:layout_height="@dimen/y1" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

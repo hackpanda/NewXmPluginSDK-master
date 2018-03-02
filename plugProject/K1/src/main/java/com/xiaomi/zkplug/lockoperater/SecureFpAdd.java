@@ -253,9 +253,9 @@ public class SecureFpAdd implements ILockDataOperator {
                         animationDrawable.start();
                     }else if(lockCommFpAddResponse.getLuruNum() == 4){
                         TextView fpPutTv = (TextView) activity.findViewById(R.id.fpPutTv);
-                        fpPutTv.setText("调整姿势，采集边缘");
+                        fpPutTv.setText("采集手指边缘指纹");
                         TextView fpCompleteTv = (TextView) activity.findViewById(R.id.fpCompleteTv);
-                        fpCompleteTv.setText("使用手指边缘按在指纹头上再抬起，重复此步骤");
+                        fpCompleteTv.setText("将手指边缘按在指纹头上再抬起，重复此步骤");
                         fpImg.setImageResource(R.drawable.fp_input_animation_4);
                         AnimationDrawable animationDrawable = (AnimationDrawable) fpImg.getDrawable();
                         animationDrawable.start();

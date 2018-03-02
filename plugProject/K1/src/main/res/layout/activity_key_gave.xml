@@ -72,11 +72,11 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
                 android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y39">
+                android:layout_height="@dimen/y50">
 
                 <TextView
                     android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/x10"
                     android:text="钥匙有效期"
                     android:textColor="#000000"
                     android:alpha="0.8"
@@ -84,10 +84,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <LinearLayout
-                    android:layout_centerVertical="true"
+                    android:id="@+id/keyTypeLayout"
+                    android:layout_marginTop="@dimen/x13"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <LinearLayout
                         android:id="@+id/foreverLayout"
@@ -160,34 +161,19 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
+                <TextView
+                    android:id="@+id/keyInfoTv"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:text="手机钥匙永久有效"
+                    android:textColor="#000000"
+                    android:alpha="0.4"
+                    android:textSize="@dimen/x10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </RelativeLayout>
-            <LinearLayout
-                android:id="@+id/keyInfoLayout"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y39">
-                <View
-                    android:layout_gravity="center_horizontal"
-                    android:background="#eeeeee"
-                    android:layout_width="@dimen/x279"
-                    android:layout_height="@dimen/y1" />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <TextView
-                        android:id="@+id/keyInfoTv"
-                        android:layout_gravity="center_vertical"
-                        android:text="手机钥匙永久有效"
-                        android:textColor="#000000"
-                        android:alpha="0.4"
-                        android:textSize="@dimen/x13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/keyPeriodLayout"
                 android:visibility="gone"
@@ -300,19 +286,20 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/keyGaveBtn"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/key_gave_selector"
-                android:layout_marginBottom="@dimen/y10"
-                android:layout_width="@dimen/x279"
-                android:layout_height="@dimen/y33" />
             <View
                 android:id="@+id/mBottom"
                 android:layout_alignParentBottom="true"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
+            <Button
+                android:id="@+id/keyGaveBtn"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y33"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y10"
+                android:layout_above="@id/mBottom"
+                android:text="添加"
+                android:background="@drawable/corners_btn" />
         </RelativeLayout>
     </LinearLayout>
 

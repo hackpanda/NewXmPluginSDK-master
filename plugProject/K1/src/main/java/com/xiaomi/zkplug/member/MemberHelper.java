@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomi.plugin.core.XmPluginPackage;
@@ -230,12 +231,14 @@ class MemberHelper {
      * 点击了删除家人
      */
     protected void delFamilyMember(){
-//        TextView shareStatusTv = (TextView) activity.findViewById(R.id.shareStatusTv);
-//        TextView nickNameTv = (TextView) activity.findViewById(R.id.memberNickNameTv);
-//        if (shareStatusTv.getText().toString().indexOf("已授权") != -1) {
-//            Toast.makeText(activity, "请先取消对"+nickNameTv.getText().toString()+"的授权", Toast.LENGTH_LONG).show();
-//            return;
-//        }
+        /* 根据界面做了逻辑判断，不太好 being */
+        TextView memberNickNameTv = (TextView) activity.findViewById(R.id.memberNickNameTv);
+        TextView keyTv = (TextView) activity.findViewById(R.id.keyTv);
+        if (keyTv.getText().toString().equals(activity.getResources().getString(R.string.member_had_key))) {
+            Toast.makeText(activity, "请先删除"+memberNickNameTv.getText().toString()+"的手机钥匙", Toast.LENGTH_LONG).show();
+            return;
+        }
+        /* 根据界面做了逻辑判断，不太好 being */
         isDelMember = true;
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
         builder.setTitle("是否删除成员？");

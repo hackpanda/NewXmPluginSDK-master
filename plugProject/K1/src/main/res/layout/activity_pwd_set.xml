@@ -98,13 +98,14 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
-        <ImageView
+        <Button
             android:id="@+id/pwdSetBtn"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/pwd_set_selector"
             android:layout_marginTop="@dimen/y17"
             android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33" />
+            android:layout_height="@dimen/y33"
+            android:text="设置"
+            android:background="@drawable/corners_btn" />
     </LinearLayout>
 
 

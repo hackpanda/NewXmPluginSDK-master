@@ -25,8 +25,8 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.deviceinfo.DeviceInfoActivity;
 import com.xiaomi.zkplug.dfu.DfuActivity;
 import com.xiaomi.zkplug.entity.MyProvider;
+import com.xiaomi.zkplug.intelligent.AppointAOpenActivity;
 import com.xiaomi.zkplug.log.LogReadActivity;
-import com.xiaomi.zkplug.member.MemberManageActivity;
 import com.xiaomi.zkplug.otp.OtpActivity;
 import com.xiaomi.zkplug.view.GifView;
 
@@ -146,6 +146,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         intentMenuDfu.intent = mHostActivity.getActivityIntent(null, DfuActivity.class.getName());
         menus.add(intentMenuDfu);
 
+
         /*
         * 注册修改名字的广播监听
         * 准备一次性密码准备秘钥
@@ -174,7 +175,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 //mHostActivity.openMoreMenu(null, true, -1);
                 //跳转到插件下一个activity的菜单
                 Intent scenceIntent = new Intent();//第一级
-                scenceIntent.putExtra("scence_enable", false);
+                scenceIntent.putExtra("scence_enable", false);//智能
                 Intent commonSettingParams = new Intent();
                 commonSettingParams.putExtra("firmware_enable", false);
                 commonSettingParams.putExtra("share_enable", false);
@@ -192,7 +193,9 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             case R.id.title_bar_share:
                 Intent memberIntent = new Intent();
                 memberIntent.putExtra("mDeviceMemberArray", mDeviceMemberArray.toString());
-                startActivity(memberIntent, MemberManageActivity.class.getName());
+//                startActivity(memberIntent, MemberManageActivity.class.getName());
+                startActivity(memberIntent, AppointAOpenActivity.class.getName());
+
                 break;
             case R.id.shanglaImg:
                 startActivity(new Intent(), MsgActivity.class.getName());

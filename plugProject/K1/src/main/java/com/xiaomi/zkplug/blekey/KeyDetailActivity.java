@@ -156,7 +156,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                             if(securityKeyInfos.get(i).status == 3){//永久
                                 keyValidPeriodTv.setText("手机钥匙永久有效");
                             }else if(securityKeyInfos.get(i).status == 1){//临时
-                                keyValidPeriodTv.setText(BriefDate.fromNature(startTime).toString().substring(0, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(0, 16));
+                                keyValidPeriodTv.setText(BriefDate.fromNature(startTime).toString().substring(0, 16) +" ~ "+ BriefDate.fromNature(endTime).toString().substring(0, 16));
                             }else{
                                 List<Integer> weekdays = securityKeyInfos.get(i).weekdays;
                                 String result = "每";

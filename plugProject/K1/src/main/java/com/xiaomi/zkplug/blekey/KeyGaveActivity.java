@@ -37,7 +37,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
     Bitmap userBitmap;
     String memberId;
     TextView keyInfoTv, keyStartTv, keyEndTv, keyPeriodTv;//钥匙周期
-    LinearLayout keyInfoLayout, keyStartLayout, keyEndLayout, keyPeriodLayout;
+    LinearLayout keyStartLayout, keyEndLayout, keyPeriodLayout;
     private TimeSelector timeSelector;
     KeyManager keyManager;//发送钥匙辅助类
     @Override
@@ -78,7 +78,6 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
         this.keyStartTv = (TextView) findViewById(R.id.keyStartTv);
         this.keyEndTv = (TextView) findViewById(R.id.keyEndTv);
 
-        keyInfoLayout = (LinearLayout) findViewById(R.id.keyInfoLayout);
         keyPeriodLayout = (LinearLayout) findViewById(R.id.keyPeriodLayout);
         keyStartLayout = (LinearLayout) findViewById(R.id.keyStartLayout);
         keyEndLayout = (LinearLayout) findViewById(R.id.keyEndLayout);

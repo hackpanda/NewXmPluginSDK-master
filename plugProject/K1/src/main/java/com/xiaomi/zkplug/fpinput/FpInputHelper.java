@@ -230,6 +230,8 @@ public class FpInputHelper {
                 fpTipLayout.setVisibility(View.VISIBLE);
                 fpInputBuzhouLayout.setVisibility(View.GONE);
                 iLockDataOperator.unregisterBluetoothReceiver();
+                xqProgressDialog.dismiss();
+                viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
 
             }
         });

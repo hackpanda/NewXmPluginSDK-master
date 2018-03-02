@@ -15,4 +15,6 @@
     <color name="green">#2ed184</color>
     <color name="strokeColor">#dedede</color>
     <color name="listTextColor">#2d2d2d</color>
+    <color name="two_factor_authen">#8cc16a</color>
+
 </resources>

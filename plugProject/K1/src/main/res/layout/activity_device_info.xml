@@ -79,8 +79,7 @@
                         <TextView
                             android:textSize="@dimen/x11"
                             android:text="@string/device_info_level_content"
-                            android:textColor="@color/black"
-                            android:alpha="0.5"
+                            android:textColor="#2889fd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
                         <ImageView

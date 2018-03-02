@@ -79,7 +79,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y11"
                 android:text="将手指按在指纹头上再抬起，重复此步骤"
-                android:alpha="0.8"
+                android:alpha="0.6"
                 android:textColor="#000000"
                 android:textSize="@dimen/x14"
                 android:layout_width="wrap_content"

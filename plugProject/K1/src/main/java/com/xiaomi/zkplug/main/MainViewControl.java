@@ -271,15 +271,15 @@ public class MainViewControl {
         secureOpen.sendLockMsg(null,new LockOperateCallback() {
             @Override
             public void lockOperateSucc(final String value) {
+                Log.d(TAG, value);
                 Log.d(TAG, "开锁完成: "+BriefDate.fromNature(new Date()).toString());
                 if(value.equals("7f")){
-                    openWarnTv.setTextColor(activity.getResources().getColor(R.color.text_succ));
-                    openWarnTv.setText("门锁已开启双重验证，请继续使用指纹或密码开锁");
-                    displaySuccView();
+                    openWarnTv.setTextColor(activity.getResources().getColor(R.color.two_factor_authen));
+                    displaySuccView("门锁开启双重验证，请继续使用指纹或密码开锁");
                 }else if(value.equals("02")){
                     displayFailView("您的门已被反锁");
                 }else{
-                    displaySuccView();
+                    displaySuccView("已开锁");
                 }
             }
             @Override
@@ -412,7 +412,7 @@ public class MainViewControl {
     /**
      * 开锁成功界面
      */
-    public void displaySuccView(){
+    public void displaySuccView(String succMsg){
         ZkUtil.stopAnima(openCircleImg);
         viewHanlder.removeMessages(MSG_CONNECT_TIMEOUT);
         openLockImg.setImageResource(R.drawable.icon_mensuoyikai);
@@ -422,7 +422,7 @@ public class MainViewControl {
         final Animation rotate = AnimationUtils.loadAnimation(activity, R.anim.rotate_bashou_down_anim);
         bashouImg.setAnimation(rotate);
         viewHanlder.sendEmptyMessageDelayed(BASHOU_ANIMA_STOP_SUCC, 2100);
-        openWarnTv.setText("已开锁");
+        openWarnTv.setText(succMsg);
         openWarnTv.setTextColor(activity.getResources().getColor(R.color.text_succ));
     }
 

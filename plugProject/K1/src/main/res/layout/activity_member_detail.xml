@@ -84,7 +84,7 @@
                 android:layout_height="@dimen/y10" />
         </RelativeLayout>
         <TextView
-            android:text="密码解锁"
+            android:text="开锁密码"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x11"
@@ -124,7 +124,7 @@
 
         </RelativeLayout>
         <TextView
-            android:text="解锁指纹"
+            android:text="开锁指纹"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x11"

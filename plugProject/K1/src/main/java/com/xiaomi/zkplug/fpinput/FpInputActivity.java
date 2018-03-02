@@ -35,7 +35,7 @@ public class FpInputActivity extends BaseActivity implements View.OnClickListene
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("录入指纹");
+        mTitleView.setText("添加指纹");
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         this.btnFpInput = (Button) findViewById(R.id.btnFpIput);
         this.fpInputBuzhouLayout = (LinearLayout) findViewById(R.id.fpInputBuzhouLayout);

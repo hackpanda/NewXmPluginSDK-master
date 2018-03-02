@@ -192,7 +192,7 @@ public class DeviceInfoManager {
         try {
             devicePowerTv.setText(activity.getResources().getString(R.string.device_info_power, statusObj.getInt("power"))+"%");
             if(statusObj.getInt("power") < 10){
-                showErrMsg(devicePowerTv, "（电量过低，请及时更换电池）");
+                showErrMsg(devicePowerTv, "（电量过低请及时更换电池）");
             }
             int securityLevel = (statusObj.getInt("seclevel") & 3);
 
@@ -223,7 +223,7 @@ public class DeviceInfoManager {
             Log.d(TAG, "timdiffsnd"+timdiffsnd);
             if(timdiffsnd > 30){
                 showErrMsg(phoneTimeTv,"（偏差"+timdiffsnd+"秒建议同步时间）");
-                showSyncTimeDialog();
+                //showSyncTimeDialog();
             }
 
         } catch (JSONException e) {
@@ -434,7 +434,7 @@ public class DeviceInfoManager {
      */
     private void showSyncTimeDialog(){
         MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle("命令不在有效期");
+        builder.setTitle("时间偏差过大");
         builder.setMessage("请将手机时间同步到锁内");
         builder.setPositiveButton("同步", new MLAlertDialog.OnClickListener() {
             @Override
