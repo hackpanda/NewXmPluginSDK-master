@@ -25,7 +25,6 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.deviceinfo.DeviceInfoActivity;
 import com.xiaomi.zkplug.dfu.DfuActivity;
 import com.xiaomi.zkplug.entity.MyProvider;
-import com.xiaomi.zkplug.intelligent.AppointAOpenActivity;
 import com.xiaomi.zkplug.log.LogReadActivity;
 import com.xiaomi.zkplug.otp.OtpActivity;
 import com.xiaomi.zkplug.view.GifView;
@@ -194,7 +193,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
                 Intent memberIntent = new Intent();
                 memberIntent.putExtra("mDeviceMemberArray", mDeviceMemberArray.toString());
 //                startActivity(memberIntent, MemberManageActivity.class.getName());
-                startActivity(memberIntent, AppointAOpenActivity.class.getName());
 
                 break;
             case R.id.shanglaImg:
