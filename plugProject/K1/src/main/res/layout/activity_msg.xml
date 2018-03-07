@@ -20,7 +20,7 @@
             android:background="@drawable/icon_zhuangtai"
             android:layout_height="@dimen/x34" />
         <TextView
-            android:text="正在读取消息"
+            android:text="@string/msg_reading"
             android:textSize="@dimen/x12"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="@dimen/y12"
                 android:textColor="#8d8d8d"
                 android:textSize="@dimen/x13"
-                android:text="当前您没有任何消息"
+                android:text="@string/msg_empty"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

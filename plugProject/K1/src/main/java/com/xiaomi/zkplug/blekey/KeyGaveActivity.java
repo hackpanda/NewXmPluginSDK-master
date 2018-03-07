@@ -157,7 +157,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.tempImg.setTag(TAG_WEI_XUAN_ZHONG);
                 this.periodImg.setImageResource(R.drawable.btn_weixuan);
                 this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
-                keyInfoTv.setText("手机钥匙永久有效");
+                keyInfoTv.setText(R.string.blekey_valid_forever);
                 keyPeriodLayout.setVisibility(View.GONE);
                 keyStartLayout.setVisibility(View.GONE);
                 keyEndLayout.setVisibility(View.GONE);

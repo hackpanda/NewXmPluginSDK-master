@@ -185,7 +185,7 @@ public class SecureFpDel implements ILockDataOperator {
                 lockCommFpDelResponse = (LockCommFpDelResponse) LockCommBase.parse(inputBuffer);
                 if(lockCommFpDelResponse.getResultCode() != 0){
                     Log.d(TAG, "错误码："+lockCommFpDelResponse.getResultCode());
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpDelResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpDelResponse.getResultCode()), activity));
                 }else{
                     lockOperateCallback.lockOperateSucc("");
                 }

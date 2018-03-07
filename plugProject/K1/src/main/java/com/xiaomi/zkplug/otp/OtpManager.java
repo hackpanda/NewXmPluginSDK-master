@@ -292,7 +292,7 @@ public class OtpManager {
                         }else{
                             viewHandler.removeMessages(MSG_OTP_CLOSE_TIMEOUT);
                         }
-                        Toast.makeText(activity, "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, R.string.device_has_been_reset, Toast.LENGTH_LONG).show();
                         xqProgressDialog.dismiss();
                     }
                 }
@@ -694,12 +694,12 @@ public class OtpManager {
                 case MSG_OTP_CLOSE_TIMEOUT:
                     XmBluetoothManager.getInstance().disconnect(mDevice.deviceStat().mac);
                     xqProgressDialog.dismiss();
-                    Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.connect_time_out, Toast.LENGTH_SHORT).show();
                     break;
                 case MSG_OTP_KAITONG_TIMEOUT:
                     XmBluetoothManager.getInstance().disconnect(mDevice.deviceStat().mac);
                     xqProgressDialog.dismiss();
-                    Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, R.string.connect_time_out, Toast.LENGTH_SHORT).show();
                     break;
                 case MSG_CACULATE_ZOTP:
                     calculateZotp();

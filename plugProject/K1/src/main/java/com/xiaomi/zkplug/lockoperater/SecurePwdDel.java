@@ -188,7 +188,7 @@ public class SecurePwdDel implements ILockDataOperator {
                 lockCommSyncPwdResponse = (LockCommSyncPwdResponse) LockCommBase.parse(inputBuffer);
                 if(lockCommSyncPwdResponse.getResultCode() != 0){
                     Log.d(TAG, "错误码："+lockCommSyncPwdResponse.getResultCode());
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncPwdResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncPwdResponse.getResultCode()), activity));
                 }else{
                     lockOperateCallback.lockOperateSucc("");
                 }

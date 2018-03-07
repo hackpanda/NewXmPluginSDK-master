@@ -59,14 +59,14 @@ public class CloseZotpActivity extends BaseActivity implements View.OnClickListe
                 }
                 final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
                 builder.setTitle("确定要关闭临时密码吗?");
-                builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+                builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //确定
                         otpManager.doSsKeyExchange(false);
                     }
                 });
-                builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+                builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

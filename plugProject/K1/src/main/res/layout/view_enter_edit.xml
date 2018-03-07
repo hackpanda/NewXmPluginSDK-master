@@ -44,7 +44,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_view_enter_edit_right_selector"
             android:gravity="center"
-            android:text="取消"
+            android:text="@string/gloable_cancel"
             android:textColor="@color/dialog_btn_font_color_selector"
             android:textSize="18dip" />
 
@@ -60,7 +60,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_view_enter_edit_left_selector"
             android:gravity="center"
-            android:text="确定"
+            android:text="@string/gloable_confirm"
             android:textColor="@color/dialog_btn_font_color_selector"
             android:textSize="18dip" />
     </LinearLayout>

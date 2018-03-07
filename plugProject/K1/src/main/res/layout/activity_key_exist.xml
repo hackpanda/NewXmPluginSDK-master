@@ -59,7 +59,7 @@
             android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y83"
-            android:text="确定"
+            android:text="@string/gloable_confirm"
             android:background="@drawable/corners_btn"/>
     </LinearLayout>
 

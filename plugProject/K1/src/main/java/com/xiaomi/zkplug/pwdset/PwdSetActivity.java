@@ -184,7 +184,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                                             setMemberPwd(iLockUpdateOperator);
                                         }catch (JSONException e){
                                             e.printStackTrace();
-                                            CommonUtils.toast(activity(), "数据解析异常");
+                                            Toast.makeText(activity(), R.string.gloable_data_error, Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 }else{
@@ -216,7 +216,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
     * */
     private boolean pwdCheck(){
         if(!ZkUtil.isBleOpen()){
-            CommonUtils.toast(activity(), "请打开手机蓝牙");
+            CommonUtils.toast(activity(), getResources().getString(R.string.open_bluetooth));
             return false;
         }
 
@@ -231,7 +231,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
             return false;
         }
         if(!ZkUtil.isNetworkAvailable(this)){
-            Toast.makeText(activity(), "网络未连接，请确保网络畅通", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;//符合规则
@@ -318,7 +318,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                         operateLockMsg(lockDataOperator, lockCmdSyncPwd);
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                        showResultView("设备已被重置，请解除绑定后重新添加");
+                        showResultView(getResources().getString(R.string.device_has_been_reset));
                     }
                 }
             });
@@ -433,7 +433,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_PWD_SET_TIMEOUT:
-                    showResultView("未发现门锁，请靠近门锁重试");
+                    showResultView(getResources().getString(R.string.connect_time_out));
                     break;
                 default:
                     break;

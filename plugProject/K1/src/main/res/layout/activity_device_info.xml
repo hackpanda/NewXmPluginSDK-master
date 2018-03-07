@@ -24,7 +24,7 @@
                     android:layout_height="match_parent" />
                 <TextView
                     android:layout_centerHorizontal="true"
-                    android:text="请将门锁和手机尽量靠近"
+                    android:text="@string/device_closer_lock"
                     android:textColor="@color/black"
                     android:alpha="0.8"
                     android:textSize="@dimen/x12"
@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/devicePowerTv"
                     android:gravity="center_vertical"
-                    android:text="门锁电量："
+                    android:text="@string/device_lock_power"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -60,7 +60,7 @@
                         android:id="@+id/deviceSecLevelTv"
                         android:layout_alignParentLeft="true"
                         android:layout_marginTop="@dimen/y12"
-                        android:text="安全等级："
+                        android:text="@string/device_sec_level"
                         android:layout_marginLeft="@dimen/x21"
                         android:textSize="@dimen/x12"
                         android:textColor="@color/black"
@@ -103,7 +103,7 @@
                     <TextView
                         android:id="@+id/muteModeTv"
                         android:layout_marginTop="@dimen/y12"
-                        android:text="静音模式"
+                        android:text="@string/device_mute_mode"
                         android:layout_marginLeft="@dimen/x21"
                         android:textSize="@dimen/x12"
                         android:textColor="@color/black"
@@ -113,7 +113,7 @@
                     <TextView
                         android:gravity="center_vertical"
                         android:layout_below="@id/muteModeTv"
-                        android:text="开启后操作键盘和开锁时，门锁不会发出提示音"
+                        android:text="@string/device_mute_intro"
                         android:layout_marginLeft="@dimen/x21"
                         android:layout_marginTop="@dimen/y4"
                         android:textSize="@dimen/x11"
@@ -140,7 +140,7 @@
                 <TextView
                     android:id="@+id/fpCountTv"
                     android:gravity="center_vertical"
-                    android:text="指纹数量："
+                    android:text="@string/device_fp_count"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -155,7 +155,7 @@
                 <TextView
                     android:id="@+id/pwdCountTv"
                     android:gravity="center_vertical"
-                    android:text="密码数量："
+                    android:text="@string/device_pwd_count"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -173,7 +173,7 @@
                 <TextView
                     android:id="@+id/romVerTv"
                     android:gravity="center_vertical"
-                    android:text="固件版本号："
+                    android:text="@string/device_rom_version"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -188,7 +188,7 @@
                 <TextView
                     android:id="@+id/pluginVerTv"
                     android:gravity="center_vertical"
-                    android:text="插件版本号："
+                    android:text="@string/device_plugin_version"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x12"
                     android:textColor="@color/black"
@@ -205,7 +205,7 @@
                 <TextView
                     android:id="@+id/lockTimeTv"
                     android:gravity="center_vertical"
-                    android:text="锁内时间："
+                    android:text="@string/device_lock_time"
                     android:layout_marginLeft="@dimen/x21"
                     android:layout_marginTop="@dimen/y12"
                     android:textSize="@dimen/x12"
@@ -217,7 +217,7 @@
                 <TextView
                     android:id="@+id/phoneTimeTv"
                     android:gravity="center_vertical"
-                    android:text="手机时间："
+                    android:text="@string/device_phone_time"
                     android:layout_marginLeft="@dimen/x21"
                     android:textSize="@dimen/x11"
                     android:textColor="@color/black"
@@ -241,7 +241,7 @@
                     android:layout_centerInParent="true"
                     android:layout_width="@dimen/x279"
                     android:layout_height="@dimen/y33"
-                    android:text="和手机时间进行同步"
+                    android:text="@string/device_sync_from_phone"
                     android:background="@drawable/corners_btn" />
             </RelativeLayout>
         </LinearLayout>

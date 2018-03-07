@@ -49,7 +49,7 @@
                 <TextView
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="接收推送信息"
+                    android:text="@string/blekey_receive_notify"
                     android:textColor="#000000"
                     android:alpha="0.8"
                     android:textSize="@dimen/x13"
@@ -77,7 +77,7 @@
                 <TextView
                     android:layout_alignParentLeft="true"
                     android:layout_marginTop="@dimen/x10"
-                    android:text="钥匙有效期"
+                    android:text="@string/blekey_valid_time"
                     android:textColor="#000000"
                     android:alpha="0.8"
                     android:textSize="@dimen/x13"
@@ -105,7 +105,7 @@
                             android:id="@+id/foreverTv"
                             android:layout_marginLeft="@dimen/x2"
                             android:layout_gravity="center_vertical"
-                            android:text="永久"
+                            android:text="@string/blekey_period_foerver"
                             android:textColor="#000000"
                             android:alpha="0.6"
                             android:textSize="@dimen/x13"
@@ -128,7 +128,7 @@
                             android:id="@+id/tempTv"
                             android:layout_marginLeft="@dimen/x2"
                             android:layout_gravity="center_vertical"
-                            android:text="自定义"
+                            android:text="@string/blekey_period_custom"
                             android:textColor="#000000"
                             android:alpha="0.8"
                             android:textSize="@dimen/x13"
@@ -150,7 +150,7 @@
                             android:layout_height="@dimen/x14" />
                         <TextView
                             android:id="@+id/periodTv"
-                            android:text="周期"
+                            android:text="@string/blekey_period_week"
                             android:layout_marginLeft="@dimen/x2"
                             android:layout_gravity="center_vertical"
                             android:textColor="#000000"
@@ -166,7 +166,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="@dimen/x10"
-                    android:text="手机钥匙永久有效"
+                    android:text="@string/blekey_valid_forever"
                     android:textColor="#000000"
                     android:alpha="0.4"
                     android:textSize="@dimen/x10"
@@ -192,7 +192,7 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="center_vertical"
-                        android:text="重复周期: "
+                        android:text="@string/blekey_week_cf"
                         android:textColor="#000000"
                         android:alpha="0.8"
                         android:textSize="@dimen/x13"
@@ -201,7 +201,7 @@
                     <TextView
                         android:id="@+id/keyPeriodTv"
                         android:layout_gravity="center_vertical"
-                        android:text="请选择重复周期"
+                        android:text="@string/blekey_week_select"
                         android:textColor="#000000"
                         android:alpha="0.6"
                         android:textSize="@dimen/x13"
@@ -228,7 +228,7 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="center_vertical"
-                        android:text="生效时间: "
+                        android:text="@string/blekey_start_time"
                         android:textColor="#000000"
                         android:alpha="0.8"
                         android:textSize="@dimen/x13"
@@ -237,7 +237,7 @@
                     <TextView
                         android:id="@+id/keyStartTv"
                         android:layout_gravity="center_vertical"
-                        android:text="请选择生效时间"
+                        android:text="@string/blekey_start_select"
                         android:textColor="#000000"
                         android:alpha="0.6"
                         android:textSize="@dimen/x13"
@@ -264,7 +264,7 @@
                     android:layout_height="match_parent">
                     <TextView
                         android:layout_gravity="center_vertical"
-                        android:text="到期时间: "
+                        android:text="@string/blekey_end_time"
                         android:textColor="#000000"
                         android:alpha="0.8"
                         android:textSize="@dimen/x13"
@@ -273,7 +273,7 @@
                     <TextView
                         android:id="@+id/keyEndTv"
                         android:layout_gravity="center_vertical"
-                        android:text="请选择到期时间"
+                        android:text="@string/blekey_end_select"
                         android:textColor="#000000"
                         android:alpha="0.4"
                         android:textSize="@dimen/x13"
@@ -298,7 +298,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="@dimen/y10"
                 android:layout_above="@id/mBottom"
-                android:text="添加"
+                android:text="@string/blekey_add"
                 android:background="@drawable/corners_btn" />
         </RelativeLayout>
     </LinearLayout>

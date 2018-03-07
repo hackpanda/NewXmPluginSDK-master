@@ -1,15 +1,14 @@
 package com.xiaomi.zkplug.entity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaomi.plugin.core.XmPluginPackage;
 import com.xiaomi.zkplug.Device;
+import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.DataManageUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,11 +47,11 @@ public class MyProvider extends cn.zelkova.lockprotocol.ProfileProvider implemen
             Log.d(TAG, "查询本地密钥为： "+BitConverter.fromHexString(skey));
         } catch (JSONException je) {
             je.printStackTrace();
-            Toast.makeText(activity, "数据解析异常", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_SHORT).show();
         } catch (Exception e){
             e.printStackTrace();
             Log.d(TAG, "初始无数据");
-            Toast.makeText(activity, "初始无密钥数据", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.gloable_no_seckey, Toast.LENGTH_SHORT).show();
         }
         return ssKey;
     }

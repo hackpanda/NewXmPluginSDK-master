@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Gloable -->
+    <string name="open_bluetooth">please open the bluetooth</string>
+
+    <!-- 首页 -->
+    <string name="main_connecting">connecting lock</string>
+
+    <string name="main_click_to_open">click to open the lock</string>
+</resources>

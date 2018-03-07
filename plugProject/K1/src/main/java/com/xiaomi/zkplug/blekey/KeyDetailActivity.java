@@ -65,7 +65,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
 
         this.dataManageUtil = new DataManageUtil(mDeviceStat, this);
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("钥匙详情");
+        mTitleView.setText(R.string.blekey_key_info);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         findViewById(R.id.authRemoveBtn).setOnClickListener(this);
         nickNameTv = (TextView) findViewById(R.id.nickNameTv);
@@ -91,7 +91,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
             }
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(activity(), "用户信息查询失败", Toast.LENGTH_LONG).show();
+                Toast.makeText(activity(), R.string.blekey_userinfo_query_failed, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -131,21 +131,12 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
         XmPluginHostApi.instance().getSecurityKey(model, did, new Callback<List<SecurityKeyInfo>>() {
             @Override
             public void onSuccess(List<SecurityKeyInfo> securityKeyInfos) {
-                Log.d(TAG, String.format("获取到%d把钥匙：", securityKeyInfos.size()));
                 if(securityKeyInfos.size() == 0) {
-                    Toast.makeText(KeyDetailActivity.this.activity(), "没有钥匙，授权取消失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KeyDetailActivity.this.activity(), R.string.blekey_null, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 for (int i = 0; i < securityKeyInfos.size(); i++) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append("钥匙" + (i + 1) + ":" + "\n");
-                    sb.append("keyId = " + securityKeyInfos.get(i).keyId + "\n");
-                    sb.append("shareUid = " + securityKeyInfos.get(i).shareUid + "\n");
-                    sb.append("status = " + securityKeyInfos.get(i).status + "\n");
-                    sb.append("activeTime = " + securityKeyInfos.get(i).activeTime + "\n");
-                    sb.append("expireTime = " + securityKeyInfos.get(i).expireTime + "\n");
-                    sb.append("weekdays = " + securityKeyInfos.get(i).weekdays + "\n");
-                    sb.append("isoutofdate = " + securityKeyInfos.get(i).isoutofdate + "\n");
+                    ;
                     if(securityKeyInfos.get(i).shareUid.equals(miAccount)){//已被授过权
                         if(isDelete){
                             deleteSecurityKey(model, did, securityKeyInfos.get(i).keyId);
@@ -154,31 +145,31 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                             Date startTime = new Date(securityKeyInfos.get(i).activeTime * 1000);
                             Date endTime = new Date(securityKeyInfos.get(i).expireTime * 1000);
                             if(securityKeyInfos.get(i).status == 3){//永久
-                                keyValidPeriodTv.setText("手机钥匙永久有效");
+                                keyValidPeriodTv.setText(R.string.blekey_valid_forever);
                             }else if(securityKeyInfos.get(i).status == 1){//临时
                                 keyValidPeriodTv.setText(BriefDate.fromNature(startTime).toString().substring(0, 16) +" ~ "+ BriefDate.fromNature(endTime).toString().substring(0, 16));
                             }else{
                                 List<Integer> weekdays = securityKeyInfos.get(i).weekdays;
-                                String result = "每";
+                                String result = getResources().getString(R.string.blekey_period_per);
                                 for(int m=0; m<weekdays.size(); m++){
                                     if(weekdays.get(m) == 1){
-                                        result += "周一，";
+                                        result += getResources().getString(R.string.blekey_period_monday)+"，";
                                     }else if(weekdays.get(m) == 2){
-                                        result += "周二，";
+                                        result += getResources().getString(R.string.blekey_period_tuesday)+"，";
                                     }else if(weekdays.get(m) == 3){
-                                        result += "周三，";
+                                        result += getResources().getString(R.string.blekey_period_wednesday)+"，";
                                     }else if(weekdays.get(m) == 4){
-                                        result += "周四，";
+                                        result += getResources().getString(R.string.blekey_period_thursday)+"，";
                                     }else if(weekdays.get(m) == 5){
-                                        result += "周五，";
+                                        result += getResources().getString(R.string.blekey_period_friday)+"，";
                                     }else if(weekdays.get(m) == 6){
-                                        result += "周六，";
+                                        result += getResources().getString(R.string.blekey_period_saturday)+"，";
                                     }else if(weekdays.get(m) == 0){
-                                        result += "周日，";
+                                        result += getResources().getString(R.string.blekey_period_sunday)+"，";
                                     }
                                 }
                                 result = result.substring(0, result.length() - 1);
-                                keyValidPeriodTv.setText(result+"的"+BriefDate.fromNature(startTime).toString().substring(11, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(11, 16)+"有效");
+                                keyValidPeriodTv.setText(result+getResources().getString(R.string.blekey_period_de)+BriefDate.fromNature(startTime).toString().substring(11, 16) +" - "+ BriefDate.fromNature(endTime).toString().substring(11, 16)+getResources().getString(R.string.blekey_period_valid));
                             }
                         }
                         return;
@@ -188,7 +179,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(KeyDetailActivity.this.activity(), "授权取消失败：" + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(KeyDetailActivity.this.activity(), activity().getResources().getString(R.string.blekey_info_query_failed)+"：" + s, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -202,18 +193,18 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.authRemoveBtn:
                 if(!ZkUtil.isNetworkAvailable(this)){
-                    Toast.makeText(activity(), "网络未连接，请确保网络畅通", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-                builder.setTitle("是否删除钥匙 ");
-                builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+                builder.setTitle(R.string.blekey_del_dialog_title);
+                builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         getSecurityKey(mDeviceStat.model, mDeviceStat.did, true);
                     }
                 });
-                builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+                builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -233,7 +224,7 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
             }
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(KeyDetailActivity.this.activity(), String.format("删除钥匙(keyId=%s)失败, code = %d, detail = %s", keyId, i, s), Toast.LENGTH_SHORT).show();
+                Toast.makeText(KeyDetailActivity.this.activity(), getResources().getString(R.string.blekey_del_fail)+" Code="+i, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -253,7 +244,6 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
             dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
                 @Override
                 public void dataUpateFail(int i, final String s) {
-                    Log.d(TAG, "取消授权失败");
                     activity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -263,11 +253,10 @@ public class KeyDetailActivity extends BaseActivity implements View.OnClickListe
                 }
                 @Override
                 public void dataUpdateSucc(String s) {
-                    Log.d(TAG, "取消授权成功");
                     activity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(KeyDetailActivity.this.activity(), "取消授权成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KeyDetailActivity.this.activity(), R.string.blekey_del_succ, Toast.LENGTH_SHORT).show();
                             finish();
                             if(KeySearchActivity.instance != null){
                                 KeySearchActivity.instance.finish();

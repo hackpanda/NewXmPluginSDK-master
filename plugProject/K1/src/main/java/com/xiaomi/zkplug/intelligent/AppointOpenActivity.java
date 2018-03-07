@@ -13,7 +13,7 @@ import com.xiaomi.zkplug.util.DataManageUtil;
  * 邮箱：liwenqi@zelkova.cn
  * 描述：指定开锁联动页面
  */
-public class AppointAOpenActivity extends BaseActivity implements View.OnClickListener{
+public class AppointOpenActivity extends BaseActivity implements View.OnClickListener{
 
     private final String TAG = "AppointAOpenActivity";
     InteManager inteManager;

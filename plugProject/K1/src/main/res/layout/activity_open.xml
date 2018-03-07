@@ -55,7 +55,7 @@
                 android:id="@+id/openWarnTv"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:text="您已被取消开锁权限"
+                android:text=""
                 android:textSize="@dimen/x12"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginTop="@dimen/x233"
@@ -66,7 +66,7 @@
                 android:visibility="gone"
                 android:layout_centerHorizontal="true"
                 android:layout_width="wrap_content"
-                android:text="钥匙有效期：每周一12:00-12:30"
+                android:text=""
                 android:textSize="@dimen/x12"
                 android:textColor="@color/black"
                 android:alpha="0.5"
@@ -82,7 +82,7 @@
             android:layout_height="@dimen/y20">
             <TextView
                 android:id="@+id/longTimeNoSyncTimeTv"
-                android:text="@string/long_no_sync_time"
+                android:text="@string/never_synced_time"
                 android:textColor="#000000"
                 android:alpha="0.6"
                 android:textSize="@dimen/x9"
@@ -160,11 +160,14 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <ImageView
+                    <Button
                         android:id="@+id/refreshLsImg"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/y10"
-                        android:src="@drawable/status_refresh_selector"
+                        android:text="@string/main_refresh"
+                        android:textSize="@dimen/x11"
+                        android:textColor="@drawable/reresh_text_selector"
+                        android:background="@drawable/status_refresh_selector"
                         android:layout_width="@dimen/x153"
                         android:layout_height="@dimen/y21" />
                     <TextView

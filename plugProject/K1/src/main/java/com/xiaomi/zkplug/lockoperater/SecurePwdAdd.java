@@ -192,7 +192,7 @@ public class SecurePwdAdd implements ILockDataOperator {
                 lockCommSyncPwdResponse = (LockCommSyncPwdResponse) LockCommBase.parse(inputBuffer);
                 if(lockCommSyncPwdResponse.getResultCode() != 0){
                     Log.d(TAG, "错误码："+lockCommSyncPwdResponse.getResultCode());
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncPwdResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncPwdResponse.getResultCode()), activity));
                 }else{
                     Log.d(TAG, "密码别名:"+lockCommSyncPwdResponse.getPwdIdx());
                     lockOperateCallback.lockOperateSucc(String.valueOf(lockCommSyncPwdResponse.getPwdIdx()));

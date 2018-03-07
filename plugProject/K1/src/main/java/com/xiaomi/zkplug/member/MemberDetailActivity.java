@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xiaomi.smarthome.common.ui.dialog.MLAlertDialog;
 import com.xiaomi.zkplug.BaseActivity;
@@ -271,12 +272,12 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
         builder.setTitle("修改家人名称");
         builder.setInputView(nickNameTv.getText().toString(), true);
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity())){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!TextUtils.isEmpty(builder.getInputView().getText().toString()) && TextUtils.isEmpty(builder.getInputView().getText().toString().trim())){//全是空格
@@ -425,7 +426,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                     activity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            CommonUtils.toast(activity(), "服务器数据查询失败");
+                            Toast.makeText(activity(), R.string.data_query_fail, Toast.LENGTH_LONG).show();
                         }
                     });
                 }

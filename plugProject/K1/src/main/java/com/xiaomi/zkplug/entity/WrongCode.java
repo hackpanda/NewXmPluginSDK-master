@@ -1,5 +1,9 @@
 package com.xiaomi.zkplug.entity;
 
+import android.app.Activity;
+
+import com.xiaomi.zkplug.R;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,29 +17,29 @@ public class WrongCode {
      * @param message
      * @return
      */
-    public static String get(String message) {
-        map.put("1", "处理服务器发来的锁命令时，没有能解密出来");
-        map.put("2", "无效钥匙");
-        map.put("3", "命令不在有效期，请到\"设备信息\"页将手机时间同步到锁内后再尝试");
-        map.put("4", "虽然锁命令未过期，但是不在指定的周期内Week，month，包括所处的周期时间");
-        map.put("5", "次数使用完毕");
-        map.put("6", "Open指令要求绑定到首次使用的设备，当前设备不是首次使用设备的Id");
-        map.put("7", "当前指纹头不在录入状态，请稍后再添加");//等待回转或者提前放置了手指
-        map.put("8", "所执行的操作导致超过既定容量");
-        map.put("9", "命令中的时间，与锁体时间误差过大");
-        map.put("10", "未知错误");
-        map.put("11", "得到的数据不能正确解析出协议内容");
-        map.put("12", "锁命令中MAC与锁不匹配");
-        map.put("13", "手机与锁Rom的通讯Token已经过期，或无效");
-        map.put("14", "与控制端交换密钥的方式，不被ROM支持");
-        map.put("15", "ROM不支持协议，或无法识别");
-        map.put("16", "给的的参数值不在范围内");
-        map.put("17", "数据包丢失");
-        map.put("18", "该密码已存在，请重新设置");
-        map.put("19", "未找到指定的值");
-        map.put("20", "录入指纹出错，请重新添加");
-        map.put("64", "设置参数有误");
-        String result = "未定义的错误码("+message+")";
+    public static String get(String message, Activity activity) {
+        map.put("1", activity.getString(R.string.gloable_wrongcode_1));
+        map.put("2", activity.getString(R.string.gloable_wrongcode_2));
+        map.put("3", activity.getString(R.string.gloable_wrongcode_3));
+        map.put("4", activity.getString(R.string.gloable_wrongcode_4));
+        map.put("5", activity.getString(R.string.gloable_wrongcode_5));
+        map.put("6", activity.getString(R.string.gloable_wrongcode_6));
+        map.put("7", activity.getString(R.string.gloable_wrongcode_7));//等待回转或者提前放置了手指
+        map.put("8", activity.getString(R.string.gloable_wrongcode_8));
+        map.put("9", activity.getString(R.string.gloable_wrongcode_9));
+        map.put("10", activity.getString(R.string.gloable_wrongcode_10));
+        map.put("11", activity.getString(R.string.gloable_wrongcode_11));
+        map.put("12", activity.getString(R.string.gloable_wrongcode_12));
+        map.put("13", activity.getString(R.string.gloable_wrongcode_13));
+        map.put("14", activity.getString(R.string.gloable_wrongcode_14));
+        map.put("15", activity.getString(R.string.gloable_wrongcode_15));
+        map.put("16", activity.getString(R.string.gloable_wrongcode_16));
+        map.put("17", activity.getString(R.string.gloable_wrongcode_17));
+        map.put("18", activity.getString(R.string.gloable_wrongcode_18));
+        map.put("19", activity.getString(R.string.gloable_wrongcode_19));
+        map.put("20", activity.getString(R.string.gloable_wrongcode_20));
+        map.put("64", activity.getString(R.string.gloable_wrongcode_64));
+        String result = activity.getString(R.string.gloable_wrongcode_undifine)+"("+message+")";
         if(map.get(message) != null){
             result = map.get(message)+"("+message+")";
         }

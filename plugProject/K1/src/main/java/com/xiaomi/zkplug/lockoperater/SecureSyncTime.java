@@ -182,7 +182,7 @@ public class SecureSyncTime implements ILockDataOperator {
                 if(lockCommSyncTimeResponse.getResultCode() == 0){
                     lockOperateCallback.lockOperateSucc(lockCommSyncTimeResponse.getLockBriefTime().toString());
                 }else{
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncTimeResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSyncTimeResponse.getResultCode()), activity));
                 }
             }catch (Exception e){
                 Log.d(TAG, "LockFormatException");

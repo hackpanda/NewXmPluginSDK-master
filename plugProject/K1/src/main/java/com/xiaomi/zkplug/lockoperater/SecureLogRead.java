@@ -184,7 +184,7 @@ public class SecureLogRead implements ILogReadOperator {
                 lockCommGetLogResponse = (LockCommGetLogResponse) LockCommBase.parse(inputBuffer);
                 if(lockCommGetLogResponse.getResultCode() != 0){
                     Log.d(TAG, "错误码："+lockCommGetLogResponse.getResultCode());
-                    logReadCallback.logReadFail(WrongCode.get(String.valueOf(lockCommGetLogResponse.getResultCode())));
+                    logReadCallback.logReadFail(WrongCode.get(String.valueOf(lockCommGetLogResponse.getResultCode()), activity));
                 }else{
                     logReadCallback.logReadSucc(lockCommGetLogResponse);
                 }

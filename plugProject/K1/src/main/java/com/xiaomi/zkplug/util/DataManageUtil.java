@@ -10,6 +10,7 @@ import com.xiaomi.smarthome.device.api.Callback;
 import com.xiaomi.smarthome.device.api.DeviceStat;
 import com.xiaomi.smarthome.device.api.Parser;
 import com.xiaomi.smarthome.device.api.XmPluginHostApi;
+import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.entity.MyEntity;
 
 import org.json.JSONArray;
@@ -64,7 +65,7 @@ public class DataManageUtil {
             userDataObj = dataObject.getJSONObject("deviceList");//deviceList
         }catch (JSONException e){
             e.printStackTrace();
-            Toast.makeText(activity, "数据解析异常", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_SHORT).show();
         }
         return userDataObj;
     }
@@ -179,7 +180,7 @@ public class DataManageUtil {
         queryDataFromServer(mJsArray, new DataUpdateCallback() {
             @Override
             public void dataUpateFail(int i, String s) {
-                dataUpdateCallback.dataUpateFail(i, "数据查询失败");
+                dataUpdateCallback.dataUpateFail(i, s);
             }
             @Override
             public void dataUpdateSucc(String s) {

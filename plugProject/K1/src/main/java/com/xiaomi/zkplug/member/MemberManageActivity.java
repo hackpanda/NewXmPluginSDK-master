@@ -76,7 +76,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
 
         versionTv.setText(MyEntity.VERSION);
         if(!ZkUtil.isNetworkAvailable(this)){
-            CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+            Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -189,12 +189,12 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
         builder.setTitle("添加成员");
         builder.setInputView("成员姓名", true);
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity())){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 try {

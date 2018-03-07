@@ -1,5 +1,6 @@
 package com.xiaomi.zkplug.intelligent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.xiaomi.zkplug.R;
 public class AnyModeOpenActivity extends BaseActivity implements View.OnClickListener{
 
     private final String TAG = "AnyModeOpenActivity";
+    public static final int MSG_GET_SCENE_VALUE = 3;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +46,23 @@ public class AnyModeOpenActivity extends BaseActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.anyModeOpenLayout:
+
+//                XmPluginHostApi.instance().sendMessage(startConditionActivity,  Device.getDevice(mDeviceStat), IXmPluginMessageReceiver.MSG_GET_SCENE_VALUE,intent);
+
                 break;
             case R.id.anyPwdOpenLayout:
+                Intent intent = getIntent();
+                intent.putExtra("value", "0001");//密码开门
+//                Log.d(TAG, "anyPwdOpenLayout");
+//                Intent intent = new Intent(mCommonSceneConditions.get(position).mParamAction);
+//                intent.putExtra("action", mCommonSceneConditions.get(position).mKey);
+//                intent.putExtra("value", String.valueOf(mCommonSceneConditions.get(position).mValue));
+//                if(condition != null) {
+//                    intent.putExtra("last_value", String.valueOf(((SceneApi.ConditionDeviceCommon)condition.conditionDevice).mValues));
+//                }
+//                intent.putExtra("actionId",mCommonSceneConditions.get(position).id);
+//                sendMessage(startConditionActivity,mDevice, IXmPluginMessageReceiver.MSG_GET_SCENE_VALUE,intent);
+
                 break;
             case R.id.anyFpOpenLayout:
                 break;

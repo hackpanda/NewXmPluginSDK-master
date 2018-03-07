@@ -26,7 +26,7 @@
                 android:layout_height="@dimen/y125" />
             <TextView
                 android:gravity="center_horizontal"
-                android:text="为成员添加一把手机钥匙"
+                android:text="@string/blekey_add_smkey"
                 android:textColor="@color/black"
                 android:alpha="0.6"
                 android:textSize="@dimen/x12"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:gravity="center_horizontal"
-                android:text="成员就可以使用手机开锁了"
+                android:text="@string/blekey_smkey_succ"
                 android:textColor="@color/black"
                 android:alpha="0.6"
                 android:textSize="@dimen/x12"
@@ -54,7 +54,7 @@
             android:textSize="@dimen/x10"
             android:paddingLeft="@dimen/x11"
             android:textColor="@color/black"
-            android:hint="请输入对方的邮箱／手机号码／小米账号"
+            android:hint="@string/blekey_account_input"
             android:layout_width="@dimen/x278"
             android:layout_height="@dimen/y33" />
 
@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/accountWarnTv"
                 android:layout_centerHorizontal="true"
-                android:text="未找到该用户"
+                android:text="@string/blekey_not_find"
                 android:visibility="gone"
                 android:alpha="0.8"
                 android:textColor="#ff0000"
@@ -79,7 +79,7 @@
                 android:layout_marginTop="@dimen/y25"
                 android:layout_width="@dimen/x279"
                 android:layout_height="@dimen/y33"
-                android:text="查找"
+                android:text="@string/blekey_seach_btntx"
                 android:background="@drawable/corners_btn" />
         </RelativeLayout>
 

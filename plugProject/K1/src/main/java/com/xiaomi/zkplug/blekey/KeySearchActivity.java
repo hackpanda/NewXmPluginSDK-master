@@ -15,7 +15,6 @@ import com.xiaomi.smarthome.device.api.SecurityKeyInfo;
 import com.xiaomi.smarthome.device.api.UserInfo;
 import com.xiaomi.smarthome.device.api.XmPluginHostApi;
 import com.xiaomi.zkplug.BaseActivity;
-import com.xiaomi.zkplug.CommonUtils;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.ZkUtil;
@@ -68,16 +67,16 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
             case R.id.searchBtn:
                 accountWarnTv.setVisibility(View.GONE);
                 if(!ZkUtil.isNetworkAvailable(this)){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(accountEdit.getText().toString())){
-                    accountWarnTv.setText("请输入查找账号");
+                    accountWarnTv.setText(R.string.blekey_empty_search);
                     accountWarnTv.setVisibility(View.VISIBLE);
                     return;
                 }
                 xqProgressDialog = new XQProgressDialog(activity());
-                xqProgressDialog.setMessage("正在查找");
+                xqProgressDialog.setMessage(getResources().getString(R.string.blekey_searching));
                 xqProgressDialog.setCancelable(false);
                 xqProgressDialog.show();
                 getUserInfo(accountEdit.getText().toString().trim());//根据帐号获取用户信息
@@ -97,14 +96,13 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
      */
     //根据帐号获取用户信息
     private void getUserInfo(final String accountId){
-        Log.d(TAG, "开始查找:");
         XmPluginHostApi.instance().getUserInfo(accountId, new Callback<UserInfo>() {
             @Override
             public void onSuccess(UserInfo userInfo) {
                 xqProgressDialog.dismiss();
                 Log.d(TAG, "accountId:"+accountId + ",userInfo: userInfo.userId: "+userInfo.userId+", userInfo.phone: "+userInfo.phone+", userInfo.nickName: "+userInfo.nickName+", userInfo.url: "+userInfo.url);
                 if(TextUtils.isEmpty(userInfo.nickName)){
-                    accountWarnTv.setText("未找到该用户");
+                    accountWarnTv.setText(R.string.blekey_not_find);
                     accountWarnTv.setVisibility(View.VISIBLE);
                     return;
                 }
@@ -112,7 +110,7 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
             }
             @Override
             public void onFailure(int i, String s) {
-                accountWarnTv.setText("未找到该用户");
+                accountWarnTv.setText(R.string.blekey_not_find);
                 accountWarnTv.setVisibility(View.VISIBLE);
                 xqProgressDialog.dismiss();
             }
@@ -124,11 +122,10 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
         XmPluginHostApi.instance().getSecurityKey(mDevice.getModel(), mDevice.getDid(), new Callback<List<SecurityKeyInfo>>() {
             @Override
             public void onSuccess(List<SecurityKeyInfo> securityKeyInfos) {
-                Log.d(TAG, "userInfo数据：userInfo.url: "+userInfo.url+", userInfo.phone"+userInfo.phone+", userInfo.nickName"+userInfo.nickName+", userInfo.userId"+userInfo.userId);
-//                Log.d(TAG, String.format("获取到%d把钥匙：", securityKeyInfos.size()));
+                Log.d(TAG, "userInfo data：userInfo.url: "+userInfo.url+", userInfo.phone"+userInfo.phone+", userInfo.nickName"+userInfo.nickName+", userInfo.userId"+userInfo.userId);
                 for (int i = 0; i < securityKeyInfos.size(); i++) {
                     StringBuilder sb = new StringBuilder();
-                    sb.append("钥匙" + (i + 1) + ":" + "\n");
+                    sb.append("blekey" + (i + 1) + ":" + "\n");
                     sb.append("keyId = " + securityKeyInfos.get(i).keyId + "\n");
                     sb.append("shareUid = " + securityKeyInfos.get(i).shareUid + "\n");
                     sb.append("status = " + securityKeyInfos.get(i).status + "\n");
@@ -151,7 +148,7 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
                     Intent userIntent = new Intent();
                     userIntent.putExtra("nickName", userInfo.nickName);
                     userIntent.putExtra("url", userInfo.url);
-                    userIntent.putExtra("msg", "您已是门锁管理员，无法再为自己添加手机钥匙");
+                    userIntent.putExtra("msg", getResources().getString(R.string.blekey_admin));
                     startActivity(userIntent, KeyExistActivity.class.getName());
                     return;
                 }else{
@@ -163,12 +160,11 @@ public class KeySearchActivity extends BaseActivity implements View.OnClickListe
                     userIntent.putExtra("url", userInfo.url);
                     startActivity(userIntent, KeyGaveActivity.class.getName());
                 }
-
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(activity(), "授权取消失败：" + s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity(), getResources().getString(R.string.blekey_info_query_failed)+"：" + s, Toast.LENGTH_SHORT).show();
             }
         });
     }

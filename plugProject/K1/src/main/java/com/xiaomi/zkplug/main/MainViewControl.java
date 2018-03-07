@@ -119,7 +119,7 @@ public class MainViewControl {
      */
     protected void showConnectingView(){
         if(!ZkUtil.isBleOpen()){
-            openWarnTv.setText("手机蓝牙未打开");
+            openWarnTv.setText(R.string.bluetooth_not_open);
             return;
         }
         viewHanlder.sendEmptyMessageDelayed(MSG_CONNECT_TIMEOUT, CONNECT_FAIL_TIME);
@@ -127,7 +127,7 @@ public class MainViewControl {
         isOperating = true;
         //开锁逻辑
         ZkUtil.startAnima(activity, openCircleImg);
-        openWarnTv.setText("连接门锁中");
+        openWarnTv.setText(activity.getResources().getString(R.string.main_connecting));
         openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
     }
     /**
@@ -136,7 +136,7 @@ public class MainViewControl {
     protected void showConnecSuccView(){
         Log.d(TAG , "----showConnecSuccView--"+isOperating);
         isOperating = false;
-        openWarnTv.setText("点击开锁");
+        openWarnTv.setText(activity.getResources().getString(R.string.main_click_to_open));
         ZkUtil.stopAnima(openCircleImg);
         viewHanlder.removeMessages(MSG_CONNECT_TIMEOUT);
     }
@@ -146,11 +146,11 @@ public class MainViewControl {
     protected void showConnecFailView(){
         Log.d(TAG , "----showConnecFailView--"+isOperating);
         if(isOperating == false){
-            openWarnTv.setText("未连接门锁，点击重试");
+            openWarnTv.setText(R.string.main_connect_fail);
         }
         isOperating = false;
         if(!ZkUtil.isBleOpen()){
-            openWarnTv.setText("手机蓝牙未打开");
+            openWarnTv.setText(R.string.bluetooth_not_open);
         }
     }
     /**
@@ -162,9 +162,9 @@ public class MainViewControl {
             return;
         }
         if(!ZkUtil.isBleOpen()){
-            openWarnTv.setText("手机蓝牙未打开");
+            openWarnTv.setText(R.string.bluetooth_not_open);
             openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
-            Toast.makeText(activity, "请打开手机蓝牙", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, activity.getResources().getString(R.string.open_bluetooth), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -181,19 +181,17 @@ public class MainViewControl {
      */
     protected void conneMasterctLock(){
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
-            Log.d(TAG, "todo显示点击开锁view");
             showConnecSuccView();
         }else{
             showConnectingView();//动画和界面变化
             XmBluetoothManager.getInstance().securityChipConnect(mDevice.getMac(), new Response.BleConnectResponse() {
                 @Override
                 public void onResponse(int i, Bundle bundle) {
-                    Log.d(TAG, "连接返回:"+i);
+                    Log.d(TAG, "connect return: "+i);
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
-                        Log.d(TAG, "todo显示点击开锁view");
                         showConnecSuccView();
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                        displayFailView("设备已被重置，请解除绑定后重新添加");
+                        displayFailView(activity.getResources().getString(R.string.device_has_been_reset));
                     }else{
                         doScan();
                     }
@@ -207,7 +205,6 @@ public class MainViewControl {
      */
     protected void connectSharedLock(){
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
-            Log.d(TAG, "todo显示点击开锁view");
             showConnecSuccView();
         }else{
             showConnectingView();//动画和界面变化
@@ -218,12 +215,12 @@ public class MainViewControl {
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                         showConnecSuccView();
                     }else if(i == XmBluetoothManager.Code.REQUEST_SHARED_KEY_EXPIRED){
-                        displayFailView("分享的钥匙已过期");
+                        displayFailView(activity.getResources().getString(R.string.main_key_expired));
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                        displayFailView("设备已被重置，请解除绑定后重新添加");
+                        displayFailView(activity.getResources().getString(R.string.device_has_been_reset));
 
                     } else {
-                        displayFailView("未发现门锁，请靠近门锁重试");//连接失败
+                        displayFailView(activity.getResources().getString(R.string.connect_time_out));//连接失败
                     }
                 }
             });
@@ -237,14 +234,12 @@ public class MainViewControl {
         //被分享者
         boolean isSecurityChipSharedKeyValid = XmBluetoothManager.getInstance().isSecurityChipSharedKeyValid(mDevice.getMac());
         if (!isSecurityChipSharedKeyValid) {
-            Toast.makeText(activity, "没有被分享的钥匙", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.main_no_shared_key, Toast.LENGTH_SHORT).show();
             showNoShareKeyView();
         } else {
             if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
                 sendOpenMsg();
-                Log.d(TAG, "已连接，直接发送锁命令");
             }else{
-                Log.d(TAG, "未连接，先进行连接");
                 connectSharedLock();
             }
         }
@@ -255,36 +250,33 @@ public class MainViewControl {
      */
     public void openMasterLock(){
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
-            Log.d(TAG, "已连接，直接发送锁命令");
             sendOpenMsg();
         }else{
-            Log.d(TAG, "未连接，先进行连接");
             conneMasterctLock();
         }
     }
 
     private void sendOpenMsg(){
-        Log.d(TAG, "发送开锁命令");
         ZkUtil.startAnima(activity, openCircleImg);
-        openWarnTv.setText("开锁中");
+        openWarnTv.setText(R.string.main_opening);
         openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
         secureOpen.sendLockMsg(null,new LockOperateCallback() {
             @Override
             public void lockOperateSucc(final String value) {
                 Log.d(TAG, value);
-                Log.d(TAG, "开锁完成: "+BriefDate.fromNature(new Date()).toString());
+                Log.d(TAG, "open complete: "+BriefDate.fromNature(new Date()).toString());
                 if(value.equals("7f")){
                     openWarnTv.setTextColor(activity.getResources().getColor(R.color.two_factor_authen));
-                    displaySuccView("门锁开启双重验证，请继续使用指纹或密码开锁");
+                    displaySuccView(activity.getResources().getString(R.string.main_two_factor_auth));
                 }else if(value.equals("02")){
-                    displayFailView("您的门已被反锁");
+                    displayFailView(activity.getResources().getString(R.string.main_door_fansuo));
                 }else{
-                    displaySuccView("已开锁");
+                    displaySuccView(activity.getResources().getString(R.string.main_door_opened));
                 }
             }
             @Override
             public void lockOperateFail(final String value) {
-                displayFailView("开锁失败: "+value);
+                displayFailView(activity.getResources().getString(R.string.main_open_fail, value));
             }
         });
     }
@@ -323,11 +315,11 @@ public class MainViewControl {
                                 dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
                                     @Override
                                     public void dataUpateFail(int i, String s) {
-                                        Log.d(TAG, "管理员添加失败");
+                                        Log.d(TAG, "add master fail");
                                     }
                                     @Override
                                     public void dataUpdateSucc(String s) {
-                                        Log.d(TAG, "管理员添加成功");
+                                        Log.d(TAG, "add master success");
                                     }
                                 });
                                 JSONObject localObj = new JSONObject();
@@ -355,7 +347,7 @@ public class MainViewControl {
             }
             @Override
             public void onFailure(int i, String s) {
-                Log.d(TAG, "帐号信息获取失败");
+                Log.d(TAG, "get account info fail");
             }
         });
     }
@@ -378,10 +370,10 @@ public class MainViewControl {
 
                 Log.d(TAG, "dayInterval: " + dayInterval);
                 if(dayInterval > 30 && dayInterval <= 60){
-                    longTimeNoSyncTimeTv.setText("超过30天未同步时间，请到\"设备信息\"页将手机时间同步到锁内");
+                    longTimeNoSyncTimeTv.setText(R.string.no_sync_time_30);
                     longTimeNoSyncTimeRel.setVisibility(View.VISIBLE);
                 }else if(dayInterval > 60){
-                    longTimeNoSyncTimeTv.setText("超过60天未同步时间，请到\"设备信息\"页将手机时间同步到锁内");
+                    longTimeNoSyncTimeTv.setText(R.string.no_sync_time_60);
                     longTimeNoSyncTimeRel.setVisibility(View.VISIBLE);
                 } else{
                     longTimeNoSyncTimeRel.setVisibility(View.GONE);
@@ -435,8 +427,7 @@ public class MainViewControl {
             switch (msg.what) {
                 case MSG_CONNECT_TIMEOUT:
                     isOperating = false;
-                    Log.d(TAG, "-----1------");
-                    openWarnTv.setText("未连接门锁，点击重试");
+                    openWarnTv.setText(R.string.main_connect_fail);
                     ZkUtil.stopAnima(openCircleImg);
                     break;
                 case BASHOU_ANIMA_STOP_FAIL:
@@ -452,10 +443,9 @@ public class MainViewControl {
                     break;
                 case BASHOU_TO_NORMAL:
                     bashouImg.setImageResource(R.drawable.bashou);
-//                    openLockImg.setImageResource(R.drawable.btn_open_nor);
                     openLockImg.setImageResource(R.drawable.open_lock_selector);
                     bashouImg.setVisibility(View.GONE);
-                    openWarnTv.setText("点击开锁");
+                    openWarnTv.setText(R.string.main_click_to_open);
                     openWarnTv.setTextColor(activity.getResources().getColor(R.color.colorPrimary));
                     isOperating = false;
                     break;
@@ -488,7 +478,7 @@ public class MainViewControl {
                     powerTv.setTextColor(activity.getResources().getColor(R.color.black));
                 }
                 if(powerLevel > 80){
-                    powerTv.setText(">"+powerLevel+"%");
+                    powerTv.setText(">80%");
                 }else{
                     powerTv.setText(powerLevel+"%");
                 }
@@ -498,9 +488,49 @@ public class MainViewControl {
             public void onFailure(int i, String s) {
                 xqProgressDialog.dismiss();
                 Log.d(TAG, "getUserDeviceData:"+i);
-                if(!backgroundRun) Toast.makeText(activity, "获取门锁状态失败，请检查网关是否正常", Toast.LENGTH_SHORT).show();
+                if(!backgroundRun) Toast.makeText(activity, R.string.main_check_gateway, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    /**
+     * 解析锁状态事件
+     *
+     * @param statusJsArray
+     * @return
+     * @throws JSONException
+     */
+    public JSONArray transformLockStatus(JSONArray statusJsArray) throws JSONException{
+
+        for(int i=0; i<statusJsArray.length(); i++){
+            JSONObject statusJsObj = statusJsArray.getJSONObject(i);
+
+            String value = statusJsObj.getString("value").replace("[\"", "").replace("\"]", "");
+            String uid = statusJsObj.getString("uid");
+            String time = statusJsObj.getString("time");
+            String did = statusJsObj.getString("did");
+            Log.d("解析", "opTime:"+ZkUtil.getDateBySnd(Long.parseLong(time)));
+            statusJsObj.put("opTime", ZkUtil.getDateBySnd(Long.parseLong(time)));//操作时间
+            Log.d("解析 ", "status: "+ getStatus(value));
+            statusJsObj.put("status", getStatus(value));//门锁状态
+        }
+
+        return statusJsArray;
+    }
+    /**
+     * action 所状态
+     * 0xff 异常
+     * 0x00 开锁状态
+     * 0x01 上锁状态
+     * 0x02 反锁状态
+     * @return
+     */
+    private String getStatus(String value){
+        if(value.equals("00")) return activity.getResources().getString(R.string.main_status_changkai);
+        if(value.equals("01")) return activity.getResources().getString(R.string.main_close_weishangti);
+        if(value.equals("02")) return activity.getResources().getString(R.string.main_close_yishangti);
+
+        return "开锁状态";
     }
 
     /**
@@ -513,10 +543,10 @@ public class MainViewControl {
                 xqProgressDialog.dismiss();
                 try {
                     if(jsonArray.length() == 0){
-                        if(!backgroundRun) Toast.makeText(activity, "获取门锁状态失败，请检查网关是否正常", Toast.LENGTH_SHORT).show();
+                        if(!backgroundRun) Toast.makeText(activity, R.string.main_check_gateway, Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    JSONArray statusJsArray = ZkUtil.transformLockStatus(jsonArray);
+                    JSONArray statusJsArray = transformLockStatus(jsonArray);
                     Log.d(TAG, "statusJsArray: "+statusJsArray.toString());
                     try {
                         JSONObject statusObj = statusJsArray.getJSONObject(0);//第一个是最新的
@@ -525,16 +555,15 @@ public class MainViewControl {
                         TextView lockStatusTv = (TextView) activity.findViewById(R.id.lockStatusTv);
                         lockStatusImg.setVisibility(View.VISIBLE);
                         lockStatusTv.setText(statusObj.getString("status"));
-                        if(statusObj.getString("status").equals(MyEntity.STATUS_CLOSE_YISHANGTI) || statusObj.getString("status").equals(MyEntity.STATUS_CLOSE_WEISHANGTI)){
+                        if(statusObj.getString("status").equals(activity.getResources().getString(R.string.main_close_yishangti)) || statusObj.getString("status").equals(activity.getResources().getString(R.string.main_close_weishangti))){
                             lockStatusImg.setImageResource(R.drawable.icon_yiguan);
                         }
-                        if(statusObj.getString("status").equals(MyEntity.STATUS_CHANGKAI)){
+                        if(statusObj.getString("status").equals(activity.getResources().getString(R.string.main_status_changkai))){
                             lockStatusImg.setImageResource(R.drawable.icon_changkai);
                         }
 
                         TextView refreshTimeTv = (TextView) activity.findViewById(R.id.refreshTimeTv);
-                        refreshTimeTv.setText("更新时间："+statusObj.getString("opTime"));
-                        Log.d(TAG, "lockOperateSucc-status");
+                        refreshTimeTv.setText(activity.getResources().getString(R.string.main_update_time, statusObj.getString("opTime")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -564,12 +593,12 @@ public class MainViewControl {
      */
     public void refreshLockStatus(final boolean backgroundRun){
         if(!ZkUtil.isNetworkAvailable(activity)){
-            if(!backgroundRun) CommonUtils.toast(activity, "获取门锁状态失败，请检查网关是否正常");
+            if(!backgroundRun) Toast.makeText(activity, R.string.main_check_gateway, Toast.LENGTH_LONG).show();
             return;
         }
 
         if(!backgroundRun){
-            xqProgressDialog.setMessage("正在刷新");
+            xqProgressDialog.setMessage(activity.getResources().getString(R.string.main_refreshing));
             xqProgressDialog.setCancelable(false);
             xqProgressDialog.show();
         }
@@ -594,7 +623,7 @@ public class MainViewControl {
         builder.setMessage("钥匙已失效，无法开锁，请联系管理员");
 
         builder.setCancelable(false);
-        builder.setNegativeButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

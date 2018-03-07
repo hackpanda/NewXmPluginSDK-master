@@ -21,7 +21,7 @@
             android:background="@drawable/icon_zhuangtai"
             android:layout_height="@dimen/x34" />
         <TextView
-            android:text="正在检查最新版本"
+            android:text="@string/dfu_newver_checking"
             android:textSize="@dimen/x12"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal"
@@ -53,7 +53,7 @@
             <TextView
                 android:id="@+id/curRomVer"
                 android:layout_gravity="center_horizontal"
-                android:text="当前版本: V1.3.1"
+                android:text="@string/dfu_cur_version"
                 android:textColor="#000000"
                 android:textSize="@dimen/x13"
                 android:layout_marginTop="@dimen/y16"
@@ -62,7 +62,7 @@
             <TextView
                 android:id="@+id/newestRomVer"
                 android:layout_gravity="center_horizontal"
-                android:text="最新版本: V1.3.1"
+                android:text="@string/dfu_newest_ver"
                 android:textColor="#000000"
                 android:textSize="@dimen/x13"
                 android:layout_marginTop="@dimen/y7"
@@ -91,7 +91,7 @@
             <TextView
                 android:id="@+id/updateTipTv1"
                 android:layout_marginTop="@dimen/y99"
-                android:text="打开蓝牙并靠近门锁，升级过程不能中断"
+                android:text="@string/dfu_cannot_interrupt"
                 android:textColor="#ff7700"
                 android:textSize="@dimen/x12"
                 android:layout_centerHorizontal="true"
@@ -101,7 +101,7 @@
                 android:id="@+id/updateTipTv2"
                 android:layout_below="@+id/updateTipTv1"
                 android:layout_marginTop="@dimen/y9"
-                android:text="如升级失败必须重新升级，直到升级成功"
+                android:text="@string/dfu_interrupt_tips"
                 android:textColor="#ff7700"
                 android:textSize="@dimen/x12"
                 android:layout_centerHorizontal="true"
@@ -114,7 +114,7 @@
                 android:layout_height="@dimen/y33"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/y9"
-                android:text="更新"
+                android:text="@string/dfu_update"
                 android:background="@drawable/corners_btn"/>
         </RelativeLayout>
     </LinearLayout>
@@ -161,7 +161,7 @@
         <TextView
             android:id="@+id/checkVerDfuSuccTv"
             android:layout_gravity="center_horizontal"
-            android:text="更新过程中请勿使用门锁"
+            android:text="@string/dfu_updateing_tips"
             android:textColor="#ff7700"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y7"
@@ -170,7 +170,7 @@
         <TextView
             android:id="@+id/checkVerDfuSuccTipTv"
             android:layout_gravity="center_horizontal"
-            android:text="手机与门锁距离不能超过1米"
+            android:text="@string/dfu_distance"
             android:textColor="#ff7700"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y7"
@@ -183,12 +183,12 @@
             android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y113"
-            android:text="检查锁内固件版本号"
+            android:text="@string/dfu_check_lock_ver"
             android:background="@drawable/corners_btn"/>
         <TextView
             android:id="@+id/dfuBottomTipTv"
             android:layout_gravity="center_horizontal"
-            android:text="固件版本号以锁内为准，请靠近门锁读取"
+            android:text="@string/dfu_as_the_lock"
             android:textColor="@color/colorDivider"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y7"
@@ -214,7 +214,7 @@
         <TextView
             android:id="@+id/dfuFailTv"
             android:layout_gravity="center_horizontal"
-            android:text="升级失败，请重新升级"
+            android:text="@string/dfu_update_failed"
             android:textColor="#e83434"
             android:textSize="@dimen/x16"
             android:layout_marginTop="@dimen/y14"
@@ -229,7 +229,7 @@
             <TextView
                 android:alpha="0.8"
                 android:layout_gravity="center_horizontal"
-                android:text="升级成功前，严禁删除门锁"
+                android:text="@string/dfu_del_ban"
                 android:textColor="#e83434"
                 android:textSize="@dimen/x12"
                 android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
             <TextView
                 android:alpha="0.8"
                 android:layout_gravity="center_horizontal"
-                android:text="升级成功后，门锁才可使用"
+                android:text="@string/dfu_use_after_updated"
                 android:textColor="#e83434"
                 android:textSize="@dimen/x12"
                 android:layout_width="wrap_content"
@@ -247,13 +247,12 @@
         <!-- 重新升级 -->
         <Button
             android:id="@+id/reupdateBtn"
-
             android:layout_width="@dimen/x279"
             android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
             android:layout_below="@+id/updateTipTv"
             android:layout_marginTop="@dimen/y140"
-            android:text="重新升级"
+            android:text="@string/dfu_re_update"
             android:background="@drawable/corners_btn" />
     </LinearLayout>
 </LinearLayout>

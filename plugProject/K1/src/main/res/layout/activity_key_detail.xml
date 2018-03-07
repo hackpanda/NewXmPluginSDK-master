@@ -50,7 +50,7 @@
                     android:layout_height="@dimen/y38">
                     <TextView
                         android:id="@+id/validTitle"
-                        android:text="钥匙有效期"
+                        android:text="@string/blekey_valid_time"
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/x13"
@@ -87,7 +87,7 @@
                     android:background="@drawable/item_selector"
                     android:layout_height="@dimen/y38">
                     <TextView
-                        android:text="推送通知"
+                        android:text="@string/blekey_msg_send"
                         android:layout_marginLeft="@dimen/x20"
                         android:layout_centerVertical="true"
                         android:textSize="@dimen/x13"
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/recMsgTv"
-                        android:text="接收"
+                        android:text="@string/blekey_msg_receive"
                         android:layout_marginRight="@dimen/x20"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
@@ -127,7 +127,7 @@
             android:layout_marginTop="@dimen/y83"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="删除手机钥匙"
+                android:text="@string/blekey_del_text"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"

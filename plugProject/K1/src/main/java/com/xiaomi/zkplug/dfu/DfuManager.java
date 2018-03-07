@@ -121,14 +121,13 @@ public class DfuManager {
         TextView dfuProgressTv = (TextView) context.findViewById(R.id.dfuProgressTv);
         dfuProgressTv.setText("0%");
         TextView curVerDfuSuccTv = (TextView) context.findViewById(R.id.curVerDfuSuccTv);
-        curVerDfuSuccTv.setText("更新中...");
+        curVerDfuSuccTv.setText(R.string.dfu_update_ing);
         TextView checkVerDfuSuccTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTv);
-        checkVerDfuSuccTv.setText("更新过程中请勿使用门锁");
+        checkVerDfuSuccTv.setText(R.string.dfu_updateing_tips);
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.dfu_updateing_color));
         TextView checkVerDfuSuccTipTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTipTv);
-        checkVerDfuSuccTipTv.setText("手机与门锁距离不能超过1米");
+        checkVerDfuSuccTipTv.setText(R.string.dfu_distance);
         checkVerDfuSuccTipTv.setVisibility(View.VISIBLE);
-
 
     }
 
@@ -150,7 +149,7 @@ public class DfuManager {
         TextView curVerDfuSuccTv = (TextView) context.findViewById(R.id.curVerDfuSuccTv);
         curVerDfuSuccTv.setText(version);
         TextView checkVerDfuSuccTv = (TextView) context.findViewById(R.id.checkVerDfuSuccTv);
-        checkVerDfuSuccTv.setText("固件已是最新版本");
+        checkVerDfuSuccTv.setText(R.string.dfu_newest_ver);
         context.findViewById(R.id.checkVerDfuSuccTipTv).setVisibility(View.GONE);
         checkVerDfuSuccTv.setTextColor(context.getResources().getColor(R.color.colorDivider));
         Button checkVersionBtn = (Button)context.findViewById(R.id.checkVersionBtn);

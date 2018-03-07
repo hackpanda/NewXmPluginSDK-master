@@ -60,18 +60,18 @@ public class KeyManager {
     }
 
     /**
-     * 显示周期选择框
+     * 显示周期选择框：(暂时不用)
      */
     protected void showPeriodPickDialog(){
         weekdays = null;//初始化
         ArrayList<String> names = new ArrayList<>();
-        names.add("星期一");
-        names.add("星期二");
-        names.add("星期三");
-        names.add("星期四");
-        names.add("星期五");
-        names.add("星期六");
-        names.add("星期日");
+        names.add(activity.getResources().getString(R.string.blekey_dialog_monday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_tuesday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_wednesday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_thursday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_friday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_saturday));
+        names.add(activity.getResources().getString(R.string.blekey_dialog_sunday));
 
         new MultiSelectPopWindow.Builder(activity)
                 .setNameArray(names)
@@ -83,19 +83,19 @@ public class KeyManager {
                             String result = "";
                             weekdays = new ArrayList<Integer>();
                             for(int i=0; i<selectedList.size(); i++){
-                                if(selectedList.get(i).equals("星期一")){
+                                if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_monday))){
                                     weekdays.add(1);
-                                }else if(selectedList.get(i).equals("星期二")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_tuesday))){
                                     weekdays.add(2);
-                                }else if(selectedList.get(i).equals("星期三")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_wednesday))){
                                     weekdays.add(3);
-                                }else if(selectedList.get(i).equals("星期四")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_thursday))){
                                     weekdays.add(4);
-                                }else if(selectedList.get(i).equals("星期五")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_friday))){
                                     weekdays.add(5);
-                                }else if(selectedList.get(i).equals("星期六")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_saturday))){
                                     weekdays.add(6);
-                                }else if(selectedList.get(i).equals("星期日")){
+                                }else if(selectedList.get(i).equals(activity.getResources().getString(R.string.blekey_dialog_sunday))){
                                     weekdays.add(0);
                                 }
                                 result += selectedList.get(i) +",";
@@ -109,9 +109,9 @@ public class KeyManager {
                         }
                     }
                 })
-                .setCancel("取消")
-                .setConfirm("完成")
-                .setTitle("周期列表")
+                .setCancel(activity.getResources().getString(R.string.gloable_cancel))
+                .setConfirm(activity.getResources().getString(R.string.blekey_dialog_complete))
+                .setTitle(activity.getResources().getString(R.string.blekey_week_list))
                 .build()
                 .show(activity.findViewById(R.id.mBottom));
     }
@@ -125,10 +125,8 @@ public class KeyManager {
         long expireTime = 0;
 
         if(status == 3){
-            Log.d(TAG, "发送永久有效钥匙");
             activeTime = ZkUtil.getUTCTime(); // 生效时间 UTC时间戳，单位为s
             expireTime = activeTime + 50 * DateUtils.YEAR_IN_MILLIS; // 过期时间 UTC时间戳，单位为s
-            Log.d(TAG, "activeTime: "+activeTime+", expireTime: "+expireTime);
         }else if(status == 2){//周期钥匙，暂时屏蔽掉了
             SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             try {
@@ -184,7 +182,7 @@ public class KeyManager {
 
         Date endTime = new Date(expireTime * 1000);
         if(BriefDate.fromNature(startTime).toString().substring(0, 16).equals(BriefDate.fromNature(endTime).toString().substring(0, 16))){//至少一分钟
-            Toast.makeText(activity, "到期时间必须大于当前时间", Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, R.string.blekey_period_ivalid, Toast.LENGTH_LONG).show();
             return;
         }
         XmPluginHostApi.instance().shareSecurityKey(model, did, shareUid,
@@ -202,9 +200,9 @@ public class KeyManager {
 //                            Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
 //                        }
 
-                        Toast.makeText(activity, "分享钥匙失败, code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, activity.getResources().getString(R.string.blekey_share_failed)+", code = " + i + ", detail = " + s, Toast.LENGTH_SHORT).show();
                         if (i == Callback.INVALID) {
-                            Toast.makeText(activity, "用户id不存在", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, R.string.blekey_id_not_exist, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -217,10 +215,9 @@ public class KeyManager {
         XmPluginHostApi.instance().getSecurityKey(mDevice.getModel(), mDevice.getDid(), new Callback<List<SecurityKeyInfo>>() {
             @Override
             public void onSuccess(List<SecurityKeyInfo> securityKeyInfos) {
-                Log.d(TAG, String.format("获取到%d把钥匙：", securityKeyInfos.size()));
                 for (int i = 0; i < securityKeyInfos.size(); i++) {
                     StringBuilder sb = new StringBuilder();
-                    sb.append("钥匙" + (i + 1) + ":" + "\n");
+                    sb.append("key" + (i + 1) + ":" + "\n");
                     sb.append("keyId = " + securityKeyInfos.get(i).keyId + "\n");
                     sb.append("shareUid = " + securityKeyInfos.get(i).shareUid + "\n");
                     sb.append("status = " + securityKeyInfos.get(i).status + "\n");
@@ -238,7 +235,7 @@ public class KeyManager {
             }
             @Override
             public void onFailure(int i, String s) {
-                Toast.makeText(activity, "获取授权钥匙失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.blekey_get_failed, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -286,7 +283,7 @@ public class KeyManager {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(activity, "钥匙添加成功", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, R.string.blekey_add_succ, Toast.LENGTH_SHORT).show();
                             activity.finish();
                             if(KeySearchActivity.instance != null){
                                 KeySearchActivity.instance.finish();

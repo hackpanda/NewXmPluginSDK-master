@@ -208,11 +208,11 @@ public class InteManager {
             Log.d(TAG, "nnnnnnnnnnn");
             KEYS = new String[MEMBERS.length][];
             ArrayList<String> keys = new ArrayList<String>();
-            keys.add("手机钥匙开锁");
+            keys.add(activity.getString(R.string.inte_ble_open));
 
             if(data.has(theMasterPwdKey) && !TextUtil.isEmpty(data.getString(theMasterPwdKey))){
                 Log.d(TAG, "xxxxxxxxxxx");
-                keys.add("密码开锁");
+                keys.add(activity.getString(R.string.inte_pwd_open));
             }
             if(data.has(theMasterFpKey) && !TextUtil.isEmpty(data.getString(theMasterFpKey))){
                 Log.d(TAG, "yyyyyyyyyyyyyy");
@@ -220,7 +220,7 @@ public class InteManager {
                 Log.d(TAG, "zzzzzzzzzzzzz");
                 for(int i=0; i<fpArray.length(); i++){
                     JSONObject fpObj = fpArray.getJSONObject(i);
-                    keys.add(fpObj.getString("name")+"开锁");
+                    keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open));
                 }
             }
 
@@ -236,17 +236,17 @@ public class InteManager {
                 theSmFpKey = "keyid_sm$fp$"+smid+"_data";
                 theAccountKey = "keyid_sm$mi$account$"+smid+"_data";
                 if(data.has(theAccountKey) && !TextUtil.isEmpty(data.getString(theAccountKey))){//有钥匙
-                    keys.add("手机钥匙开锁");
+                    keys.add(activity.getString(R.string.inte_ble_open));
                 }
 
                 if(data.has(theSmPwdKey) && !TextUtil.isEmpty(data.getString(theSmPwdKey))){
-                    keys.add("密码开锁");
+                    keys.add(activity.getString(R.string.inte_pwd_open));
                 }
                 if(data.has(theSmFpKey) && !TextUtil.isEmpty(data.getString(theSmFpKey))){
                     JSONArray fpArray = new JSONArray(data.getString(theSmFpKey));
                     for(int i=0; i<fpArray.length(); i++){
                         JSONObject fpObj = fpArray.getJSONObject(i);
-                        keys.add(fpObj.getString("name")+"开锁");
+                        keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open));
                     }
                 }
                 KEYS[j+1] = new String[keys.size()];//成员+1，因为第一位管理员占了

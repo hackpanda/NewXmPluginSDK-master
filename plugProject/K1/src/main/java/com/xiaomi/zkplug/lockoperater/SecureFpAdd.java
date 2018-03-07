@@ -223,13 +223,13 @@ public class SecureFpAdd implements ILockDataOperator {
                         if(fpTipLayout.getVisibility() == View.GONE){
                             lockOperateCallback.lockOperateFail("超时未放置手指，请重新添加");
                         }else{
-                            lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode())));
+                            lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode()), activity));
                         }
 
                     }else if(lockCommFpAddResponse.getResultCode() == 0x17){//0x17
                         //什么都不要做，不要退出
                     }else{
-                        lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode())));
+                        lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode()), activity));
                     }
                 }else{
                     Log.d(TAG, "请录入指纹getLuruNum():"+lockCommFpAddResponse.getLuruNum());

@@ -181,7 +181,7 @@ public class SecureExchangeKey implements ILockDataOperator {
                 lockCommExchangeKeyResponse = (LockCommExchangeKeyResponse) LockCommBase.parse(inputBuffer);
                 if(lockCommExchangeKeyResponse.getResultCode() != 0){
                     Log.d(TAG, "错误码："+lockCommExchangeKeyResponse.getResultCode());
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommExchangeKeyResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommExchangeKeyResponse.getResultCode()), activity));
                 }else{
                     lockOperateCallback.lockOperateSucc(BitConverter.toHexString(lockCommExchangeKeyResponse.getSkey(), ""));
                 }

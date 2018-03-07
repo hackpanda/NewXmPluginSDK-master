@@ -182,7 +182,7 @@ public class SecureSetVolumn implements ILockDataOperator {
                 if(lockCommSetVolumnResponse.getResultCode() == 0){
                     lockOperateCallback.lockOperateSucc("设置成功");
                 }else{
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSetVolumnResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommSetVolumnResponse.getResultCode()), activity));
                 }
             }catch (Exception e){
                 Log.d(TAG, "LockFormatException");

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ import com.xiaomi.zkplug.deviceinfo.DeviceInfoActivity;
 import com.xiaomi.zkplug.dfu.DfuActivity;
 import com.xiaomi.zkplug.entity.MyProvider;
 import com.xiaomi.zkplug.log.LogReadActivity;
+import com.xiaomi.zkplug.member.MemberManageActivity;
 import com.xiaomi.zkplug.otp.OtpActivity;
 import com.xiaomi.zkplug.view.GifView;
 
@@ -50,16 +52,18 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     TextView mTitleView;
     MainViewControl mainViewControl;
     GifView openLockGif;//等待三秒动画
-    ImageView refreshLsImg, memberImg, shanglaImg, openLockImg;
+    Button refreshLsImg;
+    ImageView memberImg, shanglaImg, openLockImg;
     private BroadcastReceiver mDeviceReceiver;//修改插件名字广播接收器
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open);
         mDevice = Device.getDevice(mDeviceStat);
-        Log.d(TAG, "Mac地址： "+mDeviceStat.mac);
         mHostActivity.enableVerifyPincode();
         initView();
+
+
     }
 
     /**
@@ -78,7 +82,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         memberImg = (ImageView) findViewById(R.id.title_bar_share);
         openLockGif = (GifView) findViewById(R.id.openLockGif);
         openLockImg = (ImageView) findViewById(R.id.openLockImg);
-        refreshLsImg = (ImageView) findViewById(R.id.refreshLsImg);
+        refreshLsImg = (Button) findViewById(R.id.refreshLsImg);
         refreshLsImg.setOnClickListener(this);
         openLockImg.setOnClickListener(this);
         findViewById(R.id.longTimeNoSyncTimeTv).setOnClickListener(this);
@@ -100,11 +104,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         boolean isSecurityChipSharedKeyValid = XmBluetoothManager.getInstance().isSecurityChipSharedKeyValid(mDevice.getMac());
         Log.d(TAG, "isSecurityChipSharedKeyValid: "+isSecurityChipSharedKeyValid);
         if (!isSecurityChipSharedKeyValid) {
-            //Toast.makeText(activity, "没有被分享的钥匙", Toast.LENGTH_SHORT).show();
             mainViewControl.showNoShareKeyView();
         }else{
             TextView keyPeriodTv = (TextView) findViewById(R.id.keyPeriodTv);
-            keyPeriodTv.setText("被分享者钥匙有效期不支持查询");
+            keyPeriodTv.setText("");//钥匙已失效，无法开锁，请联系管理员
             keyPeriodTv.setVisibility(View.VISIBLE);
             mainViewControl.connectSharedLock();//自动连接门锁
         }
@@ -118,7 +121,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mTitleView.setOnClickListener(this);
         mNewFirmView = findViewById(R.id.title_bar_redpoint);
         /* use share icon instead of member begin */
-
         memberImg.setVisibility(View.VISIBLE);
         memberImg.setOnClickListener(this);
         memberImg.setImageResource(R.drawable.member_guanli_selector);
@@ -131,17 +133,17 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         * 检查固件升级
         * */
         IXmPluginHostActivity.IntentMenuItem intentMenuOtp = new IXmPluginHostActivity.IntentMenuItem();
-        intentMenuOtp.name = "临时密码";
+        intentMenuOtp.name = getResources().getString(R.string.main_menu_otp);
         intentMenuOtp.intent = mHostActivity.getActivityIntent(null, OtpActivity.class.getName());
         menus.add(intentMenuOtp);
 
         IXmPluginHostActivity.IntentMenuItem intentMenuDeviceInfo = new IXmPluginHostActivity.IntentMenuItem();
-        intentMenuDeviceInfo.name = "设备信息";
+        intentMenuDeviceInfo.name = getResources().getString(R.string.main_menu_deviceinfo);
         intentMenuDeviceInfo.intent = mHostActivity.getActivityIntent(null, DeviceInfoActivity.class.getName());
         menus.add(intentMenuDeviceInfo);
 
         IXmPluginHostActivity.IntentMenuItem intentMenuDfu = new IXmPluginHostActivity.IntentMenuItem();
-        intentMenuDfu.name = "检查固件升级";
+        intentMenuDfu.name = getResources().getString(R.string.main_menu_dfu_check);
         intentMenuDfu.intent = mHostActivity.getActivityIntent(null, DfuActivity.class.getName());
         menus.add(intentMenuDfu);
 
@@ -192,8 +194,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             case R.id.title_bar_share:
                 Intent memberIntent = new Intent();
                 memberIntent.putExtra("mDeviceMemberArray", mDeviceMemberArray.toString());
-//                startActivity(memberIntent, MemberManageActivity.class.getName());
-
+                startActivity(memberIntent, MemberManageActivity.class.getName());
                 break;
             case R.id.shanglaImg:
                 startActivity(new Intent(), MsgActivity.class.getName());
@@ -202,6 +203,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             case R.id.longTimeNoSyncTimeTv:
                 startActivity(new Intent(), DeviceInfoActivity.class.getName());
                 overridePendingTransition(R.anim.activity_open, R.anim.activity_open);//结束的动画
+
                 break;
         }
     }
@@ -281,7 +283,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             }
             if (intent != null && XmBluetoothManager.ACTION_ONLINE_STATUS_CHANGED.equals(intent.getAction())) {
 
-                Log.d(TAG, "登录状态广播: 登录成功");
+                Log.d(TAG, "Login Succ");
             }
         }
     }
@@ -299,12 +301,12 @@ public class MainActivity extends BaseActivity implements OnClickListener{
             mHits = null;	//这里说明一下，我们在进来以后需要还原状态，否则如果点击过快，第六次，第七次 都会不断进来触发该效果。重新开始计数即可
             mShow = true;
             if (mShow) {
-                Toast.makeText(activity(), "已开放日志读取功能", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity(), R.string.main_log_read_enable, Toast.LENGTH_SHORT).show();
                 //这里是你具体的操作
                 if(mDevice.isOwner() && menus.size() == 3){
                     /* begin add by wenqi for test begin */
                     IXmPluginHostActivity.IntentMenuItem intentMenuItemLog = new IXmPluginHostActivity.IntentMenuItem();
-                    intentMenuItemLog.name = "日志读取";
+                    intentMenuItemLog.name = getResources().getString(R.string.main_log_read);
                     intentMenuItemLog.intent = mHostActivity.getActivityIntent(null, LogReadActivity.class.getName());
                     menus.add(intentMenuItemLog);
                     /* begin add by wenqi for test end */
@@ -314,7 +316,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         }
     }
 
-//    private void leScan() {
+    //    private void leScan() {
 //        Log.d(TAG, "开始扫描.");
 //        mBluetoothLe.setScanPeriod(15000)
 //                .setReportDelay(0)

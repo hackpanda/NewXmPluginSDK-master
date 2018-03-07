@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--item里面的drawable属性表示当文本框长度不为零的时候显示的图片 -->
+
+  <item android:state_pressed="true" android:color="#ffffff"/>
+  <item android:state_focused="true" android:color="#2889fd"/>
+  <item android:color="#0066cc" />
+</selector>

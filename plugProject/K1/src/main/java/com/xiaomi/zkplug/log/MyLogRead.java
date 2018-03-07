@@ -62,10 +62,9 @@ public class MyLogRead {
                         Log.d(TAG, "登录成功");
                         lockCommGetLogList.getLockLog(orderType, showLogcallback);
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                        Toast.makeText(activity, "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.device_has_been_reset, Toast.LENGTH_SHORT).show();
                     }else {
-                        Log.d(TAG, "未发现门锁，请靠近门锁重试");
-                        Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.connect_time_out, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

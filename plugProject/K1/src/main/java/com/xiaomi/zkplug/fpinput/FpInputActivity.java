@@ -35,7 +35,7 @@ public class FpInputActivity extends BaseActivity implements View.OnClickListene
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("添加指纹");
+        mTitleView.setText(R.string.fp_add_title);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         this.btnFpInput = (Button) findViewById(R.id.btnFpIput);
         this.fpInputBuzhouLayout = (LinearLayout) findViewById(R.id.fpInputBuzhouLayout);
@@ -58,14 +58,14 @@ public class FpInputActivity extends BaseActivity implements View.OnClickListene
                     return;
                 }
                 if(!ZkUtil.isBleOpen()){
-                    Toast.makeText(activity(), "请打开手机蓝牙", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity(), R.string.open_bluetooth, Toast.LENGTH_LONG).show();
                     return;
                 }
 
                 TextView fpPutTv = (TextView) findViewById(R.id.fpPutTv);
-                fpPutTv.setText("放置手指");
+                fpPutTv.setText(R.string.fp_put_figure);
                 TextView fpCompleteTv = (TextView) findViewById(R.id.fpCompleteTv);
-                fpCompleteTv.setText("将手指按在指纹头上再抬起，重复此步骤");
+                fpCompleteTv.setText(R.string.fp_repeat_input);
                 fpInputHelper.registerBluetoothReceiver();
                 fpInputHelper.addMemberFp();
                 break;

@@ -13,6 +13,8 @@ import com.xiaomi.smarthome.device.api.DeviceStat;
 import com.xiaomi.smarthome.device.api.IXmPluginMessageReceiver;
 import com.xiaomi.smarthome.device.api.MessageCallback;
 import com.xiaomi.smarthome.device.api.XmPluginHostApi;
+import com.xiaomi.zkplug.intelligent.AnyModeOpenActivity;
+import com.xiaomi.zkplug.intelligent.AppointOpenActivity;
 import com.xiaomi.zkplug.main.MainActivity;
 
 /**
@@ -24,12 +26,15 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
     public boolean handleMessage(Context context, XmPluginPackage xmPluginPackage, int type,
                                  Intent intent,
                                  DeviceStat deviceStat) {
+        Log.d("xxxcccc", type+"-----");
         switch (type) {
             case LAUNCHER: {// 启动入口
                 XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
                         deviceStat.did, MainActivity.class);
                 return true;
             }
+
+
             case PUSH_MESSAGE: {
                 // 订阅消息push通知
                 if (intent == null)
@@ -60,7 +65,40 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
     @Override
     public boolean handleMessage(Context context, XmPluginPackage xmPluginPackage, int type,
                                  Intent intent, DeviceStat deviceStat, MessageCallback callback) {
-        //TODO 主app调用插件获取数据
+        switch (type){
+            case MSG_GET_SCENE_VALUE:
+                ///处理客户端发送过来的场景请求
+                String action = intent.getStringExtra("action");///对应客户端发送过来的action即开放平台配置的字段
+                if(action.equals("event.shjszn.lock.c1.unlock")){
+                    XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
+                            deviceStat.did, AnyModeOpenActivity.class);
+                }
+                if(action.equals("event.shjszn.lock.c1.key")){
+                    XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
+                            deviceStat.did, AppointOpenActivity.class);
+                }
+                //actionId和last_value都为空
+                Log.d("vvvvv", "0000000000000");
+                if(intent.hasExtra("actionId")){
+                    Log.d("vvvvv", "111111111");
+                    Log.d("vvvvv", intent.getStringExtra("actionId")+"--------");
+                }
+                Log.d("vvvvv", "2222222");
+                if(intent.hasExtra("last_value")){
+                    Log.d("vvvvv", "3333333");
+                    Log.d("vvvvv", intent.getStringExtra("last_value")+"--------");
+                }
+                Log.d("vvvvv", "444444444");
+                if(callback != null){
+                    Log.d("vvvvv", "--------");
+                    callback.onSuccess(intent);
+                }
+
+
+                break;
+            default:
+                break;
+        }
         return false;
     }
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_gravity="center_horizontal"
-            android:text="最舒适的姿势，将手指按在门锁指纹头上，听"
+            android:text="@string/fp_input_tips_0"
             android:alpha="0.8"
             android:textColor="#000000"
             android:textSize="@dimen/x12"
@@ -51,7 +51,7 @@
             android:layout_height="@dimen/y33"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/y86"
-            android:text="开始添加"
+            android:text="@string/fp_begin_add"
             android:background="@drawable/corners_btn"/>
     </LinearLayout>
     <LinearLayout
@@ -69,7 +69,7 @@
             <TextView
                 android:id="@+id/fpPutTv"
                 android:layout_gravity="center_horizontal"
-                android:text="放置手指"
+                android:text="@string/fp_put_figure"
                 android:textColor="#2889fd"
                 android:textSize="@dimen/x23"
                 android:layout_width="wrap_content"
@@ -78,7 +78,7 @@
                 android:id="@+id/fpCompleteTv"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y11"
-                android:text="将手指按在指纹头上再抬起，重复此步骤"
+                android:text="@string/fp_repeat_input"
                 android:alpha="0.6"
                 android:textColor="#000000"
                 android:textSize="@dimen/x14"

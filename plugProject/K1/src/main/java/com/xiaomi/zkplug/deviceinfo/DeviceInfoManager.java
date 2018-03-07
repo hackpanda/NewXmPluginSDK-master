@@ -58,7 +58,8 @@ public class DeviceInfoManager {
     private final int MSG_MUTE_SET_TIME_OUT = 0x11;//静音设置超时
     private final int MSG_SEND_SYNC_TIME_CMD = 0x20;//发送同步时间命令
     private final int MSG_SEND_VOLUMN_SET_CMD = 0x30;//发送设置静音模式命令
-    boolean fromGetInfoFlag = false;//从获取设备信息而来, 则不需要监听muteSwitch的变化
+    private final int MSG_SWITCH_RESTORE = 0x40;//还原switch
+    boolean needMonitor = true;//是否需要监听switch变化
     Activity activity;
     XQProgressDialog xqProgressDialog;
     Device mDevice;
@@ -66,7 +67,6 @@ public class DeviceInfoManager {
     SwitchButton muteSwitch;
     ILockDataOperator iStatusOperator, iSyncTimeOperator, iSetVolumnOperator;
     DataManageUtil dataManageUtil;
-    boolean muteSetComplete = false;//静音模式设置完成标识位
     public DeviceInfoManager(Device device, final Activity activity) {
         this.mDevice = device;
         this.activity = activity;
@@ -89,15 +89,17 @@ public class DeviceInfoManager {
         this.muteSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(fromGetInfoFlag){
-                    fromGetInfoFlag = false;
-                }else{//不是从getInfo而来，才需要监听变化
+                if(needMonitor){
                     if(!ZkUtil.isBleOpen()){
-                        Toast.makeText(activity, "请打开手机蓝牙", Toast.LENGTH_LONG).show();
+                        needMonitor = false;
+                        Toast.makeText(activity, activity.getResources().getString(R.string.open_bluetooth), Toast.LENGTH_LONG).show();
+                        viewHanlder.sendEmptyMessage(MSG_SWITCH_RESTORE);
                         return;
                     }
-                    muteSetComplete = false;
                     setMuteMode(isChecked);
+
+                }else{
+                    needMonitor = true;
                 }
             }
         });
@@ -106,9 +108,9 @@ public class DeviceInfoManager {
     protected void getDeviceInfo(){
         if(!ZkUtil.isBleOpen()){
             MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-            builder.setTitle("提示");
-            builder.setMessage("手机蓝牙未打开");
-            builder.setNegativeButton("确定", new MLAlertDialog.OnClickListener() {
+            builder.setTitle(activity.getResources().getString(R.string.device_info_tip));
+            builder.setMessage(R.string.bluetooth_not_open);
+            builder.setNegativeButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
@@ -118,7 +120,7 @@ public class DeviceInfoManager {
             builder.show();
             return;
         }
-        xqProgressDialog.setMessage("正在获取设备信息");
+        xqProgressDialog.setMessage(activity.getResources().getString(R.string.device_info_querying));
         xqProgressDialog.show();
 
         getLockStatus();
@@ -168,7 +170,7 @@ public class DeviceInfoManager {
                 iStatusOperator.unregisterBluetoothReceiver();
                 xqProgressDialog.dismiss();
                 Toast.makeText(activity, value, Toast.LENGTH_LONG).show();
-                if(value.indexOf("命令不在有效期内") != -1){//需要同步时间
+                if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     showSyncTimeDialog();
                 }
             }
@@ -192,7 +194,7 @@ public class DeviceInfoManager {
         try {
             devicePowerTv.setText(activity.getResources().getString(R.string.device_info_power, statusObj.getInt("power"))+"%");
             if(statusObj.getInt("power") < 10){
-                showErrMsg(devicePowerTv, "（电量过低请及时更换电池）");
+                showErrMsg(devicePowerTv, "（"+activity.getString(R.string.device_power_out)+"）");
             }
             int securityLevel = (statusObj.getInt("seclevel") & 3);
 
@@ -204,12 +206,12 @@ public class DeviceInfoManager {
             }else if(securityLevel == 3){
                 securityLevelStr = "B";
             }else{
-                securityLevelStr = "异常";
+                securityLevelStr = activity.getString(R.string.device_exception);
             }
 
             deviceSecLevelTv.setText(activity.getResources().getString(R.string.device_info_level_title, securityLevelStr));
             if(statusObj.getInt("volumn") == 0){//静音
-                fromGetInfoFlag = true;
+                needMonitor = false;
                 muteSwitch.setChecked(true);
             }
             fpCountTv.setText(activity.getResources().getString(R.string.device_info_fp_count, statusObj.getInt("fpcount")));
@@ -222,7 +224,8 @@ public class DeviceInfoManager {
 
             Log.d(TAG, "timdiffsnd"+timdiffsnd);
             if(timdiffsnd > 30){
-                showErrMsg(phoneTimeTv,"（偏差"+timdiffsnd+"秒建议同步时间）");
+                String errMsg = activity.getString(R.string.device_time_diff, String.valueOf(timdiffsnd));
+                showErrMsg(phoneTimeTv, "（"+errMsg+"）");
                 //showSyncTimeDialog();
             }
 
@@ -236,9 +239,9 @@ public class DeviceInfoManager {
      */
     private void setMuteMode(boolean isChecked){
         if(isChecked){
-            xqProgressDialog.setMessage("正在开启");
+            xqProgressDialog.setMessage(activity.getString(R.string.device_mute_openning));
         }else{
-            xqProgressDialog.setMessage("正在关闭");
+            xqProgressDialog.setMessage(activity.getString(R.string.device_mute_closing));
         }
         viewHanlder.sendEmptyMessageDelayed(MSG_MUTE_SET_TIME_OUT, GET_STATUS_FAIL_TIME);
         xqProgressDialog.show();
@@ -249,7 +252,6 @@ public class DeviceInfoManager {
      * 进行更新门锁状态和授时
      */
     private void getLockStatus(){
-        Log.d(TAG, "getLockStatus开始");
         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
 
         viewHanlder.sendEmptyMessageDelayed(MSG_GET_STATUS, 2000);
@@ -260,15 +262,15 @@ public class DeviceInfoManager {
      */
     private void showGetStatusRetryDialog(){
         MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle("获取锁内信息失败");
-        builder.setMessage("请将手机尽量靠近门锁重新获取");
-        builder.setPositiveButton("重新获取", new MLAlertDialog.OnClickListener(){
+        builder.setTitle(R.string.device_info_get_failed);
+        builder.setMessage(R.string.device_info_closer);
+        builder.setPositiveButton(activity.getString(R.string.device_info_again), new MLAlertDialog.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 getDeviceInfo();
             }
         });
-        builder.setNegativeButton("退出", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(activity.getString(R.string.device_info_exit), new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -284,11 +286,24 @@ public class DeviceInfoManager {
         @Override
         public void handleMessage(final Message msg) {
             switch (msg.what) {
+                case MSG_SWITCH_RESTORE:
+                    if(muteSwitch.isChecked()){
+                        Log.d(TAG, "被选中，需要还原");
+                        muteSwitch.setChecked(false);
+                    }else{
+                        Log.d(TAG, "未选中，需要还原");
+                        muteSwitch.setChecked(true);
+                    }
+
+                    break;
                 case MSG_MUTE_SET_TIME_OUT:
-                    Log.d(TAG, "连接设备失败");
+                    Log.d(TAG, "connect failed");
                     unregisterBleReceiver();
-                    Toast.makeText(activity, "未发现门锁，请靠近门锁重试", Toast.LENGTH_LONG).show();
+                    Toast.makeText(activity, R.string.connect_time_out, Toast.LENGTH_LONG).show();
                     XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
+                    Log.d(TAG, "开始还原");
+                    needMonitor = false;
+                    viewHanlder.sendEmptyMessage(MSG_SWITCH_RESTORE);
                     xqProgressDialog.dismiss();
                     break;
                 case MSG_TIME_OUT:
@@ -354,7 +369,7 @@ public class DeviceInfoManager {
             public void lockOperateSucc(String lockTime) {
                 iSyncTimeOperator.unregisterBluetoothReceiver();
                 Log.d(TAG, "同步成功");
-                Toast.makeText(activity, "同步成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.device_synctime_succ, Toast.LENGTH_SHORT).show();
                 xqProgressDialog.dismiss();
                 sendStatusCmd();//同步成功后，再次获取锁信息
 
@@ -376,8 +391,6 @@ public class DeviceInfoManager {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
 
             @Override
@@ -390,7 +403,6 @@ public class DeviceInfoManager {
         });
     }
 
-
     /**
      * 发送前状态判断
      */
@@ -399,13 +411,14 @@ public class DeviceInfoManager {
         iSyncTimeOperator.registerBluetoothReceiver();
         viewHanlder.sendEmptyMessageDelayed(MSG_SEND_SYNC_TIME_CMD, 2000);//注册广播后，延迟一秒发送
     }
+
     /**
      * 授时间
      */
     protected void operateLockSyncTime(){
-        xqProgressDialog.setMessage("正在同步时间");
+        xqProgressDialog.setMessage(activity.getString(R.string.device_syncing));
         xqProgressDialog.show();
-        Log.d(TAG, "开始授时: "+BriefDate.fromNature(new Date()).toString());
+        Log.d(TAG, "start sync time: "+BriefDate.fromNature(new Date()).toString());
         if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
             Log.d(TAG, "已连接，直接发送授时间命令");
             prepareSendSyncCmd();
@@ -422,27 +435,28 @@ public class DeviceInfoManager {
                         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
                         iSyncTimeOperator.unregisterBluetoothReceiver();
                         Log.d(TAG, "连接设备失败");
-                        Toast.makeText(activity, "连接设备失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.device_connect_fail, Toast.LENGTH_SHORT).show();
                         xqProgressDialog.dismiss();
                     }
                 }
             });
         }
     }
+
     /**
      * 命令不在有效期弹框
      */
     private void showSyncTimeDialog(){
         MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle("时间偏差过大");
-        builder.setMessage("请将手机时间同步到锁内");
-        builder.setPositiveButton("同步", new MLAlertDialog.OnClickListener() {
+        builder.setTitle(R.string.device_large_diff);
+        builder.setMessage(R.string.device_to_sync_time);
+        builder.setPositiveButton(R.string.device_sync_time, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 operateLockSyncTime();
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -479,7 +493,6 @@ public class DeviceInfoManager {
             @Override
             public void lockOperateSucc(String result) {
                 Log.d(TAG, "设置成功");
-                muteSetComplete = true;
                 viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                 iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, result, Toast.LENGTH_SHORT).show();
@@ -489,12 +502,14 @@ public class DeviceInfoManager {
             @Override
             public void lockOperateFail(String value) {
                 Log.d(TAG, "设置失败");
-                muteSetComplete = true;
                 viewHanlder.removeMessages(MSG_MUTE_SET_TIME_OUT);
                 iSetVolumnOperator.unregisterBluetoothReceiver();
                 Toast.makeText(activity, value, Toast.LENGTH_SHORT).show();
+                needMonitor = false;
+                viewHanlder.sendEmptyMessage(MSG_SWITCH_RESTORE);
+
                 xqProgressDialog.dismiss();
-                if(value.indexOf("命令不在有效期内") != -1){//需要同步时间
+                if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     showSyncTimeDialog();
                 }
 

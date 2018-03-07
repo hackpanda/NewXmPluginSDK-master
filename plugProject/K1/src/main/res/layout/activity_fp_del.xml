@@ -24,8 +24,7 @@
                 android:background="@drawable/item_selector"
                 android:layout_height="@dimen/y38">
                 <TextView
-
-                    android:text="指纹名称"
+                    android:text="@string/fp_name_text"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x20"
                     android:textSize="@dimen/x13"
@@ -43,7 +42,7 @@
                     android:layout_height="@dimen/y10" />
                 <TextView
                     android:id="@+id/fpNameTv"
-                    android:text="王美兰"
+                    android:text=""
                     android:gravity="right"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/x12"
@@ -118,7 +117,7 @@
             android:layout_marginTop="@dimen/y313"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="删除"
+                android:text="@string/fp_del_text"
                 android:textSize="@dimen/x13"
                 android:textColor="#e83434"
                 android:layout_width="wrap_content"

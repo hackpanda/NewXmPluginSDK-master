@@ -102,22 +102,22 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
     private void delFp(){
 
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-        builder.setTitle("是否删除指纹？");
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setTitle(getString(R.string.fp_del_title)+"？");
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity())){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!ZkUtil.isBleOpen()){
-                    CommonUtils.toast(activity(), "请打开手机蓝牙");
+                    CommonUtils.toast(activity(), getResources().getString(R.string.open_bluetooth));
                     return;
                 }
 
                 viewHanlder.sendEmptyMessageDelayed(MSG_FP_DEL_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
-                xqProgressDialog.setMessage("正在删除");
+                xqProgressDialog.setMessage(getString(R.string.gloable_deling));
                 xqProgressDialog.setCancelable(false);
                 xqProgressDialog.show();
                 if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
@@ -130,12 +130,12 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
                             if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                                 delFpInLock();//删除锁内指纹
                             }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                                Toast.makeText(activity(), "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
+                                Toast.makeText(activity(), R.string.device_has_been_reset, Toast.LENGTH_LONG).show();
                                 xqProgressDialog.dismiss();
                                 viewHanlder.removeMessages(MSG_FP_DEL_TIMEOUT);
                             }else {
                                 xqProgressDialog.dismiss();
-                                CommonUtils.toast(activity(), "未发现门锁，请靠近门锁重试");
+                                CommonUtils.toast(activity(), getResources().getString(R.string.connect_time_out));
                                 viewHanlder.removeMessages(MSG_FP_DEL_TIMEOUT);
                             }
 
@@ -144,7 +144,7 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
                 }
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -155,30 +155,27 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
     //修改家人名字dialog
     private void showDialog() {
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-        builder.setTitle("修改指纹名称");
+        builder.setTitle(R.string.fp_modify_fp_name);
         builder.setInputView(fpNameTv.getText().toString(), true);
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity())){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(!ZkUtil.isNetworkAvailable(activity())){
-                    CommonUtils.toast(activity(), "网络未连接，请确保网络畅通");
-                    return;
-                }
+
                 if(!TextUtils.isEmpty(builder.getInputView().getText().toString()) && TextUtils.isEmpty(builder.getInputView().getText().toString().trim())){//全是空格
-                    CommonUtils.toast(activity(), "请输入指纹名称");
+                    Toast.makeText(activity(), R.string.fp_name_empty, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(builder.getInputView().getText().toString().trim().equals(fpNameTv.getText().toString())){
-                    CommonUtils.toast(activity(), "指纹名已存在，请重新输入");
+                    Toast.makeText(activity(), R.string.fp_name_exist, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(builder.getInputView().getText().toString())){//什么都没输入
-                    CommonUtils.toast(activity(), "修改成功");
+                    Toast.makeText(activity(), R.string.gloable_modify_succ, Toast.LENGTH_LONG).show();
                     return;
                 }
                 String theFpKey = "";
@@ -203,7 +200,7 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
                 }
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -247,7 +244,7 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
         for(int m =0; m<fpList.length(); m++){
             JSONObject memberFp = fpList.getJSONObject(m);
             if(memberFp.getString("name").equals(newFpName)){
-                Toast.makeText(activity(), "指纹名称已存在", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity(), R.string.fp_name_exist, Toast.LENGTH_SHORT).show();
                 return false;
             }
         }
@@ -290,10 +287,10 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
             public void lockOperateFail(String value) {
                 viewHanlder.removeMessages(MSG_FP_DEL_TIMEOUT);
                 xqProgressDialog.dismiss();
-                if(value.equals("命令不在有效期内(3)")){
+                if(value.indexOf(getString(R.string.device_cmd_timeout)) != -1){
                     ZkUtil.showCmdTimeOutView(activity());
                 }else{
-                    CommonUtils.toast(activity(), value);
+                    Toast.makeText(activity(), value, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -340,11 +337,11 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
                             @Override
                             public void run() {
                                 if(isDel){
-                                    CommonUtils.toast(activity(), "删除成功");
+                                    Toast.makeText(activity(), R.string.gloable_del_succ, Toast.LENGTH_LONG).show();
                                     finish();
                                 }else{
                                     fpNameTv.setText(newFpName);
-                                    CommonUtils.toast(activity(), "修改成功");
+                                    Toast.makeText(activity(), R.string.gloable_modify_succ, Toast.LENGTH_LONG).show();
                                 }
 
                                 xqProgressDialog.dismiss();
@@ -367,7 +364,7 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            CommonUtils.toast(activity(), "数据解析异常");
+            Toast.makeText(activity(), R.string.gloable_data_error, Toast.LENGTH_LONG).show();
         }
     }
     Handler viewHanlder = new Handler() {
@@ -376,10 +373,9 @@ public class FpDelActivity extends BaseActivity implements View.OnClickListener{
             switch (msg.what) {
                 case MSG_FP_DEL_TIMEOUT:
                     xqProgressDialog.dismiss();
-                    Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
+                    Log.d(TAG, "start fp input timeout, disconnect: "+mDeviceStat.mac);
                     XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                    CommonUtils.toast(activity(), "未发现门锁，请靠近门锁重试");
-                    Log.d(TAG, "超时未发现门锁");
+                    Toast.makeText(activity(), R.string.connect_time_out, Toast.LENGTH_LONG).show();
                     break;
 
                 default:

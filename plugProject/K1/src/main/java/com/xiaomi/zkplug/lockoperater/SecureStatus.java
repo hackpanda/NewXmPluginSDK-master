@@ -196,7 +196,7 @@ public class SecureStatus implements ILockDataOperator {
                     if(lockCommGetStatusResponse.getResultCode() != 0){
                         unregisterBluetoothReceiver();
                         Log.d(TAG, "错误码："+lockCommGetStatusResponse.getResultCode());
-                        lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommGetStatusResponse.getResultCode())));
+                        lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommGetStatusResponse.getResultCode()), activity));
                     }else{
                         unregisterBluetoothReceiver();
                         Log.d(TAG, "锁内时间:"+lockCommGetStatusResponse.getLockBriefTime());

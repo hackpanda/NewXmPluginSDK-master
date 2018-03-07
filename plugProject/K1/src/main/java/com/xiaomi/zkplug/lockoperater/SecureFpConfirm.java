@@ -190,7 +190,7 @@ public class SecureFpConfirm implements ILockDataOperator {
                 if(lockCommFpConfirmResponse.getResultCode() != 0){
                     Log.d(TAG, "指纹确认错误码："+lockCommFpConfirmResponse.getResultCode());
                     unregisterBluetoothReceiver();
-                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpConfirmResponse.getResultCode())));
+                    lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpConfirmResponse.getResultCode()), activity));
                 }else{
                     Log.d(TAG, "指纹录入成功");
                     unregisterBluetoothReceiver();

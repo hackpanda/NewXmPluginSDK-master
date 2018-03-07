@@ -32,7 +32,7 @@ public class DeviceInfoActivity extends BaseActivity implements View.OnClickList
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("设备信息");
+        mTitleView.setText(R.string.main_menu_deviceinfo);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         findViewById(R.id.btnSyncTime).setOnClickListener(this);
 

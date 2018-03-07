@@ -116,7 +116,7 @@ class MemberHelper {
                             }else{
                                 viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                                 viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                                CommonUtils.toast(activity, "删除成功");
+                                Toast.makeText(activity, R.string.gloable_del_succ, Toast.LENGTH_LONG).show();
                                 pwdSetRel.setVisibility(View.VISIBLE);
                                 pwdUnlockView.setVisibility(View.GONE);
                                 xqProgressDialog.dismiss();
@@ -141,7 +141,7 @@ class MemberHelper {
             e.printStackTrace();
             viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
             viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-            CommonUtils.toast(activity, "数据解析异常");
+            Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_LONG).show();
             xqProgressDialog.dismiss();
         }
     }
@@ -187,7 +187,7 @@ class MemberHelper {
             });
         } catch (JSONException e) {
             e.printStackTrace();
-            CommonUtils.toast(activity, "数据解析异常");
+            Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_LONG).show();
             xqProgressDialog.dismiss();
         }
     }
@@ -197,16 +197,16 @@ class MemberHelper {
         isDelMember = false;
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
         builder.setTitle("是否删除密码？");
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity)){
-                    CommonUtils.toast(activity, "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity, R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!ZkUtil.isBleOpen()){
-                    CommonUtils.toast(activity, "请打开手机蓝牙");
+                    CommonUtils.toast(activity, activity.getResources().getString(R.string.open_bluetooth));
                     return;
                 }
                 viewHanlder.sendEmptyMessageDelayed(MSG_PWD_DEL_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
@@ -242,12 +242,12 @@ class MemberHelper {
         isDelMember = true;
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
         builder.setTitle("是否删除成员？");
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //确定
                 if(!ZkUtil.isNetworkAvailable(activity)){
-                    CommonUtils.toast(activity, "网络未连接，请确保网络畅通");
+                    Toast.makeText(activity, R.string.network_not_avilable, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(!ZkUtil.isBleOpen()){
@@ -360,12 +360,12 @@ class MemberHelper {
                             }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
                                 viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                                 viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                                Toast.makeText(activity, "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
+                                Toast.makeText(activity, R.string.device_has_been_reset, Toast.LENGTH_LONG).show();
                                 xqProgressDialog.dismiss();
                             } else {
                                 viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                                 viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                                CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                                CommonUtils.toast(activity, activity.getResources().getString(R.string.connect_time_out));
                                 xqProgressDialog.dismiss();
                             }
                         }
@@ -459,13 +459,13 @@ class MemberHelper {
                     if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                         delFpInLock(faArray, iLockFpDelOperator);
                     }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                        Toast.makeText(activity, "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, R.string.device_has_been_reset, Toast.LENGTH_LONG).show();
                         xqProgressDialog.dismiss();
                         viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                     } else {
                         viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                         xqProgressDialog.dismiss();
-                        CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                        CommonUtils.toast(activity, activity.getResources().getString(R.string.connect_time_out));
                     }
                 }
             });
@@ -510,7 +510,7 @@ class MemberHelper {
                                 public void run() {
                                     viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                                     viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                                    CommonUtils.toast(activity, "删除成功");
+                                    Toast.makeText(activity, R.string.gloable_del_succ, Toast.LENGTH_LONG).show();
                                     xqProgressDialog.dismiss();
                                     activity.finish();
                                 }
@@ -539,7 +539,7 @@ class MemberHelper {
                     Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
                     xqProgressDialog.dismiss();
                     XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                    CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                    CommonUtils.toast(activity, activity.getResources().getString(R.string.connect_time_out));
                     Log.d(TAG, "超时未发现门锁");
                     break;
 
@@ -547,7 +547,7 @@ class MemberHelper {
                     Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
                     xqProgressDialog.dismiss();
                     XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                    CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                    CommonUtils.toast(activity, activity.getResources().getString(R.string.connect_time_out));
                     break;
                 default:
                     break;

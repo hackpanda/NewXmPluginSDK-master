@@ -94,7 +94,7 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
         dataManageUtil.queryDataFromServer(mJsArray, new DataUpdateCallback() {
             @Override
             public void dataUpateFail(int i, String s) {
-                Toast.makeText(activity(), "数据查询失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity(), R.string.data_query_fail, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -139,7 +139,7 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
             @Override
             public void dataUpateFail(int i, String s) {
 
-                Toast.makeText(activity(), "数据查询失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity(), R.string.data_query_fail, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -175,7 +175,7 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                         dataManageUtil.queryDataFromServer(jsonArray, new DataUpdateCallback() {
                             @Override
                             public void dataUpateFail(int i, String s) {
-                                Toast.makeText(activity(), "数据查询失败", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity(), R.string.data_query_fail, Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -212,7 +212,6 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                         });
                     }else{
                         queryAddLockTime();
-                        Log.d(TAG, "xxxxxxx家人列表为空bbb");
                     }
                 }catch (JSONException e){
                     e.printStackTrace();
@@ -239,7 +238,6 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
             @Override
             public void onSuccess(JSONArray jsonArray) {
                 try {
-                    Log.d(TAG, "jsonArray条数:"+jsonArray.length());
                     if(jsonArray.length() == 0){
                         checkView.setVisibility(View.GONE);
                         Log.d(TAG, "jsonArray.length() == 0");
@@ -248,11 +246,8 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                     }
 
                     JSONArray msgJsArray = ZkUtil.transformLockEvent(jsonArray, mDeviceMemberArray);
-                    Log.d(TAG, "消息条数:"+msgJsArray.length());
                     for(int i=0; i<msgJsArray.length(); i++){
                         JSONObject msgJsObj = msgJsArray.getJSONObject(i);
-                        Log.d(TAG,"msgJsObj:" + msgJsObj.toString());
-
                         if(i > 0){
                             if(!msgJsObj.getString("opTime").substring(0, 10).equals(msgJsArray.getJSONObject(i-1).getString("opTime").substring(0, 10))){//新的一天
                                 LockMsg lockMsg = new LockMsg();
@@ -276,7 +271,6 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                     }
                     lastTime =  Long.parseLong(msgJsArray.getJSONObject(msgJsArray.length()-1).getString("time"));
                     msgLastObj = msgJsArray.getJSONObject(msgJsArray.length()-1);
-                    Log.d(TAG, "解析完成");
                     if(firstRefresh){
                         adapter = new MsgAdapter(MsgActivity.this, msgList);
                         listView.setAdapter(adapter);
@@ -288,7 +282,6 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                     checkView.setVisibility(View.GONE);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.d(TAG, "JSON异常");
                     ZkUtil.stopAnima(checkImg);
                     checkView.setVisibility(View.GONE);
                 }
@@ -353,14 +346,13 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "action: "+intent.getAction());
             if (intent != null && "action.more.rename.notify".equals(intent.getAction())) {
-
                 String name = intent.getStringExtra("extra.name");
                 int result = intent.getIntExtra("extra.result", 0);
                 Log.d(TAG, "miio-bluetooth"+String.format("name: %s, result = %d", name, result));
                 mTitleView.setText(name);
             }
             if (intent != null && XmBluetoothManager.ACTION_ONLINE_STATUS_CHANGED.equals(intent.getAction())) {
-                Log.d(TAG, "登录状态广播: 登录成功");
+                Log.d(TAG, "Login success");
             }
         }
     }

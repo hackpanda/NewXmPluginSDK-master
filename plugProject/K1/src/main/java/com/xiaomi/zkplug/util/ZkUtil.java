@@ -247,7 +247,7 @@ public class ZkUtil {
      * @param snd
      * @return
      */
-    private static String getDateBySnd(long snd){
+    public static String getDateBySnd(long snd){
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(snd * 1000);
@@ -544,46 +544,6 @@ public class ZkUtil {
     }
 
     /**
-     * action 所状态
-     * 0xff 异常
-     * 0x00 开锁状态
-     * 0x01 上锁状态
-     * 0x02 反锁状态
-     * @return
-     */
-    private static String getStatus(String value){
-        if(value.equals("00")) return MyEntity.STATUS_CHANGKAI;
-        if(value.equals("01")) return MyEntity.STATUS_CLOSE_WEISHANGTI;
-        if(value.equals("02")) return MyEntity.STATUS_CLOSE_YISHANGTI;
-
-        return "开锁状态";
-    }
-
-    /**
-     * 解析锁状态事件
-     *
-     * @param statusJsArray
-     * @return
-     * @throws JSONException
-     */
-    public static JSONArray transformLockStatus(JSONArray statusJsArray) throws JSONException{
-
-        for(int i=0; i<statusJsArray.length(); i++){
-            JSONObject statusJsObj = statusJsArray.getJSONObject(i);
-
-            String value = statusJsObj.getString("value").replace("[\"", "").replace("\"]", "");
-            String uid = statusJsObj.getString("uid");
-            String time = statusJsObj.getString("time");
-            String did = statusJsObj.getString("did");
-            Log.d("解析", "opTime:"+getDateBySnd(Long.parseLong(time)));
-            statusJsObj.put("opTime", getDateBySnd(Long.parseLong(time)));//操作时间
-            Log.d("解析 ", "status: "+ getStatus(value));
-            statusJsObj.put("status", getStatus(value));//门锁状态
-        }
-
-        return statusJsArray;
-    }
-    /**
      * 解析得出最新电量
      *
      * @param powerJsArray
@@ -610,7 +570,7 @@ public class ZkUtil {
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(mActivity);
         builder.setTitle("命令不在有效期");
         builder.setMessage(R.string.cmd_out_of_time);
-        builder.setPositiveButton("确定", new MLAlertDialog.OnClickListener() {
+        builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();

@@ -125,7 +125,7 @@ public class FpInputHelper {
                 int fpIndexNum = 1;
                 for(int index=0; index < fpArray.length(); index++){
                     String fpName = fpArray.getJSONObject(index).getString("name");
-                    if(fpName.startsWith("指纹")){
+                    if(fpName.startsWith(activity.getString(R.string.fp_main_name))){
                         int m = 1;
                         try{
                             m = Integer.parseInt(fpName.substring(2));
@@ -138,17 +138,17 @@ public class FpInputHelper {
                 }
                 Log.d(TAG, "fpIndexNum: "+fpIndexNum);
                 /* 指纹命名规则 end */
-                fpObj.put("name", "指纹"+(fpIndexNum+1));
+                fpObj.put("name", activity.getString(R.string.fp_main_name)+(fpIndexNum+1));
                 fpObj.put("batchno", fpBatchNo);
 
             }else{
-                fpObj.put("name", "指纹1");
+                fpObj.put("name", activity.getString(R.string.fp_main_name)+"1");
                 fpObj.put("batchno", fpBatchNo);
             }
             fpArray.put(fpObj);
         }catch (JSONException e){
             e.printStackTrace();
-            Toast.makeText(activity, "数据解析异常", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_SHORT).show();
         }
         return fpArray;
     }
@@ -158,7 +158,7 @@ public class FpInputHelper {
     * */
     private void addMemberFpToServer(final String fpBatchNo){
         if(!ZkUtil.isNetworkAvailable(activity)){
-            Toast.makeText(activity, "网络未连接，请确保网络畅通", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.network_not_avilable, Toast.LENGTH_LONG).show();
             return;
         }
         try {
@@ -179,9 +179,9 @@ public class FpInputHelper {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            fpPutTv.setText("添加完成");
+                            fpPutTv.setText(R.string.fp_add_complete);
                             fpPutTv.setTextColor(activity.getResources().getColor(R.color.text_succ));
-                            fpCompleteTv.setText("请尝试用指纹开一次锁");
+                            fpCompleteTv.setText(R.string.fp_open_test);
                             iLockDataOperator.unregisterBluetoothReceiver();
                         }
                     });
@@ -189,7 +189,7 @@ public class FpInputHelper {
                 @Override
                 public void dataUpateFail(int i, final String s) {
                     retryCount+=1;
-                    Log.d(TAG, "设置失败, retryCount: "+retryCount);
+                    Log.d(TAG, "set failed, retryCount: "+retryCount);
                     if(retryCount > 3){
                         activity.runOnUiThread(new Runnable() {
                             @Override
@@ -212,7 +212,7 @@ public class FpInputHelper {
 
     //发送锁命令,并更新数据
     protected void operateLockMsg(LockCmdFpAdd lockCmdAddFp){
-        //viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
+        viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
         iLockDataOperator.sendLockMsg(lockCmdAddFp.getBytes(), new LockOperateCallback() {
             @Override
             public void lockOperateSucc(String fpBatchNo) {
@@ -222,10 +222,10 @@ public class FpInputHelper {
             }
             @Override
             public void lockOperateFail(String value) {
-                if(value.equals("命令不在有效期内(3)")){
+                if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     ZkUtil.showCmdTimeOutView(activity);
                 }else{
-                    CommonUtils.toast(activity, value);
+                    Toast.makeText(activity, value, Toast.LENGTH_LONG).show();
                 }
                 fpTipLayout.setVisibility(View.VISIBLE);
                 fpInputBuzhouLayout.setVisibility(View.GONE);
@@ -244,7 +244,7 @@ public class FpInputHelper {
     //录入指纹
     protected void addMemberFp(){
         xqProgressDialog = new XQProgressDialog(activity);
-        xqProgressDialog.setMessage("正在请求录入");
+        xqProgressDialog.setMessage(activity.getString(R.string.fp_input_request));
         xqProgressDialog.setCancelable(false);
         xqProgressDialog.show();
         dataManageUtil.checkMemberAvaliable(memberId, new DataUpdateCallback() {
@@ -267,7 +267,7 @@ public class FpInputHelper {
                         if (s.equals("true")) {//有效人员
                             viewHanlder.sendEmptyMessageDelayed(MSG_FP_INPUT_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
                             final LockCmdFpAdd lockCmdAddFp = getFpIputCmd();
-                            Log.d(TAG, "录入指纹锁命令:"+cn.zelkova.lockprotocol.BitConverter.toHexString(lockCmdAddFp.getBytes()));
+                            Log.d(TAG, "fpinput cmd:"+cn.zelkova.lockprotocol.BitConverter.toHexString(lockCmdAddFp.getBytes()));
                             if (XmBluetoothManager.getInstance().getConnectStatus(mDevice.getMac()) == BluetoothProfile.STATE_CONNECTED) {
                                 operateLockMsg(lockCmdAddFp);
                             }else{
@@ -277,13 +277,13 @@ public class FpInputHelper {
                                         if (i == XmBluetoothManager.Code.REQUEST_SUCCESS) {
                                             operateLockMsg(lockCmdAddFp);
                                         }else if(i == XmBluetoothManager.Code.REQUEST_NOT_REGISTERED){
-                                            Toast.makeText(activity, "设备已被重置，请解除绑定后重新添加", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(activity, R.string.device_has_been_reset, Toast.LENGTH_LONG).show();
                                             iLockDataOperator.unregisterBluetoothReceiver();
                                             viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
                                             xqProgressDialog.dismiss();
                                         }
 //                                        else {
-//                                            CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+//                                            CommonUtils.toast(activity, activity.getResoures().getString(R.string.connect_time_out)");
 //                                            iLockDataOperator.unregisterBluetoothReceiver();
 //                                            viewHanlder.removeMessages(MSG_FP_INPUT_TIMEOUT);
 //                                            xqProgressDialog.dismiss();
@@ -292,7 +292,7 @@ public class FpInputHelper {
                                 });
                             }
                         }else{
-                            Toast.makeText(activity, "成员已被删除", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, R.string.fp_no_member, Toast.LENGTH_SHORT).show();
                             xqProgressDialog.dismiss();
                         }
                     }
@@ -309,7 +309,7 @@ public class FpInputHelper {
                     if(fpInputBuzhouLayout.getVisibility() == View.GONE){
                         Log.d(TAG, "启动超时，执行断开:"+mDeviceStat.mac);
                         XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                        CommonUtils.toast(activity, "未发现门锁，请靠近门锁重试");
+                        CommonUtils.toast(activity, activity.getResources().getString(R.string.connect_time_out));
                         iLockDataOperator.unregisterBluetoothReceiver();
                         xqProgressDialog.dismiss();
                     }
