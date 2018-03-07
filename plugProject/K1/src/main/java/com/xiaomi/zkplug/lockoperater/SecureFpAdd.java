@@ -12,10 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xiaomi.smarthome.bluetooth.Response;
 import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
-import com.xiaomi.zkplug.CommonUtils;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.entity.MyEntity;
@@ -113,7 +113,7 @@ public class SecureFpAdd implements ILockDataOperator {
                                         Log.d(TAG, "写数据成功："+code+", "+inputBuffer.size());
                                         XmBluetoothManager.getInstance().notify(mDevice.getMac(), MyEntity.RX_SERVICE_UUID,MyEntity.TX_CHAR_UUID, null);
                                     } else {
-                                        CommonUtils.toast(activity, "写数据失败，code:"+code);
+                                        Toast.makeText(activity, activity.getString(R.string.gloable_write_fail)+"，code:"+code, Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -141,7 +141,7 @@ public class SecureFpAdd implements ILockDataOperator {
 
                 } else {
                     Log.d(TAG, "通讯数据加密失败:"+i);
-                    lockOperateCallback.lockOperateFail("通讯数据加密失败:"+i);
+                    lockOperateCallback.lockOperateFail(activity.getString(R.string.gloable_encrypt_fail)+":"+i);
                 }
             }
         });
@@ -221,7 +221,7 @@ public class SecureFpAdd implements ILockDataOperator {
                     if(lockCommFpAddResponse.getResultCode() == 3){
                         LinearLayout fpTipLayout = (LinearLayout) activity.findViewById(R.id.fpTipLayout);
                         if(fpTipLayout.getVisibility() == View.GONE){
-                            lockOperateCallback.lockOperateFail("超时未放置手指，请重新添加");
+                            lockOperateCallback.lockOperateFail(activity.getString(R.string.fp_put_time_out));
                         }else{
                             lockOperateCallback.lockOperateFail(WrongCode.get(String.valueOf(lockCommFpAddResponse.getResultCode()), activity));
                         }
@@ -253,9 +253,9 @@ public class SecureFpAdd implements ILockDataOperator {
                         animationDrawable.start();
                     }else if(lockCommFpAddResponse.getLuruNum() == 4){
                         TextView fpPutTv = (TextView) activity.findViewById(R.id.fpPutTv);
-                        fpPutTv.setText("采集手指边缘指纹");
+                        fpPutTv.setText(R.string.fp_get_edge);
                         TextView fpCompleteTv = (TextView) activity.findViewById(R.id.fpCompleteTv);
-                        fpCompleteTv.setText("将手指边缘按在指纹头上再抬起，重复此步骤");
+                        fpCompleteTv.setText(R.string.fp_repeat_edge);
                         fpImg.setImageResource(R.drawable.fp_input_animation_4);
                         AnimationDrawable animationDrawable = (AnimationDrawable) fpImg.getDrawable();
                         animationDrawable.start();

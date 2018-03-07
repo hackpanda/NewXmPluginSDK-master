@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.xiaomi.smarthome.bluetooth.Response;
 import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
-import com.xiaomi.zkplug.CommonUtils;
 import com.xiaomi.zkplug.Device;
+import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.entity.MyEntity;
 import com.xiaomi.zkplug.entity.MyProvider;
 import com.xiaomi.zkplug.entity.WrongCode;
@@ -85,7 +86,7 @@ public class SecureExchangeKey implements ILockDataOperator {
                             Log.d(TAG, "写数据成功："+code);
                             XmBluetoothManager.getInstance().notify(mDevice.getMac(), MyEntity.RX_SERVICE_UUID,MyEntity.TX_CHAR_UUID, null);
                         } else {
-                            CommonUtils.toast(activity, "写数据失败，code:"+code);
+                            Toast.makeText(activity, activity.getString(R.string.gloable_write_fail)+"，code:"+code, Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -190,7 +191,7 @@ public class SecureExchangeKey implements ILockDataOperator {
                 Log.d(TAG, "LockFormatException");
                 e.printStackTrace();
             }catch (ClassCastException cce){
-                lockOperateCallback.lockOperateFail("交换密钥失败");
+                lockOperateCallback.lockOperateFail(activity.getString(R.string.gloable_exchange_key_fail));
             }
         }
     }

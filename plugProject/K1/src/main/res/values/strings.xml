@@ -191,6 +191,9 @@
     <string name="gloable_deling">正在删除</string>
     <string name="gloable_modify_succ">修改成功</string>
     <string name="gloable_del_succ">删除成功</string>
+    <string name="gloable_write_fail">写数据失败</string>
+    <string name="gloable_exchange_key_fail">交换密钥失败</string>
+    <string name="gloable_encrypt_fail">通讯数据加密失败</string>
 
     <!-- 首页 -->
     <string name="main_connecting">连接门锁中</string>
@@ -326,6 +329,7 @@
     <string name="device_info_plugin_ver">插件版本号：%1$s</string>
     <string name="device_info_lock_time">锁内时间：%1$s</string>
     <string name="device_info_phone_time">手机时间：%1$s</string>
+    <string name="device_mute_set_succ">设置成功</string>
 
     <!-- DFU -->
     <string name="dfu_send_request">正在发送请求</string>
@@ -378,6 +382,11 @@
     <string name="fp_input_tips_0">最舒适的姿势，将手指按在门锁指纹头上，</string>
     <string name="fp_input_tips_1">听到"嘀"一声后抬起，重复此步骤</string>
     <string name="fp_begin_add">开始添加</string>
+    <string name="fp_put_time_out"> 超时未放置手指，请重新添加</string>
+    <string name="fp_get_edge">采集手指边缘指纹</string>
+    <string name="fp_repeat_edge">将手指边缘按在指纹头上再抬起，重复此步骤</string>
+    <string name="fp_confirm_failed">指纹录入失败</string>
+    <string name="fp_del_failed">指纹删除失败</string>
 
 
     <!-- 智能 -->
@@ -388,5 +397,9 @@
     <string name="inte_ble_open">手机钥匙开锁</string>
     <string name="inte_pwd_open">密码开锁</string>
     <string name="inte_open">开锁</string>
+
+    <!-- 密码-->
+    <string name="pwd_set_failed">密码设置失败</string>
+
 
 </resources>

@@ -7,11 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.xiaomi.smarthome.bluetooth.Response;
 import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
-import com.xiaomi.zkplug.CommonUtils;
 import com.xiaomi.zkplug.Device;
+import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.entity.MyEntity;
 import com.xiaomi.zkplug.entity.WrongCode;
 import com.xiaomi.zkplug.util.BitConverter;
@@ -85,7 +86,7 @@ public class SecureFpConfirm implements ILockDataOperator {
                                         Log.d(TAG, "写数据成功："+code);
                                         XmBluetoothManager.getInstance().notify(mDevice.getMac(), MyEntity.RX_SERVICE_UUID,MyEntity.TX_CHAR_UUID, null);
                                     } else {
-                                        CommonUtils.toast(activity, "写数据失败，code:"+code);
+                                        Toast.makeText(activity, activity.getString(R.string.gloable_write_fail)+"，code:"+code, Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
@@ -113,7 +114,7 @@ public class SecureFpConfirm implements ILockDataOperator {
 
                 } else {
                     Log.d(TAG, "密码数据加密失败:"+i);
-                    lockOperateCallback.lockOperateFail("密码数据加密失败:"+i);
+                    lockOperateCallback.lockOperateFail(activity.getString(R.string.gloable_encrypt_fail)+":"+i);
                 }
             }
         });
@@ -202,7 +203,7 @@ public class SecureFpConfirm implements ILockDataOperator {
             }catch (ClassCastException cce){
                 cce.printStackTrace();
                 unregisterBluetoothReceiver();
-                lockOperateCallback.lockOperateFail("指纹录入失败");
+                lockOperateCallback.lockOperateFail(activity.getString(R.string.fp_confirm_failed));
             }
         }
     }
