@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y77">
             <TextView
-                android:text="门锁的安全等级介绍"
+                android:text="@string/seclevel_intro"
                 android:layout_marginLeft="@dimen/x21"
                 android:layout_marginTop="@dimen/y14"
                 android:textColor="@color/black"
@@ -33,7 +33,7 @@
                 android:background="#eeeeee"
                 android:layout_height="1dp" />
             <TextView
-                android:text="门锁的安全等级分为A级、B级和C级"
+                android:text="@string/seclevel_depart"
                 android:layout_marginLeft="@dimen/x21"
                 android:layout_marginTop="@dimen/y14"
                 android:textColor="@color/black"
@@ -53,7 +53,7 @@
                 android:layout_width="@dimen/x279"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="A级："
+                    android:text="@string/seclevel_a"
                     android:layout_marginLeft="@dimen/x21"
                     android:layout_marginTop="@dimen/y11"
                     android:textColor="@color/black"
@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:text="只需要单一方式（密码/指纹/手机）验证通过就可以开锁"
+                    android:text="@string/seclevel_single"
                     android:layout_marginLeft="@dimen/x2"
                     android:layout_marginTop="@dimen/y11"
                     android:textColor="@color/black"
@@ -76,7 +76,7 @@
                 android:layout_width="@dimen/x279"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="B级："
+                    android:text="@string/seclevel_b"
                     android:layout_marginLeft="@dimen/x21"
                     android:layout_marginTop="@dimen/y7"
                     android:textColor="@color/black"
@@ -85,7 +85,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:text="需要用两种不同方式（指纹+密码/指纹+手机/手机+密码）组合验证通过才可开锁"
+                    android:text="@string/seclevel_two"
                     android:layout_marginLeft="@dimen/x2"
                     android:layout_marginTop="@dimen/y7"
                     android:textColor="@color/black"
@@ -99,7 +99,7 @@
                 android:layout_width="@dimen/x279"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="C级："
+                    android:text="@string/seclevel_b"
                     android:layout_marginLeft="@dimen/x21"
                     android:layout_marginTop="@dimen/y7"
                     android:textColor="@color/black"
@@ -108,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:text="在B级的基础上，门锁会停止消息广播，此时您无法接收门锁事件通知和查看门锁状态"
+                    android:text="@string/seclevel_three"
                     android:layout_marginLeft="@dimen/x2"
                     android:layout_marginTop="@dimen/y7"
                     android:textColor="@color/black"
@@ -126,7 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="怎样去设置门锁的安全等级？"
+                android:text="@string/seclevel_how_to_set"
                 android:layout_marginLeft="@dimen/x21"
                 android:layout_marginTop="@dimen/y14"
                 android:textColor="@color/black"
@@ -142,7 +142,7 @@
                 android:background="#eeeeee"
                 android:layout_height="1dp" />
             <TextView
-                android:text="从门锁后面板下方打开后面板盖，拨动安全等级按钮即可进行切换"
+                android:text="@string/seclevel_set_method"
                 android:layout_marginLeft="@dimen/x21"
                 android:layout_marginTop="@dimen/y14"
                 android:layout_marginBottom="@dimen/y14"

@@ -119,7 +119,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                 }
                 viewHanlder.sendEmptyMessageDelayed(MSG_PWD_SET_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
                 xqProgressDialog = new XQProgressDialog(PwdSetActivity.this);
-                xqProgressDialog.setMessage("正在设置");
+                xqProgressDialog.setMessage(getString(R.string.pwd_setting));
                 xqProgressDialog.setCancelable(false);
                 xqProgressDialog.show();
 
@@ -142,7 +142,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                             @Override
                             public void run() {
                                 if(s.equals("true")){//有效人员
-                                    if(getIntent().getStringExtra("title").equals("添加密码")){//添加密码
+                                    if(getIntent().getStringExtra("title").equals(getString(R.string.member_pwd_add_title))){//添加密码
                                         if(iLockAddOperator == null){
                                             iLockAddOperator = OperatorBuilder.create(SecurePwdAdd.FLAG, activity(), mDevice);
                                         }
@@ -188,7 +188,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                                         }
                                     }
                                 }else{
-                                    Toast.makeText(activity(), "成员已被删除", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity(), R.string.fp_no_member, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

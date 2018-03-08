@@ -21,7 +21,7 @@
                 android:layout_height="@dimen/y252" />
             <TextView
                 android:layout_centerHorizontal="true"
-                android:text="请将门锁和手机尽量靠近"
+                android:text="@string/device_closer_lock"
                 android:textColor="@color/black"
                 android:alpha="0.8"
                 android:textSize="@dimen/x12"
@@ -37,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="@dimen/x279"
             android:layout_height="@dimen/y33"
-            android:text="关闭"
+            android:text="@string/otp_close_btn"
             android:background="@drawable/corners_btn" />
 
     </RelativeLayout>

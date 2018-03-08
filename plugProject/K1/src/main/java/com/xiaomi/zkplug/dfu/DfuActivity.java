@@ -74,6 +74,8 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
     private boolean isDisvocerService = false;
     TextView curRomVer, newestRomVer;
     ImageView checkImg;
+    LinearLayout dfuProgressView;//更新进程View,用来做布局判断
+    Button checkVersionBtn;//用来做布局判断
     private BluetoothLe mBluetoothLe;
     private BluetoothDevice mBluetoothDevice;
     static final int MSG_UPDATE_FIRM = 1;
@@ -101,7 +103,8 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         dfuProgressTv = (TextView) findViewById(R.id.dfuProgressTv);
         curRomVer = (TextView) findViewById(R.id.curRomVer);
         newestRomVer = (TextView) findViewById(R.id.newestRomVer);
-
+        dfuProgressView = (LinearLayout) findViewById(R.id.dfuProgressView);
+        checkVersionBtn = (Button) findViewById(R.id.checkVersionBtn);
         this.dataManageUtil = new DataManageUtil(mDeviceStat, this);
         dfuManager = new DfuManager(activity());
         this.mDevice = Device.getDevice(mDeviceStat);
@@ -158,6 +161,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
             }
         }
     };
+
 
     @Override
     public void onClick(View v) {
@@ -327,6 +331,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onServicesDiscovered(BluetoothGatt gatt) {
+                viewHanlder.removeMessages(MSG_ENTER_DFU_TIME_OUT);
                 Log.d(TAG, "已发现服务，可以升级了.");
                 isDisvocerService = true;
                 Log.d(TAG, "正在升级，请等待升级成功");
@@ -390,6 +395,9 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         public void onProgressChanged(String deviceAddress, int percent, float speed, float avgSpeed, int currentPart, int partsTotal) {
             //在上传固件期间调用的方法。 它不会使用相同的百分比值调用两次，但是在小型固件文件的情况下，可能会省略一些值。\
             Log.d(TAG, "进度：" + percent + "%");
+            if(checkVersionBtn.getVisibility() == View.VISIBLE){
+                dfuManager.showDfuProgressView();
+            }
             dfuProgressTv.setText(percent + "%");
         }
 
@@ -608,12 +616,15 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                                 try{
                                     JSONObject resultObj = new JSONObject(s);
                                     Log.d(TAG, "resultObj:"+resultObj.toString());
-                                    if(resultObj.has("keyid_romver_data") && !TextUtils.isEmpty(resultObj.getString("keyid_romver_data"))){
-                                        showDfuUpdateView(resultObj.getString("keyid_romver_data"), updateInfo);//展示更新界面
-                                    }else{
-                                        getLockStatus(false);
-                                        return;
+                                    if(dfuProgressView.getVisibility() == View.GONE){//用来处理异常情况，在更新中，就不用显示初始布局了
+                                        if(resultObj.has("keyid_romver_data") && !TextUtils.isEmpty(resultObj.getString("keyid_romver_data"))){
+                                            showDfuUpdateView(resultObj.getString("keyid_romver_data"), updateInfo);//展示更新界面
+                                        }else{
+                                            getLockStatus(false);
+                                            return;
+                                        }
                                     }
+
                                 }catch (JSONException e){
                                     e.printStackTrace();
                                 }

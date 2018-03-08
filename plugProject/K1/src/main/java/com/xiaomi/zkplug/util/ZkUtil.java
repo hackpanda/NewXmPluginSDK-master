@@ -264,68 +264,6 @@ public class ZkUtil {
         }
         return theDate;
     }
-    /**
-     * action 当前操作
-     * 0xff 异常
-     * 0x00 开锁
-     * 0x01 上锁
-     * 0x02 反锁
-     * @return
-     */
-    private static String getAction(String value){
-        Log.d("解析", "action value:"+value);
-        if(value.equals("ff")) return "异常";
-        if(value.equals("00")) return "开锁";
-        if(value.equals("01")) return "上锁";
-        if(value.equals("02")) return "反锁";
-        return "开锁";
-    }
-    /**
-     * Method 操作方式
-     * 0x00 蓝牙方式
-     * 0x01 密码方式
-     * 0x02 指纹方式
-     * 0x03 钥匙方式
-     * 0x04 转盘方式
-     * 0x10 人工反锁
-     * 0x20 自动反锁
-     * 0xff 异常
-     * @return
-     */
-    private static String getMethod(String value){
-        Log.d("解析", "method value:"+value);
-        if(value.equals("ff")) return "异常";
-        if(value.equals("00")) return "蓝牙";
-        if(value.equals("01")) return "密码";
-        if(value.equals("02")) return "指纹";
-        if(value.equals("03")) return "钥匙";
-        if(value.equals("04")) return "转盘";
-        if(value.equals("10")) return "人工反锁";
-        if(value.equals("20")) return "自动反锁";
-        return "蓝牙方式";
-    }
-    /**
-     * Key ID or Exception ID
-     * 0x00000000 锁的拥有者
-     * 0xffffffff 未知操作者
-     * 0xC0DE0001 操作次数超限(错误密码/指纹频繁开锁)
-     * 0xC0DE0002 操作超时(密码输入超时)
-     * 0xC0DE0003 撬锁
-     * 0xC0DE1000 电量低于10%
-     * 0xC0DE1001 电量低于5%
-     * @return
-     */
-    private static String getKeyOrException(String value){
-        Log.d("解析", "KeyOrException value:"+value);
-        if(value.equals("00000000")) return "锁的拥有者";
-        if(value.equals("ffffffff")) return "未知操作者";
-        if(value.equals("0100dec0")) return "操作次数超限(错误密码/指纹频繁开锁)";
-        if(value.equals("0200dec0")) return "操作超时(密码输入超时)";
-        if(value.equals("0300dec0")) return "撬锁";
-        if(value.equals("0010dec0")) return "电量低于10%";
-        if(value.equals("0110dec0")) return "电量低于5%";
-        return getReverseStr(value);//0000007b
-    }
 
     /**
      * 查询操作人员人员名字
@@ -342,7 +280,7 @@ public class ZkUtil {
 
      管理员创建成功时调用
      */
-    public static JSONObject getMsgInfo(String method, String keyId, JSONArray mDeviceMemberArray){
+    public static JSONObject getMsgInfo(String method, String keyId, JSONArray mDeviceMemberArray, Activity activity){
         JSONObject resObj = new JSONObject();
         JSONObject memberObj = null;
         try{
@@ -354,19 +292,19 @@ public class ZkUtil {
                         Log.d("解析", "memberObj:"+memberObj.toString());
                         if(memberObj.getString("memberType").equals("admin")){
                             if(memberObj.getString("nickName").length() > 6){
-                                resObj.put("msgTitle", memberObj.getString("nickName").substring(0, 6)+"...使用手机开锁");
+                                resObj.put("msgTitle", activity.getString(R.string.msg_ble_open_long, memberObj.getString("nickName").substring(0, 6)));
                             }else{
-                                resObj.put("msgTitle", memberObj.getString("nickName")+"使用手机开锁");
+                                resObj.put("msgTitle", activity.getString(R.string.msg_ble_open_normal, memberObj.getString("nickName")));
                             }
-
-                            resObj.put("msgContent", memberObj.getString("nickName")+"使用手机开锁");
+                            String msgContent = activity.getString(R.string.msg_ble_open_normal, memberObj.getString("nickName"));
+                            resObj.put("msgContent", msgContent);
                             resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                             return resObj;
                         }
                     }
                 }else if(keyId.equals("ffffffff")){
-                    resObj.put("msgTitle", "未知操作者使用手机开锁");
-                    resObj.put("msgContent", "未知操作者使用手机开锁");
+                    resObj.put("msgTitle", activity.getString(R.string.msg_unknown_open));
+                    resObj.put("msgContent", activity.getString(R.string.msg_unknown_open));
                     resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                     return resObj;
                 }else{//被分享者开门
@@ -378,20 +316,21 @@ public class ZkUtil {
                             JSONObject authObj = memberObj.getJSONObject("auth");
 
                             if(authObj.has("keyId") && !TextUtils.isEmpty(authObj.getString("keyId")) && BitConverter.toInt32(BitConverter.fromHexString(keyId), 0) == Integer.parseInt(authObj.getString("keyId"))){
+
                                 if(memberObj.getString("nickName").length() > 6){
-                                    resObj.put("msgTitle", memberObj.getString("nickName").substring(0, 6)+"...使用手机开锁");
+                                    resObj.put("msgTitle", activity.getString(R.string.msg_ble_open_long, memberObj.getString("nickName").substring(0, 6)));
                                 }else{
-                                    resObj.put("msgTitle", memberObj.getString("nickName")+"使用手机开锁");
+                                    resObj.put("msgTitle", activity.getString(R.string.msg_ble_open_normal, memberObj.getString("nickName")));
                                 }
 
-                                resObj.put("msgContent", memberObj.getString("nickName")+"使用手机开锁");
+                                resObj.put("msgContent", activity.getString(R.string.msg_ble_open_normal, memberObj.getString("nickName")));
                                 resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                                 return resObj;
                             }
                         }
                     }
-                    resObj.put("msgTitle", "家人使用手机开锁");
-                    resObj.put("msgContent", "家人使用手机开锁");
+                    resObj.put("msgTitle", activity.getString(R.string.msg_sm_ble_open));
+                    resObj.put("msgContent", activity.getString(R.string.msg_sm_ble_open));
                     resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                     Log.d("解析", "----2-------"+resObj.toString());
                     return resObj;
@@ -404,24 +343,23 @@ public class ZkUtil {
                     memberObj = mDeviceMemberArray.getJSONObject(i);
                     if(memberObj.has("pwdIdx") && memberObj.getString("pwdIdx").equals(String.valueOf(BitConverter.toInt32(BitConverter.fromHexString(keyId), 0)))){
                         if(memberObj.getString("nickName").length() > 6){
-                            resObj.put("msgTitle", memberObj.getString("nickName").substring(0, 6)+"...使用密码开锁");
+                            resObj.put("msgTitle", activity.getString(R.string.msg_pwd_open_long, memberObj.getString("nickName").substring(0, 6)));
                         }else{
-                            resObj.put("msgTitle", memberObj.getString("nickName")+"使用密码开锁");
+                            resObj.put("msgTitle", activity.getString(R.string.msg_pwd_open_normal, memberObj.getString("nickName")));
                         }
-
-                        resObj.put("msgContent", memberObj.getString("nickName")+"使用密码开锁");
+                        resObj.put("msgContent", activity.getString(R.string.msg_pwd_open_normal, memberObj.getString("nickName")));
                         resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                         return resObj;
                     }
                 }
                 if(keyId.equals("ffffffff")){
-                    resObj.put("msgTitle", "家人使用临时密码开锁");
-                    resObj.put("msgContent", "家人使用临时密码开锁");
+                    resObj.put("msgTitle", activity.getString(R.string.msg_sm_otp_open));
+                    resObj.put("msgContent", activity.getString(R.string.msg_sm_otp_open));
                     resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                     return resObj;
                 }
-                resObj.put("msgTitle", "家人使用密码开锁");
-                resObj.put("msgContent", "家人使用密码开锁");
+                resObj.put("msgTitle", activity.getString(R.string.msg_sm_pwd_open));
+                resObj.put("msgContent", activity.getString(R.string.msg_sm_pwd_open));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                 return resObj;
             }
@@ -435,61 +373,62 @@ public class ZkUtil {
                             JSONObject memberFp = fpList.getJSONObject(m);
                             if(memberFp.getString("batchno").equals(String.valueOf(BitConverter.toInt32(BitConverter.fromHexString(keyId), 0)))){
                                 if(memberObj.getString("nickName").length() > 6){
-                                    resObj.put("msgTitle", memberObj.getString("nickName").substring(0, 6)+"...使用指纹开锁");
+                                    resObj.put("msgTitle", activity.getString(R.string.msg_fp_open_long, memberObj.getString("nickName").substring(0, 6)));
                                 }else{
-                                    resObj.put("msgTitle", memberObj.getString("nickName")+"使用指纹开锁");
+                                    resObj.put("msgTitle", activity.getString(R.string.msg_fp_open_normal, memberObj.getString("nickName")));
                                 }
-                                resObj.put("msgContent", memberObj.getString("nickName")+"使用指纹开锁");
+
+                                resObj.put("msgContent", activity.getString(R.string.msg_fp_open_normal, memberObj.getString("nickName")));
                                 resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                                 return resObj;
                             }
                         }
                     }
                 }
-                resObj.put("msgTitle", "家人使用指纹开锁");
-                resObj.put("msgContent", "家人通过指纹开门");
+                resObj.put("msgTitle", activity.getString(R.string.msg_sm_fp_open));
+                resObj.put("msgContent", activity.getString(R.string.msg_fp_open_content));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_HUIJIA);
                 return resObj;
             }
             if(method.equals("10")){//人工反锁
-                resObj.put("msgTitle", "反锁提醒");
-                resObj.put("msgContent", "检测到门已被反锁");
+                resObj.put("msgTitle", activity.getString(R.string.msg_fansuo_notify));
+                resObj.put("msgContent", activity.getString(R.string.msg_find_fansuo));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_FANSUO);
                 return resObj;
             }
             if(method.equals("20")){//自动反锁
-                resObj.put("msgTitle", "反锁提醒");
-                resObj.put("msgContent", "检测到门已被反锁");
+                resObj.put("msgTitle", activity.getString(R.string.msg_fansuo_notify));
+                resObj.put("msgContent", activity.getString(R.string.msg_find_fansuo));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_FANSUO);
                 return resObj;
             }
             if(keyId.equals("0100dec0")){
-                resObj.put("msgTitle", "键盘被锁");
-                resObj.put("msgContent", "有人多次连续输错密码，导致您的门锁键盘被锁");
+                resObj.put("msgTitle", activity.getString(R.string.msg_keyb_freezon));
+                resObj.put("msgContent", activity.getString(R.string.msg_keyb_freezon_reason));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_FREEZE_KEYBOARD);
                 return resObj;
             }
             if(keyId.equals("0200dec0")){
-                resObj.put("msgTitle", "操作超时");
-                resObj.put("msgContent", "密码输入超时");
+                resObj.put("msgTitle", activity.getString(R.string.msg_operate_timeout));
+                resObj.put("msgContent", activity.getString(R.string.msg_pwd_input_timeout));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_FREEZE_KEYBOARD);
                 return resObj;
             }
             if(keyId.equals("0300dec0")){
-                resObj.put("msgTitle", "有人试图撬锁");
-                resObj.put("msgContent", "检测到门锁可能存在撬锁行为，请注意查看");
+                resObj.put("msgTitle", activity.getString(R.string.msg_peo_qiaosuo));
+                resObj.put("msgContent", activity.getString(R.string.msg_qiaosuo_content));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_BAOJING);
                 return resObj;
             }
             if(keyId.equals("0010dec0")){
-                resObj.put("msgTitle", "门锁电量过低");
-                resObj.put("msgContent", "检测到门锁电量低于10%, 请及时更换电池");
+                resObj.put("msgTitle", activity.getString(R.string.msg_low_power));
+                resObj.put("msgContent", activity.getString(R.string.msg_power_10_percent));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_LOW_POWER);
                 return resObj;
             }
             if(keyId.equals("0110dec0")){
-                resObj.put("msgTitle", "门锁电量过低");
-                resObj.put("msgContent", "检测到门锁电量低于5%, 请及时更换电池");
+                resObj.put("msgTitle", activity.getString(R.string.msg_low_power));
+                resObj.put("msgContent", activity.getString(R.string.msg_power_5_percent));
                 resObj.put("msgType", MyEntity.MSG_LEVEL_LOW_POWER);
                 return resObj;
             }
@@ -521,7 +460,7 @@ public class ZkUtil {
      * @param eventJsArray
      * @return
      */
-    public static JSONArray transformLockEvent(JSONArray eventJsArray, JSONArray mDeviceMemberArray) throws JSONException{
+    public static JSONArray transformLockEvent(JSONArray eventJsArray, JSONArray mDeviceMemberArray, Activity activity) throws JSONException{
         for(int i=0; i<eventJsArray.length(); i++){
             JSONObject eventJsObj = eventJsArray.getJSONObject(i);
 
@@ -532,7 +471,7 @@ public class ZkUtil {
             String method = value.substring(2,4);
             String keyId = value.substring(4,12);
 
-            JSONObject msgInfoObj = getMsgInfo(method, keyId, mDeviceMemberArray);
+            JSONObject msgInfoObj = getMsgInfo(method, keyId, mDeviceMemberArray, activity);
             eventJsObj.put("opTime", getDateBySnd(Long.parseLong(time)));
             eventJsObj.put("msgTitle", msgInfoObj.getString("msgTitle"));
             eventJsObj.put("msgContent", msgInfoObj.getString("msgContent"));
@@ -568,7 +507,7 @@ public class ZkUtil {
     public static void showCmdTimeOutView(Activity mActivity){
 
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(mActivity);
-        builder.setTitle("命令不在有效期");
+        builder.setTitle(R.string.device_cmd_timeout);
         builder.setMessage(R.string.cmd_out_of_time);
         builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override

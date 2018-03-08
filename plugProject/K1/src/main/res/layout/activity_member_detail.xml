@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="姓名"
+                android:text="@string/member_name_text"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -38,7 +38,7 @@
                 android:layout_height="@dimen/y10" />
             <TextView
                 android:id="@+id/memberNickNameTv"
-                android:text="王美兰"
+                android:text=""
                 android:gravity="right"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/x12"
@@ -52,7 +52,7 @@
         </RelativeLayout>
         <TextView
             android:id="@+id/keyLabel"
-            android:text="手机钥匙"
+            android:text="@string/member_had_key"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x11"
@@ -84,7 +84,7 @@
                 android:layout_height="@dimen/y10" />
         </RelativeLayout>
         <TextView
-            android:text="开锁密码"
+            android:text="@string/member_lock_pwd"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x11"
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="添加密码"
+                android:text="@string/member_pwd_add_title"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -124,7 +124,7 @@
 
         </RelativeLayout>
         <TextView
-            android:text="开锁指纹"
+            android:text="@string/member_lock_fp"
             android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x20"
             android:textSize="@dimen/x11"
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/fpName_0"
-                android:text="指纹1"
+                android:text="@string/member_fp_first"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/fpName_1"
-                android:text="指纹2"
+                android:text="@string/member_fp_sec"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/fpName_2"
-                android:text="指纹3"
+                android:text="@string/member_fp_third"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -263,7 +263,7 @@
             android:layout_height="@dimen/y38">
 
             <TextView
-                android:text="添加指纹"
+                android:text="@string/fp_add_title"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"
@@ -286,7 +286,7 @@
             android:layout_marginTop="@dimen/y29"
             android:layout_height="@dimen/y38">
             <TextView
-                android:text="删除家人"
+                android:text="@string/member_del_text"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x20"
                 android:textSize="@dimen/x13"

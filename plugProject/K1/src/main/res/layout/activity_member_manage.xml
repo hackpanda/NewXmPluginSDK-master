@@ -22,7 +22,7 @@
                 android:layout_height="@dimen/y38">
                 <TextView
                     android:id="@+id/masterNickNameTv"
-                    android:text="姓名"
+                    android:text="@string/member_name_text"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x20"
                     android:textSize="@dimen/x13"
@@ -40,7 +40,7 @@
                     android:layout_height="@dimen/y10" />
                 <TextView
                     android:layout_centerVertical="true"
-                    android:text="管理员"
+                    android:text="@string/member_master_text"
                     android:textSize="@dimen/x10"
                     android:textColor="#000000"
                     android:alpha="0.5"
@@ -51,7 +51,7 @@
             </RelativeLayout>
             <TextView
                 android:layout_marginLeft="@dimen/x20"
-                android:text="添加成员后，可为成员添加密码、指纹和手机钥匙"
+                android:text="@string/member_member_tips"
                 android:layout_marginTop="@dimen/y10"
                 android:textSize="@dimen/x11"
                 android:textColor="#000000"

@@ -76,7 +76,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("成员详情");
+        mTitleView.setText(R.string.member_detail);
         initView();
     }
 
@@ -178,7 +178,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                 Intent pwdSetIntent = new Intent();
                 pwdSetIntent.putExtra("memberId", memberId);
                 pwdSetIntent.putExtra("nickName", nickNameTv.getText().toString());
-                pwdSetIntent.putExtra("title", "添加密码");
+                pwdSetIntent.putExtra("title", getString(R.string.member_pwd_add_title));
                 startActivity(pwdSetIntent, PwdSetActivity.class.getName());
                 break;
             case R.id.delHolder:
@@ -281,7 +281,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                     return;
                 }
                 if(!TextUtils.isEmpty(builder.getInputView().getText().toString()) && TextUtils.isEmpty(builder.getInputView().getText().toString().trim())){//全是空格
-                    CommonUtils.toast(activity(), "请输入姓名");
+                    Toast.makeText(activity(), R.string.member_name_empty, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(builder.getInputView().getText().toString())){//什么都没输入

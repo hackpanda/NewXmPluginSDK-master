@@ -12,7 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
-import android.support.v7.widget.AppCompatEditText;
+
 import com.xiaomi.zkplug.R;
 
 public class ClearEditText extends EditText implements

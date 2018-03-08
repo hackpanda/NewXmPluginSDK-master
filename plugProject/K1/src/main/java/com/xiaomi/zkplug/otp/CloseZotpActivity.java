@@ -35,7 +35,7 @@ public class CloseZotpActivity extends BaseActivity implements View.OnClickListe
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("关闭临时密码");
+        mTitleView.setText(R.string.otp_close_title);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         mDevice = Device.getDevice(mDeviceStat);
         otpManager = new OtpManager(activity(), mDevice, pluginPackage());
@@ -50,15 +50,15 @@ public class CloseZotpActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.btnCloseOtp:
                 if(!ZkUtil.isBleOpen()){
-                    Toast.makeText(activity(), "请打开蓝牙", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity(), R.string.open_bluetooth, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!ZkUtil.isNetworkAvailable(this)){
-                    Toast.makeText(activity(), "网络未连接，请保持网络畅通", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-                builder.setTitle("确定要关闭临时密码吗?");
+                builder.setTitle(R.string.otp_does_close);
                 builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

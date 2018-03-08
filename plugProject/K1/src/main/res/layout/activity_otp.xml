@@ -22,7 +22,7 @@
             android:background="@drawable/icon_zhuangtai"
             android:layout_height="@dimen/x34" />
         <TextView
-            android:text="正在检查密钥"
+            android:text="@string/otp_seckey_check"
             android:textSize="@dimen/x12"
             android:textColor="#000000"
             android:layout_gravity="center_horizontal"
@@ -48,7 +48,7 @@
                 android:layout_height="@dimen/y252" />
             <TextView
                 android:layout_centerHorizontal="true"
-                android:text="请将门锁和手机尽量靠近"
+                android:text="@string/device_closer_lock"
                 android:textColor="@color/black"
                 android:alpha="0.8"
                 android:textSize="@dimen/x12"
@@ -61,7 +61,7 @@
             android:id="@+id/tips1"
             android:layout_below="@+id/ktTipRel"
             android:layout_centerHorizontal="true"
-            android:text="当前您还未开通临时密码"
+            android:text="@string/otp_no_seckey"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/y10"
@@ -70,7 +70,7 @@
         <TextView
             android:layout_below="@+id/tips1"
             android:layout_centerHorizontal="true"
-            android:text="靠近门锁开通后方可使用"
+            android:text="@string/otp_use_near"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/y3"
@@ -84,7 +84,7 @@
             android:layout_marginTop="@dimen/y118"
             android:layout_width="@dimen/x279"
             android:layout_height="@dimen/y33"
-            android:text="开通"
+            android:text="@string/otp_dredge_btn"
             android:background="@drawable/corners_btn" />
 
     </RelativeLayout>
@@ -115,7 +115,7 @@
             <TextView
                 android:id="@+id/usedOutTipTv"
                 android:visibility="gone"
-                android:text="当前密码已用完，请于12:00后生成"
+                android:text="@string/otp_used_out"
                 android:textColor="@color/black"
                 android:textSize="@dimen/x12"
                 android:layout_marginTop="@dimen/y182"
@@ -133,7 +133,7 @@
                     android:alpha="0.8"
                     android:layout_gravity="center_horizontal"
                     android:textSize="@dimen/x11"
-                    android:text="门锁安全等级在A时，临时密码有效"
+                    android:text="@string/otp_level_a"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <LinearLayout
@@ -147,7 +147,7 @@
                         android:textColor="@color/black"
                         android:alpha="0.8"
                         android:textSize="@dimen/x11"
-                        android:text="了解如何设置安全等级"
+                        android:text="@string/otp_level_know"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -246,7 +246,7 @@
                 android:layout_height="@dimen/y33"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y128"
-                android:text="生成"
+                android:text="@string/otp_gene_btn"
                 android:background="@drawable/corners_btn" />
 
             <Button
@@ -255,7 +255,7 @@
                 android:layout_height="@dimen/y33"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/y10"
-                android:text="关闭"
+                android:text="@string/otp_close_btn"
                 android:textColor="@color/black"
                 android:background="@drawable/corners_grey" />
         </LinearLayout>

@@ -148,7 +148,7 @@ public class OtpManager {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(activity, "密钥数据查询失败", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, R.string.otp_seckey_query_failed, Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -176,7 +176,7 @@ public class OtpManager {
                 showOtpView(skey);
             }catch (JSONException je){
                 je.printStackTrace();
-                Toast.makeText(activity, "密钥数据查询失败", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.otp_seckey_query_failed, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -187,7 +187,7 @@ public class OtpManager {
             @Override
             public void lockOperateSucc(String value) {
                 iLockDataOperator.unregisterBluetoothReceiver();
-                Log.d(TAG, "交换密钥成功:"+value);
+                Log.d(TAG, "exchange seckey succ:"+value);
                 JSONObject settingsObj = new JSONObject();
                 try {
                     if(isKaiTong){
@@ -210,7 +210,7 @@ public class OtpManager {
                                     }else{
                                         viewHandler.removeMessages(MSG_OTP_CLOSE_TIMEOUT);
                                     }
-                                    Toast.makeText(activity, "存储密钥失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, R.string.otp_seckey_savefail, Toast.LENGTH_SHORT).show();
                                     xqProgressDialog.dismiss();
                                 }
                             });
@@ -244,7 +244,8 @@ public class OtpManager {
                         viewHandler.removeMessages(MSG_OTP_CLOSE_TIMEOUT);
                     }
                     xqProgressDialog.dismiss();
-                    CommonUtils.toast(activity, "数据格式异常");
+                    Toast.makeText(activity, R.string.gloable_format_err, Toast.LENGTH_LONG).show();
+
                 }
             }
             @Override
@@ -255,7 +256,7 @@ public class OtpManager {
                     viewHandler.removeMessages(MSG_OTP_CLOSE_TIMEOUT);
                 }
                 xqProgressDialog.dismiss();
-                if(value.equals("命令不在有效期内(3)")){
+                if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     ZkUtil.showCmdTimeOutView(activity);
                 }else{
                     CommonUtils.toast(activity, value);
@@ -273,7 +274,7 @@ public class OtpManager {
         if(!isKaiTong){
             viewHandler.sendEmptyMessageDelayed(MSG_OTP_CLOSE_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
             xqProgressDialog = new XQProgressDialog(activity);
-            xqProgressDialog.setMessage("正在关闭");
+            xqProgressDialog.setMessage(activity.getString(R.string.device_mute_closing));
             xqProgressDialog.setCancelable(false);
             xqProgressDialog.show();
         }
@@ -306,7 +307,7 @@ public class OtpManager {
         isUsedOut = false;
         viewHandler.sendEmptyMessageDelayed(MSG_OTP_KAITONG_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
         xqProgressDialog = new XQProgressDialog(activity);
-        xqProgressDialog.setMessage("正在开通");
+        xqProgressDialog.setMessage(activity.getString(R.string.otp_open_ing));
         xqProgressDialog.setCancelable(false);
         xqProgressDialog.show();
         JSONArray mJsArray = new JSONArray();
@@ -318,7 +319,7 @@ public class OtpManager {
                     @Override
                     public void run() {
                         viewHandler.removeMessages(MSG_OTP_KAITONG_TIMEOUT);
-                        Toast.makeText(activity, "密钥数据查询失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, R.string.otp_seckey_query_failed, Toast.LENGTH_SHORT).show();
                         xqProgressDialog.dismiss();
                     }
                 });
@@ -599,7 +600,8 @@ public class OtpManager {
             calendar.set(Calendar.MINUTE, min+30);
         }
         TextView usedOutTipTv = (TextView) activity.findViewById(R.id.usedOutTipTv);
-        usedOutTipTv.setText("当前密码已用完，请于"+(df.format(calendar.getTime())).substring(11,16)+"后生成");
+        String usedOuttime = activity.getString(R.string.otp_used_out, (df.format(calendar.getTime())).substring(11,16));
+        usedOutTipTv.setText(usedOuttime);
     }
     private int parseCharToInt(char c){
         return Integer.parseInt(String.valueOf(c));
@@ -624,8 +626,8 @@ public class OtpManager {
             int min = calendar.get(Calendar.MINUTE);
             calendar.set(Calendar.MINUTE, min+30);
         }
-
-        invalidTime.setText("密码于"+(df.format(calendar.getTime())).substring(11,16)+"失效，失效前仅可使用一次");
+        String validTime = activity.getString(R.string.otp_valid_time, (df.format(calendar.getTime())).substring(11,16));
+        invalidTime.setText(validTime);
     }
     /**
      * @param otpMap
@@ -712,7 +714,7 @@ public class OtpManager {
                             dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
                                 @Override
                                 public void dataUpateFail(int i, String s) {
-                                    Toast.makeText(activity, "数据存储失败", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(activity, R.string.otp_saved_err, Toast.LENGTH_SHORT).show();
                                 }
 
                                 @Override

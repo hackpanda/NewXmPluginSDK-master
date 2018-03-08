@@ -3,12 +3,15 @@ package com.xiaomi.zkplug.main;
 import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaomi.smarthome.bluetooth.XmBluetoothManager;
+import com.xiaomi.smarthome.common.ui.dialog.MLAlertDialog;
+import com.xiaomi.smarthome.device.api.Callback;
+import com.xiaomi.smarthome.device.api.DeviceUpdateInfo;
 import com.xiaomi.smarthome.device.api.IXmPluginHostActivity;
 import com.xiaomi.zkplug.BaseActivity;
 import com.xiaomi.zkplug.Device;
@@ -29,9 +35,13 @@ import com.xiaomi.zkplug.entity.MyProvider;
 import com.xiaomi.zkplug.log.LogReadActivity;
 import com.xiaomi.zkplug.member.MemberManageActivity;
 import com.xiaomi.zkplug.otp.OtpActivity;
+import com.xiaomi.zkplug.util.DataManageUtil;
+import com.xiaomi.zkplug.util.DataUpdateCallback;
 import com.xiaomi.zkplug.view.GifView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -40,6 +50,8 @@ import cn.zelkova.lockprotocol.ProfileProvider;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainActivity extends BaseActivity implements OnClickListener{
     private final String TAG = "MainActivity";
+
+    static final int MSG_UPDATE_FIRM = 0x111;
     ArrayList<IXmPluginHostActivity.MenuItemBase> menus = new ArrayList<>();
     JSONArray mDeviceMemberArray;// 家人列表
     //手指按下的点为(x1, y1)手指离开屏幕的点为(x2, y2)
@@ -54,6 +66,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     GifView openLockGif;//等待三秒动画
     Button refreshLsImg;
     ImageView memberImg, shanglaImg, openLockImg;
+    DataManageUtil dataManageUtil;
     private BroadcastReceiver mDeviceReceiver;//修改插件名字广播接收器
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +75,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         mDevice = Device.getDevice(mDeviceStat);
         mHostActivity.enableVerifyPincode();
         initView();
-
-
     }
 
     /**
@@ -85,6 +96,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         refreshLsImg = (Button) findViewById(R.id.refreshLsImg);
         refreshLsImg.setOnClickListener(this);
         openLockImg.setOnClickListener(this);
+        this.dataManageUtil = new DataManageUtil(mDeviceStat, this);
         findViewById(R.id.longTimeNoSyncTimeTv).setOnClickListener(this);
         if(mDevice.isOwner()){
             initOwnerView();
@@ -147,6 +159,10 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         intentMenuDfu.intent = mHostActivity.getActivityIntent(null, DfuActivity.class.getName());
         menus.add(intentMenuDfu);
 
+        IXmPluginHostActivity.IntentMenuItem intentMenuPluginHistory = new IXmPluginHostActivity.IntentMenuItem();
+        intentMenuPluginHistory.name = getResources().getString(R.string.main_plugin_history);
+        intentMenuPluginHistory.intent = mHostActivity.getActivityIntent(null, DfuActivity.class.getName());
+        menus.add(intentMenuPluginHistory);
 
         /*
         * 注册修改名字的广播监听
@@ -161,6 +177,8 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         //3.初始化数据，添加管理员，放在onresume中，因为要动态提示同步时间
         mainViewControl.refreshLockStatus(true);//4.刷新状态
         mainViewControl.conneMasterctLock();//5.自动连接门锁
+
+        romVersionCheck();//6.检查版本更新
     }
 
     @Override
@@ -316,6 +334,94 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         }
     }
 
+
+
+    /**
+     * 检查固件版本, 若有新版本则提示
+     */
+    private void romVersionCheck(){
+        mDevice.checkDeviceUpdateInfo(new Callback<DeviceUpdateInfo>() {
+
+            @Override
+            public void onSuccess(DeviceUpdateInfo updateInfo) {
+                Message.obtain(mHandler, MSG_UPDATE_FIRM, updateInfo).sendToTarget();
+            }
+
+            @Override
+            public void onFailure(int arg0, String arg1) {
+
+            }
+        });
+    }
+    @Override
+    public void handleMessage(Message msg) {
+        switch (msg.what) {
+            case MSG_UPDATE_FIRM:
+                // 刷新固件升级状态
+                if (!mDevice.isOwner()) {//被分享者
+                    return;
+                }
+                final DeviceUpdateInfo updateInfo = (DeviceUpdateInfo) msg.obj;
+                JSONArray mJsArray = new JSONArray();
+                mJsArray.put("keyid_romver_data");
+                dataManageUtil.queryDataFromServer(mJsArray, new DataUpdateCallback() {
+                    @Override
+                    public void dataUpateFail(int i, String s) {
+                        Toast.makeText(activity(), R.string.dfu_query_fail, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void dataUpdateSucc(final String s) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    JSONObject resultObj = new JSONObject(s);
+                                    Log.d(TAG, "resultObj:"+resultObj.toString());
+                                    if(resultObj.has("keyid_romver_data") && !TextUtils.isEmpty(resultObj.getString("keyid_romver_data"))){
+                                        String romver = resultObj.getString("keyid_romver_data");
+                                        if(!romver.equals(updateInfo.mNewVersion) && !romver.equals(getString(R.string.dfu_is_newest))){
+                                            Log.d(TAG, "需要提示更新");
+                                            showDfuUpdateDialog();
+                                        }else{
+                                            Log.d(TAG, "未发现新版");
+                                        }
+                                    }
+                                }catch (JSONException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 更新对话框
+     */
+    private void showDfuUpdateDialog(){
+        MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
+        builder.setTitle(R.string.main_dfu_dtitle);
+        builder.setMessage(R.string.main_dfu_dmessage);
+        builder.setNegativeButton(getString(R.string.gloable_cancel), new MLAlertDialog.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.setPositiveButton(getString(R.string.main_dfu_dupdate), new MLAlertDialog.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent dfuIntent = new Intent();
+                startActivity(dfuIntent, DfuActivity.class.getName());
+            }
+        });
+        builder.show();
+    }
     //    private void leScan() {
 //        Log.d(TAG, "开始扫描.");
 //        mBluetoothLe.setScanPeriod(15000)

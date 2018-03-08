@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/y252" />
             <TextView
                 android:layout_centerHorizontal="true"
-                android:text="请将门锁和手机尽量靠近"
+                android:text="@string/device_closer_lock"
                 android:textColor="@color/black"
                 android:alpha="0.8"
                 android:textSize="@dimen/x12"
@@ -34,7 +34,7 @@
 
         <TextView
             android:gravity="center_horizontal"
-            android:text="连续输错五次密码，键盘会被锁定5分钟"
+            android:text="@string/pwd_freezon"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y11"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:gravity="center_horizontal"
-            android:text="连续被锁，惩罚时间翻倍"
+            android:text="@string/pwd_free_double"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/x12"
             android:layout_marginTop="@dimen/y3"
@@ -64,7 +64,7 @@
                 android:paddingLeft="@dimen/x11"
                 android:inputType="numberPassword"
                 android:maxLength="8"
-                android:hint="6-8位数字"
+                android:hint="@string/pwd_len_limit"
                 android:alpha="0.3"
                 android:drawablePadding="@dimen/x7"
                 android:layout_width="match_parent"

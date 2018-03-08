@@ -245,7 +245,7 @@ public class MsgActivity extends BaseActivity implements OnClickListener{
                         return;
                     }
 
-                    JSONArray msgJsArray = ZkUtil.transformLockEvent(jsonArray, mDeviceMemberArray);
+                    JSONArray msgJsArray = ZkUtil.transformLockEvent(jsonArray, mDeviceMemberArray, activity());
                     for(int i=0; i<msgJsArray.length(); i++){
                         JSONObject msgJsObj = msgJsArray.getJSONObject(i);
                         if(i > 0){

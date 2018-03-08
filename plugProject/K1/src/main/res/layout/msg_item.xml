@@ -54,7 +54,7 @@
 					android:layout_height="@dimen/x9" />
 				<TextView
 					android:id="@+id/titleTv"
-					android:text="门锁电量过低"
+					android:text="@string/msg_low_power"
 					android:textColor="#000000"
 					android:lines="1"
 					android:alpha="0.8"

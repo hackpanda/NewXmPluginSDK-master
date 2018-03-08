@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xiaomi.zkplug.BaseActivity;
+import com.xiaomi.zkplug.MessageReceiver;
 import com.xiaomi.zkplug.R;
 
 /**
@@ -50,9 +51,10 @@ public class AnyModeOpenActivity extends BaseActivity implements View.OnClickLis
 //                XmPluginHostApi.instance().sendMessage(startConditionActivity,  Device.getDevice(mDeviceStat), IXmPluginMessageReceiver.MSG_GET_SCENE_VALUE,intent);
 
                 break;
-            case R.id.anyPwdOpenLayout:
+            case R.id.anyPwdOpenLayout://任意密码开门
                 Intent intent = getIntent();
                 intent.putExtra("value", "0001");//密码开门
+                MessageReceiver.myCallback.onSuccess(intent);
 //                Log.d(TAG, "anyPwdOpenLayout");
 //                Intent intent = new Intent(mCommonSceneConditions.get(position).mParamAction);
 //                intent.putExtra("action", mCommonSceneConditions.get(position).mKey);

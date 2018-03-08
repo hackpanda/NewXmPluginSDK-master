@@ -28,7 +28,7 @@ public class SecureLevelActivity extends BaseActivity implements View.OnClickLis
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("门锁安全等级");
+        mTitleView.setText(R.string.otp_lock_level_title);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
     }
     @Override

@@ -30,7 +30,7 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener{
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("临时密码");
+        mTitleView.setText(R.string.main_menu_otp);
         findViewById(R.id.title_bar_return).setOnClickListener(this);
         findViewById(R.id.title_bar_share).setOnClickListener(this);
         findViewById(R.id.btnClose).setOnClickListener(this);
@@ -70,11 +70,11 @@ public class OtpActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.otpKtBtn:
                 if(!ZkUtil.isBleOpen()){
-                    Toast.makeText(activity(), "请打开蓝牙", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity(), R.string.open_bluetooth, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if(!ZkUtil.isNetworkAvailable(this)){
-                    Toast.makeText(activity(), "网络未连接，请保持网络畅通", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity(), R.string.network_not_avilable, Toast.LENGTH_SHORT).show();
                     return;
                 }
                 otpManager.checkSkeyIsExist();

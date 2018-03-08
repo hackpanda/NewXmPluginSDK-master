@@ -22,6 +22,7 @@ import com.xiaomi.zkplug.main.MainActivity;
  */
 public class MessageReceiver implements IXmPluginMessageReceiver {
 
+    public static  MessageCallback myCallback;
     @Override
     public boolean handleMessage(Context context, XmPluginPackage xmPluginPackage, int type,
                                  Intent intent,
@@ -69,6 +70,7 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
             case MSG_GET_SCENE_VALUE:
                 ///处理客户端发送过来的场景请求
                 String action = intent.getStringExtra("action");///对应客户端发送过来的action即开放平台配置的字段
+                myCallback = callback;
                 if(action.equals("event.shjszn.lock.c1.unlock")){
                     XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
                             deviceStat.did, AnyModeOpenActivity.class);
@@ -77,24 +79,9 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
                     XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
                             deviceStat.did, AppointOpenActivity.class);
                 }
-                //actionId和last_value都为空
-                Log.d("vvvvv", "0000000000000");
-                if(intent.hasExtra("actionId")){
-                    Log.d("vvvvv", "111111111");
-                    Log.d("vvvvv", intent.getStringExtra("actionId")+"--------");
-                }
-                Log.d("vvvvv", "2222222");
-                if(intent.hasExtra("last_value")){
-                    Log.d("vvvvv", "3333333");
-                    Log.d("vvvvv", intent.getStringExtra("last_value")+"--------");
-                }
-                Log.d("vvvvv", "444444444");
                 if(callback != null){
-                    Log.d("vvvvv", "--------");
                     callback.onSuccess(intent);
                 }
-
-
                 break;
             default:
                 break;

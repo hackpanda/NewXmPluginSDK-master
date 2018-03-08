@@ -56,7 +56,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
         mHostActivity.setTitleBarPadding(findViewById(R.id.title_bar));
         mHostActivity.enableWhiteTranslucentStatus();
         TextView mTitleView = ((TextView) findViewById(R.id.title_bar_title));
-        mTitleView.setText("成员管理");
+        mTitleView.setText(R.string.member_manage_title);
         addMemberImg = (ImageView) findViewById(R.id.title_bar_more);//没有add按钮，有more替换
         addMemberImg.setVisibility(View.VISIBLE);
         addMemberImg.setImageResource(R.drawable.titlebar_add_selector);
@@ -149,7 +149,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
                         @Override
                         public void run() {
                             try {
-                                Log.d(TAG, "成员列表:"+s);
+                                Log.d(TAG, "member list:"+s);
                                 JSONObject resultObj = new JSONObject(s);
                                 masterNickNameTv.setText(resultObj.getString("keyid_master$nickname_data"));
                                 if(resultObj.isNull("keyid_smlist_data")){
@@ -183,12 +183,12 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
     //添加家人dialog
     private void showDialog() {
         if(smArray.length() == 15){
-            CommonUtils.toast(activity(), "当前已添加15个成员，不可再添加");
+            Toast.makeText(activity(), R.string.member_list_full, Toast.LENGTH_LONG).show();
             return;
         }
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-        builder.setTitle("添加成员");
-        builder.setInputView("成员姓名", true);
+        builder.setTitle(R.string.member_add_title);
+        builder.setInputView(getString(R.string.member_name), true);
         builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -199,11 +199,11 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
                 }
                 try {
                     if(TextUtils.isEmpty(builder.getInputView().getText().toString().trim())){
-                        CommonUtils.toast(activity(), "请输入姓名");
+                        Toast.makeText(activity(), R.string.member_name_empty, Toast.LENGTH_LONG).show();
                         return;
                     }
                     xqProgressDialog = new XQProgressDialog(activity());
-                    xqProgressDialog.setMessage("正在添加");
+                    xqProgressDialog.setMessage(getString(R.string.member_add_ing));
                     xqProgressDialog.setCancelable(false);
                     xqProgressDialog.show();
 
@@ -219,7 +219,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
                     dataManageUtil.saveDataToServer(settingsObj, new DataUpdateCallback() {
                         @Override
                         public void dataUpateFail(int i, final String s) {
-                            Log.d(TAG, "添加成员失败");
+                            Log.d(TAG, "add member fail");
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -235,7 +235,7 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
                                 @Override
                                 public void run() {
                                     refreshMemberListView();
-                                    CommonUtils.toast(activity(), "添加成功");
+                                    Toast.makeText(activity(), R.string.member_add_succ, Toast.LENGTH_LONG).show();
                                     xqProgressDialog.dismiss();
                                 }
                             });
@@ -244,12 +244,12 @@ public class MemberManageActivity extends BaseActivity implements View.OnClickLi
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    CommonUtils.toast(activity(), "数据格式解析失败");
+                    Toast.makeText(activity(), R.string.gloable_data_error, Toast.LENGTH_LONG).show();
                     xqProgressDialog.dismiss();
                 }
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

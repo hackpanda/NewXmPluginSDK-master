@@ -196,7 +196,7 @@ class MemberHelper {
     protected void delPwd(){
         isDelMember = false;
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle("是否删除密码？");
+        builder.setTitle(R.string.member_pwd_del_title);
         builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -211,13 +211,13 @@ class MemberHelper {
                 }
                 viewHanlder.sendEmptyMessageDelayed(MSG_PWD_DEL_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
                 xqProgressDialog = new XQProgressDialog(activity);
-                xqProgressDialog.setMessage("正在删除");
+                xqProgressDialog.setMessage(activity.getString(R.string.gloable_deling));
                 xqProgressDialog.setCancelable(false);
                 xqProgressDialog.show();
                 delPwdInLock();
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(activity.getString(R.string.gloable_cancel), new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -235,13 +235,14 @@ class MemberHelper {
         TextView memberNickNameTv = (TextView) activity.findViewById(R.id.memberNickNameTv);
         TextView keyTv = (TextView) activity.findViewById(R.id.keyTv);
         if (keyTv.getText().toString().equals(activity.getResources().getString(R.string.member_had_key))) {
-            Toast.makeText(activity, "请先删除"+memberNickNameTv.getText().toString()+"的手机钥匙", Toast.LENGTH_LONG).show();
+            String result = activity.getString(R.string.member_del_key_first, memberNickNameTv.getText().toString());
+            Toast.makeText(activity, result, Toast.LENGTH_LONG).show();
             return;
         }
         /* 根据界面做了逻辑判断，不太好 being */
         isDelMember = true;
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle("是否删除成员？");
+        builder.setTitle(R.string.member_del_title);
         builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -251,12 +252,12 @@ class MemberHelper {
                     return;
                 }
                 if(!ZkUtil.isBleOpen()){
-                    CommonUtils.toast(activity, "请打开蓝牙并靠近门锁");
+                    Toast.makeText(activity, R.string.member_open_ble, Toast.LENGTH_LONG).show();
                     return;
                 }
                 viewHanlder.sendEmptyMessageDelayed(MSG_MEMBER_DEL_TIMEOUT, MyEntity.OPERATE_TIMEOUT);
                 xqProgressDialog = new XQProgressDialog(activity);
-                xqProgressDialog.setMessage("正在删除");
+                xqProgressDialog.setMessage(activity.getString(R.string.gloable_deling));
                 xqProgressDialog.setCancelable(false);
                 xqProgressDialog.show();
                 try {
@@ -279,11 +280,11 @@ class MemberHelper {
                     e.printStackTrace();
                     viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                     xqProgressDialog.dismiss();
-                    CommonUtils.toast(activity, "数据解析出现错误");
+                    Toast.makeText(activity, R.string.gloable_data_error, Toast.LENGTH_LONG).show();
                 }
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -326,7 +327,7 @@ class MemberHelper {
                         public void lockOperateFail(String value) {
                             viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                             viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                            if(value.equals("命令不在有效期内(3)")){
+                            if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                                 ZkUtil.showCmdTimeOutView(activity);
                             }else{
                                 CommonUtils.toast(activity, value);
@@ -349,7 +350,7 @@ class MemberHelper {
                                     public void lockOperateFail(String value) {
                                         viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
                                         viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-                                        if(value.equals("命令不在有效期内(3)")){
+                                        if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                                             ZkUtil.showCmdTimeOutView(activity);
                                         }else{
                                             CommonUtils.toast(activity, value);
@@ -380,7 +381,7 @@ class MemberHelper {
             e.printStackTrace();
             viewHanlder.removeMessages(MSG_MEMBER_DEL_TIMEOUT);
             viewHanlder.removeMessages(MSG_PWD_DEL_TIMEOUT);
-            CommonUtils.toast(activity, "删除失败");
+            Toast.makeText(activity, R.string.member_del_failed, Toast.LENGTH_LONG).show();
             xqProgressDialog.dismiss();
         }
     }
@@ -429,7 +430,7 @@ class MemberHelper {
                 @Override
                 public void lockOperateFail(String value) {
                     xqProgressDialog.dismiss();
-                    if(value.equals("命令不在有效期内(3)")){
+                    if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                         ZkUtil.showCmdTimeOutView(activity);
                     }else{
                         CommonUtils.toast(activity, value);
