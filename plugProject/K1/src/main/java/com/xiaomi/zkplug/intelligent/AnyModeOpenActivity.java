@@ -13,6 +13,7 @@ import com.xiaomi.zkplug.R;
  * 作者：liwenqi on 18/3/02 13:34
  * 邮箱：liwenqi@zelkova.cn
  * 描述：任意方式开锁联动页面
+ * Action+Method+Key ID
  */
 public class AnyModeOpenActivity extends BaseActivity implements View.OnClickListener{
 
@@ -43,32 +44,31 @@ public class AnyModeOpenActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.title_bar_return:
+            case R.id.title_bar_return://点击返回
+                MessageReceiver.myCallback.onFailure(-1, "do noting");
                 finish();
                 break;
             case R.id.anyModeOpenLayout:
-
-//                XmPluginHostApi.instance().sendMessage(startConditionActivity,  Device.getDevice(mDeviceStat), IXmPluginMessageReceiver.MSG_GET_SCENE_VALUE,intent);
-
+                MessageReceiver.myCallback.onSuccess(getIntent());
+                finish();
                 break;
             case R.id.anyPwdOpenLayout://任意密码开门
-                Intent intent = getIntent();
-                intent.putExtra("value", "0001");//密码开门
-                MessageReceiver.myCallback.onSuccess(intent);
-//                Log.d(TAG, "anyPwdOpenLayout");
-//                Intent intent = new Intent(mCommonSceneConditions.get(position).mParamAction);
-//                intent.putExtra("action", mCommonSceneConditions.get(position).mKey);
-//                intent.putExtra("value", String.valueOf(mCommonSceneConditions.get(position).mValue));
-//                if(condition != null) {
-//                    intent.putExtra("last_value", String.valueOf(((SceneApi.ConditionDeviceCommon)condition.conditionDevice).mValues));
-//                }
-//                intent.putExtra("actionId",mCommonSceneConditions.get(position).id);
-//                sendMessage(startConditionActivity,mDevice, IXmPluginMessageReceiver.MSG_GET_SCENE_VALUE,intent);
-
+                Intent pwdIntent = getIntent();
+                getIntent().putExtra("value", "0001");//密码开门
+                MessageReceiver.myCallback.onSuccess(pwdIntent);
+                finish();
                 break;
             case R.id.anyFpOpenLayout:
+                Intent fpIntent = getIntent();
+                fpIntent.putExtra("value", "0002");//密码开门
+                MessageReceiver.myCallback.onSuccess(fpIntent);
+                finish();
                 break;
             case R.id.anyBlekeyOpenLayout:
+                Intent bleIntent = getIntent();
+                bleIntent.putExtra("value", "0000");//手机钥匙开门
+                MessageReceiver.myCallback.onSuccess(bleIntent);
+                finish();
                 break;
         }
     }

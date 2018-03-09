@@ -70,7 +70,7 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
             case MSG_GET_SCENE_VALUE:
                 ///处理客户端发送过来的场景请求
                 String action = intent.getStringExtra("action");///对应客户端发送过来的action即开放平台配置的字段
-                myCallback = callback;
+
                 if(action.equals("event.shjszn.lock.c1.unlock")){
                     XmPluginHostApi.instance().startActivity(context, xmPluginPackage, intent,
                             deviceStat.did, AnyModeOpenActivity.class);
@@ -80,7 +80,7 @@ public class MessageReceiver implements IXmPluginMessageReceiver {
                             deviceStat.did, AppointOpenActivity.class);
                 }
                 if(callback != null){
-                    callback.onSuccess(intent);
+                    myCallback = callback;
                 }
                 break;
             default:

@@ -517,4 +517,18 @@ public class ZkUtil {
         });
         builder.show();
     }
+
+    public static String[] delete(int index, String array[]){
+        //根据删除索引，把数组后面的向前移一位
+        for(int i=index;i<array.length;i++){
+            if(i!=array.length-1){
+                array[i]=array[i+1];
+            }else{//处理最后一位超出情况
+                array[i]=array[i];
+            }
+        }
+        return array;
+    }
+
+
 }

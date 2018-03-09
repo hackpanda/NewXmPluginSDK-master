@@ -1,12 +1,15 @@
 package com.xiaomi.zkplug.intelligent;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.xiaomi.zkplug.MessageReceiver;
 import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.util.BitConverter;
 import com.xiaomi.zkplug.util.DataManageUtil;
 import com.xiaomi.zkplug.util.DataUpdateCallback;
 import com.xiaomi.zkplug.view.TimeSelector.Utils.TextUtil;
@@ -24,17 +27,25 @@ import java.util.ArrayList;
  * 描述：逻辑数据管理类
  */
 
-public class InteManager {
+public class InteManager{
     private final String TAG = "InteManager";
     DataManageUtil dataManageUtil;
     Activity activity;
     ExpandableListView mExpandableListView;
+    private final String EVENT_FLAG = "#FLAG#";//姓名+EVENT_FLAG+action+EVENT_FLAG+method+EVENT_FLAG+keyId
+    private final String OPEN_ACTION = "00";//0x00开锁
+    private final String BLE_METHOD = "00";//0x00蓝牙方式
+    private final String PWD_METHOD = "01";//0x01密码方式
+    private final String FP_METHOD = "02";//0x02指纹方式
+
     private final String theMasterPwdKey = "keyid_master$pwd_data";//管理员密码
     private final String theMasterFpKey = "keyid_master$fp_data";//管理员指纹
+    private final String theMasterNickName = "keyid_master$nickname_data";//管理员指纹
     private String theSmFpKey = "";//成员指纹
     private String theSmPwdKey = "";//成员密码
-    private String theAccountKey = "";//成员蓝牙钥匙
-    public String[] IDS = {"1", "2", "3", "4"};
+    private String theSmBleKey = "";//成员蓝牙钥匙
+
+    private ArrayList<String> memberList = null;//存储成员列表 == MEMBERS
     public String[] MEMBERS = null;
     public String[][] KEYS = null;//蓝牙、密码、指纹
 
@@ -45,7 +56,7 @@ public class InteManager {
 
     protected void initView(){
         mExpandableListView = (ExpandableListView) activity.findViewById(R.id.expandable_list);
-
+        memberList = new ArrayList<String>();
         queryFamilyData();//查询数据
     }
     // 每次展开一个分组后，关闭其他的分组
@@ -85,13 +96,10 @@ public class InteManager {
      * Loacal方式：得到家庭成员或者管理员的钥匙数据
      */
     private void queryFamilyDataByLocal(final JSONArray smArray){
-        MEMBERS = new String[smArray.length()+1];
-        MEMBERS[0] = "管理员";
-
         JSONArray mJsArray = new JSONArray();//数据查询参数
         mJsArray.put(theMasterPwdKey);//管理员密码
         mJsArray.put(theMasterFpKey);//管理员指纹
-
+        mJsArray.put(theMasterNickName);//管理员指纹
         try {
             for(int n=0; n<smArray.length(); n++){
                 JSONObject memberObj = smArray.getJSONObject(n);
@@ -99,12 +107,8 @@ public class InteManager {
                 mJsArray.put("keyid_sm$pwd$"+memberId+"_data");
                 mJsArray.put("keyid_sm$fp$"+memberId+"_data");
                 mJsArray.put("keyid_sm$mi$blekey$"+memberId+"_data");
-                MEMBERS[n+1] = memberObj.getString("nn");
             }
             final JSONObject data = dataManageUtil.getDataFromLocal(mJsArray);//
-
-
-
 
             Log.d(TAG, "memberObj本地: "+data.toString());
             activity.runOnUiThread(new Runnable() {
@@ -155,12 +159,10 @@ public class InteManager {
      * 服务器方式：得到家庭成员或者管理员的钥匙数据
      */
     private void queryFamilyKeysByServer(final JSONArray smArray){
-        MEMBERS = new String[smArray.length()+1];//更新MEMBERS
-        MEMBERS[0] = "管理员";
-
         JSONArray mJsArray = new JSONArray();//数据查询参数
         mJsArray.put(theMasterPwdKey);//管理员密码
         mJsArray.put(theMasterFpKey);//管理员指纹
+        mJsArray.put(theMasterNickName);//管理员姓名
         try {
             for(int n=0; n<smArray.length(); n++){
                 JSONObject memberObj = smArray.getJSONObject(n);
@@ -169,7 +171,6 @@ public class InteManager {
                 mJsArray.put("keyid_sm$fp$"+memberId+"_data");
                 mJsArray.put("keyid_sm$mi$blekey$"+memberId+"_data");
 
-                MEMBERS[n+1] = memberObj.getString("nn");
             }
             dataManageUtil.queryDataFromServer(mJsArray, new DataUpdateCallback() {
                 @Override
@@ -204,23 +205,25 @@ public class InteManager {
     }
 
     private void initViewByFamilyData(JSONArray smArray, JSONObject data){
+        Log.d(TAG, data.toString());
         try {
-            Log.d(TAG, "nnnnnnnnnnn");
-            KEYS = new String[MEMBERS.length][];
+            memberList.clear();
+            int tempCount = 0;//记录有钥匙人员数量
+            KEYS = new String[20][10];
             ArrayList<String> keys = new ArrayList<String>();
-            keys.add(activity.getString(R.string.inte_ble_open));
 
+            if(data.has(theMasterNickName) && !TextUtil.isEmpty(data.getString(theMasterNickName))){
+                memberList.add(data.getString(theMasterNickName));
+            }
+            keys.add(activity.getString(R.string.inte_ble_open)+EVENT_FLAG+OPEN_ACTION+BLE_METHOD+"00000000");//管理员手机钥匙开锁
             if(data.has(theMasterPwdKey) && !TextUtil.isEmpty(data.getString(theMasterPwdKey))){
-                Log.d(TAG, "xxxxxxxxxxx");
-                keys.add(activity.getString(R.string.inte_pwd_open));
+                keys.add(activity.getString(R.string.inte_pwd_open)+EVENT_FLAG+OPEN_ACTION+PWD_METHOD+data.getString(theMasterPwdKey));
             }
             if(data.has(theMasterFpKey) && !TextUtil.isEmpty(data.getString(theMasterFpKey))){
-                Log.d(TAG, "yyyyyyyyyyyyyy");
                 JSONArray fpArray = new JSONArray(data.getString(theMasterFpKey));
-                Log.d(TAG, "zzzzzzzzzzzzz");
                 for(int i=0; i<fpArray.length(); i++){
                     JSONObject fpObj = fpArray.getJSONObject(i);
-                    keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open));
+                    keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open)+EVENT_FLAG+OPEN_ACTION+FP_METHOD+fpObj.getString("batchno"));
                 }
             }
 
@@ -234,37 +237,45 @@ public class InteManager {
                 String smid = smArray.getJSONObject(j).getString("id");
                 theSmPwdKey = "keyid_sm$pwd$"+smid+"_data";
                 theSmFpKey = "keyid_sm$fp$"+smid+"_data";
-                theAccountKey = "keyid_sm$mi$account$"+smid+"_data";
-                if(data.has(theAccountKey) && !TextUtil.isEmpty(data.getString(theAccountKey))){//有钥匙
-                    keys.add(activity.getString(R.string.inte_ble_open));
+                theSmBleKey = "keyid_sm$mi$blekey$"+smid+"_data";
+                if(data.has(theSmBleKey) && !TextUtil.isEmpty(data.getString(theSmBleKey)) && !data.getString(theSmBleKey).equals("{}")){//有钥匙
+                    JSONObject bleObj = new JSONObject(data.getString(theSmBleKey));
+                    keys.add(activity.getString(R.string.inte_ble_open)+EVENT_FLAG+OPEN_ACTION+BLE_METHOD+bleObj.getString("keyid"));
                 }
 
                 if(data.has(theSmPwdKey) && !TextUtil.isEmpty(data.getString(theSmPwdKey))){
-                    keys.add(activity.getString(R.string.inte_pwd_open));
+                    keys.add(activity.getString(R.string.inte_pwd_open)+EVENT_FLAG+OPEN_ACTION+PWD_METHOD+data.getString(theSmPwdKey));
                 }
                 if(data.has(theSmFpKey) && !TextUtil.isEmpty(data.getString(theSmFpKey))){
                     JSONArray fpArray = new JSONArray(data.getString(theSmFpKey));
                     for(int i=0; i<fpArray.length(); i++){
                         JSONObject fpObj = fpArray.getJSONObject(i);
-                        keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open));
+                        keys.add(fpObj.getString("name")+activity.getString(R.string.inte_open)+EVENT_FLAG+OPEN_ACTION+FP_METHOD+fpObj.getString("batchno"));
                     }
                 }
-                KEYS[j+1] = new String[keys.size()];//成员+1，因为第一位管理员占了
-                for(int n=0; n < keys.size(); n++){
-                    KEYS[j+1][n] = keys.get(n);
+                if(keys.size() > 0){
+                    tempCount += 1;
+                    memberList.add(smArray.getJSONObject(j).getString("nn"));
+                    KEYS[tempCount] = new String[keys.size()];//成员要+1，因为第一位管理员占了
+                    for(int n=0; n < keys.size(); n++){
+                        KEYS[tempCount][n] = keys.get(n);
+                    }
                 }
             }
-
+            MEMBERS = new String[memberList.size()];//ArrayList转数组
+            MEMBERS = memberList.toArray(MEMBERS);
             loadDataToListView();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
     /**
      * ListView加载数据
      */
     private void loadDataToListView(){
-        NormalExpandableListAdapter adapter = new NormalExpandableListAdapter(MEMBERS, KEYS);
+
+        final NormalExpandableListAdapter adapter = new NormalExpandableListAdapter(MEMBERS, KEYS);
         mExpandableListView.setAdapter(adapter);
         adapter.setOnGroupExpandedListener(new OnGroupExpandedListener() {
             @Override
@@ -287,6 +298,18 @@ public class InteManager {
         mExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                String child = String.valueOf(adapter.getChild(groupPosition, childPosition));
+                Log.d(TAG, "child: "+child);
+                String result = child.split(EVENT_FLAG)[1];
+                Log.d(TAG, "result: "+result);
+                String keyId = BitConverter.toHexString(BitConverter.getBytes(Integer.parseInt(result.substring(4))), "");
+                Log.d(TAG, "keyId: "+keyId);
+                Log.d(TAG, "result: "+result.substring(0, 4) + keyId);
+
+                Intent fpIntent = activity.getIntent();
+                fpIntent.putExtra("value", result.substring(0, 4) + keyId.toUpperCase());//指定开门
+                MessageReceiver.myCallback.onSuccess(fpIntent);
+                activity.finish();
                 return true;
             }
         });

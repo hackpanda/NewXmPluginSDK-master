@@ -9,7 +9,7 @@
     android:layout_height="@dimen/y38">
     <TextView
         android:id="@+id/label_expand_child"
-        android:layout_marginLeft="@dimen/x23"
+        android:layout_marginLeft="@dimen/x43"
         android:layout_centerVertical="true"
         android:textColor="@color/black"
         android:alpha="0.8"
@@ -18,10 +18,10 @@
         android:layout_height="wrap_content" />
     <View
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginLeft="@dimen/x40"
         android:background="#eeeeee"
         android:alpha="0.5"
         android:layout_height="1dp"
-        android:layout_width="@dimen/x279"
+        android:layout_width="match_parent"
         />
     </RelativeLayout>

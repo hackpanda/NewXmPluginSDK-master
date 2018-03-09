@@ -22,6 +22,6 @@
         android:background="#eeeeee"
         android:alpha="0.5"
         android:layout_height="1dp"
-        android:layout_width="@dimen/x279"
+        android:layout_width="match_parent"
         />
 </RelativeLayout>
