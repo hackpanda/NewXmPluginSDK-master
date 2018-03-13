@@ -10,8 +10,8 @@ android {
         minSdkVersion 19
         targetSdkVersion 23
         //每次发布版本versionCode必须加1
-        versionCode 193
-        versionName "0.4.0.803062"
+        versionCode 195
+        versionName "0.4.0.803131"
     }
 
     signingConfigs {
@@ -45,7 +45,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.0.0'
     compile project(path: ':plugProject:LockCommLib')
     compile project(path: ':plugProject:dfu')
     compile files('libs/BluetoothLe.jar')

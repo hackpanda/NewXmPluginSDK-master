@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.xiaomi.zkplug.BaseActivity;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
+import com.xiaomi.zkplug.deviceinfo.SecureLevelActivity;
 import com.xiaomi.zkplug.util.ZkUtil;
 
 /**

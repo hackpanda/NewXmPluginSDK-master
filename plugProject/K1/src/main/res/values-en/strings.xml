@@ -2,10 +2,352 @@
 <resources>
 
     <!-- Gloable -->
-    <string name="open_bluetooth">please open the bluetooth</string>
-
+    <string name="zelkova_lock_name">榉树智能门锁</string>
+    <string name="network_not_avilable">limited internet access, please make sure good internet connection</string>
+    <string name="open_bluetooth">please turn on bluetooth </string>
+    <string name="bluetooth_not_open">Bluetooth of device is off</string>
+    <string name="device_has_been_reset">lock has been reset, please remove the lock and add it back again</string>
+    <string name="connect_time_out">No lock found, please place your phone close to your lock</string>
+    <string name="data_query_fail">Failed to fetch data</string>
+    <string name="cmd_out_of_time">请到"设备信息"页将手机时间同步到门锁</string>
+    <string name="gloable_confirm">Confirm</string>
+    <string name="gloable_cancel">Cancel</string>
+    <string name="gloable_data_error">数据解析异常</string>
+    <string name="gloable_format_err">数据格式异常</string>
+    <string name="gloable_no_seckey">无密钥数据</string>
+    <string name="gloable_wrongcode_1">处理服务器发来的锁命令时，没有能解密出来</string>
+    <string name="gloable_wrongcode_2">无效钥匙</string>
+    <string name="gloable_wrongcode_3">命令不在有效期，请到"设备信息"页将手机时间同步到锁内后再尝试</string>
+    <string name="gloable_wrongcode_4">虽然锁命令未过期，但是不在指定的周期内Week，month，包括所处的周期时间</string>
+    <string name="gloable_wrongcode_5">次数使用完毕</string>
+    <string name="gloable_wrongcode_6">Open指令要求绑定到首次使用的设备，当前设备不是首次使用设备的Id</string>
+    <string name="gloable_wrongcode_7">fingerprint sensor states error, please wait…</string>
+    <string name="gloable_wrongcode_8">所执行的操作导致超过既定容量</string>
+    <string name="gloable_wrongcode_9">命令中的时间，与锁体时间误差过大</string>
+    <string name="gloable_wrongcode_10">未知错误</string>
+    <string name="gloable_wrongcode_11">得到的数据不能正确解析出协议内容</string>
+    <string name="gloable_wrongcode_12">锁命令中MAC与锁不匹配</string>
+    <string name="gloable_wrongcode_13">手机与锁Rom的通讯Token已经过期，或无效</string>
+    <string name="gloable_wrongcode_14">与控制端交换密钥的方式，不被ROM支持</string>
+    <string name="gloable_wrongcode_15">ROM不支持协议，或无法识别</string>
+    <string name="gloable_wrongcode_16">给的的参数值不在范围内</string>
+    <string name="gloable_wrongcode_17">数据包丢失</string>
+    <string name="gloable_wrongcode_18">该密码已存在，请重新设置</string>
+    <string name="gloable_wrongcode_19">未找到指定的值</string>
+    <string name="gloable_wrongcode_20">Error detected, please restart collecting</string>
+    <string name="gloable_wrongcode_64">设置参数有误</string>
+    <string name="gloable_wrongcode_undifine">未定义的错误码</string>
+    <string name="gloable_deling">deleting</string>
+    <string name="gloable_modify_succ">done</string>
+    <string name="gloable_del_succ">successfully delete</string>
+    <string name="gloable_write_fail">写数据失败</string>
+    <string name="gloable_exchange_key_fail">交换密钥失败</string>
+    <string name="gloable_encrypt_fail">通讯数据加密失败</string>
+    <string name="know_button">OK</string>
     <!-- 首页 -->
-    <string name="main_connecting">connecting lock</string>
+    <string name="main_connecting">connecting to your lock</string>
+    <string name="main_click_to_open">Tap to open</string>
+    <string name="main_menu_otp">temporary password</string>
+    <string name="main_menu_deviceinfo">Device Info</string>
+    <string name="main_menu_dfu_check">Check firmware update</string>
+    <string name="main_log_read_enable">已开放日志读取功能</string>
+    <string name="main_log_read">日志读取</string>
+    <string name="main_connect_fail">Unable to connect to your lock, please try again</string>
+    <string name="main_key_expired">分享的钥匙已过期</string>
+    <string name="main_no_shared_key">没有被分享的钥匙</string>
+    <string name="main_opening">开锁中</string>
+    <string name="main_two_factor_auth">multiple authentication on, please continue with password or finger print</string>
+    <string name="main_door_fansuo">inside lock on</string>
+    <string name="main_door_opened">unlock successfully</string>
+    <string name="main_open_fail">unlock failed：%1$s</string>
+    <string name="never_synced_time">lock internal timer is not synchronized, please synchronize timer by entering "Device info" page</string>
+    <string name="no_sync_time_30">No synchronize for more 30 days. Recommend to synchronize device timer by entering "Device Info" page</string>
+    <string name="no_sync_time_60">No synchronize for more 60 days. Recommend to synchronize device timer by entering "Device Info" page</string>
+    <string name="main_check_gateway">获取门锁状态失败，请检查网关是否正常</string>
+    <string name="main_update_time">update time：%1$s</string>
+    <string name="main_refreshing">refreshing</string>
+    <string name="main_refresh">refresh status</string>
+    <string name="main_close_weishangti">door is closed but not locked</string>
+    <string name="main_close_yishangti">door is closed and locked</string>
+    <string name="main_status_changkai">door is open</string>
+    <string name="main_dfu_dtitle">Firmware update notification</string>
+    <string name="main_dfu_dmessage">new firmware available for your lock, recommend to update your device for better experience</string>
+    <string name="main_dfu_dupdate">更新</string>
+    <string name="main_plugin_history">插件版本发布历史</string>
+    <string name="main_key_ivalid">your digital key is expired, please contact lock administrator</string>
+    <!-- Msg -->
+    <string name="msg_reading">Fetching messages</string>
+    <string name="msg_empty">当前您没有任何消息</string>
+    <string name="msg_ble_open_normal">%1$s使用手机开锁</string>
+    <string name="msg_ble_open_long">%1$s...使用手机开锁</string>
+    <string name="msg_pwd_open_normal">%1$s使用密码开锁</string>
+    <string name="msg_pwd_open_long">%1$s...使用密码开锁</string>
+    <string name="msg_fp_open_normal">%1$s使用指纹开锁</string>
+    <string name="msg_fp_open_long">%1$s...使用指纹开锁</string>
 
-    <string name="main_click_to_open">click to open the lock</string>
+    <string name="msg_unknown_open">未知操作者使用手机开锁</string>
+    <string name="msg_sm_ble_open">家人使用手机开锁</string>
+    <string name="msg_sm_otp_open">家人使用临时密码开锁</string>
+    <string name="msg_sm_pwd_open">家人使用密码开锁</string>
+    <string name="msg_sm_fp_open">家人使用指纹开锁</string>
+    <string name="msg_fp_open_content">家人通过指纹开门</string>
+    <string name="msg_fansuo_notify">反锁提醒</string>
+    <string name="msg_find_fansuo">检测到门已被反锁</string>
+    <string name="msg_keyb_freezon">keyboard is locked</string>
+    <string name="msg_keyb_freezon_reason">too many error password inputs, keyboard is locked</string>
+    <string name="msg_operate_timeout">操作超时</string>
+    <string name="msg_pwd_input_timeout">密码输入超时</string>
+    <string name="msg_peo_qiaosuo">有人试图撬锁</string>
+    <string name="msg_qiaosuo_content">检测到门锁可能存在撬锁行为，请注意查看</string>
+    <string name="msg_low_power">battery level low</string>
+    <string name="msg_power_10_percent">battery level lower than 10%, please replace your batteries</string>
+    <string name="msg_power_5_percent">battery level lower than 5%, please replace your batteries</string>
+
+
+
+    <!-- blekey -->
+    <string name="blekey_valid_time">Expired date of digital key</string>
+    <string name="blekey_msg_send">lock notifications</string>
+    <string name="blekey_msg_receive">Allow</string>
+    <string name="blekey_receive_notify">Enable lock notification</string>
+    <string name="ble_key_exist">Digital key has been created for this user. </string>
+    <string name="blekey_userinfo_query_failed">用户信息查询失败</string>
+    <string name="blekey_key_info">Digital key details</string>
+    <string name="blekey_null">没有钥匙</string>
+    <string name="blekey_info_query_failed">钥匙信息查询失败</string>
+    <string name="blekey_valid_forever">Permanent digital key</string>
+    <string name="blekey_del_text">delete the digital key</string>
+    <string name="blekey_del_succ">successfully delete</string>
+    <string name="blekey_del_fail">Failed to delete</string>
+    <string name="blekey_period_foerver">Permanent</string>
+    <string name="blekey_period_custom">Customized</string>
+    <string name="blekey_start_time">生效时间:</string>
+    <string name="blekey_start_select">请选择生效时间</string>
+    <string name="blekey_end_time">expired date:</string>
+    <string name="blekey_end_select">Please select expired date</string>
+    <string name="blekey_add">Add</string>
+    <string name="blekey_add_smkey">add a digital key for the member to unlock the door</string>
+    <string name="blekey_account_input">please enter email address/phone number/mi account to share </string>
+    <string name="blekey_seach_btntx">Search</string>
+    <string name="blekey_temp_valid">Digital key will be available until expired date</string>
+    <string name="blekey_period_per">每</string>
+    <string name="blekey_period_de">的</string>
+    <string name="blekey_period_monday">周一</string>
+    <string name="blekey_period_tuesday">周二</string>
+    <string name="blekey_period_wednesday">周三</string>
+    <string name="blekey_period_thursday">周四</string>
+    <string name="blekey_period_friday">周五</string>
+    <string name="blekey_period_saturday">周六</string>
+    <string name="blekey_period_sunday">周日</string>
+    <string name="blekey_dialog_monday">星期一</string>
+    <string name="blekey_dialog_tuesday">星期二</string>
+    <string name="blekey_dialog_wednesday">星期三</string>
+    <string name="blekey_dialog_thursday">星期四</string>
+    <string name="blekey_dialog_friday">星期五</string>
+    <string name="blekey_dialog_saturday">星期六</string>
+    <string name="blekey_dialog_sunday">星期日</string>
+    <string name="blekey_dialog_complete">完成</string>
+    <string name="blekey_week_list">周期列表</string>
+    <string name="blekey_period_valid">有效</string>
+    <string name="blekey_del_dialog_title">Confirm to delete the digital key</string>
+    <string name="blekey_share_failed">分享钥匙失败</string>
+    <string name="blekey_get_failed">获取手机钥匙失败</string>
+
+
+    <string name="blekey_id_not_exist">用户ID不存在</string>
+    <string name="blekey_period_ivalid">expired date must after the start date</string>
+    <string name="blekey_add_succ">钥匙添加成功</string>
+
+    <string name="blekey_empty_search">Please enter account</string>
+    <string name="blekey_searching">Searching</string>
+    <string name="blekey_not_find">Unable to find the user</string>
+    <string name="blekey_admin">Can not add a digital key for the administrator</string>
+
+    <!-- DeviceInfo -->
+    <string name="device_info_tip">Remind</string>
+    <string name="device_info_querying">Reading device info</string>
+    <string name="device_cmd_timeout">Command is not valid</string>
+    <string name="device_power_out">low battery, please replace your batteries</string>
+    <string name="device_exception">异常</string>
+    <string name="device_time_diff">%1$s seconds error , please synchronize lock time</string>
+    <string name="device_mute_openning">正在开启</string>
+    <string name="device_mute_closing">正在关闭</string>
+    <string name="device_info_get_failed">Failed to read device info</string>
+    <string name="device_info_closer">Put your phone next to your lock</string>
+    <string name="device_info_again">Try again</string>
+    <string name="device_info_exit">back</string>
+    <string name="device_synctime_succ">Synchronize successfully</string>
+    <string name="device_syncing">正在同步时间</string>
+    <string name="device_connect_fail">连接门锁失败</string>
+    <string name="device_large_diff">时间偏差过大</string>
+    <string name="device_to_sync_time">Synchronize phone time to your lock</string>
+    <string name="device_sync_time">同步</string>
+    <string name="device_closer_lock">Put your phone next to your lock</string>
+    <string name="device_lock_power">Battery level：</string>
+    <string name="device_sec_level">lock safety level：</string>
+    <string name="device_mute_mode">Muted</string>
+    <string name="device_mute_intro">Once muted, lock will be quite during operation.</string>
+    <string name="device_fp_count">total fingerprints：</string>
+    <string name="device_pwd_count">total digital keys：</string>
+    <string name="device_rom_version">fimware version：</string>
+    <string name="device_plugin_version">Plug-in pages version：</string>
+    <string name="device_lock_time">lock interal time：</string>
+    <string name="device_phone_time">phone time：</string>
+    <string name="device_sync_from_phone">Synchronize phone time to your lock</string>
+    <string name="device_info_power">Battery level：%1$d</string>
+    <string name="device_info_level_title">lock safety level：%1$s</string>
+    <string name="device_info_level_content">Know more about safety level</string>
+    <string name="device_info_fp_count">total fingerprints：%1$d个</string>
+    <string name="device_info_pwd_count">total digital keys：%1$d个</string>
+    <string name="device_info_rom_ver">fimware version：%1$s</string>
+    <string name="device_info_plugin_ver">Plug-in pages version：%1$s</string>
+    <string name="device_info_lock_time">lock interal time：%1$s</string>
+    <string name="device_info_phone_time">phone time：%1$s</string>
+    <string name="device_mute_set_succ">Mute the lock successfully</string>
+
+    <!-- DFU -->
+    <string name="dfu_send_request">正在发送请求</string>
+    <string name="dfu_is_newest">已经是最新版本</string>
+    <string name="dfu_newest_ver">Current version is latest</string>
+    <string name="dfu_want_check">Do you want to check version again?</string>
+    <string name="dfu_check_result">检查结果</string>
+    <string name="dfu_not_need_update">lock has the latest firmware. No further action needed.</string>
+    <string name="dfu_reboot_ble">没有发现设备，建议您重启蓝牙后再次尝试</string>
+    <string name="dfu_not_reset_fount">未发现处于重置状态的门锁</string>
+    <string name="dfu_connect_fail">连接门锁失败</string>
+    <string name="dfu_cur_version">Current version：</string>
+    <string name="dfu_newest_version">latest version：</string>
+    <string name="dfu_ver_download_fail">下载更新包失败</string>
+    <string name="dfu_ver_read_fail">failed to get firmware version</string>
+    <string name="dfu_update_need"> do you want to update lock firmware?</string>
+    <string name="dfu_update_want">update</string>
+    <string name="dfu_ver_checking">Checking</string>
+    <string name="dfu_query_fail">查询失败</string>
+    <string name="dfu_update_ing">updating firmware...</string>
+    <string name="dfu_updateing_tips">Do not use your lock during firmware updating</string>
+    <string name="dfu_distance">Keep your phone close to your lock, less than 1m is preferred</string>
+    <string name="dfu_newver_checking">Checking latest firmware version</string>
+    <string name="dfu_cannot_interrupt">Please open your bluetooth and do not interrupt the update process.</string>
+    <string name="dfu_interrupt_tips">Once the update fails,  you can try again until updates complete</string>
+    <string name="dfu_update">Update</string>
+    <string name="dfu_check_lock_ver">检查锁内固件版本号</string>
+    <string name="dfu_as_the_lock">固件版本号以锁内为准，请靠近门锁读取</string>
+    <string name="dfu_update_failed">Update failed, please try again</string>
+    <string name="dfu_del_ban">Do NOT remove your lock from device list when update fails</string>
+    <string name="dfu_use_after_updated">lock will be work again after firmware update completes</string>
+    <string name="dfu_re_update">update again</string>
+
+    <!-- 指纹 -->
+    <string name="fp_main_name">Fingerprint</string>
+    <string name="fp_name_text">Fingerprint name</string>
+    <string name="fp_del_text">delete</string>
+    <string name="fp_del_title">Sure to delete the fingerprint</string>
+    <string name="fp_modify_fp_name">Edit Fingerprint name</string>
+    <string name="fp_name_empty">Please enter fingerprint name</string>
+    <string name="fp_name_exist">指纹名已存在，请重新输入</string>
+    <string name="fp_add_title">add a fingerprint</string><!-- 标题使用，翻译时大写 -->
+    <string name="fp_put_figure">place your finger</string>
+    <string name="fp_repeat_input">please place your finger and remove after beeping</string>
+    <string name="fp_add_complete">Done</string>
+    <string name="fp_open_test">Please try to unlock with your fingerprint </string>
+    <string name="fp_input_request">Requst to start collecting</string>
+    <string name="fp_no_member">成员已被删除</string>
+    <string name="fp_input_tips">Please make sure you are using a comfort finger position during collecting fingerprint.</string>
+    <string name="fp_input_tips_0">Please remove your finger after beeping, and repeat this operation until collection completes</string>
+    <string name="fp_input_tips_1"></string>
+    <string name="fp_begin_add">Start</string>
+    <string name="fp_put_time_out">No finger detected, please restart collecting</string>
+    <string name="fp_get_edge">采集手指边缘指纹</string>
+    <string name="fp_repeat_edge">将手指边缘按在指纹头上再抬起，重复此步骤</string>
+    <string name="fp_confirm_failed">Failed to collect fingerprint</string>
+    <string name="fp_del_failed">Failed to delete fingerprint</string>
+
+
+    <!-- 智能 -->
+    <string name="any_mode_open">任意方式开锁</string>
+    <string name="any_fp_open">任意指纹开锁</string>
+    <string name="any_pwd_open">任意密码开锁</string>
+    <string name="any_blekey_open">任意手机钥匙开锁</string>
+    <string name="inte_ble_open">手机钥匙开锁</string>
+    <string name="inte_pwd_open">密码开锁</string>
+    <string name="inte_open">开锁</string>
+
+    <!-- 家庭成员 -->
+    <string name="member_sm_type">Member</string>
+    <string name="member_detail">Member details</string>
+    <string name="fp_modify_mem_name">Edit Name</string>
+    <string name="member_pwd_del_title">是否删除密码？</string>
+    <string name="member_del_title">This member will be deleted, Are your sure?</string>
+    <string name="member_del_key_first">请先删除%1$s的手机钥匙</string>
+    <string name="member_open_ble">Please open bluetooth and make sure your lock is near by</string>
+    <string name="member_del_failed">Failed to delete</string>
+    <string name="member_list_full">当前已添加15个成员，不可再添</string>
+    <string name="member_manage_title">Member management</string>
+    <string name="member_add_title">添加成员</string>
+    <string name="member_name">Name</string>
+    <string name="member_name_empty">Please input name</string>
+    <string name="member_add_ing">Adding</string>
+    <string name="member_add_succ">添加成功</string>
+    <string name="member_name_text">Please input name</string>
+    <string name="member_master_text">Administrator</string>
+    <string name="member_member_tips">Member can add password, fingerprint and digital key after created</string>
+    <string name="member_add_key">add a digital key</string>
+    <string name="member_had_key">digital key</string>
+    <string name="member_lock_pwd">password</string>
+    <string name="member_pwd_add_title">add a password</string><!-- "添加密码"翻译时大写 -->
+    <string name="member_pwd_change_title">Change password</string><!-- "添加密码"翻译时大写 -->
+
+    <string name="member_lock_fp">fingerprint</string>
+    <string name="member_fp_first">指纹1</string>
+    <string name="member_fp_sec">指纹2</string>
+    <string name="member_fp_third">指纹3</string>
+    <string name="member_del_text">delete a member</string>
+
+    <!-- 临时密码 -->
+    <string name="otp_close_title">De-activate temporary password</string>
+    <string name="otp_does_close">确定要关闭临时密码吗?</string>
+    <string name="otp_seckey_check">Checking temporary password states</string>
+    <string name="otp_no_seckey">temporary password is not activated, </string>
+    <string name="otp_use_near">please activate temporary password close to your lock</string>
+    <string name="otp_dredge_btn">activate</string>
+    <string name="otp_used_out">No more temporary password can be generated, please try again after %1$s</string><!-- 12:00 -->
+    <string name="otp_level_a">Temporary password availabe only under safety level A</string>
+    <string name="otp_level_know">了解如何设置安全等级</string>
+    <string name="otp_gene_btn">Generate temporary password</string>
+    <string name="otp_close_btn">De-activate</string>
+    <string name="otp_seckey_query_failed">密钥数据查询失败</string>
+    <string name="otp_seckey_savefail">存储密钥失败</string>
+    <string name="otp_open_ing">正在开通</string>
+    <string name="otp_valid_time">密码于%1$s失效，失效前仅可使用一次</string>
+    <string name="otp_saved_err">数据存储失败</string>
+    <string name="otp_lock_level_title">门锁安全等级</string><!-- 大写 -->
+
+    <!-- 门锁安全等级 -->
+    <string name="seclevel_intro">Instructions to lock safety level</string>
+    <string name="seclevel_depart">Lock has 3 safety level s, A, B and C</string>
+    <string name="seclevel_single">single element authentication. One of the 3 elements(password, fingerprint, digital key) matches can unlock the door.</string>
+    <string name="seclevel_two">multi elements authentication. A combinition of 2 eletments (fingerprint+password/fingerprint+digital key/digital key+password) matches can unlock the door</string>
+    <string name="seclevel_three">Besides level B features, lock stops wireless broadcasting. You will not receive any lock notification in this case.</string>
+    <string name="seclevel_a">Level A: </string>
+    <string name="seclevel_b">Level B: </string>
+    <string name="seclevel_c">Level C: </string>
+    <string name="seclevel_how_to_set">How to change lock safety level？</string>
+    <string name="seclevel_set_method">remove battery cover from bottom side of rear lock set and switch the safety button to change safety level.</string>
+
+    <!-- 密码设置 -->
+    <string name="pwd_setting">Saving changes</string>
+    <string name="pwd_freezon">keyboard will be locked for 5 minutes after 5 incorrect inputs.</string>
+    <string name="pwd_free_double">Keyboard lock time will be doubled for continued incorrect inputs</string>
+    <string name="pwd_len_limit">6-8 digits</string>
+    <string name="pwd_set_failed">set password failed</string>
+    <string name="pwd_enter">Please enter password</string>
+    <string name="pwd_enter_68">please enter 6-8 digits</string>
+    <string name="pwd_set_succ">set password successfully</string>
+    <string name="pwd_open_test">请尝试用密码开一次锁</string>
+    <!-- 插件历史版本 -->
+    <string name="history_release_version">发布版本: </string>
+
+    <string name="history_version_1">手机开锁，刷新门锁状态，成员管理（包括添加手机钥匙，密码和指纹），临时密码，门锁事件通知和检查固件升级等功</string>
+    <string name="history_version_2">1.第一次开门不会弹出授时同步时间对话框的问题\n2.设置密码概率crash\n3.无头像时，授权crash</string>
+    <string name="history_version_3">1.新增：查看设备信息、同步时间、设置静音模式、分享临时密码、查看插件版本发布历史和智能联动等功能和相关页面\n2.优化：手机钥匙开锁交互和检查固件升级过程</string>
 </resources>

@@ -192,7 +192,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
         Intent pwdUnlockIntent = new Intent();
         pwdUnlockIntent.putExtra("memberId", memberId);
         pwdUnlockIntent.putExtra("nickName", nickNameTv.getText().toString());
-        pwdUnlockIntent.putExtra("title", "修改密码");
+        pwdUnlockIntent.putExtra("title", getString(R.string.member_pwd_change_title));
         startActivity(pwdUnlockIntent, PwdSetActivity.class.getName());
     }
 
@@ -270,7 +270,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
      */
     private void showNameEditDialog() {
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-        builder.setTitle("修改家人名称");
+        builder.setTitle(R.string.fp_modify_mem_name);
         builder.setInputView(nickNameTv.getText().toString(), true);
         builder.setPositiveButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
@@ -285,13 +285,13 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                     return;
                 }
                 if(TextUtils.isEmpty(builder.getInputView().getText().toString())){//什么都没输入
-                    CommonUtils.toast(activity(), "修改成功");
+                    Toast.makeText(activity(), R.string.gloable_modify_succ, Toast.LENGTH_LONG).show();
                     return;
                 }
                 updateMemberName(builder.getInputView().getText().toString().trim());//去空格
             }
         });
-        builder.setNegativeButton("取消", new MLAlertDialog.OnClickListener() {
+        builder.setNegativeButton(R.string.gloable_cancel, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -394,7 +394,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                         activity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                CommonUtils.toast(activity(), "修改失败");
+                                Toast.makeText(activity(), R.string.gloable_modify_fail, Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -405,8 +405,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                             @Override
                             public void run() {
                                 nickNameTv.setText(newName);
-                                CommonUtils.toast(activity(), "修改成功");
-
+                                Toast.makeText(activity(), R.string.gloable_modify_succ, Toast.LENGTH_LONG).show();
                                 setKeyToNameAfterUpateMemberName(newName);
 
                             }
@@ -463,7 +462,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                                 activity().runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        CommonUtils.toast(activity(), "修改失败");
+                                        Toast.makeText(activity(), R.string.gloable_modify_fail, Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -474,7 +473,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
                                     @Override
                                     public void run() {
                                         nickNameTv.setText(newName);
-                                        CommonUtils.toast(activity(), "修改成功");
+                                        Toast.makeText(activity(), R.string.gloable_modify_succ, Toast.LENGTH_LONG).show();
                                         setKeyToNameAfterUpateMemberName(newName);
                                     }
                                 });

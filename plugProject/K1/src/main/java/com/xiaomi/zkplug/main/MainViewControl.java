@@ -8,7 +8,6 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,10 +33,8 @@ import com.xiaomi.smarthome.device.api.Callback;
 import com.xiaomi.smarthome.device.api.DeviceStat;
 import com.xiaomi.smarthome.device.api.UserInfo;
 import com.xiaomi.smarthome.device.api.XmPluginHostApi;
-import com.xiaomi.zkplug.CommonUtils;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
-import com.xiaomi.zkplug.dfu.DfuActivity;
 import com.xiaomi.zkplug.entity.MyEntity;
 import com.xiaomi.zkplug.lockoperater.LockOperateCallback;
 import com.xiaomi.zkplug.lockoperater.SecureOpen;
@@ -62,7 +59,6 @@ import cn.zelkova.lockprotocol.BriefDate;
  * 邮箱：liwenqi@zelkova.cn
  * 描述：mainView界面控制
  */
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainViewControl {
     private final String KEYID_NICKNAME_MASTER= "keyid_master$nickname_data";//管理员服务器keyId
     private final String KEYID_ADD_LOCK_TIME = "keyid_addLockTime_data";//添加门锁的时间
@@ -621,8 +617,8 @@ public class MainViewControl {
         keyPeriodTv.setVisibility(View.GONE);
         final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
 
-        builder.setTitle("提示");
-        builder.setMessage("钥匙已失效，无法开锁，请联系管理员");
+        builder.setTitle(R.string.device_info_tip);
+        builder.setMessage(activity.getString(R.string.main_key_ivalid));
 
         builder.setCancelable(false);
         builder.setNegativeButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {

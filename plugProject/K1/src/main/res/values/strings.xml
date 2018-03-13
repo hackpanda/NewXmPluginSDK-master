@@ -110,7 +110,6 @@
 		the SoftDevice itself and/or a bootloader may also be updated.
 		\n\nFor more information about the DFU, see the About DFU section in Settings.</string>
 
-
     <string name="dfu_action_abort">Abort</string>
     <string name="dfu_status_aborted">Aborted</string>
     <string name="dfu_status_aborted_msg">Application upload has been canceled.</string>
@@ -174,6 +173,7 @@
     <string name="gloable_wrongcode_undifine">未定义的错误码</string>
     <string name="gloable_deling">正在删除</string>
     <string name="gloable_modify_succ">修改成功</string>
+    <string name="gloable_modify_fail">修改失败</string>
     <string name="gloable_del_succ">删除成功</string>
     <string name="gloable_write_fail">写数据失败</string>
     <string name="gloable_exchange_key_fail">交换密钥失败</string>
@@ -187,7 +187,7 @@
     <string name="main_menu_dfu_check">检查固件升级</string>
     <string name="main_log_read_enable">已开放日志读取功能</string>
     <string name="main_log_read">日志读取</string>
-    <string name="main_connect_fail">未连接门锁，点击重试</string>
+    <string name="main_connect_fail">未连接门锁，点击门锁图标重试</string>
     <string name="main_key_expired">分享的钥匙已过期</string>
     <string name="main_no_shared_key">没有被分享的钥匙</string>
     <string name="main_opening">开锁中</string>
@@ -201,7 +201,7 @@
     <string name="main_check_gateway">获取门锁状态失败，请检查网关是否正常</string>
     <string name="main_update_time">更新时间：%1$s</string>
     <string name="main_refreshing">正在刷新</string>
-    <string name="main_refresh">&#160;&#160;&#160;&#160;&#160;刷新状态</string>
+    <string name="main_refresh">刷新状态</string>
     <string name="main_close_weishangti">关门(未上提)</string>
     <string name="main_close_yishangti">关门(已上提)</string>
     <string name="main_status_changkai">敞开</string>
@@ -209,6 +209,8 @@
     <string name="main_dfu_dmessage">门锁固件有新版本，为避免影响使用请尽快检查固件更新</string>
     <string name="main_dfu_dupdate">更新</string>
     <string name="main_plugin_history">插件版本发布历史</string>
+    <string name="main_key_ivalid">钥匙已失效，无法开锁，请联系管理员</string>
+
     <!-- Msg -->
     <string name="msg_reading">正在读取消息</string>
     <string name="msg_empty">当前您没有任何消息</string>
@@ -228,7 +230,7 @@
     <string name="msg_fansuo_notify">反锁提醒</string>
     <string name="msg_find_fansuo">检测到门已被反锁</string>
     <string name="msg_keyb_freezon">键盘被锁</string>
-    <string name="msg_keyb_freezon_reason">有人多次连续输错密码，导致您的门锁键盘被锁</string>
+    <string name="msg_keyb_freezon_reason">检测到键盘密码输错次数过多，导致键盘被锁定</string>
     <string name="msg_operate_timeout">操作超时</string>
     <string name="msg_pwd_input_timeout">密码输入超时</string>
     <string name="msg_peo_qiaosuo">有人试图撬锁</string>
@@ -236,8 +238,6 @@
     <string name="msg_low_power">门锁电量过低</string>
     <string name="msg_power_10_percent">检测到门锁电量低于10%, 请及时更换电池</string>
     <string name="msg_power_5_percent">检测到门锁电量低于5%, 请及时更换电池</string>
-
-
 
     <!-- blekey -->
     <string name="blekey_valid_time">钥匙有效期</string>
@@ -263,10 +263,10 @@
     <string name="blekey_end_time">到期时间:</string>
     <string name="blekey_end_select">请选择到期时间</string>
     <string name="blekey_add">添加</string>
-    <string name="blekey_add_smkey">为成员添加一把手机钥匙</string>
-    <string name="blekey_smkey_succ">成员就可以使用手机开锁了</string>
+    <string name="blekey_add_smkey">为成员添加一把手机钥匙\n成员就可以使用手机开锁了</string>
     <string name="blekey_account_input">请输入对方的邮箱／手机号码／小米账号</string>
     <string name="blekey_seach_btntx">查找</string>
+    <string name="blekey_temp_valid">手机钥匙在到期之前有效</string>
 
     <string name="blekey_period_per">每</string>
     <string name="blekey_period_de">的</string>
@@ -296,7 +296,7 @@
     <string name="blekey_period_ivalid">到期时间必须大于当前时间</string>
     <string name="blekey_add_succ">钥匙添加成功</string>
 
-    <string name="blekey_empty_search">请输入查找账号</string>
+    <string name="blekey_empty_search">请输入账号</string>
     <string name="blekey_searching">正在查找</string>
     <string name="blekey_not_find">未找到该用户</string>
     <string name="blekey_admin">您已是门锁管理员，无法再为自己添加手机钥匙</string>
@@ -381,6 +381,7 @@
     <string name="fp_del_text">删除</string>
     <string name="fp_del_title">是否删除指纹</string>
     <string name="fp_modify_fp_name">修改指纹名称</string>
+
     <string name="fp_name_empty">请输入指纹名称</string>
     <string name="fp_name_exist">指纹名已存在，请重新输入</string>
     <string name="fp_add_title">添加指纹</string><!-- 标题使用，翻译时大写 -->
@@ -410,11 +411,12 @@
     <string name="inte_pwd_open">密码开锁</string>
     <string name="inte_open">开锁</string>
 
-    <!-- 密码-->
-    <string name="pwd_set_failed">密码设置失败</string>
+
 
     <!-- 家庭成员 -->
+    <string name="member_sm_type">成员</string>
     <string name="member_detail">成员详情</string>
+    <string name="fp_modify_mem_name">修改家人名称</string>
     <string name="member_pwd_del_title">是否删除密码？</string>
     <string name="member_del_title">是否删除成员？</string>
     <string name="member_del_key_first">请先删除%1$s的手机钥匙</string>
@@ -434,11 +436,12 @@
     <string name="member_had_key">手机钥匙</string>
     <string name="member_lock_pwd">开锁密码</string>
     <string name="member_pwd_add_title">添加密码</string><!-- "添加密码"翻译时大写 -->
+    <string name="member_pwd_change_title">修改密码</string><!-- "添加密码"翻译时大写 -->
     <string name="member_lock_fp">开锁指纹</string>
     <string name="member_fp_first">指纹1</string>
     <string name="member_fp_sec">指纹2</string>
     <string name="member_fp_third">指纹3</string>
-    <string name="member_del_text">删除家人</string>
+    <string name="member_del_text">删除成员</string>
 
     <!-- 临时密码 -->
     <string name="otp_close_title">关闭临时密码</string>
@@ -476,5 +479,16 @@
     <string name="pwd_freezon">连续输错五次密码，键盘会被锁定5分钟</string>
     <string name="pwd_free_double">连续被锁，惩罚时间翻倍</string>
     <string name="pwd_len_limit">6-8位数字</string>
+    <string name="pwd_set_failed">密码设置失败</string>
+    <string name="pwd_enter">请输入密码</string>
+    <string name="pwd_enter_68">请输入6~8位数字</string>
+    <string name="pwd_set_succ">设置成功</string>
+    <string name="pwd_open_test">请尝试用密码开一次锁</string>
 
+    <!-- 插件历史版本 -->
+    <string name="history_release_version">发布版本: </string>
+
+    <string name="history_version_1">手机开锁，刷新门锁状态，成员管理（包括添加手机钥匙，密码和指纹），临时密码，门锁事件通知和检查固件升级等功</string>
+    <string name="history_version_2">1.第一次开门不会弹出授时同步时间对话框的问题\n2.设置密码概率crash\n3.无头像时，授权crash</string>
+    <string name="history_version_3">1.新增：查看设备信息、同步时间、设置静音模式、分享临时密码、查看插件版本发布历史和智能联动等功能和相关页面\n2.优化：手机钥匙开锁交互和检查固件升级过程</string>
 </resources>

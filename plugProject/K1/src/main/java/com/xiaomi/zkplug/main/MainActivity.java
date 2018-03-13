@@ -6,11 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.os.SystemClock;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -32,6 +30,7 @@ import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.deviceinfo.DeviceInfoActivity;
 import com.xiaomi.zkplug.dfu.DfuActivity;
 import com.xiaomi.zkplug.entity.MyProvider;
+import com.xiaomi.zkplug.history.PluginHistoryActivity;
 import com.xiaomi.zkplug.log.LogReadActivity;
 import com.xiaomi.zkplug.member.MemberManageActivity;
 import com.xiaomi.zkplug.otp.OtpActivity;
@@ -47,7 +46,6 @@ import java.util.ArrayList;
 
 import cn.zelkova.lockprotocol.ProfileProvider;
 
-@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class MainActivity extends BaseActivity implements OnClickListener{
     private final String TAG = "MainActivity";
 
@@ -74,7 +72,11 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         setContentView(R.layout.activity_open);
         mDevice = Device.getDevice(mDeviceStat);
         mHostActivity.enableVerifyPincode();
-        initView();
+        try{
+            initView();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -107,7 +109,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
     /**
      * 分享者界面
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initCustomerView(){
         memberImg.setVisibility(View.GONE);
         mainViewControl = new MainViewControl(activity(), mDeviceStat, pluginPackage());
@@ -161,7 +162,7 @@ public class MainActivity extends BaseActivity implements OnClickListener{
 
         IXmPluginHostActivity.IntentMenuItem intentMenuPluginHistory = new IXmPluginHostActivity.IntentMenuItem();
         intentMenuPluginHistory.name = getResources().getString(R.string.main_plugin_history);
-        intentMenuPluginHistory.intent = mHostActivity.getActivityIntent(null, DfuActivity.class.getName());
+        intentMenuPluginHistory.intent = mHostActivity.getActivityIntent(null, PluginHistoryActivity.class.getName());
         menus.add(intentMenuPluginHistory);
 
         /*
@@ -177,7 +178,6 @@ public class MainActivity extends BaseActivity implements OnClickListener{
         //3.初始化数据，添加管理员，放在onresume中，因为要动态提示同步时间
         mainViewControl.refreshLockStatus(true);//4.刷新状态
         mainViewControl.conneMasterctLock();//5.自动连接门锁
-
         romVersionCheck();//6.检查版本更新
     }
 

@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xiaomi.smarthome.common.ui.widget.SwitchButton;
 import com.xiaomi.zkplug.BaseActivity;
 import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.util.ZkUtil;
 import com.xiaomi.zkplug.view.TimeSelector.TimeSelector;
+import com.xiaomi.zkplug.view.TimeSelector.Utils.TextUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -124,6 +126,10 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 finish();
                 break;
             case R.id.keyGaveBtn:
+                if(TextUtil.isEmpty(keyEndTv.getText().toString())){
+                    Toast.makeText(activity(), R.string.blekey_end_select, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 //1：暂时有效，2：周期有效，3：永久有效
                 if((int)this.tempImg.getTag() == TAG_XUAN_ZHONG){
                     Log.d("KeyManager", "临时");
@@ -171,7 +177,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 this.periodImg.setImageResource(R.drawable.btn_weixuan);
                 this.periodImg.setTag(TAG_WEI_XUAN_ZHONG);
 
-                keyInfoTv.setText("手机钥匙在到期时间之前有效");
+                keyInfoTv.setText(R.string.blekey_temp_valid);
                 keyPeriodLayout.setVisibility(View.GONE);
                 keyStartLayout.setVisibility(View.GONE);
                 keyEndLayout.setVisibility(View.VISIBLE);

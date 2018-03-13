@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.xiaomi.zkplug.BaseActivity;
 import com.xiaomi.zkplug.Device;
 import com.xiaomi.zkplug.R;
-import com.xiaomi.zkplug.otp.SecureLevelActivity;
 
 /**
  * 作者：liwenqi on 18/1/31 18:34

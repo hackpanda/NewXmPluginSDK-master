@@ -26,7 +26,7 @@
             android:layout_height="@dimen/y10" />
         <TextView
             android:layout_centerVertical="true"
-            android:text="成员"
+            android:text="@string/member_sm_type"
             android:textSize="@dimen/x10"
             android:textColor="#000000"
             android:alpha="0.5"

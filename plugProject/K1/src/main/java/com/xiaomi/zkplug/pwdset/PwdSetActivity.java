@@ -221,12 +221,12 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
         }
 
         if(pwdEdit.getText().toString().isEmpty()){
-            pwdWarnTv.setText("请输入密码");
+            pwdWarnTv.setText(R.string.pwd_enter);
             pwdWarnTv.setVisibility(View.VISIBLE);
             return false;
         }
         if(pwdEdit.getText().toString().length() < 6){
-            pwdWarnTv.setText("请输入6~8位数字");
+            pwdWarnTv.setText(R.string.pwd_enter_68);
             pwdWarnTv.setVisibility(View.VISIBLE);
             return false;
         }
@@ -396,10 +396,10 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void run() {
                 final MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
-                builder.setTitle("设置成功");
+                builder.setTitle(R.string.pwd_set_succ);
                 builder.setCancelable(false);
                 builder.setMessage("请尝试用密码开一次锁");
-                builder.setNeutralButton("知道了", new MLAlertDialog.OnClickListener() {
+                builder.setNeutralButton(R.string.know_button, new MLAlertDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
@@ -419,7 +419,6 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
                     CommonUtils.toast(activity(), s);
                 }
                 XmBluetoothManager.getInstance().disconnect(mDeviceStat.mac);
-                Log.d(TAG, "超时未发现门锁, 执行断开");
                 viewHanlder.removeMessages(MSG_PWD_SET_TIMEOUT);
             }
         });

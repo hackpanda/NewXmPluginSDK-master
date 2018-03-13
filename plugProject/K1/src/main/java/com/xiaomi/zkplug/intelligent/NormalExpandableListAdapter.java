@@ -16,6 +16,7 @@ import com.xiaomi.zkplug.R;
  */
 public class NormalExpandableListAdapter extends BaseExpandableListAdapter {
     private static final String TAG = "NormalExpandableListAda";
+    private final String EVENT_FLAG = "#FLAG#";
     private String[] groupData;
     private String[][] childData;
     private OnGroupExpandedListener mOnGroupExpandedListener;
@@ -92,7 +93,13 @@ public class NormalExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             childViewHolder = (ChildViewHolder) convertView.getTag();
         }
-        childViewHolder.tvTitle.setText(childData[groupPosition][childPosition]);
+        //String childValue = childData[groupPosition][childPosition];
+        //String visibleValue = childValue.split(EVENT_FLAG)[0];
+        //String hideValue = childValue.split(EVENT_FLAG)[1];//key值隐藏在textviewz
+
+        //String textSource = visibleValue+"<font style=\"background:transparent\">"+hideValue+"</font>";
+        //childViewHolder.tvTitle.setText(Html.fromHtml(textSource));
+        childViewHolder.tvTitle.setText(childData[groupPosition][childPosition].split(EVENT_FLAG)[0]);
         return convertView;
     }
 

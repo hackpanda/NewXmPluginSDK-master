@@ -1,4 +1,4 @@
-package com.xiaomi.zkplug.otp;
+package com.xiaomi.zkplug.deviceinfo;
 
 import android.os.Bundle;
 import android.view.View;

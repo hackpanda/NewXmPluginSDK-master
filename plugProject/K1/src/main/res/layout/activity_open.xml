@@ -92,14 +92,58 @@
         </RelativeLayout>
     </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/statusRel"
-            android:background="#fafafa"
+    <RelativeLayout
+        android:id="@+id/statusRel"
+        android:background="#fafafa"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/shanglaImg"
+            android:layout_width="@dimen/x47"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/shanghua_selector"
+            android:layout_height="@dimen/y20" />
+        <LinearLayout
+            android:id="@+id/refreshRel"
+            android:layout_above="@id/shanglaImg"
+            android:layout_marginBottom="@dimen/y20"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/refreshLsImg"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y10"
+                    android:text="@string/main_refresh"
+                    android:textSize="@dimen/x11"
+                    android:textColor="@drawable/reresh_text_selector"
+                    android:background="@drawable/status_refresh_selector"
+                    android:layout_width="@dimen/x153"
+                    android:layout_height="@dimen/y21" />
+                <TextView
+                    android:id="@+id/refreshTimeTv"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/y7"
+                    android:layout_width="wrap_content"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:alpha="0.5"
+                    android:textSize="@dimen/x9"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_above="@id/refreshRel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:id="@+id/lockStatusLayout"
-                android:layout_marginTop="@dimen/y29"
                 android:layout_alignParentLeft="true"
                 android:orientation="vertical"
                 android:layout_width="@dimen/x70"
@@ -126,7 +170,6 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/powerLayout"
-                android:layout_marginTop="@dimen/y29"
                 android:layout_alignParentRight="true"
                 android:orientation="vertical"
                 android:layout_width="@dimen/x70"
@@ -151,44 +194,9 @@
                     android:layout_marginTop="@dimen/y3"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <LinearLayout
-                android:layout_below="@id/lockStatusLayout"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:id="@+id/refreshLsImg"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y10"
-                        android:text="@string/main_refresh"
-                        android:textSize="@dimen/x11"
-                        android:textColor="@drawable/reresh_text_selector"
-                        android:background="@drawable/status_refresh_selector"
-                        android:layout_width="@dimen/x153"
-                        android:layout_height="@dimen/y21" />
-                    <TextView
-                        android:id="@+id/refreshTimeTv"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/y7"
-                        android:layout_width="wrap_content"
-                        android:text=""
-                        android:textColor="#000000"
-                        android:alpha="0.5"
-                        android:textSize="@dimen/x9"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-            </LinearLayout>
-            <ImageView
-                android:id="@+id/shanglaImg"
-                android:layout_width="@dimen/x47"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/shanghua_selector"
-                android:layout_height="@dimen/y20" />
+
         </RelativeLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -33,15 +33,15 @@
                 android:layout_marginTop="@dimen/y30"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <TextView
-                android:gravity="center_horizontal"
-                android:text="@string/blekey_smkey_succ"
-                android:textColor="@color/black"
-                android:alpha="0.6"
-                android:textSize="@dimen/x12"
-                android:layout_marginTop="@dimen/y3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--<TextView-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:text="@string/blekey_smkey_succ"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:alpha="0.6"-->
+                <!--android:textSize="@dimen/x12"-->
+                <!--android:layout_marginTop="@dimen/y3"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
         </LinearLayout>
 
         <EditText
