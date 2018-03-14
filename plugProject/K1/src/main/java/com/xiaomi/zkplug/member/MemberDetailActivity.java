@@ -496,7 +496,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
         pwdUnlockView = (ListViewCompat) findViewById(R.id.pwdUnlockView);
         pwdUnlockItems = new ArrayList<PwdUnlockItem>();
         PwdUnlockItem item = new PwdUnlockItem();
-        item.title = "密码";
+        item.title = getString(R.string.member_label_pwd);
         pwdUnlockItems.add(item);
         pwdUnlockView.setAdapter(new PwdUnlockAdapter());
 
@@ -578,7 +578,7 @@ public class MemberDetailActivity extends BaseActivity implements View.OnClickLi
             if(memberObj.has(theAccountKey) && !memberObj.getString(theAccountKey).equals("")){//有钥匙
                 miAccount = memberObj.getString(theAccountKey);
                 keyTv.setTextColor(getResources().getColor(R.color.black));
-                keyTv.setText("手机钥匙");
+                keyTv.setText(R.string.member_had_key);
             }else{
                 keyTv.setTextColor(getResources().getColor(R.color.colorPrimary));
                 keyTv.setText(R.string.member_add_key);

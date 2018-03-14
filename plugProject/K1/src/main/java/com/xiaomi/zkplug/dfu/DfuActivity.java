@@ -71,6 +71,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
     private final int MSG_CHECK_UPDATE_INFO = 0x11;
     private final int MSG_ENTER_DFU_TIME_OUT = 0x20;//启动DFU超时
     private final int MSG_CONNECT_DFU = 0x21;//连接DFU设备
+    private final int MSG_WAIT_DFU_FILE_DOWNLOAD = 0x22;//开始下载
     private boolean isDisvocerService = false;
     TextView curRomVer, newestRomVer;
     ImageView checkImg;
@@ -120,7 +121,6 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         findViewById(R.id.checkVersionBtn).setOnClickListener(this);
         checkImg = (ImageView) findViewById(R.id.checkImg);
 
-
         ZkUtil.startAnima(this, checkImg);//旋转
         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
 
@@ -134,6 +134,9 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         @Override
         public void handleMessage(final Message msg) {
             switch (msg.what) {
+                case MSG_WAIT_DFU_FILE_DOWNLOAD:
+                    downLoadRom();//先下载文件
+                    break;
                 case MSG_GET_VER_TIME_OUT:
                     Log.d(TAG, "MSG_GET_VER_TIME_OUT");
                     showGetVerFailView("");
@@ -193,7 +196,12 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                 }
                 xqProgressDialog.setMessage(getString(R.string.dfu_send_request));
                 xqProgressDialog.show();
-                downLoadRom();//先下载文件
+                XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
+                if(iStatusOperator != null){
+                    iStatusOperator.unregisterBluetoothReceiver();
+                }
+
+                viewHanlder.sendEmptyMessageDelayed(MSG_WAIT_DFU_FILE_DOWNLOAD, 2000);//为断开节约时间
                 break;
             case R.id.checkVersionBtn:
                 showCheckVerDialog();
@@ -226,6 +234,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
      * 检查后锁内固件仍是最新
      */
     private void showConfirmDialog(){
+
         viewHanlder.removeMessages(MSG_GET_VER_TIME_OUT);
         MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity());
         builder.setTitle(R.string.dfu_check_result);
@@ -233,7 +242,6 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         builder.setNegativeButton(R.string.gloable_confirm, new MLAlertDialog.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
         builder.show();
@@ -273,9 +281,7 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());//主动断开一下默认的连接
                         mBluetoothDevice = bluetoothDevice;
                         mBluetoothLe.stopScan();
-                        //viewHanlder.sendEmptyMessageDelayed(MSG_CONNECT_DFU, 3 * 1000);
-
-                        connect();
+                        viewHanlder.sendEmptyMessageDelayed(MSG_CONNECT_DFU, 3 * 1000);
                     }
 
                     @Override
@@ -551,7 +557,9 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
         Log.d(TAG, "showGetVerFailView");
         xqProgressDialog.dismiss();
         XmBluetoothManager.getInstance().disconnect(mDevice.getMac());
-        iStatusOperator.unregisterBluetoothReceiver();
+        if(iStatusOperator != null){
+            iStatusOperator.unregisterBluetoothReceiver();
+        }
         viewHanlder.removeMessages(MSG_GET_VER_TIME_OUT);
 
         if(value.indexOf(getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
@@ -577,7 +585,8 @@ public class DfuActivity extends BaseActivity implements View.OnClickListener{
                     }
                     xqProgressDialog.setMessage(getString(R.string.dfu_send_request));
                     xqProgressDialog.show();
-                    downLoadRom();//先下载文件
+                    viewHanlder.sendEmptyMessageDelayed(MSG_WAIT_DFU_FILE_DOWNLOAD, 2000);//为断开节约时间
+
 
                 }
             });

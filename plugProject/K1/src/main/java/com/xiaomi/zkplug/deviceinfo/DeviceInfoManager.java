@@ -133,10 +133,10 @@ public class DeviceInfoManager {
      */
     private LockCmdGetStatus getLockStatusCmd(){
         Calendar cld = Calendar.getInstance();
-        cld.add(Calendar.YEAR, -5);
+        cld.add(Calendar.SECOND, -5);
         BriefDate vFrom = BriefDate.fromNature(cld.getTime());
         cld = Calendar.getInstance();
-        cld.add(Calendar.YEAR, 180);
+        cld.add(Calendar.SECOND, 180);
         BriefDate vTo = BriefDate.fromNature(cld.getTime());
         LockCmdGetStatus lockCmdGetStatus = new LockCmdGetStatus(BitConverter.convertMacAdd(mDevice.getMac()), vFrom, vTo);
         Log.d(TAG, vFrom.toString()+"-----"+vTo.toString());
@@ -168,10 +168,12 @@ public class DeviceInfoManager {
             public void lockOperateFail(String value) {
                 Log.d(TAG, "getLockStatus:"+value);
                 iStatusOperator.unregisterBluetoothReceiver();
+                viewHanlder.removeMessages(MSG_TIME_OUT);
                 xqProgressDialog.dismiss();
-                Toast.makeText(activity, value, Toast.LENGTH_LONG).show();
                 if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     showSyncTimeDialog();
+                }else{
+                    Toast.makeText(activity, value, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -448,7 +450,7 @@ public class DeviceInfoManager {
      */
     private void showSyncTimeDialog(){
         MLAlertDialog.Builder builder = new MLAlertDialog.Builder(activity);
-        builder.setTitle(R.string.device_large_diff);
+        builder.setTitle(R.string.device_cmd_timeout);
         builder.setMessage(R.string.device_to_sync_time);
         builder.setPositiveButton(R.string.device_sync_time, new MLAlertDialog.OnClickListener() {
             @Override

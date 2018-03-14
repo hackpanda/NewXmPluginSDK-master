@@ -71,6 +71,7 @@ public class LockCmdSyncPwd extends LockCmdBase {
 
     /**
      * 将符合要求的密码字符串转化为二进制数组
+     * 不用翻译，因为界面已经做了限制
      */
     public static byte[] convertToASIICByte(String val) {
         byte[] tempBuffer;

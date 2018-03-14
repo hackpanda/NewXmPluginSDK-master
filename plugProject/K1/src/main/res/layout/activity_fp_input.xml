@@ -45,14 +45,21 @@
             android:layout_marginTop="@dimen/y88"
             android:layout_width="@dimen/x213"
             android:layout_height="@dimen/y108"/>
-        <Button
-            android:id="@+id/btnFpIput"
-            android:layout_width="@dimen/x279"
-            android:layout_height="@dimen/y33"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/y86"
-            android:text="@string/fp_begin_add"
-            android:background="@drawable/corners_btn"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btnFpIput"
+                android:layout_width="@dimen/x279"
+                android:layout_height="@dimen/y33"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y20"
+                android:text="@string/fp_begin_add"
+                android:background="@drawable/corners_btn"/>
+        </RelativeLayout>
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/fpInputBuzhouLayout"

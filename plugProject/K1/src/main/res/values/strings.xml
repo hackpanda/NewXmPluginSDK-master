@@ -243,6 +243,7 @@
     <string name="blekey_valid_time">钥匙有效期</string>
     <string name="blekey_msg_send">推送通知</string>
     <string name="blekey_msg_receive">接收</string>
+    <string name="blekey_msg_not">不接收</string>
     <string name="blekey_receive_notify">接收推送信息</string>
     <string name="ble_key_exist">该用户已被添加手机钥匙\n不能重复添加</string>
     <string name="blekey_userinfo_query_failed">用户信息查询失败</string>
@@ -304,7 +305,7 @@
     <!-- DeviceInfo -->
     <string name="device_info_tip">提示</string>
     <string name="device_info_querying">正在获取设备信息</string>
-    <string name="device_cmd_timeout">命令不在有效期内</string>
+    <string name="device_cmd_timeout">命令不在有效期</string>
     <string name="device_power_out">电量过低请及时更换电池</string>
     <string name="device_exception">异常</string>
     <string name="device_time_diff">偏差%1$s秒建议同步时间</string>
@@ -422,7 +423,7 @@
     <string name="member_del_key_first">请先删除%1$s的手机钥匙</string>
     <string name="member_open_ble">请打开蓝牙并靠近门锁</string>
     <string name="member_del_failed">删除失败</string>
-    <string name="member_list_full">当前已添加15个成员，不可再添</string>
+    <string name="member_list_full">当前已添加15个成员，不可再添加</string>
     <string name="member_manage_title">成员管理</string>
     <string name="member_add_title">添加成员</string>
     <string name="member_name">成员姓名</string>
@@ -435,6 +436,7 @@
     <string name="member_add_key">添加手机钥匙</string>
     <string name="member_had_key">手机钥匙</string>
     <string name="member_lock_pwd">开锁密码</string>
+    <string name="member_label_pwd">密码</string>
     <string name="member_pwd_add_title">添加密码</string><!-- "添加密码"翻译时大写 -->
     <string name="member_pwd_change_title">修改密码</string><!-- "添加密码"翻译时大写 -->
     <string name="member_lock_fp">开锁指纹</string>
@@ -484,11 +486,12 @@
     <string name="pwd_enter_68">请输入6~8位数字</string>
     <string name="pwd_set_succ">设置成功</string>
     <string name="pwd_open_test">请尝试用密码开一次锁</string>
+    <string name="pwd_len_err">密码长度不能为0</string>
 
     <!-- 插件历史版本 -->
     <string name="history_release_version">发布版本: </string>
 
-    <string name="history_version_1">手机开锁，刷新门锁状态，成员管理（包括添加手机钥匙，密码和指纹），临时密码，门锁事件通知和检查固件升级等功</string>
+    <string name="history_version_1">手机开锁，刷新门锁状态，成员管理（包括添加手机钥匙，密码和指纹），临时密码，门锁事件通知和检查固件升级等功能</string>
     <string name="history_version_2">1.第一次开门不会弹出授时同步时间对话框的问题\n2.设置密码概率crash\n3.无头像时，授权crash</string>
     <string name="history_version_3">1.新增：查看设备信息、同步时间、设置静音模式、分享临时密码、查看插件版本发布历史和智能联动等功能和相关页面\n2.优化：手机钥匙开锁交互和检查固件升级过程</string>
 </resources>

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.xiaomi.zkplug.Device;
+import com.xiaomi.zkplug.R;
 import com.xiaomi.zkplug.lockoperater.ILogReadOperator;
 import com.xiaomi.zkplug.lockoperater.LogReadCallback;
 import com.xiaomi.zkplug.lockoperater.SecureLogRead;
@@ -119,7 +120,7 @@ public class LockCommGetLogList {
 
             @Override
             public void logReadFail(String value) {
-                if(value.equals("命令不在有效期内(3)")){
+                if(value.indexOf(activity.getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     ZkUtil.showCmdTimeOutView(activity);
                 }else{
                     Toast.makeText(activity, value, Toast.LENGTH_SHORT).show();

@@ -338,7 +338,7 @@ public class PwdSetActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void lockOperateFail(String value) {
                 viewHanlder.removeMessages(MSG_PWD_SET_TIMEOUT);
-                if(value.equals("命令不在有效期内(3)")){
+                if(value.indexOf(getString(R.string.device_cmd_timeout)) != -1){//需要同步时间
                     ZkUtil.showCmdTimeOutView(PwdSetActivity.this);
                 }else{
                     Toast.makeText(activity(), value, Toast.LENGTH_LONG).show();

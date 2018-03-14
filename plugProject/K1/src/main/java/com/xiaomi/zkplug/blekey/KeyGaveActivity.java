@@ -152,7 +152,7 @@ public class KeyGaveActivity extends BaseActivity implements View.OnClickListene
                 showTimePickDialog("请选择生效时间");
                 break;
             case R.id.keyEndLayout:
-                showTimePickDialog("请选择到期时间");
+                showTimePickDialog(getString(R.string.blekey_end_select));
                 break;
 
 
